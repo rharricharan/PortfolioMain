@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
+    <title>Ryan Harricharan | Multi-Taleneted Designer</title>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="left-logo">
+                <h3 class="name-logo">Ryan Harricharan</h3>
+            </div>
+
+            <div class="mid-menu-tab">
+                <a class="menu-tab">
+                    <h3 class="menu-text">experience</h3>
+                </a>
+
+                <a class="menu-tab">
+                    <h3 class="menu-text">work</h3>
+                </a>
+
+                <a class="menu-tab">
+                    <h3 class="menu-text">contact</h3>
+                </a>
+            </div>
+
+            <!-- <div class="right-timer-value">
+                <h3 class="timer-value" id="timer-value"></h3>
+            </div> -->
+        </div>
+    </header>
+
+    <script>
+        function updateNYTime() {
+            const timerElement = document.getElementById('timer-value');
+
+            // Get the current time in New York timezone
+            const options = {
+                timeZone: 'America/New_York',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true,
+            };
+            const formatter = new Intl.DateTimeFormat([], options);
+            const parts = formatter.formatToParts(new Date());
+
+            const hours = parts.find(part => part.type === 'hour').value;
+            const minutes = parts.find(part => part.type === 'minute').value;
+            const period = parts.find(part => part.type === 'dayPeriod').value.toUpperCase();
+
+            timerElement.textContent = `${hours}:${minutes} ${period}`;
+
+        }
+
+        // Update the time immediately and then every minute
+        updateNYTime();
+        setInterval(updateNYTime, 60000);
+    </script>
+
+    <div class="hero-wrapper">
+        <div class="hero-container">
+            <div class="top-hero-section">
+                <h3 class="hero-text">Ryan is a designer crafting interfaces and interactions that are useful and feel natural. Previously, he designed at <span><a class="highlight-s">Smartstop®</a></span> and worked for <span><a class="highlight-b">BMW</a></span> and <span><a class="highlight-o">Our Next Energy®</a></span>. He's currently available for <span><a class="highlight-w">work</a></span></h3>
+            </div>
+        </div>
+
+            <div class="project-container">
+                <div class="project-wrapper">
+                    <div class="project">
+                        <div class="project-container-box">
+                            <img class="project-img" src="assets/Start Dashboard {Base Plan}.svg">
+                        </div>
+
+                        <div class="project-title">
+                            <h3 class="project-t">Yourtutor</h3>
+                            <h4 class="project-s">Improving the way students study</h4>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-container-box">
+                            <img class="project-img" src="assets/Start Dashboard {Base Plan}.svg">
+                        </div>
+                    
+                        <div class="project-title">
+                            <h3 class="project-t">Yourtutor</h3>
+                            <h4 class="project-s">Improving the way students study</h4>
+                        </div>
+                    </div>
+
+                    <div class="project">
+                        <div class="project-container-box">
+                            <img class="project-img" src="assets/Start Dashboard {Base Plan}.svg">
+                        </div>
+                    
+                        <div class="project-title">
+                            <h3 class="project-t">Yourtutor</h3>
+                            <h4 class="project-s">Improving the way students study</h4>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
