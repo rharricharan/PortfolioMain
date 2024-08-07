@@ -2,8 +2,8 @@
     --inter: 'Inter', sans-serif;
     --blk: #020202;
     --white: #fff;
-    --menu-width: 300px;
-    --left-border: 1px solid rgba(0, 0, 0, 0.1);
+    --menu-width: 460px;
+    --left-border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 html, body {
@@ -14,7 +14,6 @@ html, body {
 
 body {
     background-color: #f8f8f8;
-    font-family: 'Inter', sans-serif;
 }
 
 * {
@@ -26,21 +25,27 @@ body {
 .page-wrapper {
     display: flex;
     flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .right-side-menu {
     background-color: white;
     height: 100%;
     width: var(--menu-width);
-    order: 1;
-    border-right: var(--left-border);
+    order: 2;
+    border-left: var(--left-border);
     flex-shrink: 0;
     flex-grow: 0;
+    position: fixed;
+    top: 0;
+    right: 0;
 }
 
 .menu-container {
     display: flex;
     flex-direction: column;
+    padding: 12px;
 }
 
 .top-info {
@@ -50,14 +55,126 @@ body {
     align-items: center;
 }
 
+.top-info-header {
+    padding: 6px 12px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
 .top-head-txt {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    font-family: var(--inter);
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Inter';
 }
 
 .timer {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 400;
-    font-family: var(--inter);
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Inter';
+}
+
+.info-text-div {
+    margin-top: 32px;
+    padding: 0 6px;
+}
+
+.info-text-text {
+    font-size: 15px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(0, 0, 0, 0.8);
+    font-family: 'Inter';
+}
+
+.projects-container {
+    margin-top: 36px;
+    padding: 0 6px;
+}
+
+.project-header {
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 150%;
+    color: rgba(0, 0, 0, 0.5);
+    font-family: 'Inter';
+}
+
+.projects-buttons {
+    display: flex;
+    flex-direction: column;
+    margin-top: 12px;
+    gap: 3px;
+}
+
+.project {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+}
+
+.project:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.project:hover h3 {
+    color: white;
+}
+
+.project-name-text {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 13px;
+    position: relative;
+    color: rgba(0, 0, 0, 0.8);
+}
+
+.project-details {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+}
+
+.date {
+    font-family: 'Inter';
+    font-weight: 400;
+    font-size: 13px;
+    position: relative;
+    text-align: right;
+    text-align: right;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+.type {
+    font-family: 'Inter';
+    font-weight: 400;
+    position: relative;
+    font-size: 13px;
+    color: rgba(0, 0, 0, 0.5);
+}
+
+main {
+    width: 100%;
+    display: flex;
+}
+
+.video-container {
+    width: 100%;
+    height: inherit;
+    padding: 6px;
+}
+
+video {
+    width: 100%;
+    height: inherit;
+    border-radius: 6px;
+    object-fit: cover;
 }
