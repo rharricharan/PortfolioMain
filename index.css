@@ -3,13 +3,14 @@
     --blk: #020202;
     --white: #fff;
     --menu-width: 460px;
-    --left-border: 1px solid rgba(0, 0, 0, 0.05);
+    --left-border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 html, body {
     margin: 0;
     box-sizing: border-box;
-    overflow: none;
+    overflow-x: none;
+    overflow-y: none;
 }
 
 body {
@@ -30,7 +31,8 @@ body {
 }
 
 .right-side-menu {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(30px);
     height: 100%;
     width: var(--menu-width);
     order: 2;
@@ -68,7 +70,7 @@ body {
     font-family: 'Inter';
 }
 
-.timer {
+.time-container {
     font-size: 12px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5);
@@ -117,6 +119,7 @@ body {
     border-radius: 3px;
     background-color: rgba(0, 0, 0, 0.05);
     cursor: pointer;
+    z-index: 112;
 }
 
 .project:hover {
@@ -149,7 +152,6 @@ body {
     font-size: 13px;
     position: relative;
     text-align: right;
-    text-align: right;
     color: rgba(0, 0, 0, 0.5);
 }
 
@@ -157,6 +159,7 @@ body {
     font-family: 'Inter';
     font-weight: 400;
     position: relative;
+    text-align: right;
     font-size: 13px;
     color: rgba(0, 0, 0, 0.5);
 }
@@ -167,14 +170,22 @@ main {
 }
 
 .video-container {
-    width: 100%;
+    width: 100vw;
+    border-radius: 6px;
+    overflow: none;
     height: inherit;
-    padding: 6px;
 }
 
 video {
-    width: 100%;
+    width: 100.5%;
     height: inherit;
-    border-radius: 6px;
     object-fit: cover;
+    border-radius: 6px;
+    margin: 0;
+    padding: 6px;
+    z-index: 110;
+}
+
+source {
+    border-radius: 6px;
 }

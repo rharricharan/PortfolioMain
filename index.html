@@ -17,8 +17,29 @@
                     </div>
 
                     <div class="top-info-header">
-                        <h3 class="timer">4:00 PM</h3>
+                        <div class="time-container" id="time-container">
+                            EST 4:00 PM
+                        </div>
                     </div>
+
+                    <script>
+                        function updateTime() {
+                            const timeContainer = document.getElementById('time-container');
+                            const options = {
+                                timeZone: 'America/New_York',
+                                hour12: true,
+                                hour: 'numeric',
+                                minute: 'numeric',
+                            };
+                            const formatter = new Intl.DateTimeFormat([], options);
+                            const now = new Date();
+                            const formattedTime = formatter.format(now);
+                            timeContainer.textContent = `EST ${formattedTime}`;
+                        }
+
+                        updateTime();
+                        setInterval(updateTime, 1000);
+                    </script>
                 </div>
 
                 <div class="info-text-div">
@@ -35,7 +56,6 @@
                             </div>
 
                             <div class="project-details">
-                                <h3 class="date">2022 - 2024</h3>
                                 <h3 class="type">Product Design</h3>
                             </div>
                         </a>
@@ -46,7 +66,6 @@
                             </div>
                         
                             <div class="project-details">
-                                <h3 class="date">2023 - 2024</h3>
                                 <h3 class="type">Product Design</h3>
                             </div>
                         </a>
@@ -57,7 +76,6 @@
                             </div>
                         
                             <div class="project-details">
-                                <h3 class="date">2023</h3>
                                 <h3 class="type">Website Design</h3>
                             </div>
                         </a>
@@ -68,7 +86,6 @@
                             </div>
                         
                             <div class="project-details">
-                                <h3 class="date">2022</h3>
                                 <h3 class="type">Product Design</h3>
                             </div>
                         </a>
@@ -79,7 +96,6 @@
                             </div>
                         
                             <div class="project-details">
-                                <h3 class="date">2023</h3>
                                 <h3 class="type">User Experience</h3>
                             </div>
                         </a>
@@ -96,8 +112,8 @@
                             </div>
                 
                             <div class="project-details">
-                                <h3 class="date">2023 - 2024</h3>
                                 <h3 class="type">Product Designer</h3>
+                                <h3 class="date">2023 - 2024</h3>
                             </div>
                         </a>
                 
@@ -107,8 +123,8 @@
                             </div>
                 
                             <div class="project-details">
-                                <h3 class="date">2021 - 2024</h3>
                                 <h3 class="type">Chief Executive Officer</h3>
+                                <h3 class="date">2021 - 2024</h3>
                             </div>
                         </a>
                 
@@ -118,8 +134,8 @@
                             </div>
                 
                             <div class="project-details">
-                                <h3 class="date">2017 - 2024</h3>
                                 <h3 class="type">Freelance Designer</h3>
+                                <h3 class="date">2017 - 2024</h3>
                             </div>
                         </a>
                 
@@ -129,8 +145,8 @@
                             </div>
                 
                             <div class="project-details">
-                                <h3 class="date">2023</h3>
                                 <h3 class="type">Senior UX Designer</h3>
+                                <h3 class="date">2023 - 2023</h3>
                             </div>
                         </a>
                     </div>
@@ -140,7 +156,9 @@
 
         <main>
             <div class="video-container">
-                <video src="assets/18069862-uhd_3840_2160_24fps.mp4" autoplay loop></video>
+                <video autoplay loop muted playsinline>
+                    <source src="assets/18069862-uhd_3840_2160_24fps.mp4" type="video/mp4">
+                </video>
             </div>
         </main>
     </div>
