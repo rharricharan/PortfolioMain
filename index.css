@@ -6,11 +6,15 @@
     --left-border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-html, body {
+html,
+body {
     margin: 0;
-    box-sizing: border-box;
-    overflow-x: none;
-    overflow-y: none;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 body {
@@ -18,9 +22,15 @@ body {
 }
 
 * {
+    font-family: 'Inter';
     font-weight: 400;
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
+}
+
+a {
+    text-decoration-line: none;
 }
 
 .page-wrapper {
@@ -40,6 +50,7 @@ body {
     flex-shrink: 0;
     flex-grow: 0;
     position: fixed;
+    z-index: 111;
     top: 0;
     right: 0;
 }
@@ -48,6 +59,7 @@ body {
     display: flex;
     flex-direction: column;
     padding: 12px;
+    height: 100%;
 }
 
 .top-info {
@@ -67,14 +79,14 @@ body {
     font-size: 12px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5);
-    font-family: 'Inter';
+    font-family: var(--inter);
 }
 
 .time-container {
     font-size: 12px;
     font-weight: 400;
     color: rgba(0, 0, 0, 0.5);
-    font-family: 'Inter';
+    font-family: var(--inter);
 }
 
 .info-text-div {
@@ -86,8 +98,9 @@ body {
     font-size: 15px;
     font-weight: 400;
     line-height: 150%;
+    letter-spacing: -0.5px;
     color: rgba(0, 0, 0, 0.8);
-    font-family: 'Inter';
+    font-family: var(--inter);
 }
 
 .projects-container {
@@ -100,7 +113,7 @@ body {
     font-weight: 400;
     line-height: 150%;
     color: rgba(0, 0, 0, 0.5);
-    font-family: 'Inter';
+    font-family: var(--inter);
 }
 
 .projects-buttons {
@@ -108,6 +121,26 @@ body {
     flex-direction: column;
     margin-top: 12px;
     gap: 3px;
+}
+
+.project-rh { /* blank state * no hover */
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px 12px;
+    border-radius: 3px;
+    background-color: rgba(0, 0, 0, 0.05);
+    cursor: default;
+    z-index: 112;
+}
+
+.project-rh:hover {
+    background-color: rgba(0, 0, 0, 1);
+}
+
+.project-rh:hover h3 {
+    color: white;
 }
 
 .project {
@@ -131,7 +164,7 @@ body {
 }
 
 .project-name-text {
-    font-family: 'Inter';
+    font-family: var(--inter);
     font-weight: 400;
     font-size: 13px;
     position: relative;
@@ -147,7 +180,7 @@ body {
 }
 
 .date {
-    font-family: 'Inter';
+    font-family: var(--inter);
     font-weight: 400;
     font-size: 13px;
     position: relative;
@@ -156,7 +189,7 @@ body {
 }
 
 .type {
-    font-family: 'Inter';
+    font-family: var(--inter);
     font-weight: 400;
     position: relative;
     text-align: right;
@@ -166,26 +199,155 @@ body {
 
 main {
     width: 100%;
-    display: flex;
+    height: 100%;
+    display: block;
 }
 
 .video-container {
-    width: 100vw;
+    width: 100%;
     border-radius: 6px;
-    overflow: none;
-    height: inherit;
+    position: relative;
+    pointer-events: none;
+    overflow: hidden;
+    height: 100%;
+    z-index: 1;
 }
 
 video {
-    width: 100.5%;
-    height: inherit;
+    width: auto;
+    height: 100%;
     object-fit: cover;
+    object-position: center;
     border-radius: 6px;
     margin: 0;
-    padding: 6px;
-    z-index: 110;
 }
 
-source {
+.bottom-container {
+    display: flex;
+    flex-direction: row;
+    margin-top: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.available {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 12px;
+    border-radius: 200px;
+    border: 1px solid rgba(21, 171, 97, 0.5);
+    background-color: rgba(21, 171, 97, 0.1);
+}
+
+.dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 200px;
+    background-color: rgba(21, 171, 97, 1);
+}
+
+.available-text {
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: rgba(21, 171, 97, 1);
+    line-height: 140%;
+    margin: 0;
+    padding: 0;
+}
+
+.right-elements {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+}
+
+.mail {
+    padding: 3px 12px;
+    background-color: rgba(0, 0, 0, 0.05);
     border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.linkedin {
+    padding: 3px 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.read-cv {
+    padding: 3px 12px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 6px;
+    transition: all 0.3s ease-out;
+    cursor: pointer;
+}
+
+.mail:hover {
+    padding: 3px 16px;
+    background-color: #000;
+}
+
+.mail:hover h3{
+    color: white;
+}
+
+.linkedin:hover {
+    padding: 3px 16px;
+    background-color: #000;
+}
+
+.linkedin:hover h3 {
+    color: white;
+}
+
+.read-cv:hover {
+    padding: 3px 16px;
+    background-color: #000;
+}
+
+.read-cv:hover h3 {
+    color: white;
+}
+
+.mail-text {
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 140%;
+    margin: 0;
+    padding: 0;
+}
+
+.linkedin-text {
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 140%;
+    margin: 0;
+    padding: 0;
+}
+
+.read-cv-text {
+    font-family: 'Inter';
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: -0.5px;
+    color: rgba(0, 0, 0, 0.5);
+    line-height: 140%;
+    margin: 0;
+    padding: 0;
 }
