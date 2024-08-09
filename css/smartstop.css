@@ -447,7 +447,7 @@ img {
     align-items: start;
     padding-right: 24px;
     padding-left: 24px;
-    padding-top: 100vh;
+    padding-top: 920vh;
 }
 
 .project-title-rh {
@@ -458,8 +458,28 @@ img {
     gap: 12px;
 }
 
+.project-title-rh-rh {
+    width: 40%;
+    margin-top: 72px;
+    margin-bottom: 48px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding-left: 24px;
+}
+
 .project-title {
     height: 100%;
+}
+
+.project-title-tt {
+    height: 100%;
+    margin-top: 72px;
+}
+
+.project-title-ts {
+    height: 100%;
+    margin-top: 24px;
 }
 
 .title-rh {
