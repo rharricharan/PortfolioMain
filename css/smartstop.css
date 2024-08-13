@@ -447,7 +447,7 @@ img {
     align-items: start;
     padding-right: 24px;
     padding-left: 24px;
-    padding-top: 890vh; /* changes padding of vp height of content container for projects */
+    padding-top: 1470vh; /* changes padding of vp height of content container for projects */
 }
 
 .project-title-rh {
@@ -522,6 +522,7 @@ img {
     justify-content: space-between;
     align-items: start;
     margin-top: 48px;
+    margin-bottom: 48px;
     padding-left: 24px;
     padding-right: 24px;
 }
