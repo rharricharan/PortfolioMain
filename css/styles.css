@@ -381,6 +381,9 @@ main {
     overflow: hidden;
     height: 100%;
     z-index: 1;
+    padding: 6px;
+    box-sizing: border-box;
+    background-color: #f8f8f8;
 }
 
 video {
@@ -389,5 +392,7 @@ video {
     object-fit: cover;
     object-position: center;
     border-radius: 6px;
+    padding: 6px;
     margin: 0;
+    display: block;
 }
