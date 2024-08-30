@@ -396,3 +396,11 @@ video {
     margin: 0;
     display: block;
 }
+
+@media screen and (min-width: 400px) {
+
+    .right-side-menu {
+        width: 100vw;
+        height: 100%;
+    }
+}
