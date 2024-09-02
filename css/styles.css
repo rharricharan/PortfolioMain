@@ -397,10 +397,35 @@ video {
     display: block;
 }
 
-@media screen and (min-width: 400px) {
+@media screen and (max-width: 780px) {
 
     .right-side-menu {
         width: 100vw;
         height: 100%;
+    }
+
+    .type {
+        font-size: 11px;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: flex-end;
+    }
+
+    .project-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: end;
+        width: 100%;
+    }
+
+    .project-name-text {
+        font-size: 11px;
+        width: 100%;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    .date {
+        font-size: 11px;
     }
 }
