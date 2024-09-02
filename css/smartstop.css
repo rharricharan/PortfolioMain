@@ -568,6 +568,10 @@ header {
     display: none;
 }
 
+.menu-close {
+    display: none;
+}
+
 @media screen and (max-width: 780px) {
     .right-side-menu {
         display: none;
@@ -670,6 +674,7 @@ header {
         border-radius: 3px;
         justify-content: center;
         align-items: center;
+        display: flex;
     }
 
     .menu-close svg {
