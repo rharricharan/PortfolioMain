@@ -55,6 +55,7 @@ a {
 .right-side-menu {
     background-color: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
     height: 100%;
     width: var(--menu-width);
     order: 2;
