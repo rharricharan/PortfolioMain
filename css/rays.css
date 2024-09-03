@@ -711,11 +711,4 @@ header {
     .project-name-text {
         font-size: 11px;
         width: 100%;
-        justify-content: flex-start;
-        align-items: flex-start;
-    }
-
-    .date {
-        font-size: 11px;
-    }
-}
+        justify-content: flex-start
