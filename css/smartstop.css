@@ -588,7 +588,7 @@ header {
     }
 
     .top-container-wrapper {
-        padding-top: 800vh;
+        padding-top: 770vh;
         display: flex;
         flex-direction: column;
     }
