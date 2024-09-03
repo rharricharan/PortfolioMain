@@ -595,7 +595,7 @@ header {
     }
 
     .top-container-wrapper {
-        padding-top: 770vh;
+        padding-top: 40vh;
         display: flex;
         flex-direction: column;
     }
