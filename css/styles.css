@@ -426,4 +426,7 @@ video {
         align-items: flex-start;
     }
 
-   
+    .date {
+        font-size: 11px;
+    }
+}
