@@ -9,18 +9,12 @@
 html,
 body {
     margin: 0;
-    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: default;
-}
-
-body {
-    width: 100%;
-    height: 100%;
-    background-color: #f8f8f8;
     user-select: none;
+    background-color: #f8f8f8;
 }
 
 h1, h2, h3, h4, h5, h6, p {
@@ -51,7 +45,6 @@ a {
     position: relative;
     flex-wrap: nowrap;
     gap: 0px;
-    height: min-content;
     padding: 0;
 }
 
@@ -414,7 +407,6 @@ main {
     overflow-y: auto;
     display: flex;
     flex-wrap: nowrap;
-    margin-top: 15%;
     top: 0;
 }
 
@@ -448,7 +440,7 @@ img {
     align-items: start;
     padding-right: 24px;
     padding-left: 24px;
-    padding-top: 1470vh; /* changes padding of vp height of content container for projects */
+    padding-top: 24px;
 }
 
 .project-title-rh {
