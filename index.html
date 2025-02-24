@@ -22,6 +22,7 @@
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/transition.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <title>Work by Ryan Harricharan</title>
 </head>
@@ -43,6 +44,10 @@
             <div class="block"></div>
         </div>
     </div>
+
+    <audio id="hoverSound" src="assets/sounds/mechanical.wav"></audio>
+    <audio id="successSound" src="assets/sounds/success.flac"></audio>
+    
     <div class="page-wrapper">
         <div class="right-side-menu">
             <div class="menu-container">
@@ -233,6 +238,8 @@
     <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
     <script src="./components/transition.js"></script>
+    <script src="./hoverSound.js"></script>
+    <script src="./success.js"></script>
 </body>
 
 </html>
