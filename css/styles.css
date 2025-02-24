@@ -396,6 +396,7 @@ video {
 
     body {
         overflow-y: auto;
+        height: auto;
     }
 
     .right-side-menu {
