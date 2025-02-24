@@ -1,0 +1,34 @@
+.transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    gap: 0;
+    flex-direction: column;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.transition-row {
+    flex: 1;
+    display: flex;
+    gap: 0;
+}
+
+.transition-row.row-1 .block {
+    transform-origin: top;
+}
+
+.transition-row.row-2 .block {
+    transform-origin: bottom;
+}
+
+.block {
+    flex: 1;
+    background-color: #000;
+    transform: scaleY(1);
+    will-change: transform;
+    visibility: visible;
+}
