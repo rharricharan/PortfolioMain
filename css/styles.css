@@ -404,7 +404,6 @@ video {
     }
 
     .type {
-        font-size: 11px;
         width: 100%;
         justify-content: flex-end;
         align-items: flex-end;

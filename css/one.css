@@ -551,7 +551,7 @@ header {
     }
 
     .top-container-wrapper {
-        padding-top: 70vh;
+        padding-top: 24px;
         display: flex;
         flex-direction: column;
     }
@@ -570,24 +570,6 @@ header {
         flex-direction: row;
         width: 100%;
         margin-bottom: 48px;
-    }
-
-    .video-caption {
-        width: 100%;
-        gap: 0;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: column;
-        gap: 36px;
-        margin-bottom: 146px;
-    }
-
-    .caption-right {
-        width: 100%;
-    }
-
-    video {
-        margin-top: 72px;
     }
 
     .project-title-rh-rh {
@@ -650,7 +632,6 @@ header {
     }
 
     .type {
-        font-size: 11px;
         width: 100%;
         justify-content: flex-end;
         align-items: flex-end;
@@ -671,6 +652,30 @@ header {
     }
 
     .date {
-        font-size: 11px;
+        font-size: 13px;
+    }
+
+    .project {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 12px;
+    }
+
+    .project-details {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        width: 100%;
+    }
+
+    .project-name h3 {
+        font-size: 13px;
+    }
+
+    .type {
+        text-align: right;
+        font-size: 13px;
     }
 }
