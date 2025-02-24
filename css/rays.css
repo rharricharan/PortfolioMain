@@ -609,24 +609,6 @@ header {
         margin-bottom: 48px;
     }
 
-    .video-caption {
-        width: 100%;
-        gap: 0;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: column;
-        gap: 36px;
-        margin-bottom: 146px;
-    }
-
-    .caption-right {
-        width: 100%;
-    }
-
-    video {
-        margin-top: 72px;
-    }
-
     .project-title-rh-rh {
         width: 90%;
         margin-bottom: 146px;
