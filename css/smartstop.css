@@ -581,7 +581,7 @@ header {
     }
 
     .top-container-wrapper {
-        padding-top: 24px;
+        padding-top: 10%;
         display: flex;
         flex-direction: column;
     }
