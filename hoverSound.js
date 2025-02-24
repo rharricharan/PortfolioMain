@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         document.querySelectorAll(".sound").forEach((button) => {
             button.addEventListener("mouseenter", () => {
+                hoverSound.pause();
                 hoverSound.currentTime = 0; // Reset sound for rapid hovers
                 hoverSound.play();
             });
