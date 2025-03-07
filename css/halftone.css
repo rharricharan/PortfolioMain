@@ -104,7 +104,6 @@ a {
 .top-info-header-rh {
     padding: 6px 12px;
     border-radius: 3px;
-    background-color: rgba(0, 0, 0, 0.05);
 }
 
 .top-info-header:hover {
@@ -328,7 +327,6 @@ a {
 }
 
 .mail:hover {
-    padding: 3px 16px;
     background-color: #000;
 }
 
@@ -337,7 +335,6 @@ a {
 }
 
 .linkedin:hover {
-    padding: 3px 16px;
     background-color: #000;
 }
 
@@ -346,7 +343,6 @@ a {
 }
 
 .read-cv:hover {
-    padding: 3px 16px;
     background-color: #000;
 }
 
