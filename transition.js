@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("DOM loaded");
   const ease = "power4.inOut";
 
+  // Handle initial page load transition
   revealTransition().then(() => {
     gsap.set(".block", { visibility: "hidden" });
   });
@@ -24,12 +25,13 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  // Handle link clicks
   document.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", (event) => {
-      event.preventDefault();
       const href = link.getAttribute("href");
-
-      if (href && !href.startsWith("#") && href !== window.location.pathname) {
+      // Don't handle external links or hash links
+      if (href && !href.startsWith("#") && !href.startsWith("http") && !href.startsWith("mailto:") && href !== window.location.pathname) {
+        event.preventDefault();
         animateTransition().then(() => {
           window.location.href = href;
         });
@@ -37,14 +39,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
+  // Handle browser back/forward navigation
+  window.addEventListener('popstate', (event) => {
+    revealTransition();
+  });
+
   function animateTransition() {
     return new Promise((resolve) => {
       gsap.set(".block", { visibility: "visible", scaleY: 0 });
-      // Use transform instead of opacity for better performance
       gsap.to(".transition", {
-          duration: 1,
-          transform: 'translateY(-100%)',
-          ease: "power4.inOut",
+        duration: 1,
+        transform: 'translateY(-100%)',
+        ease: "power4.inOut",
       });
       gsap.to(".block", {
         scaleY: 1,
@@ -54,7 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
           from: "start",
           grid: [2, 5],
           axis: "x",
-          from: "start",
         },
         ease: ease,
         onComplete: resolve,
