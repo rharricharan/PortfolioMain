@@ -1,8 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-C8KZD5XVSE"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -25,8 +23,12 @@
     <link rel="stylesheet" href="css/transition.css">
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <title>Work by Ryan Harricharan</title>
+    <!-- Preload critical resources -->
+    <link rel="preload" href="css/styles.css" as="style">
+    <link rel="preload" href="css/transition.css" as="style">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
 </head>
-
 <body>
     <div class="transition">
         <div class="transition-row row-1">
@@ -246,14 +248,14 @@
             </div>
         </main>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js"></script>
-    <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/dist/lenis.min.js"></script>
-    <script src="./transition.js"></script>
-    <script src="./hoverSound.js"></script>
-    <script src="./success.js"></script>
+    <!-- Optimize script loading -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/CustomEase.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@latest/dist/lenis.min.js" defer></script>
+    <script src="./transition.js" defer></script>
+    <script src="./hoverSound.js" defer></script>
+    <script src="./success.js" defer></script>
 </body>
 
 </html>

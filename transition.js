@@ -40,6 +40,12 @@ document.addEventListener("DOMContentLoaded", () => {
   function animateTransition() {
     return new Promise((resolve) => {
       gsap.set(".block", { visibility: "visible", scaleY: 0 });
+      // Use transform instead of opacity for better performance
+      gsap.to(".transition", {
+          duration: 1,
+          transform: 'translateY(-100%)',
+          ease: "power4.inOut",
+      });
       gsap.to(".block", {
         scaleY: 1,
         duration: 1,
