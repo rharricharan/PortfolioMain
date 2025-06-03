@@ -519,6 +519,38 @@ header {
     display: none;
 }
 
+.transition {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    z-index: 100;
+    pointer-events: none;
+}
+
+.transition-row {
+    flex: 1;
+    display: flex;
+}
+
+.transition-row.row-1 .block {
+    transform-origin: top;
+}
+
+.transition-row.row-2 .block {
+    transform-origin: bottom;
+}
+
+.block {
+    flex: 1;
+    background-color: #000;
+    transform: scaleY(1);
+    will-change: transform;
+}
+
 @media screen and (max-width: 780px) {
     .right-side-menu {
         display: none;
