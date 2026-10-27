@@ -1,5 +1,11 @@
 {
-  "dependencies": {
-    "gsap": "^3.12.7"
+  "private": true,
+  "scripts": {
+    "stage": "rm -rf .site && rsync -a --exclude .git --exclude .claude --exclude .vscode --exclude .wrangler --exclude .site --exclude node_modules --exclude package.json --exclude package-lock.json --exclude .gitignore --exclude CNAME ./ .site/",
+    "deploy:preview": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=$(git branch --show-current)",
+    "deploy": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=main"
+  },
+  "devDependencies": {
+    "wrangler": "^4.154.0"
   }
 }
