@@ -768,3 +768,9 @@ header {
         margin-right: max(30vw, 400px);
     }
 }
+
+/* Footer links wrap under the badge when the sidebar is narrow instead of running off the edge */
+.bottom-container {
+    flex-wrap: wrap;
+    gap: 6px;
+}

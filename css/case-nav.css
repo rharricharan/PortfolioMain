@@ -13,12 +13,20 @@ main {
     view-transition-name: case-sidebar;
 }
 
-/* Nothing else on the page animates */
+/* Nothing else on the page animates. Only the new sidebar is shown (no blending of the old
+   and new snapshots, which turned the links a muddy grey). */
+::view-transition-group(root),
+::view-transition-group(case-sidebar),
 ::view-transition-old(root),
 ::view-transition-new(root),
-::view-transition-old(case-sidebar),
 ::view-transition-new(case-sidebar) {
     animation: none;
+    mix-blend-mode: normal;
+}
+
+::view-transition-old(root),
+::view-transition-old(case-sidebar) {
+    display: none;
 }
 
 ::view-transition-group(case-content) {
@@ -26,20 +34,30 @@ main {
     animation-duration: 0s;
 }
 
+/* The current story leaves completely before the next one comes in */
 ::view-transition-old(case-content) {
-    animation: case-out 0.45s cubic-bezier(0.55, 0, 0.75, 0.3) both;
+    animation: case-out 0.55s cubic-bezier(0.55, 0, 0.7, 0.2) both;
 }
 
 ::view-transition-new(case-content) {
-    animation: case-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+    animation: case-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+}
+
+::view-transition-image-pair(case-content) {
+    isolation: auto;
+}
+
+::view-transition-old(case-content),
+::view-transition-new(case-content) {
+    mix-blend-mode: normal;
 }
 
 @keyframes case-out {
-    to { transform: translateY(-64px); opacity: 0; }
+    to { transform: translateY(-80px); opacity: 0; }
 }
 
 @keyframes case-in {
-    from { transform: translateY(96px); opacity: 0; }
+    from { transform: translateY(80px); opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -2,8 +2,9 @@
    Scoped to .story so the sidebar and the rest of each page's stylesheet are untouched. */
 .story {
     --ink: #161615;
-    --muted: #5c5c58;
-    --faint: #8a8a85;
+    --muted: #6b6b66;
+    --soft: #6f6f6a;
+    --faint: #8a8a85; /* large text only (3.3:1) */
     --line: rgba(0, 0, 0, 0.08);
     --mat: #efefeb;
     --accent: #8f2a1d;
@@ -30,7 +31,7 @@
 
 .story strong { font-weight: 500; color: var(--ink); }
 
-/* Header: title on the left, facts on the right, both starting at the same line ------ */
+/* Header: title, lead and role on the left; facts on the right, from the same top line --- */
 .story-header {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
@@ -48,32 +49,64 @@
 
 .story-title span { color: var(--faint); font-weight: 500; }
 
+.story-lead {
+    max-width: 52ch;
+    margin-top: 20px;
+    color: var(--muted);
+}
+
+/* Facts: quiet label/value pairs, no rules */
 .story-facts {
     display: grid;
-    grid-template-columns: 6.5rem 1fr;
-    gap: 8px 20px;
-    padding-top: 20px;
-    border-top: 1px solid var(--line);
-    font-size: 14px;
+    gap: 6px;
+    font-size: 12px;
     line-height: 1.45;
 }
 
-.story-facts dt { color: var(--faint); }
+.story-facts > div {
+    display: grid;
+    grid-template-columns: minmax(4.75rem, 30%) 1fr;
+    gap: 12px;
+}
 
-@container (min-width: 600px) {
-    .story-header { grid-template-columns: minmax(0, 1fr) minmax(15rem, 21rem); gap: 40px; }
-    /* Line the first fact up with the title's cap height */
-    .story-facts { padding-top: 0.3em; border-top: 0; }
+.story-facts dt { color: var(--soft); }
+
+/* My Role sits under the facts, a step down: the editorial stagger */
+.story-role {
+    max-width: 46ch;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--muted);
+}
+
+.story-role h2 {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+}
+
+.story-role p { margin-top: 6px; }
+
+@container (min-width: 520px) {
+    .story-header {
+        grid-template-columns: minmax(0, 1fr) clamp(12.5rem, 38%, 19rem);
+        column-gap: 48px;
+        row-gap: 0;
+    }
+    .story-intro { grid-row: 1 / span 2; }
+    /* First fact on the title's cap line; My Role dropped below with room to breathe */
+    .story-facts { margin-top: 0.45em; }
+    .story-role { margin-top: 56px; }
 }
 
 /* Text sections ------------------------------------------------------------- */
 .story-section {
     max-width: 58ch;
-    margin: 96px auto 0;
+    margin: 128px auto 0;
     color: var(--muted);
 }
 
-.story-section > * + * { margin-top: 20px; }
+.story-section > * + * { margin-top: 8px; }
 
 .story-section h2 {
     font-size: 15px;
@@ -82,10 +115,11 @@
 }
 
 .story-list { list-style: none; }
-.story-list li + li { margin-top: 16px; }
+.story-list li + li { margin-top: 12px; }
 
 /* Figures ------------------------------------------------------------------- */
-.story-figure { margin-top: 56px; }
+.story-figure { margin-top: 40px; }
+.story-header + .story-figure { margin-top: 72px; }
 
 .story-mat {
     border-radius: 20px;
@@ -107,31 +141,32 @@
 }
 
 .story-figure figcaption {
-    margin-top: 16px;
-    color: var(--faint);
-    font-size: 14px;
+    margin-top: 12px;
+    color: var(--soft);
+    font-size: 12px;
 }
 
-/* Arrivals: sections and figures rise in as they reach the screen (js/case.js) --------- */
-.has-reveal .story [data-reveal] {
+/* Intro: hidden before first paint (js/boot.js) until GSAP plays it (js/case.js).
+   If GSAP never runs, the fallback shows everything after 2.5s. */
+.intro:not(.intro-ready) .story :is(.story-title, .story-lead, .story-role, .story-facts > div, .story-header + .story-figure) {
     opacity: 0;
-    transform: translateY(16px);
-    transition: opacity 0.7s var(--ease-out), transform 0.9s var(--ease-out);
+    animation: intro-fallback 0s 2.5s forwards;
 }
 
-.has-reveal .story [data-reveal].is-in {
-    opacity: 1;
-    transform: none;
+@keyframes intro-fallback {
+    to { opacity: 1; }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .has-reveal .story [data-reveal] { opacity: 1; transform: none; transition: none; }
+/* Keep descenders visible inside SplitText's line masks */
+.story-title [class*="mask"] {
+    padding-bottom: 0.1em;
+    margin-bottom: -0.1em;
 }
 
 /* Phones ------------------------------------------------------------------- */
 @media (max-width: 780px) {
     .story { padding: 96px 16px 64px; }
-    .story-section { margin-top: 64px; }
+    .story-section { margin-top: 80px; }
     .story-mat, .story-figure.is-wide .story-mat { padding: 5% 4%; border-radius: 14px; }
     .story-figure.is-demo .story-mat { padding: 24px 12px; }
 }
