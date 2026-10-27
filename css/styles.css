@@ -511,7 +511,7 @@ video {
     }
 
     :is(.project, .project-rh):has(.type-container) .project-details {
-        flex: 0 0 auto;
+        flex: 0 0 5.75rem;
         width: auto;
     }
 }
