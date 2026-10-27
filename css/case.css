@@ -102,7 +102,7 @@
 /* Text sections ------------------------------------------------------------- */
 .story-section {
     max-width: 58ch;
-    margin: 128px auto 0;
+    margin: 104px auto 0;
     color: var(--muted);
 }
 
@@ -120,6 +120,8 @@
 /* Figures ------------------------------------------------------------------- */
 .story-figure { margin-top: 40px; }
 .story-header + .story-figure { margin-top: 72px; }
+/* Text sits centered between the figure above and the one below */
+.story-section + .story-figure { margin-top: 104px; }
 
 .story-mat {
     border-radius: 20px;
@@ -166,7 +168,8 @@
 /* Phones ------------------------------------------------------------------- */
 @media (max-width: 780px) {
     .story { padding: 96px 16px 64px; }
-    .story-section { margin-top: 80px; }
+    .story-section { margin-top: 64px; }
+    .story-section + .story-figure { margin-top: 64px; }
     .story-mat, .story-figure.is-wide .story-mat { padding: 5% 4%; border-radius: 14px; }
     .story-figure.is-demo .story-mat { padding: 24px 12px; }
 }
