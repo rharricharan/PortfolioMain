@@ -738,3 +738,36 @@ header {
         font-size: 13px;
     }
 }
+/* Experience rows: give the role the most room and keep every row on one line */
+.project-name,
+.project-details {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
+.type-container {
+    flex: 1.7 1 0;
+    min-width: 0;
+}
+
+.type,
+.date,
+.project-name-text {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* The case-page sidebar is narrower than the home page and scrolls, so long titles wrap instead of clipping */
+:is(.project, .project-rh):has(.type-container) {
+    gap: 8px;
+}
+
+:is(.project, .project-rh):has(.type-container) :is(.type, .project-name-text) {
+    white-space: normal;
+}
+
+:is(.project, .project-rh):has(.type-container) .project-details {
+    flex: 0 0 auto;
+    width: auto;
+}
