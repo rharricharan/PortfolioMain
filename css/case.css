@@ -45,6 +45,7 @@
     font-weight: 500;
     line-height: 1.08;
     letter-spacing: -0.035em;
+    text-wrap: balance;
 }
 
 .story-title span { color: var(--faint); font-weight: 500; }
@@ -55,48 +56,43 @@
     color: var(--muted);
 }
 
-/* Facts: quiet label/value pairs, no rules */
+/* My role: beside the title, top-aligned with it */
+.story-role {
+    max-width: 52ch;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--muted);
+}
+
+/* Facts: one row across the bottom of the header, label above value */
 .story-facts {
     display: grid;
-    gap: 6px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 24px;
     font-size: 12px;
     line-height: 1.45;
 }
 
 .story-facts > div {
     display: grid;
-    grid-template-columns: minmax(4.75rem, 30%) 1fr;
-    gap: 12px;
+    gap: 4px;
+    align-content: start;
 }
 
 .story-facts dt { color: var(--soft); }
 
-/* My Role sits under the facts, a step down: the editorial stagger */
-.story-role {
-    max-width: 46ch;
-    font-size: 13px;
-    line-height: 1.55;
-    color: var(--muted);
-}
-
-.story-role h2 {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink);
-}
-
-.story-role h2 + p { margin-top: 6px; }
-
 @container (min-width: 520px) {
     .story-header {
-        grid-template-columns: minmax(0, 1fr) clamp(12.5rem, 38%, 19rem);
-        column-gap: 48px;
-        row-gap: 0;
+        grid-template-columns: minmax(0, 1fr) clamp(15rem, 44%, 27rem);
+        column-gap: 56px;
     }
-    .story-intro { grid-row: 1 / span 2; }
-    /* First fact on the title's cap line; My Role dropped below with room to breathe */
-    .story-facts { margin-top: 0.45em; }
-    .story-role { margin-top: 56px; }
+    /* Role paragraph starts on the title's cap line */
+    .story-role { margin-top: 0.55em; }
+    .story-facts {
+        grid-column: 1 / -1;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        margin-top: 40px;
+    }
 }
 
 /* Text sections ------------------------------------------------------------- */
@@ -160,7 +156,7 @@
 }
 
 /* Keep descenders visible inside SplitText's line masks */
-.story-title [class*="mask"] {
+.story [class*="mask"] {
     padding-bottom: 0.1em;
     margin-bottom: -0.1em;
 }

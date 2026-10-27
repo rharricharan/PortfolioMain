@@ -24,35 +24,45 @@
     const scroller = wrapper && wrapper.scrollHeight > wrapper.clientHeight + 1 && getComputedStyle(wrapper).overflowY !== "visible" ? wrapper : window;
     ScrollTrigger.defaults({ scroller });
 
+    // Every piece of text arrives the same way as the title: its lines rise into place behind a
+    // mask. Text is split when it animates (so lines match the current width) and restored after.
+    const rise = (els, { stagger = 0.08, gap = 0.1 } = {}) => {
+      const tl = gsap.timeline();
+      els.filter(Boolean).forEach((el, i) => {
+        const split = SplitText.create(el, { type: "lines", mask: "lines" });
+        gsap.set(el, { opacity: 1 });
+        tl.from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger, onComplete: () => split.revert() }, i * gap);
+      });
+      return tl;
+    };
+
     // Intro: waits for the wipe, or for the previous story to slide out when moving between case studies.
     const delay = root.classList.contains("case-swap") ? 0.6 : 0.4;
     const hero = story.querySelector(".story-header + .story-figure");
-    const title = story.querySelector(".story-title");
-    const lines = SplitText.create(title, { type: "lines", mask: "lines", linesClass: "story-title-line" });
-    const intro = gsap.timeline({ delay, defaults: { ease }, onComplete: () => lines.revert() });
+    const intro = gsap.timeline({ delay });
     intro
-      .from(lines.lines, { yPercent: 110, duration: 1.1, stagger: 0.08 })
-      .fromTo(".story-lead", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1, clearProps: "transform" }, "-=0.85")
-      .fromTo(".story-facts > div", { opacity: 0, y: 10 }, { opacity: 1, y: 0, duration: 0.9, stagger: 0.06, clearProps: "transform" }, "<0.05")
-      .fromTo(".story-role", { opacity: 0, y: 14 }, { opacity: 1, y: 0, duration: 1, clearProps: "transform" }, "-=0.6");
+      .add(rise([story.querySelector(".story-title")]))
+      .add(rise([story.querySelector(".story-lead"), story.querySelector(".story-role")], { stagger: 0.05, gap: 0.12 }), 0.25)
+      .add(rise($$(".story-facts dt, .story-facts dd"), { stagger: 0.04, gap: 0.035 }), 0.5);
     if (hero) {
       const media = hero.querySelector(".story-mat > *");
       intro
-        .fromTo(hero, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.2, clearProps: "transform" }, "-=0.8")
-        .from(media, { scale: 1.04, duration: 1.4, clearProps: "transform" }, "<");
+        .fromTo(hero, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.2, ease, clearProps: "transform" }, 0.65)
+        .from(media, { scale: 1.04, duration: 1.4, ease, clearProps: "transform" }, "<")
+        .add(rise([hero.querySelector("figcaption")]), "-=0.9");
     }
     root.classList.add("intro-ready"); // GSAP owns the intro now; drop the CSS fallback
 
-    // Progressive reveal: each section's heading, then its paragraphs; each figure's mat opens
-    // from the bottom while the recording settles, then the caption.
+    // Progressive reveal: each section's heading, then its paragraphs, line by line; each figure's
+    // mat opens from the bottom while the recording settles, then the caption rises in.
     $$(".story-section").forEach((section) => {
       const parts = [section.querySelector("h2"), ...section.querySelectorAll(":scope > p, .story-list li")].filter(Boolean);
-      gsap.set(parts, { opacity: 0, y: 16 });
+      gsap.set(parts, { opacity: 0 });
       ScrollTrigger.create({
         trigger: section,
         start: "top 85%",
         once: true,
-        onEnter: () => gsap.to(parts, { opacity: 1, y: 0, duration: 0.9, ease, stagger: 0.08, clearProps: "transform" }),
+        onEnter: () => rise(parts, { stagger: 0.06, gap: 0.12 }),
       });
     });
 
@@ -68,10 +78,10 @@
         start: "top 88%",
         once: true,
         onEnter: () => {
-          gsap.timeline({ defaults: { ease } })
+          const tl = gsap.timeline({ defaults: { ease } })
             .to(mat, { clipPath: "inset(0% 0% 0% 0% round 20px)", opacity: 1, duration: 1.2, clearProps: "clipPath" })
-            .to(media, { scale: 1, y: 0, duration: 1.4, clearProps: "transform" }, "<")
-            .to(caption, { opacity: 1, duration: 0.8 }, "-=0.9");
+            .to(media, { scale: 1, y: 0, duration: 1.4, clearProps: "transform" }, "<");
+          if (caption) tl.add(rise([caption]), "-=0.9");
         },
       });
     });
