@@ -745,36 +745,33 @@ header {
         font-size: 13px;
     }
 }
-/* Experience rows: give the role the most room and keep every row on one line */
-.project-name,
-.project-details {
-    flex: 1 1 0;
-    min-width: 0;
-}
 
-.type-container {
-    flex: 1.7 1 0;
-    min-width: 0;
-}
-
-.type,
-.date,
-.project-name-text {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* The case-page sidebar is narrower than the home page and scrolls, so long titles wrap instead of clipping */
+/* Experience rows: a fixed name column so roles line up row to row, dates on the right.
+   Long titles wrap rather than clip. */
 :is(.project, .project-rh):has(.type-container) {
-    gap: 8px;
+    display: grid;
+    grid-template-columns: 7.5rem minmax(0, 1fr) auto;
+    column-gap: 12px;
+    align-items: center;
 }
 
-:is(.project, .project-rh):has(.type-container) :is(.type, .project-name-text) {
-    white-space: normal;
-}
-
-:is(.project, .project-rh):has(.type-container) .project-details {
-    flex: 0 0 5.75rem;
+:is(.project, .project-rh):has(.type-container) > * {
     width: auto;
+    min-width: 0;
+}
+
+:is(.project, .project-rh):has(.type-container) .date {
+    white-space: nowrap;
+}
+
+.available-text {
+    white-space: nowrap;
+}
+
+/* Leave room for the sidebar's 400px minimum so it never covers the story */
+@media screen and (min-width: 781px) {
+    .page-content-wrapper {
+        width: calc(100vw - max(30vw, 400px));
+        margin-right: max(30vw, 400px);
+    }
 }

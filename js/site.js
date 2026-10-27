@@ -18,11 +18,19 @@
     return true;
   }
 
+  // Case study to case study: no wipe; the content area slides (css/case-nav.css, js/boot.js).
+  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr"];
+  const caseOf = (path) => CASES.includes(path.replace(/^\/|\.html$|\/$/g, ""));
+
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a[href]");
     if (!link || !isInternalPageLink(link, event)) return;
     const url = new URL(link.href, location.href);
     if (url.pathname === location.pathname) { event.preventDefault(); return; }
+    if (caseOf(location.pathname) && caseOf(url.pathname)) {
+      try { sessionStorage.setItem("case-swap", "1"); } catch (e) {}
+      return;
+    }
     if (reduceMotion || !transition) return;
     event.preventDefault();
     transition.classList.add("is-leaving");

@@ -1,0 +1,50 @@
+/* Moving between case studies: only the content area changes. The current story slides up
+   and away while the next one rises in; the sidebar stays exactly where it is.
+   Every case page loads this file, which opts both pages into the cross-page view transition. */
+@view-transition {
+    navigation: auto;
+}
+
+main {
+    view-transition-name: case-content;
+}
+
+#right-side-menu {
+    view-transition-name: case-sidebar;
+}
+
+/* Nothing else on the page animates */
+::view-transition-old(root),
+::view-transition-new(root),
+::view-transition-old(case-sidebar),
+::view-transition-new(case-sidebar) {
+    animation: none;
+}
+
+::view-transition-group(case-content) {
+    overflow: clip;
+    animation-duration: 0s;
+}
+
+::view-transition-old(case-content) {
+    animation: case-out 0.45s cubic-bezier(0.55, 0, 0.75, 0.3) both;
+}
+
+::view-transition-new(case-content) {
+    animation: case-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) 0.12s both;
+}
+
+@keyframes case-out {
+    to { transform: translateY(-64px); opacity: 0; }
+}
+
+@keyframes case-in {
+    from { transform: translateY(96px); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    ::view-transition-old(case-content),
+    ::view-transition-new(case-content) {
+        animation: none;
+    }
+}

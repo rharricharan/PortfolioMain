@@ -1,4 +1,4 @@
-/* Case study story: header, narrow text sections, figures on a warm mat, previous/next.
+/* Case study story: header with facts, narrow text sections and figures on a warm mat.
    Scoped to .story so the sidebar and the rest of each page's stylesheet are untouched. */
 .story {
     --ink: #161615;
@@ -12,8 +12,9 @@
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-    padding: 48px 32px 96px;
+    padding: 56px 32px 120px;
     min-width: 0;
+    container-type: inline-size;
     color: var(--ink);
     font-size: 15px;
     line-height: 1.5;
@@ -29,99 +30,40 @@
 
 .story strong { font-weight: 500; color: var(--ink); }
 
-/* Header ------------------------------------------------------------------ */
+/* Header: title on the left, facts on the right, both starting at the same line ------ */
 .story-header {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 40px;
-    align-items: end;
-}
-
-.story-meta {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    font-size: 13px;
-    color: var(--faint);
-}
-
-.story-count {
-    padding: 4px 10px;
-    border-radius: 999px;
-    background-color: var(--mat);
-    font-variant-numeric: tabular-nums;
-}
-
-.story-chip {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.story-chip::before {
-    content: "";
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: var(--accent);
+    gap: 32px;
+    align-items: start;
 }
 
 .story-title {
-    margin-top: 24px;
-    max-width: 20ch;
-    font-size: clamp(34px, 5vw, 56px);
+    max-width: 18ch;
+    font-size: clamp(28px, 3.4vw, 42px);
     font-weight: 500;
-    line-height: 1.04;
-    letter-spacing: -0.04em;
+    line-height: 1.08;
+    letter-spacing: -0.035em;
 }
 
 .story-title span { color: var(--faint); font-weight: 500; }
 
-.story-actions {
-    margin-top: 32px;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 16px;
-}
-
-.story-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    height: 40px;
-    padding: 0 16px;
-    border-radius: 999px;
-    background-color: var(--ink);
-    color: #fff;
-    font-size: 14px;
-    transition: transform 0.25s var(--ease-out), opacity 0.2s ease;
-}
-
-.story-button:hover { opacity: 0.85; }
-.story-button:active { transform: scale(0.97); }
-
-.story-link {
-    color: var(--faint);
-    font-size: 14px;
-    transition: color 0.2s ease;
-}
-
-.story-link:hover { color: var(--ink); }
-
 .story-facts {
     display: grid;
-    grid-template-columns: 6rem 1fr;
-    gap: 8px 24px;
-    padding-top: 24px;
+    grid-template-columns: 6.5rem 1fr;
+    gap: 8px 20px;
+    padding-top: 20px;
     border-top: 1px solid var(--line);
     font-size: 14px;
+    line-height: 1.45;
 }
 
 .story-facts dt { color: var(--faint); }
 
-@media (min-width: 1100px) {
-    .story-header { grid-template-columns: minmax(0, 1fr) 20rem; gap: 48px; }
+@container (min-width: 600px) {
+    .story-header { grid-template-columns: minmax(0, 1fr) minmax(15rem, 21rem); gap: 40px; }
+    /* Line the first fact up with the title's cap height */
+    .story-facts { padding-top: 0.3em; border-top: 0; }
 }
 
 /* Text sections ------------------------------------------------------------- */
@@ -165,57 +107,10 @@
 }
 
 .story-figure figcaption {
-    display: flex;
-    gap: 16px;
     margin-top: 16px;
     color: var(--faint);
     font-size: 14px;
 }
-
-.story-fig-n {
-    flex-shrink: 0;
-    color: #c6c6c0;
-    font-variant-numeric: tabular-nums;
-    white-space: nowrap;
-}
-
-/* Previous / next -------------------------------------------------------------- */
-.story-more {
-    display: grid;
-    gap: 12px;
-    max-width: 58ch;
-    margin: 96px auto 0;
-}
-
-@media (min-width: 640px) {
-    .story-more { grid-template-columns: 1fr 1fr; }
-}
-
-.story-more a {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    padding: 12px;
-    border: 1px solid rgba(0, 0, 0, 0.06);
-    border-radius: 20px;
-    background-color: #fff;
-    color: var(--ink);
-    transition: background-color 0.2s ease, transform 0.3s var(--ease-out);
-}
-
-.story-more a:hover { background-color: #fafaf8; transform: translateY(-2px); }
-
-.story-more img {
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
-    border-radius: 12px;
-    object-fit: cover;
-    background-color: var(--mat);
-}
-
-.story-more small { display: block; font-size: 13px; color: var(--faint); }
-.story-more span { min-width: 0; }
 
 /* Arrivals: sections and figures rise in as they reach the screen (js/case.js) --------- */
 .has-reveal .story [data-reveal] {

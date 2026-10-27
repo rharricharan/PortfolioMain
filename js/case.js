@@ -4,10 +4,6 @@
   if (!story) return;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-  // Number figures "1 / N"
-  const numbers = story.querySelectorAll(".story-fig-n");
-  numbers.forEach((n, i) => { n.textContent = `${i + 1} / ${numbers.length}`; });
-
   // Arrivals: anything already on screen stays put; the rest rises in once.
   const onView = (el, fn, margin = "0px 0px -10% 0px") => {
     const io = new IntersectionObserver((entries) => {

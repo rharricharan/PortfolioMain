@@ -55,6 +55,12 @@
     to { transform: scaleY(1); visibility: visible; }
 }
 
+/* Arrived from another case study: the content slides instead (css/case-nav.css) */
+.case-swap .block {
+    animation: none;
+    visibility: hidden;
+}
+
 @media (prefers-reduced-motion: reduce) {
     .block { animation: none; }
 }
