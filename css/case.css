@@ -88,11 +88,15 @@
     }
     /* Role paragraph starts on the title's cap line */
     .story-role { margin-top: 0.55em; }
+    /* Spread across the full content width: first flush left, last flush right, even gaps */
     .story-facts {
         grid-column: 1 / -1;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
         margin-top: 40px;
     }
+    .story-facts > div { flex: 0 1 auto; max-width: 17rem; }
 }
 
 /* Text sections ------------------------------------------------------------- */
