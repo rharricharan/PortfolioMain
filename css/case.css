@@ -53,6 +53,8 @@
 .story-lead {
     max-width: 52ch;
     margin-top: 20px;
+    font-size: 13px;
+    line-height: 1.6;
     color: var(--muted);
 }
 
