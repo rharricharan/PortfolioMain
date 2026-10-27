@@ -85,7 +85,7 @@
     color: var(--ink);
 }
 
-.story-role p { margin-top: 6px; }
+.story-role h2 + p { margin-top: 6px; }
 
 @container (min-width: 520px) {
     .story-header {
