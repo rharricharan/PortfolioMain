@@ -137,6 +137,55 @@
     fillBars();
   }
 
+  // --- Page outline, like Notion's: a dash per section in the left gutter; the one you're
+  // reading is darker. Hover (or focus) opens the list of headings; click to jump there. ---
+  const headings = [story.querySelector(".story-title"), ...$$(".story h2")].filter(Boolean);
+  if (headings.length > 2) {
+    const wrapper = document.querySelector(".content-wrapper");
+    const scroller = () => (wrapper && wrapper.scrollHeight > wrapper.clientHeight + 1 && getComputedStyle(wrapper).overflowY !== "visible" ? wrapper : null);
+    const outline = document.createElement("nav");
+    outline.className = "story-outline";
+    outline.setAttribute("aria-label", "On this page");
+    const list = document.createElement("ol");
+    const items = headings.map((h, i) => {
+      const li = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type = "button";
+      btn.innerHTML = '<span class="story-outline-dash" aria-hidden="true"></span><span class="story-outline-text"></span>';
+      btn.querySelector(".story-outline-text").textContent = i === 0 ? "Overview" : h.textContent.trim();
+      btn.addEventListener("click", () => {
+        const s = scroller();
+        const top = h.getBoundingClientRect().top - (s ? s.getBoundingClientRect().top : 0) + (s ? s.scrollTop : scrollY) - (i === 0 ? 40 : 96);
+        (s || window).scrollTo({ top: Math.max(0, top), behavior: reduceMotion ? "auto" : "smooth" });
+      });
+      li.append(btn);
+      list.append(li);
+      return li;
+    });
+    outline.append(list);
+    document.body.append(outline);
+
+    // The section being read: the last heading above 40% of the view
+    let active = -1, queued = false;
+    const update = () => {
+      queued = false;
+      const line = innerHeight * 0.4;
+      let next = 0;
+      headings.forEach((h, i) => { if (h.getBoundingClientRect().top < line) next = i; });
+      if (next === active) return;
+      items[active]?.classList.remove("is-active");
+      items[next].classList.add("is-active");
+      items[next].querySelector("button").setAttribute("aria-current", "true");
+      items[active]?.querySelector("button").removeAttribute("aria-current");
+      active = next;
+    };
+    const onScroll = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
+    (wrapper || window).addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("scroll", onScroll, { passive: true });
+    addEventListener("resize", onScroll);
+    update();
+  }
+
   // --- Cinnamon: everyone in orbit around you. Tap someone to connect them to the center. ---
   const orbit = story.querySelector("[data-orbit]");
   if (orbit) {
