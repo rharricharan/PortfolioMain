@@ -88,7 +88,7 @@ html:not(.curtain) .transition { display: none; }
     --rr-duration: 1150ms;
     --rr-fade-at: 700ms;
     --rr-fade: 680ms;
-    --rr-rest: 0.22;
+    --rr-rest: 0.1;
     --rr-paper: #fbfbfa;
 }
 .rainbow-ripple,

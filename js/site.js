@@ -71,11 +71,12 @@
     document.getElementById("menu-close")?.addEventListener("click", close);
     addEventListener("keydown", (e) => { if (e.key === "Escape") close(); });
 
+    // (Pages with the bars use them on phones instead: no swipe-open there)
     let startX = 0;
     document.addEventListener("touchstart", (e) => { startX = e.touches[0].clientX; }, { passive: true });
     document.addEventListener("touchmove", (e) => {
       const diffX = e.touches[0].clientX - startX;
-      if (diffX > 50 && startX < 50) open();
+      if (diffX > 50 && startX < 50 && !document.querySelector("[data-navbar]")) open();
       if (diffX < -50 && menu.classList.contains("open")) close();
     }, { passive: true });
   }

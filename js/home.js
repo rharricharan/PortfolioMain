@@ -63,7 +63,7 @@
   // into the same loop, and lands pointing at the projects again. Paused during previews.
   let nudge = null;
   const idle = () => {
-    if (reduceMotion || !gsap) return;
+    if (reduceMotion || !gsap || !matchMedia("(min-width: 781px)").matches) return; // the arrow is desktop-only
     const len = line.getTotalLength();
     const headLen = head.getTotalLength();
     const drawn = () => gsap.set([line, head], { strokeDashoffset: 0, opacity: 1, x: 0, y: 0 });
