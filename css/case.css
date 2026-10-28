@@ -457,13 +457,14 @@
         transition: background-color 0.3s ease, box-shadow 0.3s ease;
         animation: outline-in 0.8s 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
-    .story-outline ol { list-style: none; display: grid; gap: 2px; }
+    .story-outline ol { list-style: none; display: grid; gap: 0; }
     .story-outline button {
         display: flex;
         align-items: center;
         width: 100%;
-        min-height: 18px;
-        padding: 3px 4px 3px 6px;
+        min-height: 6px;
+        padding: 2px 4px 2px 6px;
+        transition: padding 0.3s cubic-bezier(0.22, 1, 0.36, 1);
         border: 0;
         border-radius: 6px;
         background: none;
@@ -484,11 +485,13 @@
     }
     .story-outline-text {
         max-width: 0;
+        max-height: 0; /* folded at rest, so the dashes sit close together */
+        line-height: 1.4;
         overflow: hidden;
         white-space: nowrap;
         text-overflow: ellipsis;
         opacity: 0;
-        transition: max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, margin 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        transition: max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, margin 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .story-outline li.is-active .story-outline-dash { width: 18px; background-color: #161615; }
     .story-outline li.is-active button { color: #161615; }
@@ -500,7 +503,8 @@
         backdrop-filter: blur(20px);
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 18px 40px -16px rgba(0, 0, 0, 0.18);
     }
-    .story-outline:is(:hover, :focus-within) .story-outline-text { max-width: 260px; margin-left: 10px; opacity: 1; }
+    .story-outline:is(:hover, :focus-within) button { padding-top: 5px; padding-bottom: 5px; }
+    .story-outline:is(:hover, :focus-within) .story-outline-text { max-width: 220px; max-height: 20px; margin-left: 10px; opacity: 1; }
     .story-outline:is(:hover, :focus-within) button:hover { background-color: rgba(0, 0, 0, 0.04); color: #161615; }
     .story-outline button:focus-visible { outline: 2px solid #161615; outline-offset: 1px; }
 }

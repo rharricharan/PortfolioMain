@@ -137,9 +137,10 @@
     fillBars();
   }
 
-  // --- Page outline, like Notion's: a dash per section in the left gutter; the one you're
-  // reading is darker. Hover (or focus) opens the list of headings; click to jump there. ---
-  const headings = [story.querySelector(".story-title"), ...$$(".story h2")].filter(Boolean);
+  // --- Page outline, like Notion's: a dash per chapter in the left gutter; the one you're
+  // reading is darker. Hover (or focus) opens the chapter names; click to jump there.
+  // Chapters are the headings tagged data-outline (.claude/build_cases.py OUTLINE). ---
+  const headings = [story.querySelector(".story-title"), ...$$("[data-outline]")].filter(Boolean);
   if (headings.length > 2) {
     const wrapper = document.querySelector(".content-wrapper");
     const scroller = () => (wrapper && wrapper.scrollHeight > wrapper.clientHeight + 1 && getComputedStyle(wrapper).overflowY !== "visible" ? wrapper : null);
@@ -152,7 +153,7 @@
       const btn = document.createElement("button");
       btn.type = "button";
       btn.innerHTML = '<span class="story-outline-dash" aria-hidden="true"></span><span class="story-outline-text"></span>';
-      btn.querySelector(".story-outline-text").textContent = i === 0 ? "Overview" : h.textContent.trim();
+      btn.querySelector(".story-outline-text").textContent = i === 0 ? "Overview" : h.dataset.outline;
       btn.addEventListener("click", () => {
         const s = scroller();
         const top = h.getBoundingClientRect().top - (s ? s.getBoundingClientRect().top : 0) + (s ? s.scrollTop : scrollY) - (i === 0 ? 40 : 96);
