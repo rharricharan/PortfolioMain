@@ -7,6 +7,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -20,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/leadhack.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,43 +70,71 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">
-                            <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">LeadHack is a company focused on providing high-quality lead generation and customer acquisition tools for agencies.
-                                Their platform streamlines lead prospecting, automates outreach, and optimizes CRM processes to save time and reduce
-                                costs. With LeadHack, agencies can enhance response rates, create compelling sales pitches, and effectively nurture
-                                prospects, leading to improved client retention and conversions. The service is designed to address common challenges
-                                for agency owners, with no contracts and the flexibility to cancel anytime.</h3>
-                                <h3 class="title-rh">I was responsible for designing the company’s website using Webflow, focusing on smooth scroll animations and a clean,
-                                responsive user experience. In addition to the website design, I contributed to the product development process by
-                                overseeing the front-end implementation, collaborating with developers to ensure seamless integration using the .NET
-                                framework. This project allowed me to blend design aesthetics with technical functionality, creating a polished and
-                                efficient digital experience for users.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">LeadHack. <span>Lead generation for agencies, told in one scroll.</span></h1>
+                                <p class="story-lead">LeadHack gives agencies high-quality lead generation and customer acquisition tools. It finds prospects, automates outreach and tidies up the CRM, and it helps agencies write better pitches and nurture prospects into clients. No contracts, and agencies can cancel anytime.</p>
                             </div>
-
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Website Designer</p>
-                                </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">User Experience Design, User Interface Design, Content
-                                        Management, Website Development (Webflow), Project Management, Interaction Design.</p>
-                                </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Designed and built the marketing site with smooth scroll animation and a clean, responsive layout. On the product, oversaw the front-end implementation and helped manage the project, so the site and the product look and feel like one thing.</p>
                             </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Website Designer</dd></div>
+                                <div><dt>Built With</dt><dd>Webflow, .NET (Product)</dd></div>
+                                <div><dt>Worked With</dt><dd>Product Developers</dd></div>
+                                <div><dt>Project</dt><dd>Website, Product Front End</dd></div>
+                            </dl>
                         </div>
-                        <div class="project-title">
-                            <video autoplay muted loop playsinline preload="auto" poster="assets/assets/leadhack/leadhack-poster.webp" data-lazy>
-                                <source src="assets/assets/leadhack/leadhack.mp4" type="video/mp4">
-                            </video>
+                        <!-- GAP (Ryan): Year; site URL; team size; any results; more product footage. -->
+
+                        <figure class="story-figure is-wide">
+                            <div class="story-mat">
+                                <video src="assets/work/leadhack/hero.mp4" poster="assets/work/leadhack/hero.webp" muted loop playsinline preload="metadata" data-lazy aria-label="LeadHack’s site in one scroll: the hero, the problems agencies face, LeadHack’s answer, and the product."></video>
+                            </div>
+                            <figcaption>LeadHack’s site in one scroll: the hero, the problems agencies face, LeadHack’s answer, and the product.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Name the Problem, Then Answer It</h2>
+                            <p>Agency owners know their problems better than anyone, so the site starts there. It names the four things that waste their time and money, then answers each one with what LeadHack does about it. The page stays split: LeadHack’s promise holds still on the left while the story scrolls on the right.</p>
+                        </section>
+
+                        <div class="story-block">
+                            <ol class="story-pairs">
+                                <li>
+                                    <p><span>Problem</span>Wasting hours looking for high-quality leads with low response rates.</p>
+                                    <p><span>Answer</span>Time-saving lead generation tools that deliver high-quality leads with better response rates.</p>
+                                </li>
+                                <li>
+                                    <p><span>Problem</span>Struggling to write unique, persuasive sales pitches.</p>
+                                    <p><span>Answer</span>Help writing compelling sales pitches.</p>
+                                </li>
+                                <li>
+                                    <p><span>Problem</span>Juggling several outreach tools, which complicates the workflow and the costs.</p>
+                                    <p><span>Answer</span>One place to automate outreach and the CRM, for less.</p>
+                                </li>
+                                <li>
+                                    <p><span>Problem</span>Nurturing prospects poorly, and missing opportunities.</p>
+                                    <p><span>Answer</span>Expert guidance and tools to nurture prospects into loyal clients.</p>
+                                </li>
+                            </ol>
                         </div>
 
-                    </div>
+                        <section class="story-section">
+                            <h2>The Product, Front and Center</h2>
+                            <p>“Our interface is built for agencies like yours.” The site ends on the product itself. Its home screen leads with a single search: find leads anywhere with one click. Working on that front end with the developers meant the site and the product share one look.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>One scroll, one story.</strong> Instead of pages to click through, the site tells the whole pitch in a single scroll with the promise pinned beside it. Less room for detail, and nobody gets lost.</li>
+                                <li><strong>Motion that explains.</strong> The scroll animation moves from problem to answer to product, so the motion carries the argument instead of decorating it.</li>
+                                <li><strong>Design and front end, one person.</strong> Overseeing the product’s front end meant the marketing site and the product shared one look, without a hand-off between them.</li>
+                            </ul>
+                        </section>
+                    </article>
                 </div>
             </main>
 

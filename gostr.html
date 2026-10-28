@@ -7,6 +7,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -20,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/one.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,35 +70,93 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">
-                            <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">GoSTRMarketing is a short-term rental marketing company offering customers software solutions for getting more bookings and providing a higher quality experience for the end user. GoSTRMarketing leverages GoHIghLevel in order to build clients customized applications, text notifications, and CRMs to establish a scalable network and business.</h3>
-                                <h3 class="title-rh">I was responsible for designing and developing the GoSTRMarketing website utilizing Figma, Webflow, GoHighLevel, and GSAP for seamless integration and animations. I worked alongside the companies Co-founders, CEO - Sam Mistretta and CTO - Justin Hall to create a website that would be user-friendly, interactive, and informative for potential clients.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">GoSTR Marketing. <span>Done-for-you marketing that keeps short-term rentals booked.</span></h1>
+                                <p class="story-lead">GoSTR Marketing helps short-term rental owners get more bookings and give guests a better stay. Built on GoHighLevel, it gives each client their own app, text notifications and CRM, so their marketing can grow with their business.</p>
                             </div>
-
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Website Designer & Developer</p>
-                                </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">User Experience Design, User Interface Design, Content
-                                        Management, Website Development (Webflow)), GoHighLevel Integration</p>
-                                </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Designed and built the site with the animation and integration behind it, working directly with the co-founders on a site that would be friendly, interactive and informative for owners deciding whether to sign up.</p>
                             </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Designer and Developer</dd></div>
+                                <div><dt>Built With</dt><dd>Figma, Webflow, GSAP, GoHighLevel</dd></div>
+                                <div><dt>Worked With</dt><dd>Sam Mistretta (CEO), Justin Hall (CTO)</dd></div>
+                                <div><dt>Project</dt><dd><a href="https://gostrmarketing.com" target="_blank" rel="noopener noreferrer">Website ↗</a></dd></div>
+                            </dl>
                         </div>
-                        <div class="project-title">
-                            <video autoplay muted loop playsinline preload="auto" poster="assets/assets/gostr/gostrmarketing-poster.webp" data-lazy>
-                                <source src="assets/assets/gostr/gostrmarketing.mp4" type="video/mp4">
-                            </video>
+                        <!-- GAP (Ryan): Year; results. -->
+
+                        <figure class="story-figure is-wide">
+                            <div class="story-mat">
+                                <video src="assets/work/gostr/hero.mp4" poster="assets/work/gostr/hero.webp" muted loop playsinline preload="metadata" data-lazy aria-label="100% done-for-you marketing. Beat hospitality benchmarks. GoSTR’s home page."></video>
+                            </div>
+                            <figcaption>100% done-for-you marketing. Beat hospitality benchmarks. GoSTR’s home page.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Three Steps, Shown, Not Told</h2>
+                            <p>“Unlock your rental’s potential.” The site explains the service as three steps, and each one shows the real thing: the property, the email and text campaign, and the app owners reply from.</p>
+                        </section>
+
+                        <div class="story-block">
+                            <ol class="story-steps">
+                                <li>
+                                    <h3>Step 1</h3>
+                                    <p>Enter your company and property information.</p>
+                                </li>
+                                <li>
+                                    <h3>Step 2</h3>
+                                    <p>A professionally designed, year-long monthly email and text campaign is built from that information, each one tailored to the brand.</p>
+                                </li>
+                                <li>
+                                    <h3>Step 3</h3>
+                                    <p>Use the mobile app to respond to re-booking inquiries. It’s that easy.</p>
+                                </li>
+                            </ol>
                         </div>
 
-                    </div>
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/gostr/steps.mp4" poster="assets/work/gostr/steps.webp" muted loop playsinline preload="none" data-lazy aria-label="The three steps on the live site, each showing what owners actually get."></video>
+                            </div>
+                            <figcaption>The three steps on the live site, each showing what owners actually get.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Pricing Anyone Can Read</h2>
+                            <p>“It’s easy to get started.” Pricing sits on the page, by the number of properties, with everything included listed underneath. No call needed to find out what it costs.</p>
+                        </section>
+
+                        <figure class="story-figure is-block">
+                            <div class="story-mat story-mat-plain">
+                                <ul class="story-tiers">
+                                    <li><h3>1–25 Properties</h3><p class="story-tier-price">$250</p></li>
+                                    <li><h3>26–50 Properties</h3><p class="story-tier-price">$333</p></li>
+                                    <li><h3>51+ Properties</h3><p class="story-tier-price">Let’s talk</p></li>
+                                </ul>
+                                <ul class="story-included"><li>100% done-for-you 12-month email and text campaign</li><li>100% done-for-you graphic design</li><li>100% done-for-you copy</li></ul>
+                            </div>
+                            <figcaption>The pricing tiers from the site, and what every plan includes.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/gostr/pricing.mp4" poster="assets/work/gostr/pricing.webp" muted loop playsinline preload="none" data-lazy aria-label="Reviews from owners, then pricing, on the live site."></video>
+                            </div>
+                            <figcaption>Reviews from owners, then pricing, on the live site.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>Show the product.</strong> Instead of stock photos, each step shows what owners actually get: the emails, the texts and the app.</li>
+                                <li><strong>One bold moment, then calm.</strong> The holographic gradient carries the brand at the top; everything after is quiet and readable, so the pitch never fights the color.</li>
+                                <li><strong>Prices in the open.</strong> Showing pricing up front loses a sales conversation, and saves owners the call. For a done-for-you service, that ease is the pitch.</li>
+                            </ul>
+                        </section>
+                    </article>
                 </div>
             </main>
 

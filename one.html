@@ -7,6 +7,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -20,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/one.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,42 +70,96 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">
-                            <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">Our Next Energy (ONE) is a company focused on revolutionizing energy storage solutions for electric vehicles (EVs) and
-                                the grid. They develop advanced battery technologies like the Gemini™ dual-chemistry battery, which significantly
-                                extends EV range, and the Aries™ series, which offers sustainable, durable, and efficient energy storage options. Their
-                                mission centers on enhancing range, safety, and sustainability, utilizing abundant materials to build a robust U.S.
-                                supply chain for renewable energy.</h3>
-                                <h3 class="title-rh">I played a key role in shaping the website’s structure, developing front-end pages via DatoCMS, and coordinating content
-                                from photographers, videographers, and graphic designers. Additionally, I designed email marketing templates, crafted
-                                internal and external presentation decks, and took ownership of the in-house signage design system. My contributions
-                                ensured cohesive branding across all digital and physical touchpoints, enhancing both the user experience and internal
-                                marketing efforts.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">Our Next Energy. <span>Batteries that go further, explained for drivers and the grid.</span></h1>
+                                <p class="story-lead">Our Next Energy (ONE) builds energy storage for electric vehicles and the grid. Its Gemini™ dual-chemistry battery significantly extends an EV’s range, and its Aries™ series offers sustainable, durable and efficient storage, built on abundant materials and a strong U.S. supply chain.</p>
                             </div>
-
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Senior UX Designer</p>
-                                </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">User Experience Design, User Interface Design, Content Management, Website Development (Dato), Email Template Design, Deck Template Design.</p>
-                                </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Shaped the website’s structure and built its pages on the front end, coordinating content across photography, video and graphics. Beyond the site: the email marketing templates, internal and external presentation decks, and the in-house signage design system, so the brand held together on screen and in the building.</p>
                             </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Senior UX Designer</dd></div>
+                                <div><dt>Built With</dt><dd>DatoCMS</dd></div>
+                                <div><dt>Worked With</dt><dd>Photographers, Videographers, Graphic Designers</dd></div>
+                                <div><dt>Project</dt><dd><a href="https://www.one.ai" target="_blank" rel="noopener noreferrer">Website, Email, Decks, Signage ↗</a></dd></div>
+                            </dl>
                         </div>
-                        <div class="project-title">
-                            <video autoplay muted loop playsinline preload="auto" poster="assets/assets/one/one-poster.webp" data-lazy>
-                                <source src="assets/assets/one/one.mp4" type="video/mp4">
-                            </video>
-                        </div>
+                        <!-- GAP (Ryan): Images of the email templates, decks or signage; team; any results. -->
 
-                    </div>
+                        <figure class="story-figure is-wide">
+                            <div class="story-mat">
+                                <video src="assets/work/one/range.mp4" poster="assets/work/one/range.webp" muted loop playsinline preload="metadata" data-lazy aria-label="What if we could double the range of an EV? ONE’s site opens on the question its batteries answer."></video>
+                            </div>
+                            <figcaption>What if we could double the range of an EV? ONE’s site opens on the question its batteries answer.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>A Site Built Around the Batteries</h2>
+                            <p>Battery chemistry is hard to explain. The structure starts with the question people care about, range, then introduces each battery by what it’s for, with its capacity and range right there: Aries for trucks, boats and more, Aries Grid for stationary storage, and Gemini for the longest trips.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/one/batteries.mp4" poster="assets/work/one/batteries.webp" muted loop playsinline preload="none" data-lazy aria-label="Why iron, then the batteries, each with what it’s for and the numbers that matter."></video>
+                            </div>
+                            <figcaption>Why iron, then the batteries, each with what it’s for and the numbers that matter.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Less of the Metals That Cost the Most</h2>
+                            <p>Part of the story is what ONE leaves out. The site makes it concrete: next to each chemistry, how much less of the scarce metals it needs.</p>
+                        </section>
+
+                        <figure class="story-figure is-block">
+                            <div class="story-mat story-mat-plain">
+                            <div class="story-bars-group">
+                                <h3>How much less of each metal ONE’s batteries use</h3>
+                                <ul class="story-bars">
+                                    <li><span class="bar-label">Lithium</span><span class="bar-track"><span class="bar-fill" data-v="20"></span></span><span class="bar-value">20% less</span></li>
+                                    <li><span class="bar-label">Graphite</span><span class="bar-track"><span class="bar-fill" data-v="60"></span></span><span class="bar-value">60% less</span></li>
+                                    <li><span class="bar-label">Nickel</span><span class="bar-track"><span class="bar-fill" data-v="75"></span></span><span class="bar-value">75% less</span></li>
+                                    <li><span class="bar-label">Cobalt</span><span class="bar-track"><span class="bar-fill" data-v="100"></span></span><span class="bar-value">100% less</span></li>
+                                </ul>
+                            </div>
+                            </div>
+                            <figcaption>The reductions, as the site shows them.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/one/metals.mp4" poster="assets/work/one/metals.webp" muted loop playsinline preload="none" data-lazy aria-label="LFP for daily driving, anode-free for longer trips, Gemini for both, and the metals they save."></video>
+                            </div>
+                            <figcaption>LFP for daily driving, anode-free for longer trips, Gemini for both, and the metals they save.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Aries Grid</h2>
+                            <p>For the grid, the page has to work for a different reader: someone buying storage for a factory, a data center or a community. It leads with scale and reliability, then breaks Aries Grid down into its cells, packs and systems.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/one/aries.mp4" poster="assets/work/one/aries.webp" muted loop playsinline preload="none" data-lazy aria-label="Aries Grid: from the full system down to its cells, with the case for cost and sustainability."></video>
+                            </div>
+                            <figcaption>Aries Grid: from the full system down to its cells, with the case for cost and sustainability.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Beyond the Website</h2>
+                            <p>The same system carried into email templates, presentation decks for inside and outside the company, and the signage across ONE’s buildings, owned as its own design system.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>Lead with range.</strong> The site opens on the one question every driver has, then gets technical. Engineers have to scroll a little further; everyone else stays.</li>
+                                <li><strong>Built for the team to publish.</strong> Pages are built from DatoCMS content, so ONE’s marketing team can add products and news without a developer.</li>
+                                <li><strong>One system, on screen and off.</strong> Owning the signage alongside the site meant one set of rules from the homepage to the factory floor.</li>
+                            </ul>
+                        </section>
+                    </article>
                 </div>
             </main>
 

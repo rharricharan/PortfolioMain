@@ -13,6 +13,15 @@
     io.observe(el);
   };
 
+  const bars = $$(".bar-fill");
+  const fillBars = () => bars.forEach((b) => { b.style.width = `${b.dataset.v}%`; });
+
+  // Text-bearing leaves inside a block (so nested lists don't rise twice)
+  const leaves = (el) => {
+    const all = [...el.querySelectorAll("p, h3, li, dt, dd")];
+    return all.filter((n) => !all.some((m) => m !== n && n.contains(m)));
+  };
+
   // --- Motion -------------------------------------------------------------------------
   const motion = () => {
     const { gsap, ScrollTrigger, SplitText } = window;
@@ -86,6 +95,35 @@
       });
     });
 
+    // Blocks between sections (pairs, notes, steps, stats): their text rises in like the rest
+    $$(".story-block, .story-stats").forEach((blockEl) => {
+      const parts = leaves(blockEl);
+      gsap.set(parts, { opacity: 0 });
+      ScrollTrigger.create({
+        trigger: blockEl,
+        start: "top 88%",
+        once: true,
+        onEnter: () => rise(parts, { stagger: 0.05, gap: 0.05 }),
+      });
+    });
+
+    // Content on a mat (bars, quotes, flow, tiers): text rises after the mat opens; bars grow to their value
+    $$(".story-figure.is-block").forEach((figure) => {
+      // Never split a bar row itself: reverting the split would replace the bar being filled
+      const parts = leaves(figure.querySelector(".story-mat")).flatMap((el) => (el.querySelector(".bar-fill") ? [...el.querySelectorAll(".bar-label, .bar-value")] : [el]));
+      const fills = [...figure.querySelectorAll(".bar-fill")];
+      gsap.set(parts, { opacity: 0 });
+      ScrollTrigger.create({
+        trigger: figure,
+        start: "top 80%",
+        once: true,
+        onEnter: () => {
+          rise(parts, { stagger: 0.04, gap: 0.03 }).delay(0.3);
+          gsap.to(fills, { width: (i, el) => `${el.dataset.v}%`, duration: 1.4, ease, stagger: 0.05, delay: 0.45 });
+        },
+      });
+    });
+
     // Videos and images that load later change the page height
     addEventListener("load", () => ScrollTrigger.refresh());
   };
@@ -95,6 +133,7 @@
     (document.fonts ? document.fonts.ready : Promise.resolve()).then(motion);
   } else {
     root.classList.add("intro-ready");
+    fillBars();
   }
 
   // --- Cinnamon: everyone in orbit around you. Tap someone to connect them to the center. ---

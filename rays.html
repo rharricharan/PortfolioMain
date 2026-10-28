@@ -7,6 +7,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -20,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/rays.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,48 +70,166 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">
-                            <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">CatchRays is a brand built around a community of individuals who love the summer, beach, and to be tan.</h3>
-                                <h3 class="title-rh">They wanted to build an iOS exclusive application because they realized there wasn't a solid application that really
-                                gave users the upper-hand when it came to accurate tracking of UV Index and creating an overall better tanning
-                                experience.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">Rays. <span>Tanning, without the guesswork.</span></h1>
+                                <p class="story-lead">CatchRays is a brand built around a community of people who love summer, the beach and a good tan. They wanted an iOS-only app because nothing on the market gave tanners the upper hand: accurate UV tracking and a better, safer tanning experience in one place.</p>
                             </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Took the founders’ idea from zero to one as the only designer: research and usability testing with users they’d already gathered, product strategy, end-to-end product and interaction design, and the website, designed and built to launch the app.</p>
+                            </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Product Designer</dd></div>
+                                <div><dt>Built With</dt><dd>FlutterFlow</dd></div>
+                                <div><dt>Worked With</dt><dd>CatchRays Founders</dd></div>
+                                <div><dt>Project</dt><dd><a href="https://rharricharan.github.io/rays-test.github.io/" target="_blank" rel="noopener noreferrer">iPhone App, Website ↗</a></dd></div>
+                            </dl>
+                        </div>
+                        <!-- GAP (Ryan): Years and launch date; App Store link; is the app still live? -->
 
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Product Designer</p>
+                        <figure class="story-figure is-wide is-phone">
+                            <div class="story-mat">
+                                <video src="assets/work/rays/hero.mp4" poster="assets/work/rays/hero.webp" muted loop playsinline preload="metadata" data-lazy aria-label="Rays, the finished app: today’s UV, the hourly chart, and a tanning session from set-up to start."></video>
+                            </div>
+                            <figcaption>Rays, the finished app: today’s UV, the hourly chart, and a tanning session from set-up to start.</figcaption>
+                        </figure>
+
+                        <dl class="story-stats">
+                            <div><dt>of testers avoided sunburn</dt><dd>86%</dd></div>
+                            <div><dt>tanned successfully for their skin tone</dt><dd>78%</dd></div>
+                            <div><dt>joined the waitlist before launch</dt><dd>2,000+</dd></div>
+                            <div><dt>people in usability testing</dt><dd>20+</dd></div>
+                        </dl>
+
+                        <section class="story-section">
+                            <h2>The Problem</h2>
+                            <p>Tanners struggle to balance the tan they want with keeping their skin healthy. Existing apps lacked real-time UV data and personal safety guidance, so people didn’t know their limits. To get it right, they had to search online for the UV index, sun safety advice, the best times to be out and the right SPF.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>What We Learned, and What We Set Out To Do</h2>
+                            <p>Research came back with three findings, and each one became an objective.</p>
+                        </section>
+
+                        <div class="story-block">
+                            <ol class="story-pairs">
+                                <li>
+                                    <p><span>Finding</span>No real-time UV monitoring, and no clear way to read the data.</p>
+                                    <p><span>Objective</span>A friendly, real-time UV index and exposure chart.</p>
+                                </li>
+                                <li>
+                                    <p><span>Finding</span>A big worry about skin safety and getting burnt.</p>
+                                    <p><span>Objective</span>Safety guidance personalized to each person’s skin.</p>
+                                </li>
+                                <li>
+                                    <p><span>Finding</span>Tired of going online with a stack of bookmarked sites.</p>
+                                    <p><span>Objective</span>An app that gets every task done quickly and easily.</p>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <section class="story-section">
+                            <h2>Two Versions</h2>
+                            <p>The first version covered everything, and testing said it was too much: cluttered and too colorful, with the analytics hard to read, and the timer, the thing people came for, buried. Going into the second version, three questions led. How do we make the tanning timer better? How do we simplify the experience? How do we show the numbers that matter right away?</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <img src="assets/work/rays/v1.webp" alt="The first version of Rays" loading="lazy" decoding="async">
+                            </div>
+                            <figcaption>The first version: everything at once.</figcaption>
+                        </figure>
+
+                        <div class="story-block story-notes">
+                            <p class="story-notes-title">From v1 to the final app</p>
+                            <div class="story-notes-cols">
+                                <div>
+                                    <h3>What Testing Said</h3>
+                                    <ul><li>Cluttered, and too colorful.</li><li>The analytics were poorly displayed.</li><li>The timer needed to come first.</li></ul>
                                 </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">Website Design & Development, UX Research, Product Strategy,
-                                        End-to-End Product Design, Content Management, Front-End Development, Usability
-                                        Testing, Interaction Design.</p>
+                                <div>
+                                    <h3>What Changed</h3>
+                                    <ul><li>Today’s UV, temperature and prime tanning hours up top.</li><li>One hourly chart instead of many widgets.</li><li>Start Tanning one tap away, on every screen.</li></ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="project-title">
-                            <img src="assets/assets/rays/title.webp" alt="Rays case study: title" width="1600" height="1200" fetchpriority="high" decoding="async">
-                            <img src="assets/assets/rays/abt.svg" alt="Rays case study: about" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/impact.webp" alt="Rays case study: impact" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/outcome.webp" alt="Rays case study: outcome" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/findings.svg" alt="Rays case study: findings" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/objectives.svg" alt="Rays case study: objectives" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/solution-1.webp" alt="Rays case study: solution 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/main.webp" alt="Rays case study: main" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/timer.webp" alt="Rays case study: timer" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/archive-1.webp" alt="Rays case study: archive" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/iteration1.svg" alt="Rays case study: iteration 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/iteration2.svg" alt="Rays case study: iteration 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/rays/solution-2.webp" alt="Rays case study: solution 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <video src="assets/assets/rays/rays.mp4" muted loop playsinline preload="none" poster="assets/assets/rays/rays-poster.webp" data-lazy></video>
-                        </div>
-                    </div>
+
+                        <section class="story-section">
+                            <h2>Today, at a Glance</h2>
+                            <p>The app opens on what a tanner needs to decide: today’s UV index, the temperature outside and the prime tanning hours, with an hourly UV chart underneath. Each hour fills to its UV index and warms in color as it rises, so a glance says when to go out and when to cover up.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/rays/screens.mp4" poster="assets/work/rays/screens.webp" muted loop playsinline preload="none" data-lazy aria-label="The finished screens: find shade, today at a glance, and start tanning."></video>
+                            </div>
+                            <figcaption>The finished screens: find shade, today at a glance, and start tanning.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>A Timer That Looks After You</h2>
+                            <p>The timer became the center of the app. A session takes three steps: set a duration, choose how to be reminded, including a nudge to flip, and start. Then the screen changes to a countdown with music one tap away.</p>
+                        </section>
+
+                        <figure class="story-figure is-phone">
+                            <div class="story-mat">
+                                <video src="assets/work/rays/timer.mp4" poster="assets/work/rays/timer.webp" muted loop playsinline preload="none" data-lazy aria-label="Setting up a tanning session, from duration and alerts to the countdown."></video>
+                            </div>
+                            <figcaption>Setting up a tanning session, from duration and alerts to the countdown.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>The Website</h2>
+                            <p>The site introduces the app and carries the brand into the shop: what Rays does, the features that matter most, and CatchRays’ summer essentials one tap from the store. It was designed and built alongside the app, so the launch felt like one thing.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/rays/site-top.mp4" poster="assets/work/rays/site-top.webp" muted loop playsinline preload="none" data-lazy aria-label="Soak Up the Sun with Rays. The site opens on the app itself."></video>
+                            </div>
+                            <figcaption>Soak Up the Sun with Rays. The site opens on the app itself.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/rays/site-shop.mp4" poster="assets/work/rays/site-shop.webp" muted loop playsinline preload="none" data-lazy aria-label="The features, then CatchRays’ summer essentials, straight to the store."></video>
+                            </div>
+                            <figcaption>The features, then CatchRays’ summer essentials, straight to the store.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>The timer first.</strong> Testing showed people opened the app to tan, not to read data, so the timer moved to the center and every screen keeps Start Tanning one tap away. The analytics got less room in exchange, which is what testers asked for.</li>
+                                <li><strong>One chart instead of many.</strong> v1 had widgets for everything. The final app reduces it to a single hourly chart that fills and warms with the UV. Less to explore, and an answer at a glance.</li>
+                                <li><strong>Warm, but calmer.</strong> v1 was too colorful. The final palette keeps the brand’s sun-warm oranges for what matters and lets everything else step back.</li>
+                                <li><strong>Reminders do the remembering.</strong> Push notifications say when to flip and when to stop, so nobody has to watch the clock.</li>
+                            </ul>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>Usability Testing and Brand Impact</h2>
+                            <p>In usability testing with more than 20 people, the app helped 86% of them avoid sunburn, and 78% tanned successfully for their skin tone and the safety guidance. Before launch, more than 2,000 people joined the waitlist, and the CatchRays online store sold out of every product in its first month.</p>
+                        </section>
+
+                        <figure class="story-figure is-block">
+                            <div class="story-mat story-mat-plain">
+                                <ul class="story-quotes">
+                                    <li>CatchRays is extremely intuitive and fast to use.</li>
+                                    <li>I wish I had this for my trip to Aruba.</li>
+                                    <li>I feel like I am tanning with an assistant.</li>
+                                    <li>Knowing when to go tan is extremely useful.</li>
+                                    <li>The push notifications are very helpful.</li>
+                                    <li>The app is simple and easy to navigate.</li>
+                                    <li>Not being sunburnt feels great.</li>
+                                    <li>This has not only saved me time but also a lot of aloe, lotion, oil, and money.</li>
+                                    <li>The hourly data is such a relief.</li>
+                                </ul>
+                            </div>
+                            <figcaption>What testers said.</figcaption>
+                        </figure>
+                    </article>
                 </div>
             </main>
 

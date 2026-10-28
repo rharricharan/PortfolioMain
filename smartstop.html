@@ -6,6 +6,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -17,6 +21,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/smartstop.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,80 +64,241 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">  <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">Smartstop® is a pioneering traffic and logistics startup dedicated to enhancing urban
-                                    environments by making cities
-                                    faster, cleaner, safer, and smarter.</h3>
-                                <h3 class="title-rh">Together we developed the Smart Traffic Infrastructure Management Platform, an
-                                    innovative solution that provides city engineers with comprehensive data access across all urban touchpoints.
-                                </h3>
-                                <h3 class="title-rh">Our system
-                                    also autonomously adjusts traffic flow in real-time, offers recommendations, and creates customized traffic
-                                    plans through our
-                                    advanced AI, Nebula.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">Smartstop. <span>A city’s traffic, managed from one place.</span></h1>
+                                <p class="story-lead">Smartstop is a traffic and logistics startup working to make cities faster, cleaner, safer and smarter. Together we built STIM, the Smart Traffic Infrastructure Management platform: one place where city engineers see data from every part of the city, while Nebula, Smartstop’s AI, adjusts traffic flow in real time.</p>
                             </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Owned the product from research to launch: interviews and a 200-person survey, product strategy, end-to-end product and interaction design, and usability testing on every version. Designed and built the website on the front end and managed its content, then took the finished platform to cities.</p>
+                            </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Founding Product Designer</dd></div>
+                                <div><dt>Worked With</dt><dd>CEO</dd></div>
+                                <div><dt>Project</dt><dd><a href="https://www.smartstop.io" target="_blank" rel="noopener noreferrer">Web Platform, Website ↗</a></dd></div>
+                            </dl>
+                        </div>
+                        <!-- GAP (Ryan): Team size; tools used; the $200K city investment vs the five cities and the grants; what happened after Jul 2024. -->
 
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Product Designer</p>
+                        <figure class="story-figure is-wide">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v3-mapping.mp4" poster="assets/work/smartstop/v3-mapping.webp" muted loop playsinline preload="metadata" data-lazy aria-label="STIM, the finished platform: the city map, with congestion over time, the AI’s quick decisions and live city metrics."></video>
+                            </div>
+                            <figcaption>STIM, the finished platform: the city map, with congestion over time, the AI’s quick decisions and live city metrics.</figcaption>
+                        </figure>
+
+                        <dl class="story-stats">
+                            <div><dt>more traffic efficiency within three months</dt><dd>22%</dd></div>
+                            <div><dt>faster decision-making, powered by Nebula</dt><dd>31%</dd></div>
+                            <div><dt>tools an engineer needed for a single task</dt><dd>12 → 1</dd></div>
+                            <div><dt>cities signed to put it at key intersections</dt><dd>5</dd></div>
+                        </dl>
+
+                        <section class="story-section">
+                            <h2>The Problem</h2>
+                            <p>Cities were facing more congestion every year, with few tools to monitor or control traffic in real time. Before STIM, a traffic engineer could need 10 to 12 different pieces of software to finish a single task. Smartstop needed one way to collect traffic data and optimize signal timing.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>Understanding the End User</h2>
+                            <p>We interviewed city planners and traffic engineers about their pain points, and studied two user groups: more than 120 traffic engineers and 10 civil engineers. They ranged widely in how comfortable they were with technology, so the platform had to stay as friendly as possible while carrying everything the system can do. Then we surveyed 200 people.</p>
+                        </section>
+
+                        <figure class="story-figure is-block">
+                            <div class="story-mat story-mat-plain">
+                            <div class="story-bars-group">
+                                <h3>What do you value most in traffic management software?</h3>
+                                <ul class="story-bars">
+                                    <li><span class="bar-label">Easy to use</span><span class="bar-track"><span class="bar-fill" data-v="49"></span></span><span class="bar-value">49%</span></li>
+                                    <li><span class="bar-label">Access to AI</span><span class="bar-track"><span class="bar-fill" data-v="22"></span></span><span class="bar-value">22%</span></li>
+                                    <li><span class="bar-label">Real-time analytics</span><span class="bar-track"><span class="bar-fill" data-v="12"></span></span><span class="bar-value">12%</span></li>
+                                    <li><span class="bar-label">Policy creation</span><span class="bar-track"><span class="bar-fill" data-v="8"></span></span><span class="bar-value">8%</span></li>
+                                    <li><span class="bar-label">Auto traffic adjustments</span><span class="bar-track"><span class="bar-fill" data-v="4"></span></span><span class="bar-value">4%</span></li>
+                                    <li><span class="bar-label">Camera display</span><span class="bar-track"><span class="bar-fill" data-v="2"></span></span><span class="bar-value">2%</span></li>
+                                    <li><span class="bar-label">Object detection</span><span class="bar-track"><span class="bar-fill" data-v="2"></span></span><span class="bar-value">2%</span></li>
+                                </ul>
+                            </div>
+                            <div class="story-bars-group">
+                                <h3>Are you happy with your current software?</h3>
+                                <ul class="story-bars">
+                                    <li><span class="bar-label">No</span><span class="bar-track"><span class="bar-fill" data-v="69"></span></span><span class="bar-value">69%</span></li>
+                                    <li><span class="bar-label">Yes</span><span class="bar-track"><span class="bar-fill" data-v="31"></span></span><span class="bar-value">31%</span></li>
+                                </ul>
+                            </div>
+                            <div class="story-bars-group">
+                                <h3>What’s most important to you in traffic management software?</h3>
+                                <ul class="story-bars">
+                                    <li><span class="bar-label">Collaboration</span><span class="bar-track"><span class="bar-fill" data-v="77"></span></span><span class="bar-value">77%</span></li>
+                                    <li><span class="bar-label">Analytics</span><span class="bar-track"><span class="bar-fill" data-v="13"></span></span><span class="bar-value">13%</span></li>
+                                    <li><span class="bar-label">User friendly</span><span class="bar-track"><span class="bar-fill" data-v="10"></span></span><span class="bar-value">10%</span></li>
+                                </ul>
+                            </div>
+                            </div>
+                            <figcaption>The survey of 200 traffic and civil engineers, as it came back.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>What We Learned, and What We Set Out To Do</h2>
+                            <p>Three findings came out of the research, and each one became an objective for the platform.</p>
+                        </section>
+
+                        <div class="story-block">
+                            <ol class="story-pairs">
+                                <li>
+                                    <p><span>Finding</span>A strong need for real-time, accurate data, caught and shown as it happens.</p>
+                                    <p><span>Objective</span>A real-time traffic monitoring platform built around data visualization.</p>
+                                </li>
+                                <li>
+                                    <p><span>Finding</span>The software cities used had complex, unintuitive interfaces.</p>
+                                    <p><span>Objective</span>A simpler experience that’s easier and quicker to use.</p>
+                                </li>
+                                <li>
+                                    <p><span>Finding</span>Their technology limited scale and city expansion.</p>
+                                    <p><span>Objective</span>A platform that scales as more cities and intersections come on.</p>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <section class="story-section">
+                            <h2>Three Versions</h2>
+                            <p>Every version was tested with engineers, and what they said became the questions for the next one. The first set out to design around a map, on Google Maps. By the third, the platform worked best when it led with the data and let the AI do the heavy lifting with the map in the background. The goal became as little work behind the desk as possible.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v1.mp4" poster="assets/work/smartstop/v1.webp" muted loop playsinline preload="none" data-lazy aria-label="Version 1 of the platform"></video>
+                            </div>
+                            <figcaption>Version 1 of the platform</figcaption>
+                        </figure>
+
+                        <div class="story-block story-notes">
+                            <p class="story-notes-title">v1: A great start, but not the one.</p>
+                            <div class="story-notes-cols">
+                                <div>
+                                    <h3>What Testing Said</h3>
+                                    <ul><li>Cluttered and difficult to navigate.</li><li>Too many data widgets on the dashboard.</li><li>Not enough information on system flags.</li></ul>
                                 </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">Website Design & Development, UX Research, Product Strategy, End-to-End Product Design, Content Management, Front-End Development, Usability Testing, Interaction Design.</p>
+                                <div>
+                                    <h3>Questions for the Next</h3>
+                                    <ul><li>How do we show what runs on its own while giving access to manual control?</li><li>How do we make data intuitive and there when it’s asked for?</li><li>How do we make a system with many moving parts feel clean?</li></ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="project-title">
-                            <img src="assets/assets/smarstop/title.webp" alt="Smartstop case study: title" width="1600" height="1200" fetchpriority="high" decoding="async">
-                            <img src="assets/assets/smarstop/abt.svg" alt="Smartstop case study: about" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/impact.webp" alt="Smartstop case study: impact" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/under.svg" alt="Smartstop case study: understanding the end user" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame8.webp" alt="Smartstop case study: board 8" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame9.svg" alt="Smartstop case study: board 9" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame10.svg" alt="Smartstop case study: board 10" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame11.svg" alt="Smartstop case study: board 11" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/findings.svg" alt="Smartstop case study: findings" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/objectives.svg" alt="Smartstop case study: objectives" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame13.webp" alt="Smartstop case study: board 13" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/first.webp" alt="Smartstop case study: version 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <video src="assets/assets/smarstop/first-comp.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/first-comp-poster.webp" data-lazy></video>
-                            <img src="assets/assets/smarstop/screens-1.webp" alt="Smartstop case study: screens 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/screens-2.webp" alt="Smartstop case study: screens 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/screens-3.webp" alt="Smartstop case study: screens 3" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/screens-4.webp" alt="Smartstop case study: screens 4" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/iteration1.svg" alt="Smartstop case study: iteration 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/iteration2.svg" alt="Smartstop case study: iteration 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/second.webp" alt="Smartstop case study: version 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <video src="assets/assets/smarstop/second-comp.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/second-comp-poster.webp" data-lazy></video>
-                            <img src="assets/assets/smarstop/second-screens-1.webp" alt="Smartstop case study: version 2 screens 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/second-screens-2.webp" alt="Smartstop case study: version 2 screens 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/second-screens-3.webp" alt="Smartstop case study: version 2 screens 3" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/v2-iteration1.webp" alt="Smartstop case study: version 2, iteration 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/v2-iteration2.webp" alt="Smartstop case study: version 2, iteration 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third.webp" alt="Smartstop case study: version 3" width="1600" height="1200" loading="lazy" decoding="async">
-                            <video src="assets/assets/smarstop/third-map.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/third-map-poster.webp" data-lazy></video>
-                            <video src="assets/assets/smarstop/third-logic.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/third-logic-poster.webp" data-lazy></video>
-                            <video src="assets/assets/smarstop/third-dash.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/third-dash-poster.webp" data-lazy></video>
-                            <img src="assets/assets/smarstop/third-screens-1.webp" alt="Smartstop case study: version 3 screens 1" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-2.webp" alt="Smartstop case study: version 3 screens 2" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-3.webp" alt="Smartstop case study: version 3 screens 3" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-4.webp" alt="Smartstop case study: version 3 screens 4" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-5.webp" alt="Smartstop case study: version 3 screens 5" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-6.webp" alt="Smartstop case study: version 3 screens 6" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/third-screens-7.webp" alt="Smartstop case study: version 3 screens 7" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/outcome.webp" alt="Smartstop case study: outcome" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame3.svg" alt="Smartstop case study: board 3" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame4.webp" alt="Smartstop case study: board 4" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame5.webp" alt="Smartstop case study: board 5" width="1600" height="1200" loading="lazy" decoding="async">
-                            <img src="assets/assets/smarstop/frame6.webp" alt="Smartstop case study: board 6" width="1600" height="1200" loading="lazy" decoding="async">
-                            <video src="assets/assets/smarstop/smartstop2.mp4" muted loop playsinline preload="none" poster="assets/assets/smarstop/smartstop2-poster.webp" data-lazy></video>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v2.mp4" poster="assets/work/smartstop/v2.webp" muted loop playsinline preload="none" data-lazy aria-label="Version 2 of the platform"></video>
+                            </div>
+                            <figcaption>Version 2 of the platform</figcaption>
+                        </figure>
+
+                        <div class="story-block story-notes">
+                            <p class="story-notes-title">v2: We still had some work to do.</p>
+                            <div class="story-notes-cols">
+                                <div>
+                                    <h3>What Testing Said</h3>
+                                    <ul><li>Solved a lot of pain points, but lacked depth on data and on what the system was doing.</li><li>Navigation felt better, but different data displays and key actions needed more room.</li></ul>
+                                </div>
+                                <div>
+                                    <h3>Questions for the Next</h3>
+                                    <ul><li>How do we organize data so every task takes fewer steps?</li><li>How do we give engineers more control over data and decisions, citywide?</li></ul>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+
+                        <section class="story-section">
+                            <h2>The Finalized Solution: STIM</h2>
+                            <p>The final platform opens like a workspace: tabs for the dashboard, the map, the task manager and hardware, and panels engineers arrange around the work in front of them. Collaboration runs through all of it. Engineers drop notes on data charts, talk to Nebula, and drop tags on the map to point engineers, managers and ground crew at an alert.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>The Morning View</h2>
+                            <p>Engineers start the day on a dashboard built around them: what changed since they left, today’s agenda, reminders, and a city overview of throughput, close calls and air quality.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v3-dashboard.mp4" poster="assets/work/smartstop/v3-dashboard.webp" muted loop playsinline preload="none" data-lazy aria-label="The dashboard: recents, agenda, reminders and the city at a glance."></video>
+                            </div>
+                            <figcaption>The dashboard: recents, agenda, reminders and the city at a glance.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Every Connection, Healthy or Not</h2>
+                            <p>Cameras, controllers and sensors across the city in one list, with their health and last update. Any camera opens a live feed, with Nebula’s object detection drawn over the traffic.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v3-connections.mp4" poster="assets/work/smartstop/v3-connections.webp" muted loop playsinline preload="none" data-lazy aria-label="Connections, then a camera’s live feed with object detection."></video>
+                            </div>
+                            <figcaption>Connections, then a camera’s live feed with object detection.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Analytics, by Question</h2>
+                            <p>Views for the questions engineers actually ask: how traffic is moving, where it’s least safe, and how much a corner is emitting. Each one sits next to the map, so a number always has a place.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v3-analytics.mp4" poster="assets/work/smartstop/v3-analytics.webp" muted loop playsinline preload="none" data-lazy aria-label="Analytics: overview, emissions on a live map, and safety with collision placements."></video>
+                            </div>
+                            <figcaption>Analytics: overview, emissions on a live map, and safety with collision placements.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Flows</h2>
+                            <p>An intersection’s logic, laid out the way it works on the street: lanes, lights and every phase on one timeline. Engineers adjust it, run it and publish it, with autosave on. Nebula suggests changes, and an engineer applies them in one click.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/v3-flows-build.mp4" poster="assets/work/smartstop/v3-flows-build.webp" muted loop playsinline preload="none" data-lazy aria-label="Building a flow for RAH240: lights, phases and the flow visualizer."></video>
+                            </div>
+                            <figcaption>Building a flow for RAH240: lights, phases and the flow visualizer.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>Data first, not map first.</strong> Starting on Google Maps felt familiar to engineers. Leading with the data and letting Nebula handle the map in the background gave up that starting point, and took most of the work off the desk.</li>
+                                <li><strong>The AI does the heavy lifting, in the open.</strong> Nebula adjusts traffic on its own, and every decision it makes shows up in a log, with suggestions an engineer applies in one click. Engineers keep the final say without doing the routine work.</li>
+                                <li><strong>Collaboration everywhere, not in a tab.</strong> 77% of the people surveyed put collaboration first, so notes, tags and conversations with the AI live on the charts and the map, right where the problem is.</li>
+                                <li><strong>Modular, city by city.</strong> Every city is different, so the platform is built from modular pieces that can be as simple or as deep as a city needs. More to design and maintain, and the reason it could scale.</li>
+                            </ul>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>A National Impact</h2>
+                            <p>Within three months, STIM outperformed the existing competitor, Synchro Green: a 22% increase in traffic efficiency and a 31% improvement in decision-making speed, powered by Nebula. City planners reported less congestion and more control over traffic patterns and emergency response.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>Outcome</h2>
+                            <p>After development, outreach with the CEO reached more than twelve cities across the country and secured agreements with five municipalities to put STIM at key intersections. Federal grants followed to pay for new hardware and its installation, so the hardware and the software arrived as one experience.</p>
+                        </section>
+
+                        <section class="story-section">
+                            <h2>The Website</h2>
+                            <p>The website came first at Smartstop. It had to show off the company’s technology while staying easy to follow and interactive. Each section was designed and tested on its own, then assembled into one path: the promise, the proof, the products and a way to get in touch, without overloading anyone.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/site.mp4" poster="assets/work/smartstop/site.webp" muted loop playsinline preload="none" data-lazy aria-label="Making Cities Smarter. The site leads with the outcome, not the technology."></video>
+                            </div>
+                            <figcaption>Making Cities Smarter. The site leads with the outcome, not the technology.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/smartstop/site-menu.mp4" poster="assets/work/smartstop/site-menu.webp" muted loop playsinline preload="none" data-lazy aria-label="The menu opens over the city, with every product one step away."></video>
+                            </div>
+                            <figcaption>The menu opens over the city, with every product one step away.</figcaption>
+                        </figure>
+                    </article>
                 </div>
             </main>
             <!-- Menu Start -->

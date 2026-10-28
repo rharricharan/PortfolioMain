@@ -7,6 +7,10 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/vendor/gsap.min.js" defer></script>
+    <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+    <script src="js/vendor/SplitText.min.js" defer></script>
+    <script src="js/case.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -20,6 +24,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/halftone.css">
+    <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -65,38 +70,100 @@
         <div class="page-content-wrapper">
             <main>
                 <div class="content-wrapper">
-                    <div class="top-container">
-                        <div class="top-container-wrapper">
-                            <!-- Line 450 in css adjusts overall content container height of this section -->
-                            <div class="project-title-rh">
-                                <h3 class="title-rh">Halftone® is a creative agency with a emphasis on apparel design and manufacturing with the music industry. They have worked with some of the biggest brands in the world such as the Chicago Bulls, Lyrical Lemonade, Burger King, Barstool and more.</h3>
-                                <h3 class="title-rh">The goal was to create a website that was unique and highlighted projects with an emphasis on quality. One major
-                                challenge was integrating Webflow form data with HubSpot, as conventional methods caused errors during testing. After
-                                researching, I implemented Zapier to bridge the gap, connecting the platforms, attaching data points, and running tests.
-                                This solution successfully resolved the issue, ensuring seamless data transfer between Webflow and HubSpot, while
-                                maintaining the site’s unique functionality and design.
-                                </h3>
+                    <article class="story">
+                        <div class="story-header">
+                            <div class="story-intro">
+                                <h1 class="story-title">Halftone. <span>Merch for the biggest names in music and sport.</span></h1>
+                                <p class="story-lead">Halftone is a creative agency that designs and manufactures apparel and merchandise for the music industry and beyond, for brands like the Chicago Bulls, Lyrical Lemonade, Burger King and Barstool. The goal was a website as distinctive as the work, one that put the projects first.</p>
                             </div>
-
-                            <div class="role-container">
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Role</h3>
-                                    <p class="role-sub">Website Designer</p>
-                                </div>
-
-                                <div class="role-wrapper">
-                                    <h3 class="role-title">Duties</h3>
-                                    <p class="role-sub">Website Design (Figma), Website Development (Webflow), Interaction Design, Responsive Design, Content Management.</p>
-                                </div>
+                            <div class="story-role" aria-label="My role">
+                                <p>Designed the site and built it end to end: the interaction design, the responsive layouts and the content management, then connected its forms to Halftone’s CRM so every inquiry lands where sales happen.</p>
                             </div>
+                            <dl class="story-facts">
+                                <div><dt>Role</dt><dd>Website Designer</dd></div>
+                                <div><dt>Built With</dt><dd>Figma, Webflow, Zapier, HubSpot</dd></div>
+                                <div><dt>Project</dt><dd>Website</dd></div>
+                            </dl>
                         </div>
-                        <div class="project-title">
-                            <video autoplay muted loop playsinline preload="auto" poster="assets/assets/halftone/halftone-poster.webp" data-lazy>
-                                <source src="assets/assets/halftone/halftone.mp4" type="video/mp4">
-                            </video>
+                        <!-- GAP (Ryan): Site URL; year; team on Halftone’s side; any results. -->
+
+                        <figure class="story-figure is-wide">
+                            <div class="story-mat">
+                                <video src="assets/work/halftone/hero.mp4" poster="assets/work/halftone/hero.webp" muted loop playsinline preload="metadata" data-lazy aria-label="Halftone’s home page: who they are, and the rainbow arch that carries the brand."></video>
+                            </div>
+                            <figcaption>Halftone’s home page: who they are, and the rainbow arch that carries the brand.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Everything They Do, Step by Step</h2>
+                            <p>Halftone does a lot, from the first sketch to the pop-up shop. Instead of a wall of services, the site walks through them in the order a project happens: create, produce, then distribute, in person and online. Each step names exactly what’s on offer.</p>
+                        </section>
+
+                        <div class="story-block">
+                            <ol class="story-steps">
+                                <li>
+                                    <h3>Create</h3>
+                                    <p>An immersive, informed design experience. You’re the creative director; we’re your tools.</p><p class="story-steps-more">Art direction</p>
+                                </li>
+                                <li>
+                                    <h3>Produce</h3>
+                                    <p>In-house manufacturing, from the first sample to the full run.</p><p class="story-steps-more">Hardgoods, embroidery, cut and sew, screenprinting, print on demand, specialty products</p>
+                                </li>
+                                <li>
+                                    <h3>Distribute Outside</h3>
+                                    <p>The experience to pull off almost any in-person creative idea.</p><p class="story-steps-more">Pop ups</p>
+                                </li>
+                                <li>
+                                    <h3>Distribute Online</h3>
+                                    <p>An e-commerce program built for visibility and profit.</p><p class="story-steps-more">Website design, e-com management</p>
+                                </li>
+                            </ol>
                         </div>
 
-                    </div>
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/halftone/services.mp4" poster="assets/work/halftone/services.webp" muted loop playsinline preload="none" data-lazy aria-label="The services on the live site, revealed as you scroll."></video>
+                            </div>
+                            <figcaption>The services on the live site, revealed as you scroll.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>The Work, First</h2>
+                            <p>Projects are grouped by what they are: apparel, exit bags and non-apparel. A visitor finds the kind of thing they came for, and the photography does the selling.</p>
+                        </section>
+
+                        <figure class="story-figure">
+                            <div class="story-mat">
+                                <video src="assets/work/halftone/projects.mp4" poster="assets/work/halftone/projects.webp" muted loop playsinline preload="none" data-lazy aria-label="Apparel, exit bags and non-apparel, each with its own projects."></video>
+                            </div>
+                            <figcaption>Apparel, exit bags and non-apparel, each with its own projects.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>The Hard Part: Forms That Reach the CRM</h2>
+                            <p>Halftone runs its sales in HubSpot, so every inquiry on the site had to land there. Connecting Webflow’s forms to HubSpot the usual way kept failing in testing. After some research, Zapier became the bridge: each submission goes to Zapier, which maps the fields to HubSpot’s and creates the contact. Tested end to end, it held, without giving up any of the site’s custom forms or design.</p>
+                        </section>
+
+                        <figure class="story-figure is-block">
+                            <div class="story-mat story-mat-plain">
+                                <ol class="story-flow">
+                                    <li><h3>Webflow form</h3><p>An inquiry is sent from the site.</p></li>
+                                    <li><h3>Zapier</h3><p>Fields are mapped to HubSpot’s.</p></li>
+                                    <li><h3>HubSpot</h3><p>The contact is created for sales.</p></li>
+                                </ol>
+                            </div>
+                            <figcaption>How an inquiry gets from the site to HubSpot.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
+                            <h2>Decisions</h2>
+                            <ul class="story-list">
+                                <li><strong>Projects before promises.</strong> The site gets to the work quickly and lets the products speak, grouped by type rather than by client.</li>
+                                <li><strong>The brand does the motion.</strong> The rainbow arch from Halftone’s logo leads the page and returns between sections, so the movement feels like theirs, not a template’s.</li>
+                                <li><strong>Zapier over a custom integration.</strong> A custom connection would have meant code to build and maintain. Zapier adds a third-party step, and in exchange it worked reliably, and Halftone’s team can see and change it without a developer.</li>
+                            </ul>
+                        </section>
+                    </article>
                 </div>
             </main>
 
