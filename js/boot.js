@@ -11,3 +11,8 @@ try {
 if (!matchMedia("(prefers-reduced-motion: reduce)").matches) {
   document.documentElement.classList.add("intro");
 }
+// - Keep the sidebar's project filter where it was left, so the list doesn't jump on load.
+try {
+  const f = sessionStorage.getItem("project-filter");
+  if (f && f !== "all") document.documentElement.dataset.projects = f;
+} catch (e) {}

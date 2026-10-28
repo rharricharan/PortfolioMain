@@ -101,6 +101,32 @@
     el.addEventListener("click", () => play(successSound, 0.3));
   });
 
+  // --- Project filter (sidebar) ---------------------------------------------------
+  // The CSS in css/filter.css does the hiding from html[data-projects]; this keeps the pills
+  // in sync, remembers the choice for the next page, and lets the rows that appear rise in.
+  const filter = document.querySelector(".project-filter");
+  if (filter) {
+    const root = document.documentElement;
+    const rows = [...document.querySelectorAll(".projects-buttons .project[data-type]")];
+    const shown = () => rows.filter((r) => r.offsetParent !== null);
+    const sync = () => filter.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === (root.dataset.projects || "all"))));
+    sync();
+    filter.addEventListener("click", (e) => {
+      const btn = e.target.closest("button[data-filter]");
+      if (!btn) return;
+      const before = new Set(shown());
+      if (btn.dataset.filter === "all") delete root.dataset.projects;
+      else root.dataset.projects = btn.dataset.filter;
+      try { sessionStorage.setItem("project-filter", btn.dataset.filter); } catch (err) {}
+      sync();
+      if (reduceMotion) return;
+      shown().filter((r) => !before.has(r)).forEach((r, i) => r.animate(
+        [{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }],
+        { duration: 380, delay: i * 40, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "backwards" },
+      ));
+    });
+  }
+
   // --- Videos: load and play only while on screen -----------------------------------
   const videos = document.querySelectorAll("video[data-lazy]");
   if (videos.length && "IntersectionObserver" in window) {

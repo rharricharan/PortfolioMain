@@ -1,0 +1,36 @@
+/* Sidebar project filter: pills beside the Projects label (js/site.js) */
+.project-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.project-filter { display: flex; gap: 3px; }
+
+.project-filter button {
+    padding: 3px 10px;
+    border: 0;
+    border-radius: 6px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: rgba(0, 0, 0, 0.6);
+    font-family: var(--inter, 'Inter'), sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+    line-height: 150%;
+    cursor: pointer;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.project-filter button:hover { background-color: rgba(0, 0, 0, 0.1); color: #000; }
+.project-filter button[aria-pressed="true"] { background-color: #000; color: #fff; }
+.project-filter button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+/* Before JS runs, the filter saved in boot.js already applies. The page you're on always shows. */
+html[data-projects="product"] .projects-buttons .project[data-type]:not([data-type~="product"], .selected),
+html[data-projects="website"] .projects-buttons .project[data-type]:not([data-type~="website"], .selected),
+html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-type~="creative"], .selected) {
+    display: none;
+}

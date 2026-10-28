@@ -31,34 +31,37 @@
 
 .story strong { font-weight: 500; color: var(--ink); }
 
-/* Header: title, lead and role on the left; facts on the right, from the same top line --- */
+/* Header: the title across the full width; overview and role side by side under it; facts below */
 .story-header {
     display: grid;
     grid-template-columns: minmax(0, 1fr);
-    gap: 32px;
+    gap: 20px;
     align-items: start;
 }
 
+/* Title and lead sit in their own rows of the header grid */
+.story-intro { display: contents; }
+
 .story-title {
-    max-width: 18ch;
+    grid-column: 1 / -1;
     font-size: clamp(28px, 3.4vw, 42px);
     font-weight: 500;
     line-height: 1.08;
     letter-spacing: -0.035em;
-    text-wrap: balance;
+    text-wrap: pretty;
 }
 
 .story-title span { color: var(--faint); font-weight: 500; }
 
 .story-lead {
     max-width: 52ch;
-    margin-top: 20px;
+    margin-top: 4px;
     font-size: 13px;
     line-height: 1.6;
     color: var(--muted);
 }
 
-/* My role: beside the title, top-aligned with it */
+/* My role: beside the overview, top-aligned with it */
 .story-role {
     max-width: 52ch;
     font-size: 13px;
@@ -85,11 +88,11 @@
 
 @container (min-width: 520px) {
     .story-header {
-        grid-template-columns: minmax(0, 1fr) clamp(15rem, 44%, 27rem);
+        grid-template-columns: repeat(2, minmax(0, 1fr));
         column-gap: 56px;
+        row-gap: 28px;
     }
-    /* Role paragraph starts on the title's cap line */
-    .story-role { margin-top: 0.55em; }
+    .story-lead { margin-top: 0; }
     /* Spread across the full content width: first flush left, last flush right, even gaps */
     .story-facts {
         grid-column: 1 / -1;
@@ -166,7 +169,7 @@
     margin-top: 56px;
 }
 
-.story-stats > div { display: flex; flex-direction: column-reverse; gap: 6px; max-width: 15rem; }
+.story-stats > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; max-width: 15rem; }
 .story-stats dd { font-size: clamp(28px, 3.2vw, 40px); font-weight: 500; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
 .story-stats dt { font-size: 12px; line-height: 1.45; color: var(--soft); }
 
@@ -368,4 +371,15 @@
     background-color: var(--accent);
     box-shadow: 0 0 0 4px #fff;
     font-size: 12px;
+}
+
+/* One or two numbers sit together instead of being pushed to opposite edges */
+@container (min-width: 520px) {
+    .story-stats:not(:has(> div:nth-child(3))) { justify-content: flex-start; gap: 72px; }
+}
+
+/* Mid-width columns: five facts in one row get too narrow, so they sit three to a row */
+@container (min-width: 520px) and (max-width: 760px) {
+    .story-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 24px; }
+    .story-facts > div { max-width: none; }
 }

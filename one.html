@@ -28,6 +28,7 @@
     <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
+    <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -84,11 +85,12 @@
                             <dl class="story-facts">
                                 <div><dt>Role</dt><dd>Senior UX Designer</dd></div>
                                 <div><dt>Built With</dt><dd>DatoCMS</dd></div>
-                                <div><dt>Worked With</dt><dd>Photographers, Videographers, Graphic Designers</dd></div>
+                                <div><dt>Worked With</dt><dd>2 UX Designers, 2 Design Producers, 2 PMs, a Graphic Designer, 2 Web Developers</dd></div>
                                 <div><dt>Project</dt><dd><a href="https://www.one.ai" target="_blank" rel="noopener noreferrer">Website, Email, Decks, Signage ↗</a></dd></div>
+                                <div><dt>Year</dt><dd>2023</dd></div>
                             </dl>
                         </div>
-                        <!-- GAP (Ryan): Images of the email templates, decks or signage; team; any results. -->
+                        <!-- GAP (Ryan): Images of the email templates and signage (Figma). -->
 
                         <figure class="story-figure is-wide">
                             <div class="story-mat">
@@ -96,6 +98,10 @@
                             </div>
                             <figcaption>What if we could double the range of an EV? ONE’s site opens on the question its batteries answer.</figcaption>
                         </figure>
+
+                        <dl class="story-stats">
+                            <div><dt>in Series A–B funding the design and site strategy supported</dt><dd>$300M+</dd></div>
+                        </dl>
 
                         <section class="story-section">
                             <h2>A Site Built Around the Batteries</h2>
@@ -161,6 +167,11 @@
                                 <li><strong>One system, on screen and off.</strong> Owning the signage alongside the site meant one set of rules from the homepage to the factory floor.</li>
                             </ul>
                         </section>
+
+                        <section class="story-section">
+                            <h2>Outcome</h2>
+                            <p>The design work, and the product strategy behind the website, went straight into how ONE told its story to investors, through Series A and B rounds totaling more than $300M.</p>
+                        </section>
                     </article>
                 </div>
             </main>
@@ -186,12 +197,20 @@
                         </div>
                     </div>
                     <div class="info-text-div">
-                        <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®.</h3>
+                        <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®. I’m open to contract and full-time work.</h3>
                     </div>
                     <div class="projects-container">
-                        <h3 class="project-header">Projects</h3>
+                        <div class="project-header-row">
+                            <h3 class="project-header">Projects</h3>
+                            <div class="project-filter" role="group" aria-label="Filter projects by type">
+                                <button type="button" data-filter="all" aria-pressed="true">All</button>
+                                <button type="button" data-filter="product" aria-pressed="false">Product</button>
+                                <button type="button" data-filter="website" aria-pressed="false">Website</button>
+                                <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
+                            </div>
+                        </div>
                         <div class="projects-buttons">
-                            <a class="project" href="./smartstop">
+                            <a class="project" href="./smartstop" data-type="product">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Smartstop®</h3>
                                 </div>
@@ -199,7 +218,7 @@
                                     <h3 class="type">Product Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./rays">
+                            <a class="project" href="./rays" data-type="product">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Rays App</h3>
                                 </div>
@@ -207,7 +226,7 @@
                                     <h3 class="type">Product Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./halftone">
+                            <a class="project" href="./halftone" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Halftone®</h3>
                                 </div>
@@ -215,7 +234,7 @@
                                     <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./leadhack">
+                            <a class="project" href="./leadhack" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">LeadHack</h3>
                                 </div>
@@ -223,28 +242,28 @@
                                     <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project selected" href="./one">
+                            <a class="project selected" href="./one" data-type="website creative">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Our Next Energy</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Creative Direction</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./cinnamon">
+                            <a class="project" href="./cinnamon" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Cinnamon</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./gostr">
+                            <a class="project" href="./gostr" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">GoSTRMarketing</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
                         </div>
@@ -335,9 +354,6 @@
                             </a>
                             <a class="read-cv" href="https://medium.com/@rharricharan" target="_blank" rel="noopener noreferrer">
                                 <h3 class="read-cv-text">Medium</h3>
-                            </a>
-                            <a class="read-cv" href="https://www.read.cv/rharricharan/" target="_blank" rel="noopener noreferrer">
-                                <h3 class="read-cv-text">Read.cv</h3>
                             </a>
                         </div>
                     </div>

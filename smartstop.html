@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
+    <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
@@ -73,15 +74,16 @@
                                 <p class="story-lead">Smartstop is a traffic and logistics startup working to make cities faster, cleaner, safer and smarter. Together we built STIM, the Smart Traffic Infrastructure Management platform: one place where city engineers see data from every part of the city, while Nebula, Smartstop’s AI, adjusts traffic flow in real time.</p>
                             </div>
                             <div class="story-role" aria-label="My role">
-                                <p>Owned the product from research to launch: interviews and a 200-person survey, product strategy, end-to-end product and interaction design, and usability testing on every version. Designed and built the website on the front end and managed its content, then took the finished platform to cities.</p>
+                                <p>The only designer on a founding team, owning the product from research to launch: interviews and a 200-person survey, product strategy, end-to-end product and interaction design, and usability testing on every version. Designed and built the website on the front end and managed its content, then took the finished platform to cities.</p>
                             </div>
                             <dl class="story-facts">
                                 <div><dt>Role</dt><dd>Founding Product Designer</dd></div>
-                                <div><dt>Worked With</dt><dd>CEO</dd></div>
-                                <div><dt>Project</dt><dd><a href="https://www.smartstop.io" target="_blank" rel="noopener noreferrer">Web Platform, Website ↗</a></dd></div>
+                                <div><dt>Built With</dt><dd>Figma, Axure, React, Supabase, Git</dd></div>
+                                <div><dt>Worked With</dt><dd>CEO, CTO, 3 Software Engineers, City of Sarasota Engineers</dd></div>
+                                <div><dt>Project</dt><dd>Web Platform, Website</dd></div>
+                                <div><dt>Year</dt><dd>2023–2024</dd></div>
                             </dl>
                         </div>
-                        <!-- GAP (Ryan): Team size; tools used; the $200K city investment vs the five cities and the grants; what happened after Jul 2024. -->
 
                         <figure class="story-figure is-wide">
                             <div class="story-mat">
@@ -104,7 +106,7 @@
 
                         <section class="story-section">
                             <h2>Understanding the End User</h2>
-                            <p>We interviewed city planners and traffic engineers about their pain points, and studied two user groups: more than 120 traffic engineers and 10 civil engineers. They ranged widely in how comfortable they were with technology, so the platform had to stay as friendly as possible while carrying everything the system can do. Then we surveyed 200 people.</p>
+                            <p>The City of Sarasota worked with us throughout, and its traffic and civil engineers were the first people we designed for. We interviewed city planners and traffic engineers about their pain points, and studied two user groups: more than 120 traffic engineers and 10 civil engineers. They ranged widely in how comfortable they were with technology, so the platform had to stay as friendly as possible while carrying everything the system can do. Then we surveyed 200 people.</p>
                         </section>
 
                         <figure class="story-figure is-block">
@@ -357,7 +359,7 @@
 
                         <section class="story-section">
                             <h2>Outcome</h2>
-                            <p>After development, outreach with the CEO reached more than twelve cities across the country and secured agreements with five municipalities to put STIM at key intersections. Federal grants followed to pay for new hardware and its installation, so the hardware and the software arrived as one experience.</p>
+                            <p>After development, outreach with the CEO reached more than twelve cities across the country and secured agreements with five municipalities to put STIM at key intersections. Sarasota secured a federal grant for new hardware and its installation and invested in the platform itself, and two more cities invested alongside it: $200K in city investment, with the hardware and the software arriving as one experience. Smartstop and STIM were later acquired.</p>
                         </section>
 
                         <section class="story-section">
@@ -400,12 +402,20 @@
                         </div>
                     </div>
                     <div class="info-text-div">
-                        <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®.</h3>
+                        <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®. I’m open to contract and full-time work.</h3>
                     </div>
                     <div class="projects-container">
-                        <h3 class="project-header">Projects</h3>
+                        <div class="project-header-row">
+                            <h3 class="project-header">Projects</h3>
+                            <div class="project-filter" role="group" aria-label="Filter projects by type">
+                                <button type="button" data-filter="all" aria-pressed="true">All</button>
+                                <button type="button" data-filter="product" aria-pressed="false">Product</button>
+                                <button type="button" data-filter="website" aria-pressed="false">Website</button>
+                                <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
+                            </div>
+                        </div>
                         <div class="projects-buttons">
-                            <a class="project selected" href="./smartstop">
+                            <a class="project selected" href="./smartstop" data-type="product">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Smartstop®</h3>
                                 </div>
@@ -413,7 +423,7 @@
                                     <h3 class="type">Product Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./rays">
+                            <a class="project" href="./rays" data-type="product">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Rays App</h3>
                                 </div>
@@ -421,44 +431,44 @@
                                     <h3 class="type">Product Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./halftone">
+                            <a class="project" href="./halftone" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Halftone®</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./leadhack">
+                            <a class="project" href="./leadhack" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">LeadHack</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./one">
+                            <a class="project" href="./one" data-type="website creative">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Our Next Energy</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Creative Direction</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./cinnamon">
+                            <a class="project" href="./cinnamon" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">Cinnamon</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
-                            <a class="project" href="./gostr">
+                            <a class="project" href="./gostr" data-type="website">
                                 <div class="project-name">
                                     <h3 class="project-name-text">GoSTRMarketing</h3>
                                 </div>
                                 <div class="project-details">
-                                    <h3 class="type">User Experience</h3>
+                                    <h3 class="type">Website Design</h3>
                                 </div>
                             </a>
                         </div>
@@ -549,9 +559,6 @@
                             </a>
                             <a class="read-cv" href="https://medium.com/@rharricharan" target="_blank" rel="noopener noreferrer">
                                 <h3 class="read-cv-text">Medium</h3>
-                            </a>
-                            <a class="read-cv" href="https://www.read.cv/rharricharan/" target="_blank" rel="noopener noreferrer">
-                                <h3 class="read-cv-text">Read.cv</h3>
                             </a>
                         </div>
                     </div>

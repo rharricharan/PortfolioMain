@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/transition.css">
+    <link rel="stylesheet" href="css/filter.css">
+    <script src="js/boot.js"></script>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
     <title>Work by Ryan Harricharan</title>
     <!-- Preload critical resources -->
@@ -57,12 +59,20 @@
                     </div>
                 </div>
                 <div class="info-text-div">
-                    <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®.</h3>
+                    <h3 class="info-text-text">Hi, I'm Ryan. I design and build apps that feel simple to use, from first sketch to launch. Right now I'm a Product Designer at A Small Studio® and on the Awwwards Young Jury. Before that I led UX at The Maryland School for the Blind and was the founding product designer at Smartstop®. I’m open to contract and full-time work.</h3>
                 </div>
                 <div class="projects-container">
-                    <h3 class="project-header">Projects</h3>
+                    <div class="project-header-row">
+                        <h3 class="project-header">Projects</h3>
+                        <div class="project-filter" role="group" aria-label="Filter projects by type">
+                            <button type="button" data-filter="all" aria-pressed="true">All</button>
+                            <button type="button" data-filter="product" aria-pressed="false">Product</button>
+                            <button type="button" data-filter="website" aria-pressed="false">Website</button>
+                            <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
+                        </div>
+                    </div>
                     <div class="projects-buttons">
-                        <a class="project" href="./smartstop">
+                        <a class="project" href="./smartstop" data-type="product">
                             <div class="project-name">
                                 <h3 class="project-name-text">Smartstop®</h3>
                             </div>
@@ -70,7 +80,7 @@
                                 <h3 class="type">Product Design</h3>
                             </div>
                         </a>
-                        <a class="project" href="./rays">
+                        <a class="project" href="./rays" data-type="product">
                             <div class="project-name">
                                 <h3 class="project-name-text">Rays App</h3>
                             </div>
@@ -78,7 +88,7 @@
                                 <h3 class="type">Product Design</h3>
                             </div>
                         </a>
-                        <a class="project" href="./halftone">
+                        <a class="project" href="./halftone" data-type="website">
                             <div class="project-name">
                                 <h3 class="project-name-text">Halftone®</h3>
                             </div>
@@ -86,7 +96,7 @@
                                 <h3 class="type">Website Design</h3>
                             </div>
                         </a>
-                        <a class="project" href="./leadhack">
+                        <a class="project" href="./leadhack" data-type="website">
                             <div class="project-name">
                                 <h3 class="project-name-text">LeadHack</h3>
                             </div>
@@ -94,28 +104,28 @@
                                 <h3 class="type">Website Design</h3>
                             </div>
                         </a>
-                        <a class="project" href="./one">
+                        <a class="project" href="./one" data-type="website creative">
                             <div class="project-name">
                                 <h3 class="project-name-text">Our Next Energy</h3>
                             </div>
                             <div class="project-details">
-                                <h3 class="type">User Experience</h3>
+                                <h3 class="type">Creative Direction</h3>
                             </div>
                         </a>
-                        <a class="project" href="./cinnamon">
+                        <a class="project" href="./cinnamon" data-type="website">
                             <div class="project-name">
                                 <h3 class="project-name-text">Cinnamon</h3>
                             </div>
                             <div class="project-details">
-                                <h3 class="type">User Experience</h3>
+                                <h3 class="type">Website Design</h3>
                             </div>
                         </a>
-                        <a class="project" href="./gostr">
+                        <a class="project" href="./gostr" data-type="website">
                             <div class="project-name">
                                 <h3 class="project-name-text">GoSTRMarketing</h3>
                             </div>
                             <div class="project-details">
-                                <h3 class="type">User Experience</h3>
+                                <h3 class="type">Website Design</h3>
                             </div>
                         </a>
                     </div>
@@ -206,9 +216,6 @@
                         </a>
                         <a class="read-cv" href="https://medium.com/@rharricharan" target="_blank" rel="noopener noreferrer">
                             <h3 class="read-cv-text">Medium</h3>
-                        </a>
-                        <a class="read-cv" href="https://www.read.cv/rharricharan/" target="_blank" rel="noopener noreferrer">
-                            <h3 class="read-cv-text">Read.cv</h3>
                         </a>
                     </div>
                 </div>
