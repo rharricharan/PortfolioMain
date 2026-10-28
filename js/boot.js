@@ -29,8 +29,8 @@
       if (event && event.viewTransition) root.classList.add("case-swap");
       else if (!reduceMotion && (firstVisit || isHome)) {
         root.classList.add("launch");
-        window.introDelay = 1.15;
-        setTimeout(() => root.classList.remove("launch"), 2000);
+        window.introDelay = 0.7;
+        setTimeout(() => root.classList.remove("launch"), 1500);
       }
       root.classList.remove("is-prerendering");
       resolve();
