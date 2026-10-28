@@ -74,8 +74,9 @@
 html:not(.curtain) .transition { display: none; }
 
 /* Rainbow ripple: the load effect.
-   .rainbow-ripple (first in <body>): a white cover with a soft rainbow glow that ripples out
-   from the centre, then cover and glow fade together. Plays when <html> has .launch
+   .rainbow-ripple (first in <body>): a white cover with a soft rainbow glow that wells up
+   from the bottom edge with two wavefront rings running ahead of it, then cover and glow fade
+   together. Plays when <html> has .launch
    (js/boot.js, a fresh arrival) or .is-active (rainbowRipple() in js/site.js).
    .rainbow-rest (home only): the same glow, resting behind the content at low opacity and
    breathing very slowly, so the intro hands off into it with no snap.
@@ -84,8 +85,8 @@ html:not(.curtain) .transition { display: none; }
    animate; the one blur is static. */
 :root {
     --rr-colors: #fff1c9 0%, #ffd9a0 16%, #ffc0d6 32%, #d4c4ff 48%, #b6e3ff 64%, #c4f2dc 78%;
-    --rr-duration: 1000ms;
-    --rr-fade-at: 620ms;
+    --rr-duration: 1150ms;
+    --rr-fade-at: 700ms;
     --rr-fade: 680ms;
     --rr-rest: 0.22;
     --rr-paper: #fbfbfa;
@@ -103,14 +104,14 @@ html:not(.curtain) .transition { display: none; }
 .rainbow-rest::before {
     content: "";
     position: absolute;
-    top: 50%;
+    top: 100%;
     left: 50%;
     width: 150vmax;
     height: 150vmax;
     border-radius: 50%;
     background: radial-gradient(circle closest-side, var(--rr-colors), rgba(196, 242, 220, 0) 100%);
     filter: blur(24px);
-    transform: translate(-50%, -50%) scale(1.1);
+    transform: translate(-50%, -50%) scale(1.45);
     will-change: transform;
 }
 html.launch .rainbow-ripple,
@@ -122,19 +123,46 @@ html.launch .rainbow-ripple::before,
 .rainbow-ripple.is-active::before {
     animation: rr-ripple var(--rr-duration) cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+/* Wavefronts: two soft colour rings that run ahead of the swell and thin out as they travel */
+.rainbow-ripple::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 150vmax;
+    height: 150vmax;
+    border-radius: 50%;
+    background: radial-gradient(circle closest-side,
+        transparent 52%, rgba(255, 192, 214, 0.55) 57%, rgba(212, 196, 255, 0.5) 61%, transparent 66%,
+        transparent 76%, rgba(182, 227, 255, 0.4) 80%, rgba(196, 242, 220, 0.35) 84%, transparent 89%);
+    filter: blur(10px);
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.1);
+    will-change: transform, opacity;
+}
+html.launch .rainbow-ripple::after,
+.rainbow-ripple.is-active::after {
+    animation: rr-wave var(--rr-duration) cubic-bezier(0.22, 0.8, 0.3, 1) forwards;
+}
 /* The resting glow breathes very slowly; on arrival it fades up under the clearing intro */
 .rainbow-rest::before { animation: rr-breathe 12s ease-in-out infinite alternate; }
 html.launch .rainbow-rest { animation: rr-rest-in var(--rr-fade) ease-in-out var(--rr-fade-at) both; }
 @keyframes rr-ripple {
-    0% { transform: translate(-50%, -50%) scale(0.12); opacity: 0; }
+    0% { transform: translate(-50%, -50%) scale(0.08); opacity: 0; }
+    10% { opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.45); opacity: 1; }
+}
+@keyframes rr-wave {
+    0% { transform: translate(-50%, -50%) scale(0.1); opacity: 0; }
     12% { opacity: 1; }
-    100% { transform: translate(-50%, -50%) scale(1.1); opacity: 1; }
+    70% { opacity: 0.7; }
+    100% { transform: translate(-50%, -50%) scale(1.9); opacity: 0; }
 }
 @keyframes rr-clear { to { opacity: 0; visibility: hidden; } }
 @keyframes rr-rest-in { from { opacity: 0; } to { opacity: var(--rr-rest); } }
 @keyframes rr-breathe {
-    from { transform: translate(-50%, -50%) scale(1.1); }
-    to { transform: translate(-50%, -50%) scale(1.16); }
+    from { transform: translate(-50%, -50%) scale(1.45); }
+    to { transform: translate(-50%, -50%) scale(1.52); }
 }
 @media (prefers-reduced-motion: reduce) {
     .rainbow-ripple { display: none !important; }
