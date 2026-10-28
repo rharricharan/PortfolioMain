@@ -78,12 +78,13 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
 :is(.project, .project-rh) .sm { display: none; }
 
 @container (max-width: 440px) {
+    :is(.project, .project-rh):has(.type-container) { grid-template-columns: 6.4rem minmax(0, 1fr) auto; }
     :is(.project, .project-rh) .lg { display: none; }
     :is(.project, .project-rh) .sm { display: inline; }
 }
 
 @container (max-width: 380px) {
-    :is(.project, .project-rh):has(.type-container) { grid-template-columns: 6.6rem minmax(0, 1fr) auto; column-gap: 8px; }
+    :is(.project, .project-rh):has(.type-container) { grid-template-columns: 6rem minmax(0, 1fr) auto; column-gap: 8px; }
     :is(.project, .project-rh):has(.type-container) :is(h3, .type, .date, .project-name-text) { font-size: 12px; }
 }
 
@@ -167,4 +168,12 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
         border-radius: 16px;
         box-shadow: 0 18px 48px -16px rgba(0, 0, 0, 0.2);
     }
+}
+
+/* Shorter laptop screens: the side nav keeps everything in view by tightening a little:
+   slightly smaller bio, less space between sections, slimmer rows */
+@media (min-width: 781px) and (max-height: 860px) {
+    .info-text-text { font-size: 14px; }
+    .projects-container { margin-top: 24px; }
+    .projects-buttons :is(.project, .project-rh) { padding-top: 4px; padding-bottom: 4px; }
 }
