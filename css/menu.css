@@ -140,14 +140,14 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 }
 
 /* Shorter screens: rows and gaps tighten so the whole menu stays in view */
-@media (min-width: 781px) and (max-height: 860px) {
+@media (min-width: 781px) and (max-height: 980px) {
     .menu-section { margin-top: 24px; }
     .menu-row { padding-top: 8px; padding-bottom: 8px; }
     .menu-list { gap: 3px; }
     .menu-footer { padding-top: 20px; }
 }
 
-@media (min-width: 781px) and (max-height: 800px) {
+@media (min-width: 781px) and (max-height: 840px) {
     .menu-section { margin-top: 18px; }
     .menu-heading { margin-bottom: 6px; }
     .menu .project-filter { margin-bottom: 8px; }
@@ -170,3 +170,8 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .menu-projects.has-pills .menu-row::before { transition: opacity 0.3s ease, color 0.3s ease; }
 .menu-projects:hover .menu-row:not(:hover) > span { opacity: 0.5; }
 .menu-projects:hover .menu-row:not(:hover)::before { opacity: 0.6; }
+@media (min-width: 781px) and (max-height: 760px) {
+    .menu-row { padding-top: 5px; padding-bottom: 5px; }
+    .menu-list { gap: 2px; }
+    .menu-section { margin-top: 14px; }
+}

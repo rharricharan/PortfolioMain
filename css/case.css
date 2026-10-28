@@ -515,3 +515,5 @@
 @media (prefers-reduced-motion: reduce) {
     .story-outline, .story-outline * { animation: none !important; transition: none !important; }
 }
+:root:has(.story[data-case="ulogic"]) { --tint-a: rgba(232, 56, 64, 0.11); --tint-b: rgba(91, 168, 222, 0.13); }
+:root:has(.story[data-case="shift"])  { --tint-a: rgba(126, 211, 167, 0.16); --tint-b: rgba(120, 156, 230, 0.13); }
