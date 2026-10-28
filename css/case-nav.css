@@ -13,20 +13,28 @@ main {
     view-transition-name: case-sidebar;
 }
 
-/* Nothing else on the page animates. Only the new sidebar is shown (no blending of the old
-   and new snapshots, which turned the links a muddy grey). */
+/* The sidebar doesn't animate: only the new one is shown (blending the two snapshots turned
+   the links a muddy grey). The page behind everything (the project's glow) fades from the old
+   colors to the new ones: the old stays put while the new fades in over it. */
 ::view-transition-group(root),
 ::view-transition-group(case-sidebar),
 ::view-transition-old(root),
-::view-transition-new(root),
 ::view-transition-new(case-sidebar) {
     animation: none;
     mix-blend-mode: normal;
 }
 
-::view-transition-old(root),
+::view-transition-new(root) {
+    animation: page-glow-in 0.7s ease both;
+    mix-blend-mode: normal;
+}
+
 ::view-transition-old(case-sidebar) {
     display: none;
+}
+
+@keyframes page-glow-in {
+    from { opacity: 0; }
 }
 
 ::view-transition-group(case-content) {
@@ -52,6 +60,25 @@ main {
     mix-blend-mode: normal;
 }
 
+/* The selected project in the menu glides from the old row to the new one, its label
+   crossfading as it moves, instead of jumping (the rest of the menu stays still) */
+.menu-row.selected {
+    view-transition-name: menu-selected;
+}
+
+::view-transition-group(menu-selected) {
+    animation-duration: 0.65s;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+::view-transition-old(menu-selected),
+::view-transition-new(menu-selected) {
+    height: 100%;
+    animation-duration: 0.45s;
+    animation-timing-function: ease;
+    mix-blend-mode: normal;
+}
+
 @keyframes case-out {
     to { transform: translateY(-80px); opacity: 0; }
 }
@@ -62,7 +89,11 @@ main {
 
 @media (prefers-reduced-motion: reduce) {
     ::view-transition-old(case-content),
-    ::view-transition-new(case-content) {
+    ::view-transition-new(case-content),
+    ::view-transition-new(root),
+    ::view-transition-group(menu-selected),
+    ::view-transition-old(menu-selected),
+    ::view-transition-new(menu-selected) {
         animation: none;
     }
 }

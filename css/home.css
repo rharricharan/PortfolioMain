@@ -87,15 +87,15 @@ body.home-page {
     aspect-ratio: 560 / 430;
 }
 .home-arrow { display: block; width: 100%; height: 100%; overflow: visible; }
-.home-arrow path { fill: none; stroke: #e4e4e1; stroke-width: 11; stroke-linecap: round; stroke-linejoin: round; }
+.home-arrow path { fill: none; stroke: #ebebe8; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
 .home-hint-text {
     position: absolute;
     left: 19.6%;
-    top: 28.8%;
+    top: 31.6%;
     transform: translate(-50%, -50%);
-    font-size: clamp(16px, 1vw + 6px, 20px);
-    letter-spacing: -0.02em;
-    color: var(--ink);
+    font-size: 13px;
+    letter-spacing: -0.01em;
+    color: #767672; /* light, and still 4.5:1 on white */
     white-space: nowrap;
 }
 
