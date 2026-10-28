@@ -10,6 +10,7 @@
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
     <script src="js/case.js" defer></script>
+    <script src="js/demos.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -22,6 +23,7 @@
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/smartstop.css">
     <link rel="stylesheet" href="css/case.css">
+    <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -213,6 +215,46 @@
                         </section>
 
                         <section class="story-section">
+                            <h2>The City, Over Time</h2>
+                            <p>The map leads with congestion, not streets. A timeline along the bottom shows the whole day, high to low, and plays it back. Beside it, Nebula’s quick decisions arrive as they happen, with the city’s metrics next to them.</p>
+                        </section>
+
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo ss-app" data-map>
+                                    <div class="ss-bar"><span class="ss-dots" aria-hidden="true"><i></i><i></i><i></i></span><span>Dashboard</span><span class="ss-tab">Mapping</span></div>
+                                    <div class="ss-grid">
+                                        <div class="map-stage">
+                                            <img src="assets/work/smartstop/v3-map-still.webp" alt="STIM's city map" width="772" height="452" loading="lazy" decoding="async">
+                                            <span class="map-hot" data-map-hot></span><span class="map-hot" data-map-hot></span><span class="map-hot" data-map-hot></span>
+                                            <div class="map-controls">
+                                                <p class="map-legend">Overall congestion level <span><i class="hi"></i>High</span><span><i class="md"></i>Medium</span><span><i class="lo"></i>Low</span></p>
+                                                <div class="map-player">
+                                                    <button type="button" class="map-play" data-map-play aria-label="Play the day"><svg viewBox="0 0 10 10" aria-hidden="true"><path data-map-icon d="M2 1l7 4-7 4z"></path></svg></button>
+                                                    <div class="map-track" data-map-track role="slider" tabindex="0" aria-label="Time of day" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span class="map-head" data-map-head></span></div>
+                                                    <span class="map-time" data-map-time>12:00 AM</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="ss-side">
+                                            <p class="ss-side-h">Quick decisions</p>
+                                            <ul class="map-log" data-map-log></ul>
+                                            <p class="ss-side-h map-metrics-h">City metrics</p>
+                                            <dl class="ss-metrics">
+                                                <dt>Traffic flow</dt><dd>↖ NW</dd>
+                                                <dt>Avg. velocity</dt><dd data-map-m="vel">51.2</dd>
+                                                <dt>Avg. throughput</dt><dd data-map-m="tp">15.3</dd>
+                                                <dt>Congestion rating</dt><dd data-map-m="cong">24%</dd>
+                                                <dt>Emissions score</dt><dd data-map-m="em">82</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption>The map’s day in congestion, rebuilt. Press play, or drag along the timeline: the metrics follow, and Nebula’s decisions land as traffic peaks.</figcaption>
+                        </figure>
+
+                        <section class="story-section">
                             <h2>The Morning View</h2>
                             <p>Engineers start the day on a dashboard built around them: what changed since they left, today’s agenda, reminders, and a city overview of throughput, close calls and air quality.</p>
                         </section>
@@ -258,6 +300,44 @@
                                 <video src="assets/work/smartstop/v3-flows-build.mp4" poster="assets/work/smartstop/v3-flows-build.webp" muted loop playsinline preload="none" data-lazy aria-label="Building a flow for RAH240: lights, phases and the flow visualizer."></video>
                             </div>
                             <figcaption>Building a flow for RAH240: lights, phases and the flow visualizer.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo ss-app" data-flow>
+                                    <div class="flow-top"><span class="flow-name">Flows <span>/ RAH240</span></span><button type="button" class="flow-run" data-flow-run>↗ Run</button></div>
+                                    <div class="ss-grid">
+                                        <div class="flow-main">
+                                            <p>Intersection flow visualizer</p>
+                                            <div class="flow-rows">
+                                                <div class="flow-row" data-flow-row="0"></div>
+                                                <div class="flow-row" data-flow-row="1"></div>
+                                                <span class="flow-head" data-flow-head></span>
+                                            </div>
+                                            <div class="flow-stats">
+                                                <p>Avg. congestion <b data-flow-m="cong">42%</b></p>
+                                                <p>Avg. throughput <b data-flow-m="tp">21</b></p>
+                                                <p>Red per cycle <b data-flow-m="red">7.9s</b></p>
+                                            </div>
+                                        </div>
+                                        <div class="ss-side flow-side">
+                                            <p>Left quadrant</p>
+                                            <p class="flow-sub">Immediate suggestions</p>
+                                            <ul class="flow-sugs">
+                                                <li><span>Adjust priority direction to NW</span><button type="button" class="flow-apply" data-flow-apply="0" aria-pressed="false">Apply</button></li>
+                                                <li><span>Reduce red light values by 0.2s</span><button type="button" class="flow-apply" data-flow-apply="1" aria-pressed="false">Apply</button></li>
+                                            </ul>
+                                            <p class="flow-sub">Lighting settings</p>
+                                            <dl class="flow-lights">
+                                                <dt>01</dt><dd class="r" data-flow-red="2.4">2.4 s</dd><dd class="y">1.4 s</dd>
+                                                <dt>02</dt><dd class="r" data-flow-red="2.4">2.4 s</dd><dd class="y">1.4 s</dd>
+                                                <dt>03</dt><dd class="r" data-flow-red="3.1">3.1 s</dd><dd class="y">1.4 s</dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption>Nebula’s suggestions for one intersection, rebuilt. Apply them to retime the phases, then Run to play the cycle. The values here are illustrative.</figcaption>
                         </figure>
 
                         <section class="story-section">

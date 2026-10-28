@@ -11,6 +11,7 @@
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
     <script src="js/case.js" defer></script>
+    <script src="js/demos.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -25,6 +26,7 @@
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/halftone.css">
     <link rel="stylesheet" href="css/case.css">
+    <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -144,15 +146,30 @@
                             <p>Halftone runs its sales in HubSpot, so every inquiry on the site had to land there. Connecting Webflow’s forms to HubSpot the usual way kept failing in testing. After some research, Zapier became the bridge: each submission goes to Zapier, which maps the fields to HubSpot’s and creates the contact. Tested end to end, it held, without giving up any of the site’s custom forms or design.</p>
                         </section>
 
-                        <figure class="story-figure is-block">
-                            <div class="story-mat story-mat-plain">
-                                <ol class="story-flow">
-                                    <li><h3>Webflow form</h3><p>An inquiry is sent from the site.</p></li>
-                                    <li><h3>Zapier</h3><p>Fields are mapped to HubSpot’s.</p></li>
-                                    <li><h3>HubSpot</h3><p>The contact is created for sales.</p></li>
-                                </ol>
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo formflow" data-formflow>
+                                    <div class="ff-form">
+                                        <p>Contact form · Webflow</p>
+                                        <dl class="ff-fields">
+                                            <div><dt>Name</dt><dd>Jordan Lee</dd></div>
+                                            <div><dt>Email</dt><dd>jordan@label.co</dd></div>
+                                            <div><dt>Company</dt><dd>Label Co.</dd></div>
+                                            <div><dt>Project</dt><dd>Tour merch</dd></div>
+                                        </dl>
+                                        <div class="ff-buttons">
+                                            <button type="button" data-flow-send="direct">Send directly</button>
+                                            <button type="button" class="ff-primary" data-flow-send="zapier">Send via Zapier</button>
+                                        </div>
+                                    </div>
+                                    <div class="ff-pipe">
+                                        <div class="ff-stops"><span class="wf">Webflow</span><span class="zap" data-flow-zap>Zapier</span><span class="hs">HubSpot</span></div>
+                                        <div class="ff-line"><span class="ff-dot" data-flow-dot></span></div>
+                                        <div class="ff-result" data-flow-result>Waiting for a submission.</div>
+                                    </div>
+                                </div>
                             </div>
-                            <figcaption>How an inquiry gets from the site to HubSpot.</figcaption>
+                            <figcaption>An inquiry on its way from the site to HubSpot, rebuilt. Try sending it both ways.</figcaption>
                         </figure>
 
                         <section class="story-section">

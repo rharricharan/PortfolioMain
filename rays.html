@@ -11,6 +11,7 @@
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
     <script src="js/case.js" defer></script>
+    <script src="js/demos.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -25,6 +26,7 @@
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/rays.css">
     <link rel="stylesheet" href="css/case.css">
+    <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -167,6 +169,28 @@
                             <figcaption>The finished screens: find shade, today at a glance, and start tanning.</figcaption>
                         </figure>
 
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo uv" data-uv>
+                                    <div class="uv-top"><span class="uv-sun" aria-hidden="true">◠</span><span>Los Angeles, CA ›</span></div>
+                                    <div class="uv-cards">
+                                        <div><b>8</b><small>UV Index ›</small></div>
+                                        <div><b>86°</b><small>Outside Temp.</small></div>
+                                        <div><b>6–10</b><small>Prime Tanning ›</small></div>
+                                    </div>
+                                    <div class="uv-nav">
+                                        <button type="button" data-uv-prev aria-label="Earlier hours">‹</button>
+                                        <span class="uv-range" data-uv-range>7am – 10am</span>
+                                        <button type="button" data-uv-next aria-label="Later hours">›</button>
+                                    </div>
+                                    <div class="uv-bars"><div class="uv-col"><span class="uv-fill" data-uv-fill="0"></span><span class="uv-badge" data-uv-badge="0">4</span></div><div class="uv-col"><span class="uv-fill" data-uv-fill="1"></span><span class="uv-badge" data-uv-badge="1">4</span></div><div class="uv-col"><span class="uv-fill" data-uv-fill="2"></span><span class="uv-badge" data-uv-badge="2">4</span></div><div class="uv-col"><span class="uv-fill" data-uv-fill="3"></span><span class="uv-badge" data-uv-badge="3">4</span></div></div>
+                                    <div class="uv-hours"><span data-uv-hour="0"></span><span data-uv-hour="1"></span><span data-uv-hour="2"></span><span data-uv-hour="3"></span></div>
+                                    <p class="uv-label">Hourly UV Index</p>
+                                </div>
+                            </div>
+                            <figcaption>Today’s hourly UV, as the app shows it. Step through the day: each hour fills to its UV index and warms from yellow to red. The readings here are illustrative.</figcaption>
+                        </figure>
+
                         <section class="story-section">
                             <h2>A Timer That Looks After You</h2>
                             <p>The timer became the center of the app. A session takes three steps: set a duration, choose how to be reminded, including a nudge to flip, and start. Then the screen changes to a countdown with music one tap away.</p>
@@ -177,6 +201,37 @@
                                 <video src="assets/work/rays/timer.mp4" poster="assets/work/rays/timer.webp" muted loop playsinline preload="none" data-lazy aria-label="Setting up a tanning session, from duration and alerts to the countdown."></video>
                             </div>
                             <figcaption>Setting up a tanning session, from duration and alerts to the countdown.</figcaption>
+                        </figure>
+
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo timer" data-timer>
+                                    <div class="timer-step" data-timer-step="0">
+                                        <p class="timer-title">Set tanning duration</p>
+                                        <div class="timer-set">
+                                            <button type="button" class="timer-round" data-timer-dec aria-label="Five minutes less">–</button>
+                                            <span data-timer-mins>30</span>:<span>00</span>
+                                            <button type="button" class="timer-round" data-timer-inc aria-label="Five minutes more">+</button>
+                                        </div>
+                                        <button type="button" class="timer-cta" data-timer-next="1">Next</button>
+                                    </div>
+                                    <div class="timer-step" data-timer-step="1" data-hidden>
+                                        <p class="timer-title">Set notifications</p>
+                                        <div class="timer-opts">
+                                            <label>Visual and audio alerts<input type="checkbox" checked></label>
+                                            <label>Send a notification to flip<input type="checkbox" data-timer-flip checked></label>
+                                        </div>
+                                        <button type="button" class="timer-cta" data-timer-next="2">Start tanning</button>
+                                    </div>
+                                    <div class="timer-step timer-run" data-timer-step="2" data-hidden>
+                                        <p class="timer-happy">Happy<br>Tanning!</p>
+                                        <p class="timer-clock" data-timer-clock>00:30:00</p>
+                                        <div class="timer-tiles"><span>Music</span><button type="button" data-timer-end>End session</button></div>
+                                        <p class="timer-toast" data-timer-toast>Time to flip ☀️</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <figcaption>Setting up a session, rebuilt. Change the time, choose your alerts, and start; it runs fast here so you can see the flip reminder.</figcaption>
                         </figure>
 
                         <section class="story-section">

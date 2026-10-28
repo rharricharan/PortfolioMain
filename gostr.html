@@ -11,6 +11,7 @@
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
     <script src="js/case.js" defer></script>
+    <script src="js/demos.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product Designer at A Small Studio® and Awwwards Young Jury.">
@@ -25,6 +26,7 @@
     <meta property="og:url" content="https://rharricharan.com">
     <link rel="stylesheet" href="css/one.css">
     <link rel="stylesheet" href="css/case.css">
+    <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -129,16 +131,15 @@
                             <p>“It’s easy to get started.” Pricing sits on the page, by the number of properties, with everything included listed underneath. No call needed to find out what it costs.</p>
                         </section>
 
-                        <figure class="story-figure is-block">
-                            <div class="story-mat story-mat-plain">
-                                <ul class="story-tiers">
-                                    <li><h3>1–25 Properties</h3><p class="story-tier-price">$250</p></li>
-                                    <li><h3>26–50 Properties</h3><p class="story-tier-price">$333</p></li>
-                                    <li><h3>51+ Properties</h3><p class="story-tier-price">Let’s talk</p></li>
-                                </ul>
-                                <ul class="story-included"><li>100% done-for-you 12-month email and text campaign</li><li>100% done-for-you graphic design</li><li>100% done-for-you copy</li></ul>
+                        <figure class="story-figure is-demo">
+                            <div class="story-mat">
+                                <div class="demo tiers" data-tiers>
+                                    <p class="tiers-title">It’s easy to get started</p>
+                                    <label class="tiers-pick"><span><b data-tiers-n>12</b> properties</span><input type="range" min="1" max="80" value="12" data-tiers-range></label>
+                                    <ul class="tiers-list"><li data-tier data-max="25"><p class="tier-name">1–25 Properties</p><p class="tier-price">$250</p><ul><li>100% done-for-you 12-month email and text campaign</li><li>100% done-for-you graphic design</li><li>100% done-for-you copy</li></ul></li><li data-tier data-max="50"><p class="tier-name">26–50 Properties</p><p class="tier-price">$333</p><ul><li>100% done-for-you 12-month email and text campaign</li><li>100% done-for-you graphic design</li><li>100% done-for-you copy</li></ul></li><li data-tier data-max="9999"><p class="tier-name">51+ Properties</p><p class="tier-price">Let’s talk</p><ul><li>100% done-for-you 12-month email and text campaign</li><li>100% done-for-you graphic design</li><li>100% done-for-you copy</li></ul></li></ul>
+                                </div>
                             </div>
-                            <figcaption>The pricing tiers from the site, and what every plan includes.</figcaption>
+                            <figcaption>The pricing tiers from the site, rebuilt. Drag to a number of properties.</figcaption>
                         </figure>
 
                         <figure class="story-figure">
