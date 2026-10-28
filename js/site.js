@@ -40,27 +40,15 @@
     if (event.persisted && transition) transition.classList.remove("is-leaving");
   });
 
-  // --- Prefetch the next page on hover/touch so it opens instantly ------------
-  const prefetched = new Set();
-  function prefetch(event) {
-    const link = event.target.closest && event.target.closest("a[href]");
-    if (!link) return;
-    const url = new URL(link.href, location.href);
-    if (url.origin !== location.origin || url.pathname === location.pathname || prefetched.has(url.pathname)) return;
-    prefetched.add(url.pathname);
-    const hint = document.createElement("link");
-    hint.rel = "prefetch";
-    hint.href = url.pathname;
-    document.head.appendChild(hint);
-  }
-  document.addEventListener("pointerover", prefetch, { passive: true });
-  document.addEventListener("touchstart", prefetch, { passive: true });
+  // Prefetching is speculation-rules.json: hover fetches the next page's HTML (cheap), and
+  // pressing down on a link prerenders it, so pages aren't spun up in the background while
+  // someone is just moving the pointer around.
 
-  // --- Clock ------------------------------------------------------------------
-  const clock = document.getElementById("time-container");
-  if (clock) {
+  // The menu's clock, and the one shown top-right while the menu is hidden
+  const clocks = document.querySelectorAll("#time-container, [data-clock]");
+  if (clocks.length) {
     const format = new Intl.DateTimeFormat([], { timeZone: "America/New_York", hour12: true, hour: "numeric", minute: "numeric" });
-    const tick = () => { clock.textContent = `${format.format(new Date())} EST`; };
+    const tick = () => { const t = `${format.format(new Date())} EST`; clocks.forEach((c) => { c.textContent = t; }); };
     tick();
     setInterval(tick, 15000);
   }
@@ -90,6 +78,7 @@
     const root = document.documentElement;
     const setNav = (collapsed) => {
       root.classList.toggle("nav-collapsed", collapsed);
+      dispatchEvent(new CustomEvent("navchange", { detail: { collapsed } })); // js/navbar.js
       navClose.setAttribute("aria-expanded", String(!collapsed));
       try { sessionStorage.setItem("nav-collapsed", collapsed ? "1" : "0"); } catch (e) {}
       (collapsed ? navOpen : navClose).focus({ preventScroll: true });
@@ -116,6 +105,108 @@
     if (finePointer) el.addEventListener("mouseenter", () => play(hoverSound, 0.5));
     el.addEventListener("click", () => play(successSound, 0.3));
   });
+
+  // --- Project rows: sliding pills (css/menu.css) ------------------------------------------
+  // Like the filter chips: a light pill glides to the hovered row and a black pill marks the
+  // current project. Clicking a project slides the black pill there first; between case
+  // studies the page then changes once it lands (the view transition keeps it in place).
+  // site.js loads before GSAP, so this sets up once every deferred script has run.
+  const rowPills = { sync: () => {} };
+  const initRowPills = () => {
+    const list = document.querySelector(".menu-projects");
+    const { gsap } = window;
+    if (!list || !gsap) return;
+    const rows = [...list.querySelectorAll(".menu-row")];
+    const make = (cls) => { const el = document.createElement("span"); el.className = `menu-pill ${cls}`; el.setAttribute("aria-hidden", "true"); list.prepend(el); return el; };
+    const hoverPill = make("menu-pill-hover");
+    const currentPill = make("menu-pill-current");
+    list.classList.add("has-pills");
+    let current = rows.find((r) => r.classList.contains("selected")) || null;
+    let hovered = null;
+    const ease = "expo.out";
+    const box = (row) => ({ y: row.offsetTop, height: row.offsetHeight });
+    const visible = (row) => row && row.offsetParent !== null;
+
+    const mark = (row) => {
+      rows.forEach((r) => r.classList.toggle("is-current", r === row));
+    };
+    if (current) { gsap.set(currentPill, { ...box(current), opacity: 1 }); mark(current); }
+
+    const slide = (pill, row, duration) => {
+      if (reduceMotion) gsap.set(pill, box(row));
+      else gsap.to(pill, { ...box(row), duration, ease, overwrite: "auto" });
+    };
+
+    list.addEventListener("pointerover", (e) => {
+      const row = e.target.closest(".menu-row");
+      if (!row || row === hovered) return;
+      const first = !hovered;
+      hovered = row;
+      if (first) gsap.set(hoverPill, box(row));
+      else slide(hoverPill, row, 0.45);
+      gsap.to(hoverPill, { opacity: 1, duration: 0.2, overwrite: false });
+    });
+    list.addEventListener("pointerleave", () => {
+      hovered = null;
+      gsap.to(hoverPill, { opacity: 0, duration: 0.25 });
+    });
+
+    list.addEventListener("click", (e) => {
+      const row = e.target.closest(".menu-row");
+      if (!row || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || row === current) return;
+      const firstPick = !current;
+      current = row;
+      mark(row);
+      if (firstPick) {
+        gsap.set(currentPill, box(row));
+        gsap.fromTo(currentPill, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.35, ease });
+      } else {
+        slide(currentPill, row, 0.4);
+      }
+      // Between case studies, let the pill land before the page changes
+      const url = new URL(row.href, location.href);
+      if (!reduceMotion && caseOf(location.pathname) && caseOf(url.pathname) && "onpagereveal" in window) {
+        e.preventDefault();
+        setTimeout(() => { location.href = url.href; }, 360);
+      }
+    });
+
+    // After the filter folds rows away (or the menu changes size), the pills follow their rows
+    const sync = () => {
+      if (visible(current)) gsap.set(currentPill, box(current));
+      if (visible(hovered)) gsap.set(hoverPill, box(hovered));
+    };
+    if ("ResizeObserver" in window) new ResizeObserver(sync).observe(list);
+    addEventListener("pageshow", (e) => { if (e.persisted) { current = rows.find((r) => r.classList.contains("selected")) || null; mark(current); if (current) gsap.set(currentPill, { ...box(current), opacity: 1 }); else gsap.set(currentPill, { opacity: 0 }); } });
+    rowPills.sync = sync;
+  };
+  addEventListener("DOMContentLoaded", initRowPills); // deferred scripts (GSAP) have all run by then
+
+  // --- Greeting → Back home (css/menu.css) ---------------------------------------------
+  // Off the home page, hovering "Hi, I'm Ryan" swaps in "Back home": the photo shrinks away to
+  // a soft grey circle with a home icon, and the text rolls up as the new line rolls in.
+  const initGreeting = () => {
+    const { gsap } = window;
+    const hello = document.querySelector(".menu-hello[data-back]");
+    if (!hello || !gsap || reduceMotion) return;
+    const img = hello.querySelector(".menu-avatar img");
+    const home = hello.querySelector(".menu-avatar-home");
+    const hi = hello.querySelector(".menu-hello-hi");
+    const back = hello.querySelector(".menu-hello-back");
+    const tl = gsap.timeline({ paused: true, defaults: { ease: "expo.out" } })
+      .to(img, { scale: 0.4, opacity: 0, duration: 0.4, ease: "power3.in" }, 0)
+      .fromTo(home, { scale: 0.5, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.55 }, 0.14)
+      .to(hi, { y: -10, opacity: 0, filter: "blur(3px)", duration: 0.35, ease: "power3.in" }, 0)
+      .fromTo(back, { y: 10, opacity: 0, filter: "blur(3px)" }, { y: 0, opacity: 1, filter: "blur(0px)", duration: 0.55 }, 0.14);
+    const on = () => tl.timeScale(1).play();
+    const off = () => tl.timeScale(1.4).reverse();
+    hello.addEventListener("pointerenter", on);
+    hello.addEventListener("pointerleave", off);
+    hello.addEventListener("focus", on);
+    hello.addEventListener("blur", off);
+    addEventListener("pageshow", (e) => { if (e.persisted) tl.pause(0); });
+  };
+  addEventListener("DOMContentLoaded", initGreeting);
 
   // --- Project filter (sidebar) ---------------------------------------------------
   // The CSS in css/filter.css does the hiding from html[data-projects]; this keeps the pills
@@ -186,7 +277,7 @@
       const leaving = before.filter((r) => !after.includes(r));
       leaving.forEach((r) => r.classList.add("is-leaving")); // keep them laid out while they fold
 
-      running = gsap.timeline({ onComplete: reset });
+      running = gsap.timeline({ onUpdate: () => rowPills.sync(), onComplete: () => { reset(); rowPills.sync(); } });
       if (leaving.length) running.to(leaving, { ...closed, y: -4, filter: "blur(3px)", duration: 0.5, ease: "power3.inOut", stagger: 0.025 }, 0);
       if (entering.length) running.fromTo(entering,
         { ...closed, y: 10, filter: "blur(4px)" },

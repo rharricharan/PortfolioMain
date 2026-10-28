@@ -29,7 +29,7 @@
     cursor: auto;
 }
 
-.story strong { font-weight: 500; color: var(--ink); }
+.story strong { font-weight: 400; color: var(--ink); }
 
 /* Header: the title across the full width; overview and role side by side under it; facts below */
 .story-header {
@@ -45,13 +45,13 @@
 .story-title {
     grid-column: 1 / -1;
     font-size: clamp(28px, 3.4vw, 42px);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.08;
     letter-spacing: -0.035em;
     text-wrap: pretty;
 }
 
-.story-title span { color: var(--faint); font-weight: 500; }
+.story-title span { color: var(--faint); font-weight: 400; }
 
 /* A little more air between the title and the overview / role under it */
 .story-title { margin-bottom: 12px; }
@@ -119,7 +119,7 @@
 
 .story-section h2 {
     font-size: 15px;
-    font-weight: 500;
+    font-weight: 400;
     color: var(--ink);
 }
 
@@ -175,7 +175,7 @@
 }
 
 .story-stats > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 6px; max-width: 15rem; }
-.story-stats dd { font-size: clamp(28px, 3.2vw, 40px); font-weight: 500; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
+.story-stats dd { font-size: clamp(28px, 3.2vw, 40px); font-weight: 400; letter-spacing: -0.035em; line-height: 1; color: var(--ink); }
 .story-stats dt { font-size: 12px; line-height: 1.45; color: var(--soft); }
 
 @container (min-width: 520px) {
@@ -210,7 +210,7 @@
 
 /* Version notes under a recording */
 .story-notes { max-width: 72ch; margin-left: auto; margin-right: auto; font-size: 13px; line-height: 1.55; }
-.story-notes-title { font-weight: 500; color: var(--ink); }
+.story-notes-title { font-weight: 400; color: var(--ink); }
 .story-notes-cols { display: grid; gap: 20px; margin-top: 12px; }
 .story-notes h3 { font-size: 12px; font-weight: 400; color: var(--soft); }
 .story-notes ul { margin-top: 6px; padding-left: 1.1em; color: var(--muted); }
@@ -223,7 +223,7 @@
 /* Steps: numbered rows */
 .story-steps { list-style: none; max-width: 72ch; margin: 0 auto; border-top: 1px solid var(--line); }
 .story-steps li { display: grid; gap: 6px; padding: 18px 0; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.55; }
-.story-steps h3 { font-size: 13px; font-weight: 500; color: var(--ink); }
+.story-steps h3 { font-size: 13px; font-weight: 400; color: var(--ink); }
 .story-steps p { color: var(--muted); }
 .story-steps .story-steps-more { font-size: 12px; color: var(--soft); }
 
@@ -234,7 +234,7 @@
 
 /* Content blocks on the mat */
 .story-mat-plain { padding: 40px 6%; }
-.story-mat-plain h3 { font-size: 13px; font-weight: 500; color: var(--ink); }
+.story-mat-plain h3 { font-size: 13px; font-weight: 400; color: var(--ink); }
 
 .story-bars-group + .story-bars-group { margin-top: 36px; }
 .story-bars { list-style: none; margin-top: 14px; display: grid; gap: 10px; }
@@ -269,7 +269,7 @@
 .story-tiers { list-style: none; display: grid; gap: 12px; }
 .story-tiers li { padding: 18px; border-radius: 12px; background-color: #fff; box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.04); }
 .story-tiers h3 { font-weight: 400; font-size: 12px; color: var(--soft); }
-.story-tier-price { margin-top: 6px; font-size: 24px; font-weight: 500; letter-spacing: -0.03em; color: var(--ink); }
+.story-tier-price { margin-top: 6px; font-size: 24px; font-weight: 400; letter-spacing: -0.03em; color: var(--ink); }
 .story-included { list-style: none; margin-top: 20px; display: grid; gap: 6px; font-size: 12px; color: var(--muted); }
 .story-included li::before { content: "✓"; margin-right: 8px; color: var(--ink); }
 
@@ -494,7 +494,7 @@
         transition: max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, margin 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .story-outline li.is-active .story-outline-dash { width: 18px; background-color: #161615; }
-    .story-outline li.is-active button { color: #000; font-weight: 500; }
+    .story-outline li.is-active button { color: #000; font-weight: 400; }
 
     .story-outline:hover, .story-outline:has(:focus-visible) {
         padding: 8px;

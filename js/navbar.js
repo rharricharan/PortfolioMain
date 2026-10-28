@@ -1,0 +1,110 @@
+// The bars shown while the side menu is hidden (css/navbar.css).
+// Showing them: each bar grows out of a single drop into its full width while the buttons come
+// into focus from the centre out. Projects: the list grows out of the bar like a drop pulling
+// down (the goo filter melts the two shapes together on the way), rows rise in.
+// Hiding: the same motion, backwards and quicker.
+(() => {
+  const init = () => {
+    const navbar = document.querySelector("[data-navbar]");
+    const { gsap } = window;
+    if (!navbar) return;
+    const root = document.documentElement;
+    const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const items = navbar.querySelector("[data-navbar-items]");
+    const bar = navbar.querySelector('[data-shape="bar"]');
+    const panelShape = navbar.querySelector('[data-shape="panel"]');
+    const panel = navbar.querySelector("[data-navbar-panel]");
+    const projects = navbar.querySelector("[data-navbar-projects]");
+    const rows = [...panel.querySelectorAll(".navbar-row")];
+    const clock = document.querySelector(".navbar-clock");
+    const pager = document.querySelector("[data-pager]");
+    const pagerShape = pager?.querySelector(".pager-shape");
+    const pagerLinks = pager ? [...pager.querySelectorAll(".pager-link")] : [];
+    const ease = "expo.out";
+    let shown = false, open = false, showTl = null, panelTl = null;
+
+    const size = () => ({ W: items.offsetWidth, H: items.offsetHeight });
+    const fitBar = () => { const { W, H } = size(); gsap?.set(bar, { width: W, height: H, x: 0, y: 0 }); };
+
+    // --- The bars ---------------------------------------------------------------------
+    const show = (animate) => {
+      if (shown) return;
+      shown = true;
+      [navbar, clock, pager].forEach((el) => el && (el.style.visibility = "visible"));
+      if (!gsap) return;
+      showTl?.kill();
+      const { W, H } = size();
+      gsap.set(bar, { width: W, height: H, x: 0 });
+      if (!animate || reduceMotion) { gsap.set([...items.children, ...pagerLinks, clock, pagerShape], { clearProps: "all" }); return; }
+      showTl = gsap.timeline()
+        .fromTo(bar, { width: H, x: (W - H) / 2 }, { width: W, x: 0, duration: 0.8, ease })
+        .fromTo(items.children, { opacity: 0, scale: 0.8, filter: "blur(4px)" },
+          { opacity: 1, scale: 1, filter: "blur(0px)", duration: 0.55, ease, stagger: { each: 0.05, from: "center" }, clearProps: "filter,transform" }, 0.12)
+        .fromTo(clock, { opacity: 0, y: -6 }, { opacity: 1, y: 0, duration: 0.6, ease, clearProps: "transform" }, 0.2);
+      if (pager) {
+        showTl.fromTo(pagerShape, { scaleX: 0.25, opacity: 0 }, { scaleX: 1, opacity: 1, duration: 0.8, ease, clearProps: "transform" }, 0.1)
+          .fromTo(pagerLinks, { opacity: 0, y: 8, filter: "blur(4px)" }, { opacity: 1, y: 0, filter: "blur(0px)", duration: 0.55, ease, stagger: 0.06, clearProps: "filter,transform" }, 0.22);
+      }
+    };
+
+    const hide = () => {
+      if (!shown) return;
+      shown = false;
+      closePanel(false);
+      const done = () => [navbar, clock, pager].forEach((el) => el && (el.style.visibility = "hidden"));
+      if (!gsap || reduceMotion) { done(); return; }
+      showTl?.kill();
+      const { W, H } = size();
+      showTl = gsap.timeline({ onComplete: done })
+        .to(items.children, { opacity: 0, scale: 0.85, filter: "blur(4px)", duration: 0.25, ease: "power2.in", stagger: { each: 0.03, from: "edges" } })
+        .to(bar, { width: H, x: (W - H) / 2, opacity: 0, duration: 0.4, ease: "power3.in" }, 0.05)
+        .to(clock, { opacity: 0, duration: 0.25 }, 0);
+      if (pager) showTl.to(pagerLinks, { opacity: 0, y: 6, duration: 0.25, ease: "power2.in" }, 0).to(pagerShape, { scaleX: 0.25, opacity: 0, duration: 0.4, ease: "power3.in" }, 0.05);
+      showTl.add(() => gsap.set([bar, ...items.children, clock, pagerShape, ...pagerLinks], { clearProps: "opacity,transform,filter" }));
+    };
+
+    // --- Projects panel -----------------------------------------------------------------
+    const openPanel = () => {
+      if (open) return;
+      open = true;
+      projects.setAttribute("aria-expanded", "true");
+      panel.classList.add("is-open");
+      if (!gsap) return;
+      panelTl?.kill();
+      const { W, H } = size();
+      const PH = panel.offsetHeight;
+      if (reduceMotion) { gsap.set(panelShape, { x: 0, y: H - 24, width: W, height: PH + 24, opacity: 1 }); return; }
+      panelTl = gsap.timeline()
+        .fromTo(panelShape, { x: (W - H) / 2, y: H / 2, width: H, height: H, opacity: 1 },
+          { x: 0, y: H - 24, width: W, height: PH + 24, duration: 0.75, ease })
+        .fromTo(rows, { opacity: 0, y: -8 }, { opacity: 1, y: 0, duration: 0.5, ease, stagger: 0.035, clearProps: "transform" }, 0.15);
+    };
+
+    function closePanel(animate = true) {
+      if (!open) return;
+      open = false;
+      projects.setAttribute("aria-expanded", "false");
+      const done = () => { panel.classList.remove("is-open"); gsap?.set(panelShape, { opacity: 0 }); gsap?.set(rows, { clearProps: "opacity,transform" }); };
+      if (!gsap || reduceMotion || !animate) { panelTl?.kill(); done(); return; }
+      panelTl?.kill();
+      const { W, H } = size();
+      panelTl = gsap.timeline({ onComplete: done })
+        .to(rows, { opacity: 0, y: -6, duration: 0.2, ease: "power2.in", stagger: { each: 0.02, from: "end" } })
+        .to(panelShape, { x: (W - H) / 2, y: H / 2, width: H, height: H, duration: 0.45, ease: "power3.in" }, 0.08);
+    }
+
+    projects.addEventListener("click", () => (open ? closePanel() : openPanel()));
+    addEventListener("keydown", (e) => { if (e.key === "Escape" && open) { closePanel(); projects.focus(); } });
+    document.addEventListener("pointerdown", (e) => { if (open && !navbar.contains(e.target)) closePanel(); });
+    navbar.addEventListener("focusout", (e) => { if (open && !navbar.contains(e.relatedTarget)) closePanel(); });
+
+    // --- Follow the hide / show toggle (js/site.js) ----------------------------------------
+    addEventListener("navchange", (e) => (e.detail.collapsed ? show(true) : hide()));
+    if (root.classList.contains("nav-collapsed")) {
+      Promise.resolve(window.pageRevealed).then(() => show(!root.classList.contains("case-swap")));
+    }
+    if ("ResizeObserver" in window) new ResizeObserver(() => { if (shown && !showTl?.isActive()) fitBar(); }).observe(items);
+    addEventListener("pageshow", (e) => { if (e.persisted) closePanel(false); });
+  };
+  addEventListener("DOMContentLoaded", init); // after GSAP, which loads later in the page
+})();

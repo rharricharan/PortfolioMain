@@ -62,7 +62,8 @@ main {
 
 /* The selected project in the menu glides from the old row to the new one, its label
    crossfading as it moves, instead of jumping (the rest of the menu stays still) */
-.menu-row.selected {
+.menu-projects:not(.has-pills) .menu-row.selected,
+.menu-pill-current {
     view-transition-name: menu-selected;
 }
 

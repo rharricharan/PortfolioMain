@@ -8,7 +8,7 @@ body.home-page {
     --ink: #161615;
     --muted: #6b6b66;
     overflow: hidden;
-    background-color: #fff;
+    background-color: #f8f8f8;
     color: var(--ink);
     font-family: "Inter", sans-serif;
     -webkit-font-smoothing: antialiased;
@@ -16,13 +16,11 @@ body.home-page {
 .home-page a { color: inherit; }
 .home-page button { font: inherit; }
 
-/* Menu on home: fixed on the right, no card chrome (the page is already plain white) */
+/* Menu on home: fixed on the right, a white card on the grey page (css/filter.css) */
 .home-page .right-side-menu {
     position: fixed;
     z-index: 10;
-    background-color: transparent;
-    border-color: transparent;
-    box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.85);
 }
 
 /* Main area: everything left of the menu */
@@ -43,20 +41,9 @@ body.home-page {
 }
 .home-bio-lead { color: var(--ink); }
 
-/* Company links: underlined like the sketch, with the brand shimmer on hover (css/filter.css) */
-.home-bio .bio-tag {
-    --ink: #3d3d39;
-    padding: 0;
-    background-color: transparent;
-    color: var(--ink);
-    text-decoration: underline;
-    text-decoration-color: rgba(0, 0, 0, 0.25);
-    text-decoration-thickness: 1px;
-    text-underline-offset: 4px;
-    transition: text-decoration-color 0.25s ease;
-}
-.home-bio .bio-tag:hover { background-color: transparent; text-decoration-color: var(--b2); }
-.home-bio .bio-tag.is-tapped { animation: none; }
+/* Company links: the grey brand tags (css/filter.css), a touch larger to match the bio */
+.home-bio .bio-tag { padding: 1px 6px; border-radius: 6px; }
+.home-bio .bio-tag.is-tapped { animation: bio-tap 0.6s ease-out; }
 
 .home-about {
     display: inline-flex;
@@ -72,7 +59,38 @@ body.home-page {
     text-decoration: none;
     transition: background-color 0.25s ease, color 0.25s ease;
 }
-.home-about:hover { background-color: rgba(0, 0, 0, 0.08); color: var(--ink); }
+.home-about:hover { background-color: #fff; color: var(--ink); }
+
+/* Hover: a spectrum ring sweeps around the button with a soft halo behind it (after the
+   Cosmos reference). Pure CSS; the spin runs only while hovered. */
+@property --ring {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+.home-about { position: relative; } /* no isolation: the halo (z -1) must sit behind the button itself */
+.home-about::before,
+.home-about::after {
+    content: "";
+    position: absolute;
+    border-radius: 12px;
+    background: conic-gradient(from var(--ring), #ff8ad8, #8ab4ff, #7de8ff, #8dffc0, #ffe680, #ffad7a, #ff8ad8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+    animation: ring-spin 2.6s linear infinite paused;
+}
+.home-about::before {
+    inset: -1.5px;
+    padding: 1.5px;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.home-about::after { inset: -3px; z-index: -1; filter: blur(12px); }
+.home-about:hover::before { opacity: 1; animation-play-state: running; }
+.home-about:hover::after { opacity: 0.5; animation-play-state: running; }
+@keyframes ring-spin { to { --ring: 360deg; } }
 .home-about:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .home-about .icon { width: 15px; height: 15px; }
 
@@ -87,7 +105,7 @@ body.home-page {
     aspect-ratio: 560 / 430;
 }
 .home-arrow { display: block; width: 100%; height: 100%; overflow: visible; }
-.home-arrow path { fill: none; stroke: #ebebe8; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
+.home-arrow path { fill: none; stroke: #e3e3df; stroke-width: 8; stroke-linecap: round; stroke-linejoin: round; }
 .home-hint-text {
     position: absolute;
     left: 19.6%;
@@ -137,6 +155,7 @@ body.home-page {
 
 @media (prefers-reduced-motion: reduce) {
     .home-about { transition: none; }
+    .home-about::before, .home-about::after { animation: none; }
 }
 
 .home-about .icon { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }

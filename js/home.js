@@ -30,8 +30,8 @@
     const tl = gsap.timeline({ delay: 0.35, onComplete: () => { launched = true; idle(); } });
     // Each piece starts hidden through its own tween (immediateRender), so nothing flashes
     tl.from(bio, { y: 18, opacity: 0, filter: "blur(6px)", duration: 1.1, ease, clearProps: "filter,transform" }, 0)
-      .from(".home-about", { y: 14, opacity: 0, duration: 0.9, ease }, 0.45)
-      .from(menuParts, { y: 12, opacity: 0, duration: 0.9, ease, stagger: 0.08 }, 0.2)
+      .from(".home-about", { y: 14, opacity: 0, duration: 0.9, ease, clearProps: "transform,opacity" }, 0.45)
+      .from(menuParts, { y: 12, opacity: 0, duration: 0.9, ease, stagger: 0.08, clearProps: "transform,opacity" }, 0.2)
       .from(chars, { opacity: 0, y: 6, duration: 0.5, ease: "power2.out", stagger: 0.025 }, 0.9)
       .set(line, { opacity: 1 }, 1.15)
       .to(line, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, 1.15)
@@ -40,13 +40,28 @@
     root.classList.add("intro-ready");
   };
 
-  // Every few seconds the arrow leans toward the list, as if pointing again
+  // The arrow's cadence: a rest, a nudge toward the list, another rest, then it takes off (the
+  // line erases from its tail toward the tip and the head flies on), redraws from the start
+  // into the same loop, and lands pointing at the projects again. Paused during previews.
   let nudge = null;
   const idle = () => {
     if (reduceMotion || !gsap) return;
-    nudge = gsap.timeline({ repeat: -1, repeatDelay: 3.2 })
-      .to(head, { x: 7, y: -5, duration: 0.45, ease: "power2.out" })
-      .to(head, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" });
+    const len = line.getTotalLength();
+    const headLen = head.getTotalLength();
+    const drawn = () => gsap.set([line, head], { strokeDashoffset: 0, opacity: 1, x: 0, y: 0 });
+    nudge = gsap.timeline({ repeat: -1, onRepeat: drawn })
+      .add(drawn)
+      .to(head, { x: 7, y: -5, duration: 0.45, ease: "power2.out" }, 3.2)
+      .to(head, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" }, ">")
+      // take off
+      .to(line, { strokeDashoffset: -len, duration: 1, ease: "power2.in" }, 7.4)
+      .to(head, { x: 26, y: -20, opacity: 0, duration: 0.45, ease: "power2.in" }, 7.95)
+      // and back: drawn again from the start, the head snapping on at the end
+      .set(line, { strokeDashoffset: len }, 8.75)
+      .set(head, { x: 0, y: 0, strokeDashoffset: headLen, opacity: 1 }, 8.75)
+      .to(line, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 8.8)
+      .to(head, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 10.15)
+      .to({}, { duration: 0.6 });
   };
 
   if (!launched) Promise.all([window.pageRevealed, document.fonts ? document.fonts.ready : null]).then(launch);

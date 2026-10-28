@@ -23,10 +23,17 @@
 /* Greeting and clock */
 .menu-top { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 .menu-hello { display: flex; align-items: center; gap: 10px; min-width: 0; color: inherit; text-decoration: none; }
-.menu-hello img { width: 36px; height: 36px; flex-shrink: 0; border-radius: 50%; object-fit: cover; }
-.menu-hello > span { display: grid; line-height: 1.3; }
-.menu-hello b { font-weight: 500; color: var(--ink); }
-.menu-hello b + span { color: var(--muted); }
+.menu-avatar { position: relative; flex-shrink: 0; width: 36px; height: 36px; overflow: hidden; border-radius: 50%; background-color: #ececea; }
+.menu-avatar img { display: block; width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.menu-avatar-home { position: absolute; inset: 0; display: grid; place-items: center; color: #2a2a28; opacity: 0; }
+.menu-avatar-home .icon { width: 16px; height: 16px; }
+.menu-hello-text { position: relative; display: block; min-width: 0; }
+.menu-hello-hi { display: grid; line-height: 1.3; }
+.menu-hello b { font-weight: 400; color: var(--ink); }
+.menu-hello-hi b + span { color: var(--muted); }
+/* "Back home" waits underneath; hovering the greeting swaps it in (js/site.js) */
+.menu-hello-back { position: absolute; top: 0; bottom: 0; left: 0; display: flex; align-items: center; gap: 6px; color: var(--ink); white-space: nowrap; opacity: 0; }
+.menu-hello-back .icon { width: 14px; height: 14px; }
 .menu-top-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
 .menu-clock { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
 
@@ -62,6 +69,38 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .menu-row-meta { flex-shrink: 0; color: var(--muted); }
 .menu-row.selected { background-color: var(--ink); color: #fff; }
 .menu-row.selected .menu-row-meta { color: rgba(255, 255, 255, 0.72); }
+
+/* Project rows: like the filter chips, a light pill slides to the hovered row and a black
+   pill to the current project; on click the black pill slides to the clicked row before the
+   page changes (js/site.js). Each row keeps its own soft track underneath. */
+.menu-projects.has-pills { position: relative; isolation: isolate; }
+.menu-projects.has-pills .menu-row { position: relative; background-color: transparent; }
+.menu-projects.has-pills .menu-row::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -3;
+    border-radius: inherit;
+    background-color: var(--row);
+}
+.menu-projects.has-pills .menu-row.selected { color: var(--ink); }
+.menu-projects.has-pills .menu-row.selected .menu-row-meta { color: var(--muted); }
+.menu-projects.has-pills .menu-row.is-current { color: #fff; }
+.menu-projects.has-pills .menu-row.is-current .menu-row-meta { color: rgba(255, 255, 255, 0.72); }
+.menu-projects.has-pills .menu-row { transition: color 0.3s ease; }
+.menu-projects.has-pills .menu-row .menu-row-meta { transition: color 0.3s ease; }
+.menu-pill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 0;
+    border-radius: 10px;
+    pointer-events: none;
+    will-change: transform;
+}
+.menu-pill-hover { z-index: -2; background-color: rgba(0, 0, 0, 0.065); opacity: 0; }
+.menu-pill-current { z-index: -1; background-color: var(--ink); opacity: 0; }
 
 /* Experience: company, role, years in three columns */
 .menu-exp { display: grid; grid-template-columns: 8.6rem minmax(0, 1fr) auto; gap: 10px; }

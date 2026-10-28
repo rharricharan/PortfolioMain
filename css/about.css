@@ -31,7 +31,7 @@
     max-width: 16ch;
     margin-top: 48px;
     font-size: clamp(34px, 6.2cqi, 64px);
-    font-weight: 500;
+    font-weight: 400;
     line-height: 1.04;
     letter-spacing: -0.045em;
     text-wrap: balance;
@@ -76,18 +76,18 @@
 .about-steps { list-style: none; display: grid; gap: 12px; margin-top: 28px; }
 .about-steps li { padding: 24px; border-radius: 24px; background-color: var(--mat); }
 .about-steps span { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--soft); }
-.about-steps h3 { margin-top: 40px; font-size: 15px; font-weight: 500; }
+.about-steps h3 { margin-top: 40px; font-size: 15px; font-weight: 400; }
 .about-steps p { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--muted); }
 
 /* 03 In numbers */
 .about-numbers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 16px; margin-top: 28px; }
 .about-numbers div { display: flex; flex-direction: column; gap: 12px; }
-.about-numbers dd { font-size: clamp(40px, 6cqi, 56px); font-weight: 500; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.about-numbers dd { font-size: clamp(40px, 6cqi, 56px); font-weight: 400; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
 .about-numbers dt { font-size: 13px; color: var(--muted); }
 
 /* 04 Contact */
 .about-contact-card { margin-top: 28px; padding: 40px 28px; border-radius: 24px; background-color: var(--mat); }
-.about-contact-card h2 { font-size: clamp(24px, 3.6cqi, 36px); font-weight: 500; line-height: 1.1; letter-spacing: -0.035em; }
+.about-contact-card h2 { font-size: clamp(24px, 3.6cqi, 36px); font-weight: 400; line-height: 1.1; letter-spacing: -0.035em; }
 .about-contact-card p { max-width: 46ch; margin-top: 12px; color: var(--muted); }
 .about-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
 .about-button {

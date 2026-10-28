@@ -7,6 +7,7 @@
     <script src="js/boot.js"></script>
     <script src="js/analytics.js" defer></script>
     <script src="js/site.js" defer></script>
+    <script src="js/navbar.js" defer></script>
     <script src="js/vendor/gsap.min.js" defer></script>
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
@@ -30,6 +31,7 @@
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/filter.css">
     <link rel="stylesheet" href="css/menu.css">
+    <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
@@ -288,14 +290,50 @@
                 </div>
             </main>
 
-            <button type="button" class="nav-open" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 6.75A.75.75 0 0 1 2.75 6h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.75Zm0 6.5a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"/></svg><span>Menu</span></button>
-            <div class="right-side-menu menu" id="right-side-menu">
+            <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
+            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
+                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
+                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
+            </filter>
+        </svg>
+        <nav class="navbar" data-navbar aria-label="Site">
+            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
+            <div class="navbar-items" data-navbar-items>
+                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
+                <a class="navbar-pill" href="./about">About</a>
+                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
+                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
+                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
+            </div>
+            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
+                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
+                    <a class="navbar-row is-current" href="./rays" aria-current="page"><span>Rays App</span><span>Product Design</span></a>
+                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
+                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
+                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Creative Direction</span></a>
+                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
+                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
+                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
+            </div>
+        </nav>
+        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
+        <nav class="pager" data-pager aria-label="Project">
+            <div class="pager-shape" aria-hidden="true"></div>
+            <a class="pager-link" href="./"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z"/></svg>Back home</a>
+            <a class="pager-link is-next" href="./halftone">Next project<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z"/></svg></a>
+        </nav>
+        <div class="right-side-menu menu" id="right-side-menu">
             <div class="menu-inner">
                 <div class="menu-top">
                     <a class="menu-close" id="menu-close" aria-label="Close the menu"><svg class="icon menu-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"/></svg></a>
-                    <a class="menu-hello" href="./">
-                        <img src="assets/about/ryan.webp" alt="" width="36" height="36">
-                        <span><b>Hi, I’m Ryan</b><span>I design and build apps.</span></span>
+                    <a class="menu-hello" data-back href="./" aria-label="Back home">
+                        <span class="menu-avatar" aria-hidden="true">
+                            <img src="assets/about/ryan.webp" alt="" width="36" height="36">
+                            <span class="menu-avatar-home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></span>
+                        </span>
+                        <span class="menu-hello-text" aria-hidden="true">
+                            <span class="menu-hello-hi"><b>Hi, I’m Ryan</b><span>I design and build apps.</span></span><span class="menu-hello-back"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 10a.75.75 0 0 1-.75.75H5.612l4.158 3.96a.75.75 0 1 1-1.04 1.08l-5.5-5.25a.75.75 0 0 1 0-1.08l5.5-5.25a.75.75 0 1 1 1.04 1.08L5.612 9.25H16.25A.75.75 0 0 1 17 10Z"/></svg>Back home</span>
+                        </span>
                     </a>
                     <div class="menu-top-right">
                         <span class="menu-clock" id="time-container">EST</span>

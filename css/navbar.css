@@ -1,0 +1,137 @@
+/* With the side menu hidden (desktop, case studies and About): a white bar top-centre with the
+   photo, About, Projects, Contact and a button to bring the menu back; the clock top-right; and a
+   bar at the bottom to go home or on to the next project. Markup from .claude/build_menu.py;
+   the ripple (goo) motion is js/navbar.js. */
+.navbar-defs { position: absolute; width: 0; height: 0; }
+.navbar, .navbar-clock, .pager { display: none; }
+
+@media (min-width: 781px) {
+    .navbar, .navbar-clock, .pager { display: block; visibility: hidden; }
+
+    .navbar {
+        position: fixed;
+        top: 16px;
+        left: 50%;
+        z-index: 120;
+        width: max-content;
+        transform: translateX(-50%);
+        color: #161615;
+        font-size: 13px;
+        letter-spacing: -0.15px;
+    }
+
+    /* The white shapes behind the bar and the projects panel melt into each other as they move
+       (the goo filter); the text never goes through the filter */
+    .navbar-shapes {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        filter: url(#nav-goo) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.05)) drop-shadow(0 14px 30px rgba(0, 0, 0, 0.1));
+    }
+    .navbar-shapes span { position: absolute; top: 0; left: 0; border-radius: 26px; background-color: #fff; }
+    .navbar-shapes [data-shape="panel"] { border-radius: 22px; opacity: 0; }
+
+    .navbar-items { position: relative; display: flex; align-items: center; gap: 4px; padding: 6px; }
+    .navbar-avatar { display: block; flex-shrink: 0; margin-right: 14px; border-radius: 50%; }
+    .navbar-avatar img { display: block; width: 34px; height: 34px; border-radius: 50%; object-fit: cover; }
+    .navbar-pill, .navbar-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+        height: 34px;
+        border: 0;
+        border-radius: 200px;
+        background-color: #f1f1ef;
+        color: #4a4a46;
+        font: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .navbar-pill { padding: 0 18px; }
+    .navbar-pill-gap { margin-left: 14px; }
+    .navbar-icon { width: 34px; }
+    .navbar-pill .icon { width: 12px; height: 12px; }
+    .navbar-icon .icon { width: 16px; height: 16px; }
+    .navbar-pill [d^="M5.22 8.22"] { transform-origin: center; }
+    .navbar-pill:hover, .navbar-icon:hover, .navbar-pill[aria-current], .navbar-pill[aria-expanded="true"] { background-color: #e7e7e4; color: #161615; }
+    .navbar-pill[aria-expanded="true"] .icon { transform: rotate(180deg); }
+    .navbar-pill .icon { transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+    :is(.navbar-pill, .navbar-icon, .navbar-avatar, .navbar-row, .pager-link):focus-visible { outline: 2px solid #161615; outline-offset: 2px; }
+
+    /* Projects: a list that grows out of the bar (hidden until opened) */
+    .navbar-panel { position: relative; display: none; padding: 0 6px 6px; }
+    .navbar-panel.is-open { display: grid; gap: 4px; }
+    .navbar-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 10px 14px;
+        border-radius: 12px;
+        background-color: #f6f6f4;
+        color: #161615;
+        text-decoration: none;
+        white-space: nowrap;
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .navbar-row span + span { color: #6b6b66; transition: color 0.25s ease; }
+    .navbar-row:hover { background-color: #ececea; }
+    .navbar-row.is-current { background-color: #161615; color: #fff; }
+    .navbar-row.is-current span + span { color: rgba(255, 255, 255, 0.72); }
+
+    .navbar-clock {
+        position: fixed;
+        top: 30px;
+        right: 32px;
+        z-index: 120;
+        color: #6b6b66;
+        font-size: 12px;
+        font-variant-numeric: tabular-nums;
+    }
+
+    .pager {
+        position: fixed;
+        bottom: 16px;
+        left: 50%;
+        z-index: 120;
+        display: none;
+        width: max-content;
+        transform: translateX(-50%);
+        font-size: 13px;
+    }
+    html.nav-collapsed .pager { display: flex; }
+    .pager { gap: 4px; padding: 6px; }
+    .pager-shape {
+        position: absolute;
+        inset: 0;
+        border-radius: 26px;
+        background-color: #fff;
+        box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), 0 14px 30px rgba(0, 0, 0, 0.1);
+    }
+    .pager-link {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        height: 34px;
+        padding: 0 16px;
+        border-radius: 200px;
+        color: #4a4a46;
+        text-decoration: none;
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .pager-link .icon { width: 14px; height: 14px; transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1); }
+    .pager-link:hover { color: #161615; }
+    .pager-link:not(.is-next):hover .icon { transform: translateX(-3px); }
+    .pager-link.is-next { background-color: #f1f1ef; }
+    .pager-link.is-next:hover { background-color: #e7e7e4; }
+    .pager-link.is-next:hover .icon { transform: translateX(3px); }
+
+    /* The story leaves room for the bars */
+    html.nav-collapsed :is(.story, .about) { padding-top: 104px; padding-bottom: 140px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .navbar *, .pager * { transition: none !important; }
+}
