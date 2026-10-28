@@ -26,7 +26,7 @@
 
     // Sections: label, then content, rising a little as they come into view
     about.querySelectorAll(".about-section").forEach((section) => {
-      const parts = [section.querySelector(".about-label"), ...section.querySelectorAll(".about-copy p, .about-intro-line, .about-experience div, .about-steps li, .about-tools li, .about-numbers div, .about-contact-card")];
+      const parts = [section.querySelector(".about-label"), ...section.querySelectorAll(".about-copy p, .about-intro-line, .about-sub, .about-sub-small, .about-pair > div, .about-experience div, .about-steps li, .about-toolgroup, .about-numbers div, .about-contact-card")];
       gsap.set(parts, { opacity: 0, y: 18 });
       ScrollTrigger.create({
         trigger: section,
