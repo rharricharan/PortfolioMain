@@ -207,6 +207,56 @@
     if (event.persisted && window.gsap) window.gsap.set(".bio-more-arrow", { clearProps: "transform,opacity" });
   });
 
+  // --- Availability pill (css/filter.css) ---------------------------------------------
+  // The label rises between "contract" and "full-time" every few seconds; on hover it offers
+  // to copy the email, and a click copies it (falling back to a mailto link).
+  document.querySelectorAll("[data-available]").forEach((pill) => {
+    const wrap = pill.querySelector(".available-text");
+    const status = pill.querySelector("[data-available-status]");
+    const email = pill.dataset.email;
+    const cycle = ["Available for contract", "Available for full-time"];
+    let i = 0, hovering = false, copied = false;
+    let current = wrap.querySelector(".available-label");
+
+    const show = (text) => {
+      if (current.textContent === text) return;
+      const { gsap } = window;
+      const next = document.createElement("span");
+      next.className = "available-label";
+      next.textContent = text;
+      wrap.append(next);
+      const width = next.offsetWidth;
+      const old = current;
+      current = next;
+      if (!gsap || reduceMotion) { old.remove(); wrap.style.width = `${width}px`; return; }
+      gsap.to(wrap, { width, duration: 0.5, ease: "expo.out" });
+      gsap.fromTo(next, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: "expo.out" });
+      gsap.to(old, { yPercent: -100, opacity: 0, duration: 0.35, ease: "power2.in", onComplete: () => old.remove() });
+    };
+    const resting = () => cycle[i];
+    const tick = () => { if (!hovering && !copied) { i = (i + 1) % cycle.length; show(resting()); } };
+
+    pill.classList.add("is-live");
+    wrap.style.width = `${current.offsetWidth}px`;
+    if (!reduceMotion) setInterval(tick, 3200);
+
+    pill.addEventListener("pointerenter", () => { hovering = true; if (!copied) show("Copy my email"); });
+    pill.addEventListener("pointerleave", () => { hovering = false; if (!copied) show(resting()); });
+    pill.addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(email);
+      } catch (err) {
+        location.href = `mailto:${email}`;
+        return;
+      }
+      copied = true;
+      show("Email copied");
+      status.textContent = `Copied ${email}`;
+      window.gsap?.fromTo(pill, { scale: 0.96 }, { scale: 1, duration: 0.5, ease: "back.out(3)", clearProps: "transform" });
+      setTimeout(() => { copied = false; show(hovering ? "Copy my email" : resting()); }, 1800);
+    });
+  });
+
   // --- Bio tags: a pulse in the brand's colors on click (css/filter.css) ------------------
   document.querySelectorAll(".bio-tag").forEach((tag) => {
     tag.addEventListener("click", () => {

@@ -1,0 +1,129 @@
+/* About page: an intro line with the photo, a large headline, then numbered sections
+   (story and experience, how I work, numbers, contact). Same tokens as the case studies. */
+.about {
+    --ink: #161615;
+    --muted: #6b6b66;
+    --soft: #8a8a85;
+    --line: rgba(0, 0, 0, 0.08);
+    --mat: #efefeb;
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+
+    width: 100%;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 32px 120px;
+    container-type: inline-size;
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.55;
+    letter-spacing: -0.014em;
+}
+
+.about :is(h1, h2, h3, p, dt, dd, li) { pointer-events: auto; }
+
+/* Intro --------------------------------------------------------------------------- */
+.about-who { display: flex; align-items: center; gap: 12px; }
+.about-who img { width: 44px; height: 44px; border-radius: 50%; object-fit: cover; }
+.about-who p { font-size: 14px; line-height: 1.35; }
+.about-who span { color: var(--muted); }
+
+.about-title {
+    max-width: 16ch;
+    margin-top: 48px;
+    font-size: clamp(34px, 6.2cqi, 64px);
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+}
+
+/* Sections ------------------------------------------------------------------------ */
+.about-section { margin-top: 112px; }
+.about-intro + .about-section { margin-top: 96px; }
+
+.about-label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.about-label span {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-color: var(--mat);
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 11px;
+}
+
+/* 01 Story beside the experience list */
+.about-grid { display: grid; gap: 48px; margin-top: 28px; }
+.about-copy { display: grid; gap: 16px; max-width: 52ch; color: var(--muted); }
+.about-copy .about-lead { color: var(--ink); font-size: 17px; line-height: 1.5; }
+
+.about-experience { font-size: 14px; }
+.about-experience div {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 12px 0;
+    border-top: 1px solid var(--line);
+}
+.about-experience div:first-child { border-top: 0; padding-top: 0; }
+.about-experience dt span { color: var(--muted); }
+.about-experience dt span::before { content: "· "; }
+.about-experience dd { flex-shrink: 0; color: var(--muted); font-variant-numeric: tabular-nums; }
+
+/* 02 How I work */
+.about-steps { list-style: none; display: grid; gap: 12px; margin-top: 28px; }
+.about-steps li { padding: 24px; border-radius: 24px; background-color: var(--mat); }
+.about-steps span { font-family: ui-monospace, "SF Mono", Menlo, monospace; font-size: 11px; color: var(--soft); }
+.about-steps h3 { margin-top: 40px; font-size: 15px; font-weight: 500; }
+.about-steps p { margin-top: 8px; font-size: 14px; line-height: 1.55; color: var(--muted); }
+
+/* 03 In numbers */
+.about-numbers { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 40px 16px; margin-top: 28px; }
+.about-numbers div { display: flex; flex-direction: column; gap: 12px; }
+.about-numbers dd { font-size: clamp(40px, 6cqi, 56px); font-weight: 500; line-height: 1; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; }
+.about-numbers dt { font-size: 13px; color: var(--muted); }
+
+/* 04 Contact */
+.about-contact-card { margin-top: 28px; padding: 40px 28px; border-radius: 24px; background-color: var(--mat); }
+.about-contact-card h2 { font-size: clamp(24px, 3.6cqi, 36px); font-weight: 500; line-height: 1.1; letter-spacing: -0.035em; }
+.about-contact-card p { max-width: 46ch; margin-top: 12px; color: var(--muted); }
+.about-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
+.about-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 200px;
+    background-color: #fff;
+    color: var(--ink);
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 0 0 1px var(--line);
+    transition: background-color 0.25s ease, transform 0.25s var(--ease);
+}
+.about-button .icon { width: 16px; height: 16px; }
+.about-button.is-primary { background-color: var(--ink); color: #fff; box-shadow: none; }
+.about-button:hover { transform: translateY(-1px); }
+.about-button.is-primary:hover { background-color: #000; }
+.about-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+@container (min-width: 720px) {
+    .about-grid { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; }
+    .about-experience { padding-top: 6px; }
+    .about-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .about-numbers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .about-contact-card { padding: 56px 48px; }
+}
+
+@media (max-width: 780px) {
+    .about { padding: 72px 16px 72px; }
+    .about-section { margin-top: 80px; }
+}
+
+/* Before GSAP takes over, nothing waits on it: hidden only while the intro is pending */
+.intro:not(.intro-ready) .about :is(.about-who, .about-title) { opacity: 0; }
+@media (prefers-reduced-motion: reduce) {
+    .about-button { transition: none; }
+}

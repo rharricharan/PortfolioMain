@@ -170,27 +170,27 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
     }
 }
 
-/* Shorter laptop screens: the side nav keeps everything in view by tightening a little:
-   slightly smaller bio, less space between sections, slimmer rows */
-@media (min-width: 781px) and (max-height: 860px) {
-    .info-text-text { font-size: 14px; }
-    .projects-container { margin-top: 24px; }
-    .projects-buttons :is(.project, .project-rh) { padding-top: 4px; padding-bottom: 4px; }
-}
+/* Selected work rows get room to breathe: taller rows, a little more space between them */
+.projects-buttons { gap: 4px; }
+.projects-buttons .project { padding: 9px 14px; }
+.project-header-row + .projects-buttons { margin-top: 14px; }
+
 
 /* "More about me" under the bio: underlined text and a Heroicons arrow. GSAP drives the hover
    (js/site.js): the underline wipes off to the right and back in from the left, the arrow nudges. */
 .bio-more {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    margin-top: 12px;
-    color: rgba(0, 0, 0, 0.85);
-    font-size: 13px;
-    letter-spacing: -0.2px;
+    gap: 3px;
+    margin-left: 2px;
+    color: rgba(0, 0, 0, 0.42);
+    white-space: nowrap;
     text-decoration: none;
+    pointer-events: auto;
     cursor: pointer;
+    transition: color 0.3s ease;
 }
+.bio-more:hover, .bio-more:focus-visible { color: rgba(0, 0, 0, 0.85); }
 .bio-more-text { position: relative; padding-bottom: 2px; }
 .bio-more-line {
     position: absolute;
@@ -201,9 +201,8 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
     background-color: currentColor;
     transform-origin: left;
 }
-.bio-more-arrow { width: 14px; height: 14px; flex-shrink: 0; }
+.bio-more-arrow { width: 0.9em; height: 0.9em; flex-shrink: 0; }
 .bio-more:focus-visible { outline: 2px solid #000; outline-offset: 3px; border-radius: 2px; }
-.info-text-div { display: flex; flex-direction: column; align-items: flex-start; }
 
 /* Text can be selected anywhere; images and video can't be selected or dragged.
    The selection is a very light grey. */
@@ -225,3 +224,51 @@ img, video, svg, picture, canvas {
 .menu-icon { width: 20px; height: 20px; vertical-align: middle; }
 .icon-to { width: 0.7em; height: 0.7em; vertical-align: 0.05em; margin: 0 0.04em; }
 .story-facts a .icon { width: 12px; height: 12px; vertical-align: -1px; }
+
+/* Availability: a soft blue pill. Its label cycles between contract and full-time; on hover it
+   offers to copy the email, and a click copies it (js/site.js). */
+.available {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    border-radius: 200px;
+    border: 1px solid rgba(37, 99, 235, 0.2);
+    background-color: rgba(37, 99, 235, 0.07);
+    color: #2154c9;
+    font: inherit;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+.available:hover, .available:focus-visible { background-color: rgba(37, 99, 235, 0.12); border-color: rgba(37, 99, 235, 0.32); }
+.available:focus-visible { outline: 2px solid #2154c9; outline-offset: 2px; }
+.available .dot {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background-color: #2563eb;
+}
+.available .dot::after {
+    content: "";
+    position: absolute;
+    inset: -3px;
+    border-radius: 50%;
+    border: 1px solid #2563eb;
+    animation: available-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+@keyframes available-ping { 0% { transform: scale(0.6); opacity: 0.7; } 80%, 100% { transform: scale(1.8); opacity: 0; } }
+.available-text {
+    position: relative;
+    display: inline-block;
+    height: 1.4em;
+    overflow: hidden;
+    font-size: 13px;
+    letter-spacing: -0.3px;
+    line-height: 1.4;
+    color: #2154c9;
+    white-space: nowrap;
+}
+.available.is-live .available-label { position: absolute; left: 0; top: 0; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+@media (prefers-reduced-motion: reduce) { .available .dot::after { animation: none; } }
