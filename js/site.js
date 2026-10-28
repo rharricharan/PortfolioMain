@@ -19,7 +19,7 @@
   }
 
   // Case study to case study: no wipe; the content area slides (css/case-nav.css, js/boot.js).
-  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr"];
+  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave"];
   const caseOf = (path) => CASES.includes(path.replace(/^\/|\.html$|\/$/g, ""));
 
   document.addEventListener("click", (event) => {

@@ -13,7 +13,7 @@
     width: 100%;
     max-width: 1080px;
     margin: 0 auto;
-    padding: 56px 32px 120px;
+    padding: 32px 32px 120px; /* top matches the side margin */
     min-width: 0;
     container-type: inline-size;
     color: var(--ink);
@@ -52,6 +52,10 @@
 }
 
 .story-title span { color: var(--faint); font-weight: 500; }
+
+/* A little more air between the title and the overview / role under it */
+.story-title { margin-bottom: 12px; }
+@container (min-width: 520px) { .story-title { margin-bottom: 18px; } }
 
 .story-lead {
     max-width: 52ch;
@@ -295,7 +299,7 @@
 
 /* Phones ------------------------------------------------------------------- */
 @media (max-width: 780px) {
-    .story { padding: 96px 16px 64px; }
+    .story { padding: 64px 16px 64px; } /* under the fixed bar, then the side margin */
     .story-section { margin-top: 64px; }
     .story-section + .story-figure { margin-top: 64px; }
     .story-mat, .story-figure.is-wide .story-mat { padding: 5% 4%; border-radius: 14px; }
@@ -383,3 +387,22 @@
     .story-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px 24px; }
     .story-facts > div { max-width: none; }
 }
+
+/* A soft glow in the project's colors behind the header, on the whole content area (edge to edge),
+   scrolling away with the page and fading into the soft white */
+.content-wrapper:has(> .story[data-case]) {
+    background-image:
+        radial-gradient(60% 520px at 6% 0%, var(--tint-a), transparent 75%),
+        radial-gradient(55% 480px at 94% 0%, var(--tint-b), transparent 75%);
+    background-repeat: no-repeat;
+    background-attachment: local;
+}
+
+:root:has(.story[data-case="smartstop"]) { --tint-a: rgba(64, 110, 246, 0.16); --tint-b: rgba(255, 166, 77, 0.14); }
+:root:has(.story[data-case="rays"])      { --tint-a: rgba(255, 154, 60, 0.18); --tint-b: rgba(255, 209, 102, 0.20); }
+:root:has(.story[data-case="halftone"])  { --tint-a: rgba(255, 111, 174, 0.14); --tint-b: rgba(90, 200, 250, 0.16); }
+:root:has(.story[data-case="leadhack"])  { --tint-a: rgba(123, 97, 255, 0.14); --tint-b: rgba(72, 187, 255, 0.12); }
+:root:has(.story[data-case="one"])       { --tint-a: rgba(63, 182, 139, 0.15); --tint-b: rgba(106, 169, 255, 0.13); }
+:root:has(.story[data-case="cinnamon"])  { --tint-a: rgba(210, 105, 30, 0.14); --tint-b: rgba(244, 162, 97, 0.16); }
+:root:has(.story[data-case="gostr"])     { --tint-a: rgba(255, 122, 217, 0.15); --tint-b: rgba(122, 231, 255, 0.17); }
+:root:has(.story[data-case="ave"])       { --tint-a: rgba(150, 105, 70, 0.17); --tint-b: rgba(43, 69, 200, 0.14); }
