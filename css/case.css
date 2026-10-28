@@ -454,7 +454,7 @@
         padding: 8px 2px; /* at rest the dashes stay inside the 38px gutter, clear of the text */
         border-radius: 14px;
         transform: translateY(-50%);
-        transition: background-color 0.3s ease, box-shadow 0.3s ease;
+        transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
         animation: outline-in 0.8s 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     .story-outline ol { list-style: none; display: grid; gap: 0; }
@@ -468,7 +468,7 @@
         border: 0;
         border-radius: 6px;
         background: none;
-        color: #4a4a46;
+        color: #2f2f2c;
         font: inherit;
         font-size: 13px;
         letter-spacing: -0.2px;
@@ -494,13 +494,14 @@
         transition: max-width 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-height 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.25s ease, margin 0.4s cubic-bezier(0.22, 1, 0.36, 1);
     }
     .story-outline li.is-active .story-outline-dash { width: 18px; background-color: #161615; }
-    .story-outline li.is-active button { color: #161615; }
+    .story-outline li.is-active button { color: #000; font-weight: 500; }
 
     .story-outline:hover, .story-outline:focus-within {
         padding: 8px;
-        /* Frosted: 75% white with a strong blur. Labels use #4a4a46, which keeps 4.8:1 even
-           with pure black behind the glass (the dark video demos), and 8.9:1 over white. */
-        background-color: rgba(255, 255, 255, 0.75);
+        transform: translate(6px, -50%); /* the open card sits 8px in from the window edge */
+        /* Frosted: 60% white with a strong blur. Labels use #2f2f2c, which keeps 4.7:1 even
+           with pure black behind the glass (the dark video demos), and 13.4:1 over white. */
+        background-color: rgba(255, 255, 255, 0.6);
         -webkit-backdrop-filter: blur(32px) saturate(1.4);
         backdrop-filter: blur(32px) saturate(1.4);
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 18px 40px -16px rgba(0, 0, 0, 0.18);
