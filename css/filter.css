@@ -272,3 +272,65 @@ img, video, svg, picture, canvas {
 .available.is-live .available-label { position: absolute; left: 0; top: 0; }
 .visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 @media (prefers-reduced-motion: reduce) { .available .dot::after { animation: none; } }
+
+/* Hide / show the side nav on case pages (desktop). Collapsing slides the nav out to the right
+   and lets the story take the full window; a floating Menu pill brings it back (js/site.js). */
+.nav-toggle, .nav-open { display: none; }
+@media (min-width: 781px) {
+    .top-info-header-rh { display: flex; align-items: center; gap: 8px; }
+    .nav-toggle {
+        display: grid;
+        place-items: center;
+        width: 26px;
+        height: 26px;
+        border: 0;
+        border-radius: 6px;
+        background-color: rgba(0, 0, 0, 0.05);
+        color: rgba(0, 0, 0, 0.6);
+        cursor: pointer;
+        transition: background-color 0.25s ease, color 0.25s ease;
+    }
+    .nav-toggle:hover { background-color: rgba(0, 0, 0, 0.1); color: #000; }
+    .nav-toggle .icon { width: 16px; height: 16px; }
+
+    .nav-open {
+        position: fixed;
+        top: 16px;
+        right: 16px;
+        z-index: 112;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 8px 14px;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 200px;
+        background-color: rgba(255, 255, 255, 0.85);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 12px 32px -12px rgba(0, 0, 0, 0.18);
+        color: rgba(0, 0, 0, 0.85);
+        font: inherit;
+        font-size: 13px;
+        cursor: pointer;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-8px);
+        transition: opacity 0.35s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s linear 0.35s;
+    }
+    .nav-open .icon { width: 16px; height: 16px; }
+
+    #right-side-menu { transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, visibility 0s linear 0s; }
+    .page-content-wrapper { transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin-right 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+
+    html.nav-collapsed #right-side-menu {
+        transform: translateX(calc(100% + 24px));
+        opacity: 0;
+        visibility: hidden;
+        transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.4s ease, visibility 0s linear 0.6s;
+    }
+    html.nav-collapsed .page-content-wrapper { width: 100vw; margin-right: 0; }
+    html.nav-collapsed .nav-open { opacity: 1; visibility: visible; transform: none; transition-delay: 0.2s, 0.2s, 0s; }
+}
+@media (prefers-reduced-motion: reduce) {
+    #right-side-menu, .page-content-wrapper, .nav-open { transition: none !important; }
+}

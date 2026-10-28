@@ -388,20 +388,23 @@
     .story-facts > div { max-width: none; }
 }
 
-/* A soft glow in the project's colors across the top of the content area (edge to edge), fading into
-   the soft white. It stays in place while the story scrolls, so it lasts the whole case study. */
-.content-wrapper:has(> .story[data-case]) {
+/* The case study's colors wash across the whole window, behind the content and through the
+   frosted sidebar, so the screen takes on the project's light. It stays put while the story
+   scrolls. Phones scroll the window, so there it's pinned behind the story instead. */
+:root:has(.story[data-case]) {
     --glow:
-        radial-gradient(60% 520px at 6% 0%, var(--tint-a), transparent 75%),
-        radial-gradient(55% 480px at 94% 0%, var(--tint-b), transparent 75%);
-    background-image: var(--glow);
-    background-repeat: no-repeat;
-    background-attachment: scroll; /* desktop: the column scrolls, its background doesn't */
+        radial-gradient(70% 80% at 0% 0%, var(--tint-a), transparent 70%),
+        radial-gradient(60% 75% at 100% 0%, var(--tint-b), transparent 70%),
+        radial-gradient(90% 60% at 40% 110%, var(--tint-b), transparent 75%);
 }
-
-/* Phones scroll the window instead, so the glow is pinned to the viewport behind the story */
+@media (min-width: 781px) {
+    :root:has(.story[data-case]) body {
+        background-image: var(--glow);
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+}
 @media (max-width: 780px) {
-    .content-wrapper:has(> .story[data-case]) { background-image: none; }
     .content-wrapper:has(> .story[data-case])::before {
         content: "";
         position: fixed;

@@ -83,6 +83,24 @@
     }, { passive: true });
   }
 
+  // --- Hide / show the side nav on case pages (desktop, css/filter.css) -------------------
+  const navClose = document.querySelector("[data-nav-close]");
+  const navOpen = document.querySelector("[data-nav-open]");
+  if (navClose && navOpen) {
+    const root = document.documentElement;
+    const setNav = (collapsed) => {
+      root.classList.toggle("nav-collapsed", collapsed);
+      navClose.setAttribute("aria-expanded", String(!collapsed));
+      try { sessionStorage.setItem("nav-collapsed", collapsed ? "1" : "0"); } catch (e) {}
+      (collapsed ? navOpen : navClose).focus({ preventScroll: true });
+      // The story changes width: let scroll-driven reveals re-measure once it settles
+      setTimeout(() => window.ScrollTrigger?.refresh(), 650);
+    };
+    navClose.setAttribute("aria-expanded", String(!root.classList.contains("nav-collapsed")));
+    navClose.addEventListener("click", () => setNav(true));
+    navOpen.addEventListener("click", () => setNav(false));
+  }
+
   // --- Sounds (home page) -------------------------------------------------------
   // Browsers block audio until the visitor interacts, so failures are expected and ignored.
   const hoverSound = document.getElementById("hoverSound");

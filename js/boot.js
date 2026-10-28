@@ -6,7 +6,7 @@
 // - Until then the wipe's reveal is held (css/transition.css), so it plays when the page is seen.
 // - window.pageRevealed resolves when the page is shown, so the GSAP intro (js/case.js) starts then.
 // - Hide the case study intro until GSAP plays it, so nothing flashes first.
-// - Keep the sidebar's project filter where it was left, so the list doesn't jump on load.
+// - Keep the sidebar's project filter, and whether the nav is hidden, as they were left.
 (() => {
   const root = document.documentElement;
   if (!matchMedia("(prefers-reduced-motion: reduce)").matches) root.classList.add("intro");
@@ -26,5 +26,7 @@
   try {
     const f = sessionStorage.getItem("project-filter");
     if (f && f !== "all") root.dataset.projects = f;
+    // The side nav stays hidden across case studies once it's been hidden (css/filter.css)
+    if (sessionStorage.getItem("nav-collapsed") === "1") root.classList.add("nav-collapsed");
   } catch (e) {}
 })();
