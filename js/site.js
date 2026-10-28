@@ -60,7 +60,7 @@
   const clock = document.getElementById("time-container");
   if (clock) {
     const format = new Intl.DateTimeFormat([], { timeZone: "America/New_York", hour12: true, hour: "numeric", minute: "numeric" });
-    const tick = () => { clock.textContent = `EST ${format.format(new Date())}`; };
+    const tick = () => { clock.textContent = `${format.format(new Date())} EST`; };
     tick();
     setInterval(tick, 15000);
   }
@@ -126,7 +126,7 @@
   if (filter) {
     const root = document.documentElement;
     const buttons = [...filter.querySelectorAll("button[data-filter]")];
-    const rows = [...document.querySelectorAll(".projects-buttons .project[data-type]")];
+    const rows = [...document.querySelectorAll(".menu-projects .menu-row[data-type]")];
     const current = () => buttons.find((b) => b.dataset.filter === (root.dataset.projects || "all"));
     const sync = () => buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === current())));
     sync();
@@ -232,7 +232,7 @@
     const wrap = pill.querySelector(".available-text");
     const status = pill.querySelector("[data-available-status]");
     const email = pill.dataset.email;
-    const cycle = ["Available for contract", "Available for full-time"];
+    const cycle = [wrap.textContent.trim()]; // the label as written; more entries would cycle
     let i = 0, hovering = false, copied = false;
     let current = wrap.querySelector(".available-label");
 
@@ -256,7 +256,9 @@
 
     pill.classList.add("is-live");
     wrap.style.width = `${current.offsetWidth}px`;
-    if (!reduceMotion) setInterval(tick, 3200);
+    // Measured again once Inter has loaded, so the label isn't cut to the fallback font's width
+    document.fonts?.ready.then(() => { if (!hovering && !copied) wrap.style.width = `${current.offsetWidth}px`; });
+    if (!reduceMotion && cycle.length > 1) setInterval(tick, 3200);
 
     pill.addEventListener("pointerenter", () => { hovering = true; if (!copied) show("Copy my email"); });
     pill.addEventListener("pointerleave", () => { hovering = false; if (!copied) show(resting()); });

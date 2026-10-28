@@ -29,7 +29,7 @@
 .projects-buttons .project { transition-property: background-color, color; overflow: hidden; }
 
 /* A row the filter just removed stays laid out while GSAP folds it shut (js/site.js) */
-html[data-projects] .projects-buttons .project.is-leaving { display: flex !important; }
+html[data-projects] .menu-projects .menu-row.is-leaving { display: flex !important; }
 
 .project-filter button {
     padding: 3px 10px;
@@ -51,9 +51,9 @@ html[data-projects] .projects-buttons .project.is-leaving { display: flex !impor
 .project-filter button:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
 
 /* Before JS runs, the filter saved in boot.js already applies. The page you're on always shows. */
-html[data-projects="product"] .projects-buttons .project[data-type]:not([data-type~="product"], .selected),
-html[data-projects="website"] .projects-buttons .project[data-type]:not([data-type~="website"], .selected),
-html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-type~="creative"], .selected) {
+html[data-projects="product"] .menu-projects .menu-row[data-type]:not([data-type~="product"], .selected),
+html[data-projects="website"] .menu-projects .menu-row[data-type]:not([data-type~="website"], .selected),
+html[data-projects="creative"] .menu-projects .menu-row[data-type]:not([data-type~="creative"], .selected) {
     display: none;
 }
 

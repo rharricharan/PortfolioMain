@@ -29,10 +29,13 @@
     <link rel="stylesheet" href="css/demos.css">
     <link rel="stylesheet" href="css/transition.css">
     <link rel="stylesheet" href="css/filter.css">
+    <link rel="stylesheet" href="css/menu.css">
     <link rel="stylesheet" href="css/case-nav.css">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon.png">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
+    <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
     <title>Work by Ryan Harricharan | GoSTRMarketing</title>
 </head>
 
@@ -170,119 +173,85 @@
             </main>
 
             <button type="button" class="nav-open" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M2 6.75A.75.75 0 0 1 2.75 6h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 6.75Zm0 6.5a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"/></svg><span>Menu</span></button>
-            <div class="right-side-menu" id="right-side-menu">
-                <div class="menu-container">
-                    <div class="top-info">
-                        <a class="menu-close" id="menu-close">
-                            <svg class="icon menu-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"/></svg>
-                        </a>
-                        <a class="top-info-header" href="./">
-                            <h3 class="top-head-txt">Ryan Harricharan</h3>
-                        </a>
-                        <div class="top-info-header-rh">
-                            <div class="time-container" id="time-container">
-                                EST 4:00 PM
-                            </div>
-                            <button type="button" class="nav-toggle" data-nav-close aria-label="Hide the menu" aria-controls="right-side-menu" aria-expanded="true"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.21 14.77a.75.75 0 0 1 .02-1.06L14.168 10 10.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.21 14.77a.75.75 0 0 1 .02-1.06L8.168 10 4.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/></svg></button>
-                        </div>
+            <div class="right-side-menu menu" id="right-side-menu">
+            <div class="menu-inner">
+                <div class="menu-top">
+                    <a class="menu-close" id="menu-close" aria-label="Close the menu"><svg class="icon menu-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"/></svg></a>
+                    <a class="menu-hello" href="./">
+                        <img src="assets/about/ryan.webp" alt="" width="36" height="36">
+                        <span><b>Hi, I’m Ryan</b><span>I design and build apps.</span></span>
+                    </a>
+                    <div class="menu-top-right">
+                        <span class="menu-clock" id="time-container">EST</span>
+                        <button type="button" class="nav-toggle" data-nav-close aria-label="Hide the menu" aria-controls="right-side-menu" aria-expanded="true"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.21 14.77a.75.75 0 0 1 .02-1.06L14.168 10 10.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.21 14.77a.75.75 0 0 1 .02-1.06L8.168 10 4.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/></svg></button>
                     </div>
-                    <div class="info-text-div">
-                        <h3 class="info-text-text">Designing and building apps that feel simple to use. Right now I’m a Product Designer at <a class="bio-tag" data-brand="asmallstudio" href="https://www.asmallstudio.com/" target="_blank" rel="noopener noreferrer"><span>A Small Studio®</span></a> and on the <a class="bio-tag" data-brand="awwwards" href="https://www.awwwards.com/jury-member/rharricharan" target="_blank" rel="noopener noreferrer"><span>Awwwards</span></a> Young Jury. Before that, I designed for <a class="bio-tag" data-brand="smartstop" href="./smartstop"><span>Smartstop®</span></a>, <a class="bio-tag" data-brand="one" href="https://www.one.ai" target="_blank" rel="noopener noreferrer"><span>Our Next Energy®</span></a> and <a class="bio-tag" data-brand="msb" href="https://www.marylandschoolfortheblind.org/" target="_blank" rel="noopener noreferrer"><span>The Maryland School for the Blind</span></a>. Open to contract and full-time work. <a class="bio-more" href="./about"><span class="bio-more-text">More about me<span class="bio-more-line" aria-hidden="true"></span></span><svg class="bio-more-arrow" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638L10.23 5.29a.75.75 0 1 1 1.04-1.08l5.5 5.25a.75.75 0 0 1 0 1.08l-5.5 5.25a.75.75 0 1 1-1.04-1.08l4.158-3.96H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg></a></h3>
-                    </div>
-                    <div class="projects-container">
-                        <div class="project-header-row">
-                            <h3 class="project-header">Selected work</h3>
-                            <div class="project-filter" role="group" aria-label="Filter projects by type">
-                                <button type="button" data-filter="all" aria-pressed="true">All</button>
-                                <button type="button" data-filter="product" aria-pressed="false">Product</button>
-                                <button type="button" data-filter="website" aria-pressed="false">Website</button>
-                                <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
-                            </div>
-                        </div>
-                        <div class="projects-buttons">
-                            <a class="project" href="./smartstop" data-type="product">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">Smartstop®</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Product Design</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./rays" data-type="product">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">Rays App</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Product Design</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./halftone" data-type="website">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">Halftone®</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Website Design</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./leadhack" data-type="website">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">LeadHack</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Website Design</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./one" data-type="website creative">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">Our Next Energy</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Creative Direction</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./cinnamon" data-type="website">
-                            <div class="project-name">
-                                <h3 class="project-name-text">Cinnamon</h3>
-                            </div>
-                            <div class="project-details">
-                                <h3 class="type">Website Design</h3>
-                            </div>
-                            </a>
-                            <a class="project selected" href="./gostr" data-type="website">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">GoSTRMarketing</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Website Design</h3>
-                                </div>
-                            </a>
-                            <a class="project" href="./ave" data-type="website creative">
-                                <div class="project-name">
-                                    <h3 class="project-name-text">Avé</h3>
-                                </div>
-                                <div class="project-details">
-                                    <h3 class="type">Creative Direction</h3>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
+                </div>
 
-                    <div class="bottom-container">
-                        <button type="button" class="available" data-available data-email="rharricharandesigns@gmail.com" aria-label="Available for contract and full-time work. Copy my email address"><span class="dot" aria-hidden="true"></span><span class="available-text" aria-hidden="true"><span class="available-label">Available for contract</span></span><span class="visually-hidden" role="status" data-available-status></span></button>
-                        <div class="right-elements">
-                            <a class="mail" href="mailto:rharricharandesigns@gmail.com">
-                                <h3 class="mail-text">Mail</h3>
-                            </a>
-                            <a class="linkedin" href="https://www.linkedin.com/in/rharricharan/" target="_blank" rel="noopener noreferrer">
-                                <h3 class="linkedin-text">Linkedin</h3>
-                            </a>
-                            <a class="read-cv" href="https://medium.com/@rharricharan" target="_blank" rel="noopener noreferrer">
-                                <h3 class="read-cv-text">Medium</h3>
-                            </a>
-                        </div>
+                <section class="menu-section" aria-labelledby="menu-work">
+                    <h2 class="menu-heading" id="menu-work">Selected work</h2>
+                    <div class="project-filter" role="group" aria-label="Filter projects by type">
+                        <button type="button" data-filter="all" aria-pressed="true">All</button>
+                        <button type="button" data-filter="product" aria-pressed="false">Product</button>
+                        <button type="button" data-filter="website" aria-pressed="false">Website</button>
+                        <button type="button" data-filter="creative" aria-pressed="false">Creative</button>
+                    </div>
+                    <div class="menu-list menu-projects">
+                        <a class="menu-row" href="./smartstop" data-type="product" data-preview="smartstop" data-ratio="1.5385">
+                            <span class="menu-row-name">Smartstop®</span>
+                            <span class="menu-row-meta">Product Design</span>
+                        </a>
+                        <a class="menu-row" href="./rays" data-type="product" data-preview="rays" data-ratio="0.4778">
+                            <span class="menu-row-name">Rays App</span>
+                            <span class="menu-row-meta">Product Design</span>
+                        </a>
+                        <a class="menu-row" href="./halftone" data-type="website" data-preview="halftone" data-ratio="1.7910">
+                            <span class="menu-row-name">Halftone®</span>
+                            <span class="menu-row-meta">Website Design</span>
+                        </a>
+                        <a class="menu-row" href="./leadhack" data-type="website" data-preview="leadhack" data-ratio="1.7734">
+                            <span class="menu-row-name">LeadHack</span>
+                            <span class="menu-row-meta">Website Design</span>
+                        </a>
+                        <a class="menu-row" href="./one" data-type="website creative" data-preview="one" data-ratio="1.7734">
+                            <span class="menu-row-name">Our Next Energy</span>
+                            <span class="menu-row-meta">Creative Direction</span>
+                        </a>
+                        <a class="menu-row" href="./cinnamon" data-type="website" data-preview="cinnamon" data-ratio="2.0112">
+                            <span class="menu-row-name">Cinnamon</span>
+                            <span class="menu-row-meta">Website Design</span>
+                        </a>
+                        <a class="menu-row selected" href="./gostr" data-type="website" data-preview="gostr" data-ratio="2.0112" aria-current="page">
+                            <span class="menu-row-name">GoSTR Marketing</span>
+                            <span class="menu-row-meta">Website Design</span>
+                        </a>
+                        <a class="menu-row" href="./ave" data-type="website creative" data-preview="ave" data-ratio="1.6000">
+                            <span class="menu-row-name">Avé</span>
+                            <span class="menu-row-meta">Creative Direction</span>
+                        </a>
+                    </div>
+                </section>
+
+                <section class="menu-section" aria-labelledby="menu-experience">
+                    <h2 class="menu-heading" id="menu-experience">Experience</h2>
+                    <div class="menu-list">
+                        <a class="menu-row menu-exp" href="https://www.asmallstudio.com/" target="_blank" rel="noopener noreferrer"><span class="menu-exp-name">A Small Studio®</span><span class="menu-exp-role">Product Designer</span><span class="menu-exp-years">2025–<span class="lg">Present</span><span class="sm">Now</span></span></a>
+                        <a class="menu-row menu-exp" href="https://www.awwwards.com/jury-member/rharricharan" target="_blank" rel="noopener noreferrer"><span class="menu-exp-name">Awwwards</span><span class="menu-exp-role">Young Jury</span><span class="menu-exp-years">2025–<span class="lg">Present</span><span class="sm">Now</span></span></a>
+                        <a class="menu-row menu-exp" href="https://www.marylandschoolfortheblind.org/" target="_blank" rel="noopener noreferrer"><span class="menu-exp-name">MSB</span><span class="menu-exp-role">UX Lead (Contract)</span><span class="menu-exp-years">2025</span></a>
+                        <a class="menu-row menu-exp" href="./smartstop"><span class="menu-exp-name">Smartstop®</span><span class="menu-exp-role">Founding <span class="xs-hide">Product </span>Designer</span><span class="menu-exp-years">2023–<span class="lg">20</span><span class="sm"></span>24</span></a>
+                        <a class="menu-row menu-exp" href="https://www.one.ai" target="_blank" rel="noopener noreferrer"><span class="menu-exp-name"><span class="lg">Our Next Energy</span><span class="sm">ONE</span>®</span><span class="menu-exp-role"><span class="lg">Senior</span><span class="sm">Sr.</span> UX Designer (Contract)</span><span class="menu-exp-years">2023</span></a>
+                        <div class="menu-row menu-exp"><span class="menu-exp-name">RH Design</span><span class="menu-exp-role"><span class="lg">Senior</span><span class="sm">Sr.</span> UX / Product Designer</span><span class="menu-exp-years">2017–<span class="lg">20</span><span class="sm"></span>25</span></div>
+                    </div>
+                </section>
+
+                <div class="menu-footer">
+                    <button type="button" class="available" data-available data-email="rharricharandesigns@gmail.com" aria-label="Available for contract and full-time roles. Copy my email address"><span class="dot" aria-hidden="true"></span><span class="available-text" aria-hidden="true"><span class="available-label">Available for contract &amp; full-time roles</span></span><span class="visually-hidden" role="status" data-available-status></span></button>
+                    <div class="menu-links">
+                        <a href="https://www.linkedin.com/in/rharricharan/" target="_blank" rel="noopener noreferrer">LinkedIn<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
+                        <a href="mailto:rharricharandesigns@gmail.com">Mail<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
                     </div>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </body>
