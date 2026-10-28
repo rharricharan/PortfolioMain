@@ -34,6 +34,16 @@
     setTimeout(() => { location.href = url.href; }, LEAVE_MS);
   });
 
+  // The rainbow ripple (css/transition.css) on demand: rainbowRipple() replays it.
+  window.rainbowRipple = () => {
+    const el = document.querySelector(".rainbow-ripple");
+    if (!el || reduceMotion) return;
+    el.classList.remove("is-active");
+    void el.offsetWidth; // restart the animation
+    el.classList.add("is-active");
+    setTimeout(() => el.classList.remove("is-active"), 2000);
+  };
+
   // Coming back with the back button restores the page from cache: clear the cover.
   addEventListener("pageshow", (event) => {
     if (event.persisted && transition) transition.classList.remove("is-leaving");
