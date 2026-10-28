@@ -18,7 +18,8 @@
     return true;
   }
 
-  // Case study to case study: no wipe; the content area slides (css/case-nav.css, js/boot.js).
+  // Case study to case study: no wipe; the browser's view transition slides the content area
+  // (css/case-nav.css), and js/boot.js skips the wipe on arrival.
   const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave"];
   const caseOf = (path) => CASES.includes(path.replace(/^\/|\.html$|\/$/g, ""));
 
@@ -27,10 +28,7 @@
     if (!link || !isInternalPageLink(link, event)) return;
     const url = new URL(link.href, location.href);
     if (url.pathname === location.pathname) { event.preventDefault(); return; }
-    if (caseOf(location.pathname) && caseOf(url.pathname)) {
-      try { sessionStorage.setItem("case-swap", "1"); } catch (e) {}
-      return;
-    }
+    if (caseOf(location.pathname) && caseOf(url.pathname) && "onpagereveal" in window) return;
     if (reduceMotion || !transition) return;
     event.preventDefault();
     transition.classList.add("is-leaving");
@@ -121,14 +119,17 @@
     pill.setAttribute("aria-hidden", "true");
     filter.prepend(pill);
     const place = (btn) => ({ x: btn.offsetLeft, width: btn.offsetWidth });
+    // Placed by GSAP when it's there, so later tweens start from the right spot. Re-placed whenever
+    // the filter changes size (fonts loading, the phone menu opening).
     const setPill = () => {
       const { x, width } = place(current());
-      pill.style.transform = `translateX(${x}px)`;
-      pill.style.width = `${width}px`;
+      if (!width) return;
+      filter.classList.add("has-pill");
+      if (window.gsap) window.gsap.set(pill, { x, width });
+      else { pill.style.transform = `translateX(${x}px)`; pill.style.width = `${width}px`; }
     };
-    filter.classList.add("has-pill");
     setPill();
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(setPill);
+    if ("ResizeObserver" in window) new ResizeObserver(setPill).observe(filter);
 
     // Leaving rows fold shut while arriving rows open in the same moment, so the list (and the
     // Experience block under it) changes height in one smooth motion. Only individual style
@@ -136,18 +137,22 @@
     const shown = (r) => r.offsetParent !== null;
     const gap = parseFloat(getComputedStyle(rows[0].parentElement).rowGap) || 0;
     const closed = { height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: -gap, opacity: 0 };
-    let leaving = [];
+    let running = null; // the timeline of the last click
+    const reset = () => {
+      running?.kill();
+      running = null;
+      rows.forEach((r) => r.classList.remove("is-leaving"));
+      window.gsap?.set(rows, { clearProps: "all" });
+    };
     filter.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-filter]");
       if (!btn || btn === current()) return;
       const { gsap } = window;
       const animate = !reduceMotion && gsap && rows.some(shown);
-      const before = rows.filter(shown);
 
-      if (animate) {
-        gsap.killTweensOf(rows);
-        leaving.forEach((r) => r.classList.remove("is-leaving"));
-      }
+      // A click mid-animation: drop the last one and start from the rows as they really are
+      reset();
+      const before = rows.filter(shown);
       if (btn.dataset.filter === "all") delete root.dataset.projects;
       else root.dataset.projects = btn.dataset.filter;
       try { sessionStorage.setItem("project-filter", btn.dataset.filter); } catch (err) {}
@@ -160,23 +165,27 @@
 
       const after = rows.filter(shown);
       const entering = after.filter((r) => !before.includes(r));
-      leaving = before.filter((r) => !after.includes(r));
+      const leaving = before.filter((r) => !after.includes(r));
       leaving.forEach((r) => r.classList.add("is-leaving")); // keep them laid out while they fold
 
-      gsap.to(leaving, {
-        ...closed, y: -4, filter: "blur(3px)",
-        duration: 0.5, ease: "power3.inOut", stagger: 0.025,
-        onComplete: () => {
-          leaving.forEach((r) => r.classList.remove("is-leaving"));
-          gsap.set(leaving, { clearProps: "all" });
-        },
-      });
-      gsap.fromTo(entering,
+      running = gsap.timeline({ onComplete: reset });
+      if (leaving.length) running.to(leaving, { ...closed, y: -4, filter: "blur(3px)", duration: 0.5, ease: "power3.inOut", stagger: 0.025 }, 0);
+      if (entering.length) running.fromTo(entering,
         { ...closed, y: 10, filter: "blur(4px)" },
-        { height: "auto", paddingTop: "", paddingBottom: "", marginBottom: 0, opacity: 1, y: 0, filter: "blur(0px)",
-          duration: 0.65, ease: "expo.out", stagger: 0.04, delay: 0.08, clearProps: "all" });
+        { height: "auto", paddingTop: "", paddingBottom: "", marginBottom: 0, opacity: 1, y: 0, filter: "blur(0px)", duration: 0.65, ease: "expo.out", stagger: 0.04 },
+        0.08);
     });
   }
+
+  // --- Bio tags: a pulse in the brand's colors on click (css/filter.css) ------------------
+  document.querySelectorAll(".bio-tag").forEach((tag) => {
+    tag.addEventListener("click", () => {
+      tag.classList.remove("is-tapped");
+      void tag.offsetWidth; // restart the animation on repeat clicks
+      tag.classList.add("is-tapped");
+    });
+    tag.addEventListener("animationend", (e) => { if (e.target === tag) tag.classList.remove("is-tapped"); });
+  });
 
   // --- Videos: load and play only while on screen -----------------------------------
   const videos = document.querySelectorAll("video[data-lazy]");

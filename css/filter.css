@@ -21,7 +21,9 @@
     pointer-events: none;
 }
 .project-filter.has-pill button { position: relative; z-index: 1; }
-.project-filter.has-pill button[aria-pressed="true"] { background-color: transparent; }
+.project-filter.has-pill button[aria-pressed="true"],
+.project-filter.has-pill button[aria-pressed="true"]:hover { background-color: transparent; color: #fff; }
+.project-filter:not(.has-pill) .project-filter-pill { display: none; }
 
 /* GSAP moves the rows; a CSS transition on size or transform would fight it */
 .projects-buttons .project { transition-property: background-color, color; overflow: hidden; }
@@ -83,4 +85,86 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
 @container (max-width: 380px) {
     :is(.project, .project-rh):has(.type-container) { grid-template-columns: 6.6rem minmax(0, 1fr) auto; column-gap: 8px; }
     :is(.project, .project-rh):has(.type-container) :is(h3, .type, .date, .project-name-text) { font-size: 12px; }
+}
+
+/* Bio tags: the companies in the bio as small links. On hover a band of the brand's own colors
+   sweeps through the name; on click the tag pulses in that color (js/site.js adds .is-tapped). */
+.bio-tag {
+    --ink: rgba(0, 0, 0, 0.8);
+    padding: 1px 4px;
+    font-weight: inherit;
+    pointer-events: auto; /* the bio is an h3, and headings ignore the pointer site-wide */
+    cursor: pointer;
+    border-radius: 4px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--ink);
+    text-decoration: none;
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+    transition: background-color 0.35s ease, box-shadow 0.35s ease;
+}
+
+.bio-tag span {
+    background-image: linear-gradient(100deg, var(--ink) 0 34%, var(--b1) 42%, var(--b2) 50%, var(--b3) 58%, var(--ink) 66% 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+}
+
+.bio-tag:hover { background-color: var(--tint); }
+.bio-tag:hover span { color: transparent; animation: bio-shimmer 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.bio-tag:focus-visible { outline: 2px solid var(--b2); outline-offset: 2px; }
+.bio-tag.is-tapped { animation: bio-tap 0.6s ease-out; }
+.bio-tag.is-tapped span { color: transparent; animation: bio-shimmer 0.6s ease-out both; }
+
+@keyframes bio-shimmer { from { background-position: 100% 0; } to { background-position: 0 0; } }
+@keyframes bio-tap {
+    from { box-shadow: 0 0 0 0 var(--b2); }
+    to { box-shadow: 0 0 0 7px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .bio-tag:hover span, .bio-tag.is-tapped span { animation: none; color: var(--b2); }
+    .bio-tag.is-tapped { animation: none; }
+}
+
+/* Each brand's colors, sampled from its own site (deepened a touch to stay readable) */
+.bio-tag[data-brand="asmallstudio"] { --b1: #2fc9a0; --b2: #4a9ff5; --b3: #8f4ff0; --tint: rgba(74, 159, 245, 0.12); }
+.bio-tag[data-brand="awwwards"]     { --b1: #f2a900; --b2: #fa5d29; --b3: #f2a900; --tint: rgba(250, 93, 41, 0.11); }
+.bio-tag[data-brand="msb"]          { --b1: #46367f; --b2: #0088cc; --b3: #c9a227; --tint: rgba(70, 54, 127, 0.11); }
+.bio-tag[data-brand="smartstop"]    { --b1: #406ef6; --b2: #ff8a1f; --b3: #406ef6; --tint: rgba(64, 110, 246, 0.11); }
+.bio-tag[data-brand="one"]          { --b1: #10153b; --b2: #0898fb; --b3: #10153b; --tint: rgba(8, 152, 251, 0.11); }
+
+/* The side nav floats inside the window: 16px from the edges, rounded, with a soft shadow,
+   instead of a full-height panel against the edge. On case pages it gives up 16px of width so
+   it never covers the story. On phones the open menu floats the same way, 12px in. */
+@media (min-width: 781px) {
+    .right-side-menu {
+        top: 16px;
+        right: 16px;
+        bottom: 16px;
+        height: auto;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 48px -16px rgba(0, 0, 0, 0.16);
+        overflow: hidden auto;
+    }
+    #right-side-menu {
+        width: calc(max(30vw, 400px) - 16px);
+        min-width: 0;
+    }
+    .right-side-menu .menu-container { height: 100%; }
+}
+
+@media (max-width: 780px) {
+    .right-side-menu.open {
+        inset: 12px;
+        width: auto;
+        min-width: 0;
+        height: auto;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        border-radius: 16px;
+        box-shadow: 0 18px 48px -16px rgba(0, 0, 0, 0.2);
+    }
 }

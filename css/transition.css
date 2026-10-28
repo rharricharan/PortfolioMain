@@ -55,6 +55,11 @@
     to { transform: scaleY(1); visibility: visible; }
 }
 
+/* Prerendered and not shown yet: hold the reveal (covered) until the page is seen (js/boot.js) */
+.is-prerendering .block {
+    animation-play-state: paused;
+}
+
 /* Arrived from another case study: the content slides instead (css/case-nav.css) */
 .case-swap .block {
     animation: none;

@@ -129,8 +129,9 @@
   };
 
   if (!reduceMotion && window.gsap && window.ScrollTrigger && window.SplitText) {
-    // Fonts first, so the title splits into its real lines
-    (document.fonts ? document.fonts.ready : Promise.resolve()).then(motion);
+    // Once the page is actually shown (it may have been prerendered), and fonts are in, so the
+    // title splits into its real lines
+    Promise.all([window.pageRevealed, document.fonts ? document.fonts.ready : null]).then(motion);
   } else {
     root.classList.add("intro-ready");
     fillBars();
