@@ -388,14 +388,29 @@
     .story-facts > div { max-width: none; }
 }
 
-/* A soft glow in the project's colors behind the header, on the whole content area (edge to edge),
-   scrolling away with the page and fading into the soft white */
+/* A soft glow in the project's colors across the top of the content area (edge to edge), fading into
+   the soft white. It stays in place while the story scrolls, so it lasts the whole case study. */
 .content-wrapper:has(> .story[data-case]) {
-    background-image:
+    --glow:
         radial-gradient(60% 520px at 6% 0%, var(--tint-a), transparent 75%),
         radial-gradient(55% 480px at 94% 0%, var(--tint-b), transparent 75%);
+    background-image: var(--glow);
     background-repeat: no-repeat;
-    background-attachment: local;
+    background-attachment: scroll; /* desktop: the column scrolls, its background doesn't */
+}
+
+/* Phones scroll the window instead, so the glow is pinned to the viewport behind the story */
+@media (max-width: 780px) {
+    .content-wrapper:has(> .story[data-case]) { background-image: none; }
+    .content-wrapper:has(> .story[data-case])::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: var(--glow);
+        background-repeat: no-repeat;
+        pointer-events: none;
+    }
+    .story[data-case] { position: relative; z-index: 1; }
 }
 
 :root:has(.story[data-case="smartstop"]) { --tint-a: rgba(64, 110, 246, 0.16); --tint-b: rgba(255, 166, 77, 0.14); }

@@ -103,27 +103,78 @@
 
   // --- Project filter (sidebar) ---------------------------------------------------
   // The CSS in css/filter.css does the hiding from html[data-projects]; this keeps the pills
-  // in sync, remembers the choice for the next page, and lets the rows that appear rise in.
+  // in sync and remembers the choice for the next page. With GSAP, a black pill slides to
+  // the chosen category, leaving rows fold away and arriving rows open and rise in,
+  // while the Experience list below follows.
   const filter = document.querySelector(".project-filter");
   if (filter) {
     const root = document.documentElement;
+    const buttons = [...filter.querySelectorAll("button[data-filter]")];
     const rows = [...document.querySelectorAll(".projects-buttons .project[data-type]")];
-    const shown = () => rows.filter((r) => r.offsetParent !== null);
-    const sync = () => filter.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === (root.dataset.projects || "all"))));
+    const current = () => buttons.find((b) => b.dataset.filter === (root.dataset.projects || "all"));
+    const sync = () => buttons.forEach((b) => b.setAttribute("aria-pressed", String(b === current())));
     sync();
+
+    // The pill behind the active button
+    const pill = document.createElement("span");
+    pill.className = "project-filter-pill";
+    pill.setAttribute("aria-hidden", "true");
+    filter.prepend(pill);
+    const place = (btn) => ({ x: btn.offsetLeft, width: btn.offsetWidth });
+    const setPill = () => {
+      const { x, width } = place(current());
+      pill.style.transform = `translateX(${x}px)`;
+      pill.style.width = `${width}px`;
+    };
+    filter.classList.add("has-pill");
+    setPill();
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(setPill);
+
+    // Leaving rows fold shut while arriving rows open in the same moment, so the list (and the
+    // Experience block under it) changes height in one smooth motion. Only individual style
+    // properties are set, which the site's CSP allows.
+    const shown = (r) => r.offsetParent !== null;
+    const gap = parseFloat(getComputedStyle(rows[0].parentElement).rowGap) || 0;
+    const closed = { height: 0, paddingTop: 0, paddingBottom: 0, marginBottom: -gap, opacity: 0 };
+    let leaving = [];
     filter.addEventListener("click", (e) => {
       const btn = e.target.closest("button[data-filter]");
-      if (!btn) return;
-      const before = new Set(shown());
+      if (!btn || btn === current()) return;
+      const { gsap } = window;
+      const animate = !reduceMotion && gsap && rows.some(shown);
+      const before = rows.filter(shown);
+
+      if (animate) {
+        gsap.killTweensOf(rows);
+        leaving.forEach((r) => r.classList.remove("is-leaving"));
+      }
       if (btn.dataset.filter === "all") delete root.dataset.projects;
       else root.dataset.projects = btn.dataset.filter;
       try { sessionStorage.setItem("project-filter", btn.dataset.filter); } catch (err) {}
       sync();
-      if (reduceMotion) return;
-      shown().filter((r) => !before.has(r)).forEach((r, i) => r.animate(
-        [{ opacity: 0, transform: "translateY(6px)" }, { opacity: 1, transform: "none" }],
-        { duration: 380, delay: i * 40, easing: "cubic-bezier(0.16, 1, 0.3, 1)", fill: "backwards" },
-      ));
+
+      if (!animate) { setPill(); return; }
+      const { x, width } = place(btn);
+      gsap.to(pill, { x, width, duration: 0.6, ease: "expo.out", overwrite: true });
+      gsap.fromTo(btn, { scale: 0.94 }, { scale: 1, duration: 0.5, ease: "back.out(3)", clearProps: "transform" });
+
+      const after = rows.filter(shown);
+      const entering = after.filter((r) => !before.includes(r));
+      leaving = before.filter((r) => !after.includes(r));
+      leaving.forEach((r) => r.classList.add("is-leaving")); // keep them laid out while they fold
+
+      gsap.to(leaving, {
+        ...closed, y: -4, filter: "blur(3px)",
+        duration: 0.5, ease: "power3.inOut", stagger: 0.025,
+        onComplete: () => {
+          leaving.forEach((r) => r.classList.remove("is-leaving"));
+          gsap.set(leaving, { clearProps: "all" });
+        },
+      });
+      gsap.fromTo(entering,
+        { ...closed, y: 10, filter: "blur(4px)" },
+        { height: "auto", paddingTop: "", paddingBottom: "", marginBottom: 0, opacity: 1, y: 0, filter: "blur(0px)",
+          duration: 0.65, ease: "expo.out", stagger: 0.04, delay: 0.08, clearProps: "all" });
     });
   }
 

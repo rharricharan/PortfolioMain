@@ -7,7 +7,27 @@
     flex-wrap: wrap;
 }
 
-.project-filter { display: flex; gap: 3px; }
+.project-filter { position: relative; display: flex; gap: 3px; }
+
+/* With JS, a single black pill slides between categories (js/site.js) instead of each button
+   painting its own background */
+.project-filter-pill {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    border-radius: 6px;
+    background-color: #000;
+    pointer-events: none;
+}
+.project-filter.has-pill button { position: relative; z-index: 1; }
+.project-filter.has-pill button[aria-pressed="true"] { background-color: transparent; }
+
+/* GSAP moves the rows; a CSS transition on size or transform would fight it */
+.projects-buttons .project { transition-property: background-color, color; overflow: hidden; }
+
+/* A row the filter just removed stays laid out while GSAP folds it shut (js/site.js) */
+html[data-projects] .projects-buttons .project.is-leaving { display: flex !important; }
 
 .project-filter button {
     padding: 3px 10px;
@@ -33,4 +53,34 @@ html[data-projects="product"] .projects-buttons .project[data-type]:not([data-ty
 html[data-projects="website"] .projects-buttons .project[data-type]:not([data-type~="website"], .selected),
 html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-type~="creative"], .selected) {
     display: none;
+}
+
+/* Experience rows: always one line. A fixed name column so roles line up row to row, dates on the
+   right. Where the sidebar is narrow, titles and dates switch to short forms (Sr., Now, 2017–25)
+   and the text steps down to 12px. */
+.projects-container { container-type: inline-size; }
+
+:is(.project, .project-rh):has(.type-container) {
+    display: grid;
+    grid-template-columns: 7.2rem minmax(0, 1fr) auto;
+    column-gap: 10px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+:is(.project, .project-rh):has(.type-container) :is(.type, .project-name-text) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+:is(.project, .project-rh) .sm { display: none; }
+
+@container (max-width: 440px) {
+    :is(.project, .project-rh) .lg { display: none; }
+    :is(.project, .project-rh) .sm { display: inline; }
+}
+
+@container (max-width: 380px) {
+    :is(.project, .project-rh):has(.type-container) { grid-template-columns: 6.6rem minmax(0, 1fr) auto; column-gap: 8px; }
+    :is(.project, .project-rh):has(.type-container) :is(h3, .type, .date, .project-name-text) { font-size: 12px; }
 }
