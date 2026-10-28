@@ -164,3 +164,9 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
     .menu-top .menu-close { display: grid; place-items: center; width: 32px; height: 32px; padding: 0; border-radius: 8px; }
     .menu-row { padding: 12px 14px; }
 }
+
+/* The hovered project is the focal point: the others dim slightly */
+.menu-projects .menu-row > span,
+.menu-projects.has-pills .menu-row::before { transition: opacity 0.3s ease, color 0.3s ease; }
+.menu-projects:hover .menu-row:not(:hover) > span { opacity: 0.5; }
+.menu-projects:hover .menu-row:not(:hover)::before { opacity: 0.6; }

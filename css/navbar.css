@@ -135,3 +135,12 @@
 @media (prefers-reduced-motion: reduce) {
     .navbar *, .pager * { transition: none !important; }
 }
+
+/* As in the menu: the hovered project leads, the rest dim slightly */
+@media (min-width: 781px) {
+    .navbar-row > span { transition: opacity 0.3s ease, color 0.25s ease; }
+    .navbar-panel:hover .navbar-row:not(:hover) > span { opacity: 0.5; }
+    .pager-link.is-home { width: 34px; padding: 0; justify-content: center; }
+    .pager-link.is-home .icon { width: 16px; height: 16px; }
+    .pager-link.is-home:hover .icon { transform: none; }
+}

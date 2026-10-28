@@ -161,3 +161,10 @@ body.home-page {
 .home-about .icon { transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .home-about:hover .icon { transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) { .home-about .icon { transition: none; } }
+
+/* Back home with the menu hidden: it stays closed until it ripples open (js/home.js) */
+html.nav-reopen .home-page #right-side-menu { clip-path: circle(0% at 100% 0%); }
+
+/* While the bio's lines rise, the tags' grey stays clear, then fades in (js/home.js) */
+.home-bio .bio-tag { transition: background-color 0.5s ease; }
+.home-bio.is-rising .bio-tag { background-color: transparent; }

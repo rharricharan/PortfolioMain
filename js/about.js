@@ -18,9 +18,8 @@
     // Intro: the photo line, then the headline's lines rising behind a mask
     const title = about.querySelector(".about-title");
     const split = SplitText.create(title, { type: "lines", mask: "lines" });
-    const delay = root.classList.contains("case-swap") ? 0.6 : 0.4;
+    const delay = (root.classList.contains("case-swap") ? 0.6 : 0.4) + (window.introDelay || 0);
     gsap.timeline({ delay })
-      .fromTo(".about-who", { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.9, ease })
       .set(title, { opacity: 1 }, 0)
       .from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger: 0.08, onComplete: () => split.revert() }, 0.1);
     root.classList.add("intro-ready");

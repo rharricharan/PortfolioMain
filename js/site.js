@@ -3,6 +3,10 @@
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const transition = document.querySelector(".transition");
   const LEAVE_MS = 520; // keep in sync with the cover animation in css/transition.css
+  // The black block curtain between pages. Off: every page change slides (css/case-nav.css).
+  // Turn on (and add .curtain to <html>) to bring it back.
+  const USE_CURTAIN = false;
+  const slides = "onpagereveal" in window; // browsers with cross-page view transitions
 
   // --- Page transitions -----------------------------------------------------
   // Only same-tab, same-site page links get the wipe. New tabs, modifier clicks,
@@ -18,18 +22,13 @@
     return true;
   }
 
-  // Case study to case study: no wipe; the browser's view transition slides the content area
-  // (css/case-nav.css), and js/boot.js skips the wipe on arrival.
-  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave", "about"];
-  const caseOf = (path) => CASES.includes(path.replace(/^\/|\.html$|\/$/g, ""));
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a[href]");
     if (!link || !isInternalPageLink(link, event)) return;
     const url = new URL(link.href, location.href);
     if (url.pathname === location.pathname) { event.preventDefault(); return; }
-    if (caseOf(location.pathname) && caseOf(url.pathname) && "onpagereveal" in window) return;
-    if (reduceMotion || !transition) return;
+    if (slides || !USE_CURTAIN || reduceMotion || !transition) return;
     event.preventDefault();
     transition.classList.add("is-leaving");
     setTimeout(() => { location.href = url.href; }, LEAVE_MS);
@@ -159,13 +158,13 @@
       mark(row);
       if (firstPick) {
         gsap.set(currentPill, box(row));
-        gsap.fromTo(currentPill, { opacity: 0, scale: 0.96 }, { opacity: 1, scale: 1, duration: 0.35, ease });
+        gsap.fromTo(currentPill, { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power2.out" });
       } else {
         slide(currentPill, row, 0.4);
       }
       // Between case studies, let the pill land before the page changes
       const url = new URL(row.href, location.href);
-      if (!reduceMotion && caseOf(location.pathname) && caseOf(url.pathname) && "onpagereveal" in window) {
+      if (!reduceMotion && slides && url.origin === location.origin) {
         e.preventDefault();
         setTimeout(() => { location.href = url.href; }, 360);
       }
@@ -270,7 +269,6 @@
       if (!animate) { setPill(); return; }
       const { x, width } = place(btn);
       gsap.to(pill, { x, width, duration: 0.6, ease: "expo.out", overwrite: true });
-      gsap.fromTo(btn, { scale: 0.94 }, { scale: 1, duration: 0.5, ease: "back.out(3)", clearProps: "transform" });
 
       const after = rows.filter(shown);
       const entering = after.filter((r) => !before.includes(r));

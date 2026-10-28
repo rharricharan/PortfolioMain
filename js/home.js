@@ -19,17 +19,27 @@
   const launch = () => {
     const ease = "expo.out";
     const bio = home.querySelector(".home-bio");
-    // The bio rises as one piece out of a soft blur: splitting it would cut through the
-    // company links' underlines mid-animation
+    // The bio's lines rise into place behind a mask, as text does on the case studies. It's
+    // split into words (splitting by line re-wraps the text around the grey tags), then each
+    // word takes its line's timing, so every line rises together
+    const split = SplitText ? SplitText.create(bio, { type: "words", mask: "words" }) : null;
+    const tops = split ? [...new Set(split.words.map((w) => Math.round(w.getBoundingClientRect().top)))] : [];
+    const lineOf = (w) => tops.indexOf(Math.round(w.getBoundingClientRect().top));
     const menuParts = document.querySelectorAll(".home-page .menu-inner > *");
     const len = (p) => p.getTotalLength();
     // Hidden until drawn: round line caps would otherwise show as dots before the draw starts
     gsap.set([line, head], { strokeDasharray: (i, el) => len(el), strokeDashoffset: (i, el) => len(el), opacity: 0 });
     const chars = SplitText ? SplitText.create(label, { type: "chars" }).chars : [label];
 
-    const tl = gsap.timeline({ delay: 0.35, onComplete: () => { launched = true; idle(); } });
+    const delay = (root.classList.contains("case-swap") ? 0.55 : 0.35) + (window.introDelay || 0);
+    const tl = gsap.timeline({ delay, onComplete: () => { launched = true; idle(); } });
     // Each piece starts hidden through its own tween (immediateRender), so nothing flashes
-    tl.from(bio, { y: 18, opacity: 0, filter: "blur(6px)", duration: 1.1, ease, clearProps: "filter,transform" }, 0)
+    if (split) {
+      bio.classList.add("is-rising"); // the grey tags wait until their words have landed
+      tl.from(split.words, { yPercent: 110, duration: 1.1, ease, stagger: (i, w) => lineOf(w) * 0.08, onComplete: () => { split.revert(); bio.classList.remove("is-rising"); } }, 0);
+    }
+    else tl.from(bio, { y: 16, opacity: 0, duration: 1.1, ease, clearProps: "transform" }, 0);
+    tl
       .from(".home-about", { y: 14, opacity: 0, duration: 0.9, ease, clearProps: "transform,opacity" }, 0.45)
       .from(menuParts, { y: 12, opacity: 0, duration: 0.9, ease, stagger: 0.08, clearProps: "transform,opacity" }, 0.2)
       .from(chars, { opacity: 0, y: 6, duration: 0.5, ease: "power2.out", stagger: 0.025 }, 0.9)
@@ -38,6 +48,14 @@
       .set(head, { opacity: 1 }, 2.55)
       .to(head, { strokeDashoffset: 0, duration: 0.4, ease: "power2.out" }, 2.55);
     root.classList.add("intro-ready");
+
+    // Back home with the menu hidden: it ripples open again from its top-right corner
+    if (root.classList.contains("nav-reopen")) {
+      const menu = document.getElementById("right-side-menu");
+      gsap.fromTo(menu, { clipPath: "circle(0% at 100% 0%)" },
+        { clipPath: "circle(150% at 100% 0%)", duration: 1.1, ease: "expo.inOut", delay: delay * 0.5,
+          onComplete: () => { root.classList.remove("nav-reopen"); gsap.set(menu, { clearProps: "clipPath" }); } });
+    }
   };
 
   // The arrow's cadence: a rest, a nudge toward the list, another rest, then it takes off (the
@@ -55,11 +73,14 @@
       .to(head, { x: 0, y: 0, duration: 0.8, ease: "elastic.out(1, 0.5)" }, ">")
       // take off
       .to(line, { strokeDashoffset: -len, duration: 1, ease: "power2.in" }, 7.4)
+      .to(line, { opacity: 0, duration: 0.18, ease: "power1.in" }, 8.2)
       .to(head, { x: 26, y: -20, opacity: 0, duration: 0.45, ease: "power2.in" }, 7.95)
       // and back: drawn again from the start, the head snapping on at the end
-      .set(line, { strokeDashoffset: len }, 8.75)
-      .set(head, { x: 0, y: 0, strokeDashoffset: headLen, opacity: 1 }, 8.75)
+      .set(line, { strokeDashoffset: len, opacity: 0 }, 8.75)
+      .set(head, { x: 0, y: 0, strokeDashoffset: headLen, opacity: 0 }, 8.75)
       .to(line, { strokeDashoffset: 0, duration: 1.4, ease: "power2.inOut" }, 8.8)
+      .to(line, { opacity: 1, duration: 0.12 }, 8.86)
+      .set(head, { opacity: 1 }, 10.15)
       .to(head, { strokeDashoffset: 0, duration: 0.35, ease: "power2.out" }, 10.15)
       .to({}, { duration: 0.6 });
   };

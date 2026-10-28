@@ -46,7 +46,7 @@
     };
 
     // Intro: waits for the wipe, or for the previous story to slide out when moving between case studies.
-    const delay = root.classList.contains("case-swap") ? 0.6 : 0.4;
+    const delay = (root.classList.contains("case-swap") ? 0.6 : 0.4) + (window.introDelay || 0);
     const hero = story.querySelector(".story-header + .story-figure");
     const intro = gsap.timeline({ delay });
     intro

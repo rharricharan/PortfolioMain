@@ -69,3 +69,47 @@
 @media (prefers-reduced-motion: reduce) {
     .block { animation: none; }
 }
+
+/* The black curtain is kept but off: it only runs with html.curtain (js/boot.js, js/site.js) */
+html:not(.curtain) .transition { display: none; }
+
+/* First launch (a fresh visit, or landing on home from outside): a rainbow bloom rises from
+   the bottom of a white screen and fades as the site appears (js/boot.js adds .launch) */
+html.launch::before,
+html.launch::after {
+    content: "";
+    position: fixed;
+    pointer-events: none;
+}
+html.launch::before {
+    inset: 0;
+    z-index: 5000;
+    background-color: #fbfbfa;
+    animation: launch-cover 1.7s cubic-bezier(0.6, 0, 0.2, 1) forwards;
+}
+html.launch::after {
+    left: 50%;
+    bottom: 0;
+    z-index: 5001;
+    width: 130vmax;
+    height: 80vh;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #ff6ec4, #ffa66b, #ffe46b, #7dffb3, #6bd5ff, #a78bff, #ff6ec4);
+    filter: blur(70px) saturate(1.2);
+    opacity: 0;
+    transform: translate(-50%, 70%) scale(0.45);
+    animation: launch-bloom 1.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes launch-cover {
+    0%, 42% { opacity: 1; }
+    100% { opacity: 0; }
+}
+@keyframes launch-bloom {
+    0% { opacity: 0; transform: translate(-50%, 70%) scale(0.45); }
+    22% { opacity: 0.95; }
+    55% { opacity: 0.85; transform: translate(-50%, -10%) scale(1); }
+    100% { opacity: 0; transform: translate(-50%, -85%) scale(1.3); }
+}
+@media (prefers-reduced-motion: reduce) {
+    html.launch::before, html.launch::after { display: none; }
+}
