@@ -405,4 +405,4 @@
 :root:has(.story[data-case="one"])       { --tint-a: rgba(63, 182, 139, 0.15); --tint-b: rgba(106, 169, 255, 0.13); }
 :root:has(.story[data-case="cinnamon"])  { --tint-a: rgba(210, 105, 30, 0.14); --tint-b: rgba(244, 162, 97, 0.16); }
 :root:has(.story[data-case="gostr"])     { --tint-a: rgba(255, 122, 217, 0.15); --tint-b: rgba(122, 231, 255, 0.17); }
-:root:has(.story[data-case="ave"])       { --tint-a: rgba(150, 105, 70, 0.17); --tint-b: rgba(43, 69, 200, 0.14); }
+:root:has(.story[data-case="ave"])       { --tint-a: rgba(201, 184, 169, 0.42); --tint-b: rgba(134, 113, 96, 0.16); } /* the deck’s Patient Chart and Graft */
