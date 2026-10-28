@@ -41,12 +41,13 @@
       const end = Number(el.textContent);
       const start = end > 1000 ? end - 12 : 0;
       const n = { v: start };
-      el.textContent = String(start);
+      const suffix = el.dataset.suffix || "";
+      el.textContent = start + suffix;
       ScrollTrigger.create({
         trigger: el,
         start: "top 90%",
         once: true,
-        onEnter: () => gsap.to(n, { v: end, duration: 1.4, ease: "power3.out", onUpdate: () => { el.textContent = String(Math.round(n.v)); } }),
+        onEnter: () => gsap.to(n, { v: end, duration: 1.4, ease: "power3.out", onUpdate: () => { el.textContent = Math.round(n.v) + suffix; } }),
       });
     });
 
