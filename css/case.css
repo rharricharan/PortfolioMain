@@ -468,7 +468,7 @@
         border: 0;
         border-radius: 6px;
         background: none;
-        color: #6b6b66;
+        color: #4a4a46;
         font: inherit;
         font-size: 13px;
         letter-spacing: -0.2px;
@@ -498,9 +498,11 @@
 
     .story-outline:hover, .story-outline:focus-within {
         padding: 8px;
-        background-color: rgba(255, 255, 255, 0.92);
-        -webkit-backdrop-filter: blur(20px);
-        backdrop-filter: blur(20px);
+        /* Frosted: 75% white with a strong blur. Labels use #4a4a46, which keeps 4.8:1 even
+           with pure black behind the glass (the dark video demos), and 8.9:1 over white. */
+        background-color: rgba(255, 255, 255, 0.75);
+        -webkit-backdrop-filter: blur(32px) saturate(1.4);
+        backdrop-filter: blur(32px) saturate(1.4);
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 18px 40px -16px rgba(0, 0, 0, 0.18);
     }
     .story-outline:is(:hover, :focus-within) button { padding-top: 5px; padding-bottom: 5px; }
