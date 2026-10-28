@@ -165,6 +165,8 @@
     });
     outline.append(list);
     document.body.append(outline);
+    // Leaving with the pointer closes it, even if a chapter was just clicked
+    outline.addEventListener("pointerleave", () => { if (outline.contains(document.activeElement)) document.activeElement.blur(); });
 
     // The section being read: the last heading above 40% of the view
     let active = -1, queued = false;

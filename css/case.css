@@ -442,7 +442,7 @@
 :root:has(.story[data-case="about"]) { --tint-a: rgba(120, 120, 140, 0.10); --tint-b: rgba(160, 170, 190, 0.12); }
 
 /* Page outline (js/case.js), after Notion: a dash per section in the left gutter, the current
-   one darker and longer. Hover or keyboard focus opens it into a card listing the sections. */
+   one darker and longer. Hover or keyboard focus opens it into a card listing the sections; a mouse click doesn't hold it open. */
 .story-outline { display: none; }
 @media (min-width: 781px) {
     .story-outline {
@@ -496,7 +496,7 @@
     .story-outline li.is-active .story-outline-dash { width: 18px; background-color: #161615; }
     .story-outline li.is-active button { color: #000; font-weight: 500; }
 
-    .story-outline:hover, .story-outline:focus-within {
+    .story-outline:hover, .story-outline:has(:focus-visible) {
         padding: 8px;
         transform: translate(6px, -50%); /* the open card sits 8px in from the window edge */
         /* Frosted: 60% white with a strong blur. Labels use #2f2f2c, which keeps 4.7:1 even
@@ -506,9 +506,9 @@
         backdrop-filter: blur(32px) saturate(1.4);
         box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 18px 40px -16px rgba(0, 0, 0, 0.18);
     }
-    .story-outline:is(:hover, :focus-within) button { padding-top: 5px; padding-bottom: 5px; }
-    .story-outline:is(:hover, :focus-within) .story-outline-text { max-width: 220px; max-height: 20px; margin-left: 10px; opacity: 1; }
-    .story-outline:is(:hover, :focus-within) button:hover { background-color: rgba(0, 0, 0, 0.04); color: #161615; }
+    .story-outline:is(:hover, :has(:focus-visible)) button { padding-top: 5px; padding-bottom: 5px; }
+    .story-outline:is(:hover, :has(:focus-visible)) .story-outline-text { max-width: 220px; max-height: 20px; margin-left: 10px; opacity: 1; }
+    .story-outline:is(:hover, :has(:focus-visible)) button:hover { background-color: rgba(0, 0, 0, 0.04); color: #161615; }
     .story-outline button:focus-visible { outline: 2px solid #161615; outline-offset: 1px; }
 }
 @keyframes outline-in { from { opacity: 0; transform: translate(-6px, -50%); } }
