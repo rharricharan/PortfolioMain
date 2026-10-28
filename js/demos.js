@@ -151,11 +151,11 @@
         if (k < t) fired.delete(t);
       });
     };
-    const stop = () => { if (run) run.kill(); run = undefined; icon.setAttribute("d", "M2 1l7 4-7 4z"); };
+    const stop = () => { if (run) run.kill(); run = undefined; icon.setAttribute("d", "M6.3 2.84A1.5 1.5 0 0 0 4 4.11v11.78a1.5 1.5 0 0 0 2.3 1.27l9.344-5.891a1.5 1.5 0 0 0 0-2.538L6.3 2.841Z"); };
     const start = () => {
       if (p > 0.98) { set(0); log.replaceChildren(); fired = new Set(); }
       const o = { x: p };
-      icon.setAttribute("d", "M2 1h2v8H2zM6 1h2v8H6z");
+      icon.setAttribute("d", "M5.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75A.75.75 0 0 0 7.25 3h-1.5ZM12.75 3a.75.75 0 0 0-.75.75v12.5c0 .414.336.75.75.75h1.5a.75.75 0 0 0 .75-.75V3.75a.75.75 0 0 0-.75-.75h-1.5Z");
       run = gsap.to(o, { x: 1, duration: 12 * (1 - p), ease: "none", onUpdate: () => set(o.x), onComplete: stop });
     };
     $("[data-map-play]", map).addEventListener("click", () => (run ? stop() : start()));

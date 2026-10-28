@@ -421,3 +421,18 @@
 :root:has(.story[data-case="cinnamon"])  { --tint-a: rgba(210, 105, 30, 0.14); --tint-b: rgba(244, 162, 97, 0.16); }
 :root:has(.story[data-case="gostr"])     { --tint-a: rgba(255, 122, 217, 0.15); --tint-b: rgba(122, 231, 255, 0.17); }
 :root:has(.story[data-case="ave"])       { --tint-a: rgba(201, 184, 169, 0.42); --tint-b: rgba(134, 113, 96, 0.16); } /* the deck’s Patient Chart and Graft */
+
+/* About: a small portrait above the title, and the contact links as underlined text */
+.story-avatar {
+    grid-column: 1 / -1;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.story-links { display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.story-link { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--line); transition: border-color 0.2s ease; }
+.story-link:hover { border-color: var(--ink); }
+
+:root:has(.story[data-case="about"]) { --tint-a: rgba(120, 120, 140, 0.10); --tint-b: rgba(160, 170, 190, 0.12); }

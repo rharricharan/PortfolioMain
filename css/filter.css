@@ -177,3 +177,51 @@ html[data-projects="creative"] .projects-buttons .project[data-type]:not([data-t
     .projects-container { margin-top: 24px; }
     .projects-buttons :is(.project, .project-rh) { padding-top: 4px; padding-bottom: 4px; }
 }
+
+/* "More about me" under the bio: underlined text and a Heroicons arrow. GSAP drives the hover
+   (js/site.js): the underline wipes off to the right and back in from the left, the arrow nudges. */
+.bio-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 12px;
+    color: rgba(0, 0, 0, 0.85);
+    font-size: 13px;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    cursor: pointer;
+}
+.bio-more-text { position: relative; padding-bottom: 2px; }
+.bio-more-line {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background-color: currentColor;
+    transform-origin: left;
+}
+.bio-more-arrow { width: 14px; height: 14px; flex-shrink: 0; }
+.bio-more:focus-visible { outline: 2px solid #000; outline-offset: 3px; border-radius: 2px; }
+.info-text-div { display: flex; flex-direction: column; align-items: flex-start; }
+
+/* Text can be selected anywhere; images and video can't be selected or dragged.
+   The selection is a very light grey. */
+body, h1, h2, h3, h4, h5, h6, p, li, dt, dd, figcaption, span {
+    -webkit-user-select: text;
+    user-select: text;
+}
+h1, h2, h3, h4, h5, h6, p { pointer-events: auto; cursor: auto; }
+a :is(h1, h2, h3, h4, h5, h6, p, span), button :is(span, svg) { cursor: pointer; }
+img, video, svg, picture, canvas {
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+::selection { background-color: #ebebe9; color: #111; }
+
+/* Heroicons (20 solid), inline everywhere so they take the text color */
+.icon { display: inline-block; width: 1em; height: 1em; vertical-align: -0.14em; flex-shrink: 0; }
+.menu-icon { width: 20px; height: 20px; vertical-align: middle; }
+.icon-to { width: 0.7em; height: 0.7em; vertical-align: 0.05em; margin: 0 0.04em; }
+.story-facts a .icon { width: 12px; height: 12px; vertical-align: -1px; }

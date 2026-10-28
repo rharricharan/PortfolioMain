@@ -20,7 +20,7 @@
 
   // Case study to case study: no wipe; the browser's view transition slides the content area
   // (css/case-nav.css), and js/boot.js skips the wipe on arrival.
-  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave"];
+  const CASES = ["smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave", "about"];
   const caseOf = (path) => CASES.includes(path.replace(/^\/|\.html$|\/$/g, ""));
 
   document.addEventListener("click", (event) => {
@@ -176,6 +176,36 @@
         0.08);
     });
   }
+
+  // --- "More about me": GSAP hover (css/filter.css) ----------------------------------
+  // The underline wipes off to the right and draws back in from the left while the arrow
+  // nudges forward; on click the arrow shoots ahead as the page changes.
+  document.querySelectorAll(".bio-more").forEach((link) => {
+    const line = link.querySelector(".bio-more-line");
+    const arrow = link.querySelector(".bio-more-arrow");
+    const g = () => (!reduceMotion && window.gsap) || null;
+    let wipe = null;
+    link.addEventListener("pointerenter", () => {
+      const gsap = g();
+      if (!gsap) return;
+      wipe?.kill();
+      wipe = gsap.timeline()
+        .to(line, { scaleX: 0, transformOrigin: "right center", duration: 0.28, ease: "power2.in" })
+        .set(line, { transformOrigin: "left center" })
+        .to(line, { scaleX: 1, duration: 0.55, ease: "expo.out" });
+      gsap.to(arrow, { x: 4, duration: 0.5, ease: "expo.out", overwrite: true });
+    });
+    link.addEventListener("pointerleave", () => {
+      g()?.to(arrow, { x: 0, duration: 0.5, ease: "expo.out", overwrite: true });
+    });
+    link.addEventListener("click", () => {
+      g()?.to(arrow, { x: 14, opacity: 0, duration: 0.35, ease: "power2.in", overwrite: true });
+    });
+  });
+  // Restored from the back/forward cache: bring the arrow back
+  addEventListener("pageshow", (event) => {
+    if (event.persisted && window.gsap) window.gsap.set(".bio-more-arrow", { clearProps: "transform,opacity" });
+  });
 
   // --- Bio tags: a pulse in the brand's colors on click (css/filter.css) ------------------
   document.querySelectorAll(".bio-tag").forEach((tag) => {
