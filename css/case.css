@@ -521,14 +521,19 @@
 /* Source-of-truth line under the intro, the usability-testing label, and visible
    placeholders for facts Ryan still has to supply */
 .story-source { max-width: 52ch; margin-top: 14px; font-size: 12.5px; font-style: italic; color: var(--soft); }
-.story-stats-label { margin-top: 48px; font-size: 12px; color: var(--soft); }
+.story-stats-label { margin-top: 48px; font-size: 12px; color: var(--soft); text-align: center; }
 .story-stats-label + .story-stats { margin-top: 14px; }
 .story-todo { padding: 1px 6px; border-radius: 4px; background-color: #fff2b8; color: #6b5300; font-style: normal; font-size: 0.92em; }
 
 /* Header: the overview and role sit closer together instead of spanning the full width */
 @container (min-width: 520px) {
     .story-header { grid-template-columns: minmax(0, 27rem) minmax(0, 27rem); column-gap: 48px; }
-    .story-facts { max-width: calc(54rem + 48px); }
+}
+
+/* Facts and stats: centred on the content column, spread evenly, each item centred */
+.story-facts > div, .story-stats > div { text-align: center; justify-items: center; align-items: center; }
+@container (min-width: 520px) {
+    .story-facts, .story-stats, .story-stats:not(:has(> div:nth-child(3))) { justify-content: space-around; gap: 24px; }
 }
 
 /* End-of-case booking band (shown once the Cal.com link is set in .claude/build_cases.py) */
