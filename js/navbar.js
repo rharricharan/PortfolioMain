@@ -104,6 +104,12 @@
     }
 
     projects.addEventListener("click", () => (open ? closePanel() : openPanel()));
+    // With a mouse, the list opens on hovering Projects and closes once the pointer leaves the bar
+    const hover = matchMedia("(hover: hover) and (pointer: fine)");
+    let leaveTimer = 0;
+    projects.addEventListener("pointerenter", () => { if (hover.matches) { clearTimeout(leaveTimer); openPanel(); } });
+    navbar.addEventListener("pointerenter", () => clearTimeout(leaveTimer));
+    navbar.addEventListener("pointerleave", () => { if (hover.matches && open) leaveTimer = setTimeout(() => closePanel(), 180); });
     addEventListener("keydown", (e) => { if (e.key === "Escape" && open) { closePanel(); projects.focus(); } });
     document.addEventListener("pointerdown", (e) => { if (open && !navbar.contains(e.target)) closePanel(); });
     navbar.addEventListener("focusout", (e) => { if (open && !navbar.contains(e.relatedTarget)) closePanel(); });

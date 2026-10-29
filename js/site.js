@@ -377,6 +377,34 @@
     });
   });
 
+  // --- Tooltips: [data-tip] buttons get a small label that floats with the pointer inside them
+  // (css/filter.css). Mouse only.
+  if (matchMedia("(hover: hover) and (pointer: fine)").matches) {
+    const tip = document.createElement("span");
+    tip.className = "tip";
+    tip.setAttribute("aria-hidden", "true");
+    document.body.append(tip);
+    let raf = 0, x = 0, y = 0;
+    const place = () => { raf = 0; tip.style.transform = `translate(${x}px, ${y}px)`; };
+    document.addEventListener("pointerover", (e) => {
+      const el = e.target.closest("[data-tip]");
+      if (!el) return;
+      tip.textContent = el.dataset.tip;
+      tip.classList.add("is-on");
+    });
+    document.addEventListener("pointerout", (e) => {
+      const el = e.target.closest("[data-tip]");
+      if (el && !el.contains(e.relatedTarget)) tip.classList.remove("is-on");
+    });
+    document.addEventListener("pointermove", (e) => {
+      if (!tip.classList.contains("is-on")) return;
+      x = e.clientX + 14; y = e.clientY + 16;
+      if (x + tip.offsetWidth > innerWidth - 8) x = e.clientX - tip.offsetWidth - 10;
+      if (!raf) raf = requestAnimationFrame(place);
+    }, { passive: true });
+    document.addEventListener("pointerdown", () => tip.classList.remove("is-on"));
+  }
+
   // --- Bio tags: a pulse in the brand's colors on click (css/filter.css) ------------------
   document.querySelectorAll(".bio-tag").forEach((tag) => {
     tag.addEventListener("click", () => {
