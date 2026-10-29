@@ -454,7 +454,7 @@
     tag.addEventListener("animationend", (e) => { if (e.target === tag) tag.classList.remove("is-tapped"); });
   });
 
-  // --- "or copy my email" at the end of each case study -----------------------------
+  // --- "Copy email" at the end of each case study -----------------------------------
   document.querySelectorAll("[data-copy-email]").forEach((button) => {
     const label = button.textContent;
     button.addEventListener("click", () => {

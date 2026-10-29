@@ -234,3 +234,61 @@
     onView(orbit, () => { if (!reduceMotion) setTimeout(() => picked < 0 && people[0].click(), 1400); });
   }
 })();
+
+// Testimonials (css/case.css .story-voice): when the card comes into view, the quote's lines rise in
+// behind a mask, then the attribution. With several quotes, the buttons step through them: the
+// current lines rise out, the next quote's rise in, and the counter follows.
+(() => {
+  const { gsap, SplitText } = window;
+  const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.querySelectorAll("[data-voice]").forEach((card) => {
+    const quotes = [...card.querySelectorAll(".story-voice-quote")];
+    const by = card.querySelector(".story-voice-by");
+    const animate = gsap && SplitText && !reduceMotion;
+    let current = 0, busy = false;
+    const splits = new Map();
+    const lines = (q) => {
+      if (!splits.has(q)) splits.set(q, SplitText.create(q.querySelector("p"), { type: "lines", mask: "lines" }).lines);
+      return splits.get(q);
+    };
+    const show = (i) => {
+      quotes.forEach((q, j) => { q.hidden = j !== i; });
+      // Looked up each time: the page's reveal can rebuild the label's text nodes
+      const count = card.querySelector("[data-voice-count]");
+      if (count) count.textContent = `${i + 1} / ${quotes.length}`;
+    };
+
+    const go = (i) => {
+      if (busy || i === current) return;
+      const from = quotes[current], to = quotes[(i + quotes.length) % quotes.length];
+      const next = quotes.indexOf(to);
+      if (!animate) { current = next; return show(current); }
+      busy = true;
+      gsap.timeline({ onComplete: () => { busy = false; } })
+        .to(lines(from), { yPercent: -110, duration: 0.45, ease: "power2.in", stagger: 0.04 })
+        .add(() => { current = next; show(current); gsap.set(lines(to), { yPercent: 110 }); })
+        .to(lines(to), { yPercent: 0, duration: 0.9, ease: "expo.out", stagger: 0.07 });
+    };
+    card.querySelector("[data-voice-prev]")?.addEventListener("click", () => go(current - 1));
+    card.querySelector("[data-voice-next]")?.addEventListener("click", () => go(current + 1));
+    card.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowLeft") go(current - 1);
+      if (e.key === "ArrowRight") go(current + 1);
+    });
+
+    if (!animate) return;
+    // The first quote waits below its mask until the card is on screen
+    (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => {
+      gsap.set(lines(quotes[0]), { yPercent: 110 });
+      gsap.set(by, { opacity: 0, y: 8 });
+      const io = new IntersectionObserver((entries) => {
+        if (!entries.some((e) => e.isIntersecting)) return;
+        io.disconnect();
+        gsap.timeline()
+          .to(lines(quotes[0]), { yPercent: 0, duration: 1.1, ease: "expo.out", stagger: 0.08 })
+          .to(by, { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" }, "-=0.7");
+      }, { threshold: 0.35 });
+      io.observe(card);
+    });
+  });
+})();
