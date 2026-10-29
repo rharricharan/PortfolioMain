@@ -4,7 +4,7 @@
 .menu {
     --ink: #161615;
     --muted: #6b6b66;
-    --soft: #8a8a85;
+    --soft: #6b6b66; /* 4.5:1 or better on the page and card greys */
     --row: rgba(0, 0, 0, 0.035);
     --row-hover: rgba(0, 0, 0, 0.07);
     color: var(--ink);

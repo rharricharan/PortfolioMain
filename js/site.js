@@ -56,8 +56,8 @@
   // The menu's clock, and the one shown top-right while the menu is hidden
   const clocks = document.querySelectorAll("#time-container, [data-clock]");
   if (clocks.length) {
-    const format = new Intl.DateTimeFormat([], { timeZone: "America/New_York", hour12: true, hour: "numeric", minute: "numeric" });
-    const tick = () => { const t = `${format.format(new Date())} EST`; clocks.forEach((c) => { c.textContent = t; }); };
+    const format = new Intl.DateTimeFormat([], { timeZone: "America/New_York", hour12: true, hour: "numeric", minute: "numeric", timeZoneName: "short" });
+    const tick = () => { const t = format.format(new Date()); clocks.forEach((c) => { c.textContent = t; }); };
     tick();
     setInterval(tick, 15000);
   }
@@ -433,6 +433,8 @@
 
   // --- Videos: load and play only while on screen -----------------------------------
   const videos = document.querySelectorAll("video[data-lazy]");
+  // With reduced motion nothing plays on its own, so each video gets its controls instead
+  if (reduceMotion) videos.forEach((v) => { v.controls = true; });
   if (videos.length && "IntersectionObserver" in window) {
     const io = new IntersectionObserver((entries) => {
       for (const { target: video, isIntersecting } of entries) {

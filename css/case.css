@@ -530,3 +530,10 @@
     .story-header { grid-template-columns: minmax(0, 27rem) minmax(0, 27rem); column-gap: 48px; }
     .story-facts { max-width: calc(54rem + 48px); }
 }
+
+/* End-of-case booking band (shown once the Cal.com link is set in .claude/build_cases.py) */
+.story-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 16px; margin-top: 72px; padding-top: 32px; border-top: 1px solid rgba(0, 0, 0, 0.08); }
+.story-cta p { flex: 1 1 100%; color: #161615; font-size: 20px; }
+.story-cta-book { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 18px; border-radius: 200px; background-color: #161615; color: #fff; text-decoration: none; }
+.story-cta-copy { border: 0; background: none; color: #6b6b66; font: inherit; cursor: pointer; }
+.story-cta-copy:hover { color: #161615; }

@@ -15,16 +15,28 @@
     <script src="js/demos.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product designer on the Awwwards Young Jury, previously at A Small Studio®.">
-    <meta name="keywords"
-        content="ryan harricharan, product designer, ux designer, ui design, product design, interaction design, design systems, web design, app design, portfolio, awwwards, a small studio, smartstop, stim, our next energy, rays, halftone, leadhack, cinnamon, gostr, ave">
     <meta name="author" content="Ryan Harricharan">
-    <meta property="og:title" content="Work by Ryan Harricharan">
-    <meta property="og:description"
-        content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product designer on the Awwwards Young Jury, previously at A Small Studio®.">
-    <meta property="og:image" content="https://rharricharan.com/assets/cover.jpg">
+    <!-- meta -->
+    <title>Rays: An iPhone App for Tanning Safely | Ryan Harricharan</title>
+    <meta name="description" content="Rays, an iPhone app that helps people tan for their skin type without burning. A product design case study by Ryan Harricharan.">
+    <link rel="canonical" href="https://rharricharan.com/rays">
+    <meta property="og:type" content="article">
+    <meta property="og:site_name" content="Ryan Harricharan">
+    <meta property="og:url" content="https://rharricharan.com/rays">
+    <meta property="og:title" content="Rays: An iPhone App for Tanning Safely | Ryan Harricharan">
+    <meta property="og:description" content="Rays, an iPhone app that helps people tan for their skin type without burning. A product design case study by Ryan Harricharan.">
+    <meta property="og:image" content="https://rharricharan.com/assets/og/rays.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Rays: An iPhone App for Tanning Safely, by Ryan Harricharan">
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:url" content="https://rharricharan.com">
+    <meta name="twitter:title" content="Rays: An iPhone App for Tanning Safely | Ryan Harricharan">
+    <meta name="twitter:description" content="Rays, an iPhone app that helps people tan for their skin type without burning. A product design case study by Ryan Harricharan.">
+    <meta name="twitter:image" content="https://rharricharan.com/assets/og/rays.jpg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="manifest" href="/site.webmanifest">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "CreativeWork", "headline": "Rays: An iPhone App for Tanning Safely", "description": "Rays, an iPhone app that helps people tan for their skin type without burning. A product design case study by Ryan Harricharan.", "url": "https://rharricharan.com/rays", "image": "https://rharricharan.com/assets/og/rays.jpg", "datePublished": "2024-08-15", "dateModified": "2026-10-28", "author": {"@type": "Person", "name": "Ryan Harricharan", "url": "https://rharricharan.com/"}, "about": {"@type": "Organization", "name": "Rays"}, "genre": "iPhone app for safe tanning"}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Home", "item": "https://rharricharan.com/"}, {"@type": "ListItem", "position": 2, "name": "Rays", "item": "https://rharricharan.com/rays"}]}]}</script>
+    <!-- /meta -->
     <link rel="stylesheet" href="css/rays.css">
     <link rel="stylesheet" href="css/case.css">
     <link rel="stylesheet" href="css/demos.css">
@@ -38,10 +50,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <title>Work by Ryan Harricharan | Rays</title>
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="rainbow-ripple" aria-hidden="true"></div>
     <div class="transition">
         <div class="transition-row row-1">
@@ -73,7 +85,7 @@
             </div>
         </header>
         <div class="page-content-wrapper">
-            <main>
+            <main id="main">
                 <div class="content-wrapper">
                     <article class="story" data-case="rays">
                         <div class="story-header">
@@ -92,10 +104,11 @@
                                 <div><dt>Year</dt><dd>2022–2023</dd></div>
                             </dl>
                         </div>
+                        <!-- TODO-RYAN: Rays stack: which shipped, native Swift or React Native? Built With lists both. -->
 
                         <figure class="story-figure is-wide is-phone">
                             <div class="story-mat">
-                                <video src="assets/work/rays/hero.mp4" poster="assets/work/rays/hero.webp" muted loop playsinline preload="metadata" data-lazy aria-label="Rays, the finished app: today’s UV, the hourly chart, and a tanning session from setup to start."></video>
+                                <video src="assets/work/rays/hero.mp4" poster="assets/work/rays/hero.webp" muted loop playsinline preload="metadata" fetchpriority="high" data-lazy aria-label="Rays, the finished app: today’s UV, the hourly chart, and a tanning session from setup to start."></video>
                             </div>
                             <figcaption>Rays, the finished app: today’s UV, the hourly chart, and a tanning session from setup to start.</figcaption>
                         </figure>
@@ -287,6 +300,7 @@
                             </div>
                             <figcaption>What testers said.</figcaption>
                         </figure>
+                        <!-- TODO-RYAN: Cal.com link. Then: "Building something similar? Book a 20-min intro, or copy my email." -->
                     </article>
                 </div>
             </main>
@@ -319,7 +333,7 @@
                     <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
             </div>
         </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
+        <span class="navbar-clock" data-clock aria-hidden="true">ET</span>
         <nav class="pager" data-pager aria-label="Project">
             <div class="pager-shape" aria-hidden="true"></div>
             <a class="pager-link is-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
@@ -329,7 +343,7 @@
             <div class="menu-inner">
                 <div class="menu-top">
                     <a class="menu-close" id="menu-close" aria-label="Close the menu"><svg class="icon menu-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"/></svg></a>
-                    <a class="menu-hello" data-back href="./" aria-label="Back home">
+                    <a class="menu-hello" data-back href="./" aria-label="Hi, I’m Ryan. Back home">
                         <span class="menu-avatar" aria-hidden="true">
                             <img src="assets/about/ryan.webp" alt="" width="36" height="36">
                             <span class="menu-avatar-home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></span>
@@ -339,7 +353,7 @@
                         </span>
                     </a>
                     <div class="menu-top-right">
-                        <span class="menu-clock" id="time-container">EST</span>
+                        <span class="menu-clock" id="time-container">ET</span>
                         <button type="button" class="nav-toggle" data-nav-close data-tip="Hide menu" aria-label="Hide the menu" aria-controls="right-side-menu" aria-expanded="true"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.21 14.77a.75.75 0 0 1 .02-1.06L14.168 10 10.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.21 14.77a.75.75 0 0 1 .02-1.06L8.168 10 4.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/></svg></button>
                     </div>
                 </div>

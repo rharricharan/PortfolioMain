@@ -3,7 +3,7 @@
 .about {
     --ink: #161615;
     --muted: #6b6b66;
-    --soft: #8a8a85;
+    --soft: #6b6b66; /* 4.5:1 or better on the page and card greys */
     --line: rgba(0, 0, 0, 0.08);
     --mat: #efefeb;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);

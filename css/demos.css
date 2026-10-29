@@ -158,13 +158,13 @@
 .ff-stops .hs { background-color: rgba(255, 122, 89, 0.15); color: #c2410c; }
 .ff-line { position: relative; height: 4px; margin-top: 16px; border-radius: 999px; background-color: #efefeb; }
 .ff-dot { position: absolute; top: -4px; left: 0; width: 12px; height: 12px; border-radius: 50%; background-color: #161615; opacity: 0; }
-.ff-result { min-height: 132px; margin-top: 20px; color: #8a8a85; }
+.ff-result { min-height: 132px; margin-top: 20px; color: #6b6b66; }
 .ff-result .bad { font-weight: 500; color: #c2261d; }
 .ff-result .zapping { color: #ff4f00; }
 .ff-result .ok { font-weight: 500; color: #161615; }
 .ff-result p + p { margin-top: 4px; }
 .ff-result dl { display: grid; grid-template-columns: 6rem 1fr; row-gap: 4px; margin-top: 8px; color: #161615; }
-.ff-result dt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #8a8a85; }
+.ff-result dt { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11px; color: #6b6b66; }
 
 @container (min-width: 620px) {
     .formflow { grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); align-items: center; }
@@ -182,7 +182,7 @@
 .leads-list li { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 8px; padding: 10px 12px; }
 .leads-list li + li { border-top: 1px solid rgba(0, 0, 0, 0.05); }
 .leads-list .name { font-weight: 500; }
-.leads-list .meta { display: none; color: #8a8a85; }
+.leads-list .meta { display: none; color: #6b6b66; }
 .leads-list .add { padding: 2px 8px; border-radius: 999px; background-color: rgba(59, 111, 224, 0.1); color: #3b6fe0; font-size: 12px; }
 
 @container (min-width: 520px) {

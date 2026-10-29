@@ -14,16 +14,28 @@
     <script src="js/about.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="About Ryan Harricharan: a product designer who also builds and ships apps. On the Awwwards Young Jury, and previously a Product Designer at A Small Studio®.">
-    <meta name="keywords"
-        content="ryan harricharan, product designer, ux designer, ui design, product design, interaction design, design systems, web design, app design, portfolio, awwwards, a small studio, smartstop, stim, our next energy, rays, halftone, leadhack, cinnamon, gostr, ave">
     <meta name="author" content="Ryan Harricharan">
-    <meta property="og:title" content="Work by Ryan Harricharan">
-    <meta property="og:description"
-        content="Ryan Harricharan designs and builds apps that feel simple to use, from first sketch to launch. Product designer on the Awwwards Young Jury, previously at A Small Studio®.">
-    <meta property="og:image" content="https://rharricharan.com/assets/cover.jpg">
+    <!-- meta -->
+    <title>About Ryan Harricharan · AI Product Designer &amp; Design Engineer</title>
+    <meta name="description" content="How Ryan Harricharan works: product design, building in code, designing AI products people can trust, and the tools behind it.">
+    <link rel="canonical" href="https://rharricharan.com/about">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Ryan Harricharan">
+    <meta property="og:url" content="https://rharricharan.com/about">
+    <meta property="og:title" content="About Ryan Harricharan · AI Product Designer &amp; Design Engineer">
+    <meta property="og:description" content="How Ryan Harricharan works: product design, building in code, designing AI products people can trust, and the tools behind it.">
+    <meta property="og:image" content="https://rharricharan.com/assets/og/about.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Ryan Harricharan, product designer">
     <meta name="twitter:card" content="summary_large_image">
-    <meta property="og:url" content="https://rharricharan.com">
+    <meta name="twitter:title" content="About Ryan Harricharan · AI Product Designer &amp; Design Engineer">
+    <meta name="twitter:description" content="How Ryan Harricharan works: product design, building in code, designing AI products people can trust, and the tools behind it.">
+    <meta name="twitter:image" content="https://rharricharan.com/assets/og/about.jpg">
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="manifest" href="/site.webmanifest">
+    <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Person", "@id": "https://rharricharan.com/#ryan", "name": "Ryan Harricharan", "jobTitle": "Product Designer", "url": "https://rharricharan.com/", "image": "https://rharricharan.com/assets/about/ryan.webp", "email": "mailto:rharricharandesigns@gmail.com", "sameAs": ["https://www.linkedin.com/in/rharricharan/", "https://www.awwwards.com/jury-member/rharricharan"], "knowsAbout": ["Product design", "UX design", "AI product design", "Design systems", "Design engineering", "Web design"]}, {"@type": "WebSite", "@id": "https://rharricharan.com/#site", "url": "https://rharricharan.com/", "name": "Ryan Harricharan", "author": {"@id": "https://rharricharan.com/#ryan"}}, {"@type": "ProfilePage", "url": "https://rharricharan.com/about", "name": "About Ryan Harricharan · AI Product Designer & Design Engineer", "mainEntity": {"@id": "https://rharricharan.com/#ryan"}}]}</script>
+    <!-- /meta -->
     <link rel="stylesheet" href="css/one.css">
     <link rel="stylesheet" href="css/about.css">
     <link rel="stylesheet" href="css/transition.css">
@@ -36,10 +48,10 @@
     <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
     <link rel="icon" type="image/png" sizes="64x64" href="assets/favicon-64.png">
     <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-    <title>About Ryan Harricharan</title>
 </head>
 
 <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     <div class="rainbow-ripple" aria-hidden="true"></div>
     <div class="transition">
         <div class="transition-row row-1">
@@ -71,7 +83,7 @@
             </div>
         </header>
         <div class="page-content-wrapper">
-            <main>
+            <main id="main">
                 <div class="content-wrapper">
                     <article class="about">
                         <div class="about-intro">
@@ -83,6 +95,7 @@
                             <div class="about-grid">
                                 <div class="about-copy">
                                     <p class="about-lead">I’m a product designer who builds. For more than nine years, I’ve designed and shipped products and websites for startups and brands, from an AI traffic platform for city engineers to a business phone network built on 5G.</p>
+                                    <!-- TODO-RYAN: Lumina Studio vs RH Design (2017–2025 in Experience): which name, and which years? Copy unchanged until answered. -->
                                     <p>For three years, I ran my own studio, Lumina Studio. Most recently, I was a Product Designer at A Small Studio®. I’m also a member of the Awwwards Young Jury.</p>
                                     <p>If you have an app in mind, I can help you design it, build it and ship it.</p>
                                 </div>
@@ -124,6 +137,7 @@
                                 <li><span>04</span><h3>Constraints, not guesses</h3><p>The grid, the type scale and every state go in up front, instead of letting the model guess and fixing it after.</p></li>
                                 <li><span>05</span><h3>Judge it running</h3><p>Ideas are built in code from the start, so decisions are made on the real product, not a picture of it.</p></li>
                             </ol>
+                            <!-- TODO-RYAN: "The techniques" overlaps "How I work" (both say build in code early). Trim to three items? -->
                             <h3 class="about-sub-small">The rules. <span>What the AI in my products always does.</span></h3>
                             <ol class="about-steps">
                                 <li><span>01</span><h3>It shows its reasons</h3><p>Smartstop’s Nebula logs every decision it makes, so an engineer can always see why traffic changed.</p></li>
@@ -152,8 +166,9 @@
                             <p class="about-intro-line">I didn’t hand-write the code for this site. I wrote messages. Claude Code wrote the code, opened it in a browser, took screenshots and showed me; I brought the sketches, the references and the edits, often from my phone. Every animation, transition and case study was directed that way, then checked at every screen size before it shipped.</p>
                             <dl class="about-numbers">
                                 <div><dd data-count>2</dd><dt>Days from first message to this site</dt></div>
-                                <div><dd data-count>37</dd><dt>Commits along the way</dt></div>
+                                <div><dd data-count>47</dd><dt>Commits along the way</dt></div>
                                 <div><dd data-count>10</dd><dt>Case studies</dt></div>
+                                <!-- TODO-RYAN: keep, reword or drop "0 lines of code typed by hand". Suggested reword: 100% / Directed in Claude Code, reviewed at every breakpoint. -->
                                 <div><dd data-count>0</dd><dt>Lines of code typed by hand</dt></div>
                             </dl>
                         </section>
@@ -181,6 +196,11 @@
                         </section>
                     </article>
                 </div>
+                <!-- TODO-RYAN: engagement models and pricing (Design sprint 1–2 wks / MVP design and build 4–8 wks / Fractional founding designer, optional "from $X"). -->
+                <!-- TODO-RYAN: testimonials, 2–4 founder quotes with name and company. -->
+                <!-- TODO-RYAN: resume PDF (link in the menu footer and here). -->
+                <!-- TODO-RYAN: Cal.com link for "Book a 20-min intro" here and in the menu and bar. -->
+                <!-- TODO-RYAN: city and work authorization line. -->
             </main>
 
             <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
@@ -197,184 +217,6 @@
                 <a class="navbar-pill" href="./about" aria-current="page">About</a>
                 <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
                 <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Creative Direction</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Creative Direction</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Creative Direction</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Creative Direction</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Senior UX Designer</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
                 <button type="button" class="navbar-icon" data-nav-open data-tip="Show menu" aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
             </div>
             <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
@@ -390,42 +232,12 @@
                     <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
             </div>
         </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
-        <svg class="navbar-defs" width="0" height="0" aria-hidden="true" focusable="false">
-            <filter id="nav-goo" x="-20%" y="-50%" width="140%" height="200%">
-                <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur"/>
-                <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/>
-            </filter>
-        </svg>
-        <nav class="navbar" data-navbar aria-label="Site">
-            <a class="navbar-home" href="./" aria-label="Back home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></a>
-            <div class="navbar-shapes" aria-hidden="true"><span data-shape="bar"></span><span data-shape="panel"></span></div>
-            <div class="navbar-items" data-navbar-items>
-                <a class="navbar-avatar" href="./" aria-label="Home"><img src="assets/about/ryan.webp" alt="" width="34" height="34"></a>
-                <a class="navbar-pill" href="./about" aria-current="page">About</a>
-                <button type="button" class="navbar-pill" data-navbar-projects aria-expanded="false" aria-controls="navbar-projects">Projects<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg></button>
-                <a class="navbar-pill navbar-pill-gap" href="mailto:rharricharandesigns@gmail.com">Contact<svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z"/></svg></a>
-                <button type="button" class="navbar-icon" data-nav-open data-tip="Show menu" aria-label="Show the menu" aria-controls="right-side-menu"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M4.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L6.31 10l3.72-3.72a.75.75 0 1 0-1.06-1.06L4.72 9.47Zm9.25-4.25L9.72 9.47a.75.75 0 0 0 0 1.06l4.25 4.25a.75.75 0 1 0 1.06-1.06L11.31 10l3.72-3.72a.75.75 0 0 0-1.06-1.06Z"/></svg></button>
-            </div>
-            <div class="navbar-panel" id="navbar-projects" data-navbar-panel>
-                    <a class="navbar-row" href="./ulogic"><span>uLogic</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./shift"><span>Shift AI</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./smartstop"><span>Smartstop®</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./rays"><span>Rays App</span><span>Product Design</span></a>
-                    <a class="navbar-row" href="./halftone"><span>Halftone®</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./leadhack"><span>LeadHack</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./one"><span>Our Next Energy</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./cinnamon"><span>Cinnamon</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./gostr"><span>GoSTR Marketing</span><span>Website Design</span></a>
-                    <a class="navbar-row" href="./ave"><span>Avé</span><span>Creative Direction</span></a>
-            </div>
-        </nav>
-        <span class="navbar-clock" data-clock aria-hidden="true">EST</span>
+        <span class="navbar-clock" data-clock aria-hidden="true">ET</span>
         <div class="right-side-menu menu" id="right-side-menu">
             <div class="menu-inner">
                 <div class="menu-top">
                     <a class="menu-close" id="menu-close" aria-label="Close the menu"><svg class="icon menu-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.78 5.22a.75.75 0 0 1 0 1.06L8.06 10l3.72 3.72a.75.75 0 1 1-1.06 1.06l-4.25-4.25a.75.75 0 0 1 0-1.06l4.25-4.25a.75.75 0 0 1 1.06 0Z"/></svg></a>
-                    <a class="menu-hello" data-back href="./" aria-label="Back home">
+                    <a class="menu-hello" data-back href="./" aria-label="Hi, I’m Ryan. Back home">
                         <span class="menu-avatar" aria-hidden="true">
                             <img src="assets/about/ryan.webp" alt="" width="36" height="36">
                             <span class="menu-avatar-home"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M9.293 2.293a1 1 0 0 1 1.414 0l7 7A1 1 0 0 1 17 11h-1v6a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1v-3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6H3a1 1 0 0 1-.707-1.707l7-7Z"/></svg></span>
@@ -435,7 +247,7 @@
                         </span>
                     </a>
                     <div class="menu-top-right">
-                        <span class="menu-clock" id="time-container">EST</span>
+                        <span class="menu-clock" id="time-container">ET</span>
                         <button type="button" class="nav-toggle" data-nav-close data-tip="Hide menu" aria-label="Hide the menu" aria-controls="right-side-menu" aria-expanded="true"><svg class="icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" clip-rule="evenodd" d="M10.21 14.77a.75.75 0 0 1 .02-1.06L14.168 10 10.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/><path fill-rule="evenodd" clip-rule="evenodd" d="M4.21 14.77a.75.75 0 0 1 .02-1.06L8.168 10 4.23 6.29a.75.75 0 1 1 1.04-1.08l4.5 4.25a.75.75 0 0 1 0 1.08l-4.5 4.25a.75.75 0 0 1-1.06-.02Z"/></svg></button>
                     </div>
                 </div>

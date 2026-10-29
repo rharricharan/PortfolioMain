@@ -170,7 +170,7 @@ body.home-page {
         justify-items: center;
         gap: 18px;
         margin-top: 36px;
-        color: #767672;
+        color: #6b6b66;
         font-size: 14px;
     }
     .home-swipe svg { width: 26px; height: 52px; animation: swipe-bob 2.2s ease-in-out infinite; }
