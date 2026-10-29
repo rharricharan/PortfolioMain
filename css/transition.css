@@ -73,39 +73,50 @@
 /* The black curtain is kept but off: it only runs with html.curtain (js/boot.js, js/site.js) */
 html:not(.curtain) .transition { display: none; }
 
-/* Rainbow columns: the load effect, after Dia's footer.
-   Nine blurred columns (<i> in .rainbow-ripple, first in <body>), each a gradient from deep blue
-   at the bottom through white, yellow and orange to magenta, stand in a stepped arch: tallest in
-   the middle. On a white cover they rise from the bottom edge, middle first, then the cover
-   fades. Plays when <html> has .launch (js/boot.js, a fresh arrival) or .is-active
-   (rainbowRipple() in js/site.js).
-   .rainbow-rest (home only): the same arch, resting behind the content at low opacity, each
-   column swaying in height very slowly, so the intro hands off into it with no snap.
+/* Rainbow columns, after Dia's footer.
+   Nine blurred columns (<i>), each a gradient from deep blue at the bottom through white, yellow
+   and orange to magenta, stand in a stepped arch, tallest in the middle.
+   .rainbow-ripple (first in <body>), the load effect: the columns shoot up from the bottom edge
+   right through the page and out the top, middle first, as the white cover under them clears.
+   Plays when <html> has .launch (js/boot.js, a fresh arrival) or .is-active (rainbowRipple() in
+   js/site.js).
+   .rainbow-rest (home only): the arch resting behind the content at low opacity, each column
+   swaying in height very slowly, so the intro hands off into it with no snap.
+   .rainbow-end (case studies, About): the arch rises from the bottom once the page is scrolled
+   to its end, and sinks again on the way back up (js/site.js, GSAP).
    Tweak: --h on each column (its height, a share of the screen), --rr-colors (the gradient),
-   --rr-rise (how long a column takes), --rr-fade-at / --rr-fade, --rr-rest. Only transform and
-   opacity animate; the blur is static. */
+   --rr-shoot (how long a column takes to cross), --rr-fade-at / --rr-fade (the cover clearing),
+   --rr-rest. Only transform and opacity animate; the blur is static. */
 :root {
     --rr-colors: transparent 0%, #ff2ee8 8%, #ff1fd8 17%, #ff2a4c 28%, #ff7418 36%, #ffd030 46%,
         #fbefb4 54%, #e9eef6 61%, #a6c4f2 71%, #3f7af0 82%, #1652ea 92%, #1438b8 100%;
-    --rr-rise: 950ms;
-    --rr-fade-at: 820ms;
-    --rr-fade: 600ms;
+    /* The same, with a tail that fades out below the blue, for columns that travel */
+    --rr-trail: transparent 0%, #ff2ee8 6%, #ff1fd8 12%, #ff2a4c 20%, #ff7418 26%, #ffd030 33%,
+        #fbefb4 40%, #e9eef6 46%, #a6c4f2 54%, #3f7af0 63%, #1652ea 72%, rgba(20, 56, 184, 0.6) 84%, transparent 100%;
+    --rr-shoot: 1100ms;
+    --rr-fade-at: 380ms;
+    --rr-fade: 480ms;
     --rr-rest: 0.12;
     --rr-paper: #fbfbfa;
 }
 .rainbow-ripple,
-.rainbow-rest {
+.rainbow-rest,
+.rainbow-end {
     position: fixed;
     inset: 0;
     display: flex;
     overflow: hidden;
     pointer-events: none;
 }
-.rainbow-ripple { z-index: 5000; display: none; background-color: var(--rr-paper); }
-.rainbow-rest { z-index: -1; opacity: var(--rr-rest); }
+.rainbow-ripple { z-index: 5000; display: none; }
+.rainbow-rest { z-index: -1; }
+/* Case pages paint their body's background, so the page is lifted over the end arch instead */
+.rainbow-end { z-index: 0; }
+html:has(.rainbow-end) .page-wrapper { z-index: 1; }
+.rainbow-rest { opacity: var(--rr-rest); }
 /* Each column overlaps its neighbours a little, so their blurred edges blend into soft steps */
-.rainbow-ripple i,
-.rainbow-rest i {
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i {
+    position: relative;
     flex: 1 0 0;
     margin: 0 -1.4vw;
     height: 100%;
@@ -116,42 +127,63 @@ html:not(.curtain) .transition { display: none; }
     will-change: transform;
 }
 /* The arch: heights, and each column's steps from the middle (--o, for the stagger) */
-:is(.rainbow-ripple, .rainbow-rest) i:nth-child(1), :is(.rainbow-ripple, .rainbow-rest) i:nth-child(9) { --h: 0.34; --o: 4; }
-:is(.rainbow-ripple, .rainbow-rest) i:nth-child(2), :is(.rainbow-ripple, .rainbow-rest) i:nth-child(8) { --h: 0.44; --o: 3; }
-:is(.rainbow-ripple, .rainbow-rest) i:nth-child(3), :is(.rainbow-ripple, .rainbow-rest) i:nth-child(7) { --h: 0.53; --o: 2; }
-:is(.rainbow-ripple, .rainbow-rest) i:nth-child(4), :is(.rainbow-ripple, .rainbow-rest) i:nth-child(6) { --h: 0.58; --o: 1; }
-:is(.rainbow-ripple, .rainbow-rest) i:nth-child(5) { --h: 0.68; --o: 0; }
-/* Phones: five wider columns */
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(1), :nth-child(9)) { --h: 0.34; --o: 4; }
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(2), :nth-child(8)) { --h: 0.44; --o: 3; }
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(3), :nth-child(7)) { --h: 0.53; --o: 2; }
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(4), :nth-child(6)) { --h: 0.58; --o: 1; }
+:is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:nth-child(5) { --h: 0.68; --o: 0; }
+/* Phones: five wider, shorter columns */
 @media (max-width: 780px) {
-    :is(.rainbow-ripple, .rainbow-rest) i:is(:nth-child(1), :nth-child(9)) { display: none; }
-    :is(.rainbow-ripple, .rainbow-rest) i:is(:nth-child(2), :nth-child(8)) { --h: 0.3; }
-    :is(.rainbow-ripple, .rainbow-rest) i:is(:nth-child(3), :nth-child(7)) { --h: 0.38; }
-    :is(.rainbow-ripple, .rainbow-rest) i:is(:nth-child(4), :nth-child(6)) { --h: 0.44; }
-    :is(.rainbow-ripple, .rainbow-rest) i:nth-child(5) { --h: 0.52; }
-    :is(.rainbow-ripple, .rainbow-rest) i { margin: 0 -3vw; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(1), :nth-child(9)) { display: none; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(2), :nth-child(8)) { --h: 0.3; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(3), :nth-child(7)) { --h: 0.38; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:is(:nth-child(4), :nth-child(6)) { --h: 0.44; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i:nth-child(5) { --h: 0.52; }
+    :is(.rainbow-ripple, .rainbow-rest, .rainbow-end) i { margin: 0 -3vw; }
 }
+
+/* The load: a white cover (::before) that clears while the columns cross the screen */
 html.launch .rainbow-ripple,
-.rainbow-ripple.is-active {
-    display: flex;
+.rainbow-ripple.is-active { display: flex; }
+.rainbow-ripple::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-color: var(--rr-paper);
+}
+html.launch .rainbow-ripple::before,
+.rainbow-ripple.is-active::before {
     animation: rr-clear var(--rr-fade) ease-in-out var(--rr-fade-at) forwards;
+}
+.rainbow-ripple i {
+    height: 150vh;
+    align-self: flex-start;
+    background: linear-gradient(to bottom, var(--rr-trail));
+    transform: translateY(100vh);
 }
 html.launch .rainbow-ripple i,
 .rainbow-ripple.is-active i {
-    animation: rr-rise var(--rr-rise) cubic-bezier(0.16, 1, 0.3, 1) calc(var(--o) * 55ms) both;
+    animation: rr-shoot var(--rr-shoot) cubic-bezier(0.55, 0.05, 0.25, 1) calc(var(--o) * 60ms) both;
 }
+@keyframes rr-shoot {
+    from { transform: translateY(100vh); }
+    to { transform: translateY(-155vh); }
+}
+
 /* The resting arch sways; on arrival it fades up under the clearing intro */
 .rainbow-rest i { animation: rr-sway 7s ease-in-out calc(var(--o) * -1.4s) infinite alternate; }
-html.launch .rainbow-rest { animation: rr-rest-in var(--rr-fade) ease-in-out var(--rr-fade-at) both; }
-@keyframes rr-rise {
-    from { transform: translateY(4%) scaleY(0); }
-    to { transform: translateY(4%) scaleY(var(--h)); }
-}
+html.launch .rainbow-rest { animation: rr-rest-in var(--rr-fade) ease-in-out calc(var(--rr-fade-at) + 300ms) both; }
 @keyframes rr-sway {
     from { transform: translateY(4%) scaleY(calc(var(--h) * 0.94)); }
     to { transform: translateY(4%) scaleY(calc(var(--h) * 1.06)); }
 }
 @keyframes rr-clear { to { opacity: 0; visibility: hidden; } }
 @keyframes rr-rest-in { from { opacity: 0; } to { opacity: var(--rr-rest); } }
+
+/* The end arch waits below the edge until js/site.js raises it; the page ends with room for it */
+.rainbow-end i { transform: translateY(4%) scaleY(0); }
+html:has(.rainbow-end) .content-wrapper > :last-child { margin-bottom: 38vh; }
+
 @media (prefers-reduced-motion: reduce) {
     .rainbow-ripple { display: none !important; }
     .rainbow-rest i { animation: none; }

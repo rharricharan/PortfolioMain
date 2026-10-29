@@ -98,16 +98,18 @@
   const videos = new Map();
   let current = null, visible = false, hideTimer = 0;
 
-  const videoFor = (slug) => {
+  const videoFor = (row) => {
+    const slug = row.dataset.preview;
     if (videos.has(slug)) return videos.get(slug);
+    const ver = row.dataset.v ? `?v=${row.dataset.v}` : "";
     const v = document.createElement("video");
     v.muted = true;
     v.loop = true;
     v.playsInline = true;
     v.preload = "auto";
     v.setAttribute("aria-hidden", "true");
-    v.poster = `assets/previews/${slug}.webp`;
-    v.src = `assets/previews/${slug}.mp4`;
+    v.poster = `assets/previews/${slug}.webp${ver}`;
+    v.src = `assets/previews/${slug}.mp4${ver}`;
     frame.append(v);
     videos.set(slug, v);
     return v;
@@ -160,7 +162,7 @@
       gsap.to(frame, { width: size.w, height: size.h, duration: 0.6, ease });
     }
     if (slug === current) return;
-    const next = videoFor(slug);
+    const next = videoFor(row);
     const prev = current && videos.get(current);
     current = slug;
     nameEl.textContent = row.querySelector(".menu-row-name").textContent;
@@ -192,6 +194,6 @@
   list.addEventListener("focusout", (e) => { if (!list.contains(e.relatedTarget)) hide(); });
   // Warm the first few previews once the page has settled
   addEventListener("load", () => setTimeout(() => {
-    [...list.querySelectorAll(".menu-row")].slice(0, 3).forEach((r) => { const v = videoFor(r.dataset.preview); v.preload = "metadata"; });
+    [...list.querySelectorAll(".menu-row")].slice(0, 3).forEach((r) => { const v = videoFor(r); v.preload = "metadata"; });
   }, 2500));
 })();

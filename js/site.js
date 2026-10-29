@@ -44,6 +44,29 @@
     setTimeout(() => el.classList.remove("is-active"), 2000);
   };
 
+  // The end arch (css/transition.css): reaching the bottom of a case study or About, the rainbow
+  // columns rise from the bottom edge, middle first; scrolling back up, they sink again.
+  const end = document.querySelector(".rainbow-end");
+  if (end) addEventListener("DOMContentLoaded", () => {
+    if (!window.gsap) return;
+    const cols = [...end.children].filter((c) => c.offsetParent);
+    const height = (i, c) => parseFloat(getComputedStyle(c).getPropertyValue("--h")) * 0.62;
+    gsap.set(cols, { scaleY: 0, transformOrigin: "50% 100%" });
+    let shown = false;
+    const check = () => {
+      const doc = document.documentElement;
+      const atEnd = scrollY + innerHeight >= doc.scrollHeight - innerHeight * 0.15;
+      if (atEnd === shown) return;
+      shown = atEnd;
+      if (reduceMotion) gsap.set(cols, { scaleY: atEnd ? height : 0 });
+      else if (atEnd) gsap.to(cols, { scaleY: height, duration: 1.2, ease: "expo.out", stagger: { each: 0.06, from: "center" }, overwrite: true });
+      else gsap.to(cols, { scaleY: 0, duration: 0.6, ease: "power2.in", stagger: { each: 0.03, from: "edges" }, overwrite: true });
+    };
+    addEventListener("scroll", check, { passive: true });
+    addEventListener("resize", check);
+    check();
+  });
+
   // Coming back with the back button restores the page from cache: clear the cover.
   addEventListener("pageshow", (event) => {
     if (event.persisted && transition) transition.classList.remove("is-leaving");
