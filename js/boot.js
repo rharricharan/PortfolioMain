@@ -2,7 +2,7 @@
 // - How the page arrives is decided when it's actually shown (`pagereveal`; pages can be
 //   prerendered first). Moving around the site, every page change is the sliding view
 //   transition (css/case-nav.css), so the page gets .case-swap. A fresh arrival (first visit of
-//   the session, or landing on the home page from outside) gets .launch instead: the rainbow
+//   the session) and every arrival on the home page get .launch instead: the rainbow
 //   launch (css/transition.css). The black block curtain is kept but switched off (.curtain).
 // - window.pageRevealed resolves when the page is shown, so the intros (js/case.js, js/home.js,
 //   js/about.js) start then; window.introDelay adds the launch's length when it plays.
@@ -26,8 +26,11 @@
   window.introDelay = 0;
   window.pageRevealed = new Promise((resolve) => {
     const shown = (event) => {
-      if (event && event.viewTransition) root.classList.add("case-swap");
-      else if (!reduceMotion && (firstVisit || isHome)) {
+      // Home always opens with the launch, so coming back from another page skips the slide
+      const launch = !reduceMotion && (firstVisit || isHome);
+      if (event && event.viewTransition && isHome && launch) event.viewTransition.skipTransition();
+      else if (event && event.viewTransition) root.classList.add("case-swap");
+      if (launch && !root.classList.contains("case-swap")) {
         root.classList.add("launch");
         window.introDelay = 0.7;
         setTimeout(() => root.classList.remove("launch"), 1500);
