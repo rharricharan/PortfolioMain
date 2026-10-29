@@ -431,6 +431,17 @@
     tag.addEventListener("animationend", (e) => { if (e.target === tag) tag.classList.remove("is-tapped"); });
   });
 
+  // --- "or copy my email" at the end of each case study -----------------------------
+  document.querySelectorAll("[data-copy-email]").forEach((button) => {
+    const label = button.textContent;
+    button.addEventListener("click", () => {
+      navigator.clipboard?.writeText(button.dataset.copyEmail).then(() => {
+        button.textContent = "Email copied";
+        setTimeout(() => { button.textContent = label; }, 1800);
+      }, () => { location.href = `mailto:${button.dataset.copyEmail}`; });
+    });
+  });
+
   // --- Videos: load and play only while on screen -----------------------------------
   const videos = document.querySelectorAll("video[data-lazy]");
   // With reduced motion nothing plays on its own, so each video gets its controls instead
