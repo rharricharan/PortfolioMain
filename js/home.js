@@ -25,7 +25,6 @@
     const split = SplitText ? SplitText.create(bio, { type: "words", mask: "words" }) : null;
     const tops = split ? [...new Set(split.words.map((w) => Math.round(w.getBoundingClientRect().top)))] : [];
     const lineOf = (w) => tops.indexOf(Math.round(w.getBoundingClientRect().top));
-    const menuParts = document.querySelectorAll(".home-page .menu-inner > *");
     const len = (p) => p.getTotalLength();
     // Hidden until drawn: round line caps would otherwise show as dots before the draw starts
     gsap.set([line, head], { strokeDasharray: (i, el) => len(el), strokeDashoffset: (i, el) => len(el), opacity: 0 });
@@ -41,7 +40,6 @@
     else tl.from(bio, { y: 16, opacity: 0, duration: 1.1, ease, clearProps: "transform" }, 0);
     tl
       .from(".home-about", { y: 14, opacity: 0, duration: 0.9, ease, clearProps: "transform,opacity" }, 0.45)
-      .from(menuParts, { y: 12, opacity: 0, duration: 0.9, ease, stagger: 0.08, clearProps: "transform,opacity" }, 0.2)
       .from(chars, { opacity: 0, y: 6, duration: 0.5, ease: "power2.out", stagger: 0.025 }, 0.9)
       .set(line, { opacity: 1 }, 1.15)
       .to(line, { strokeDashoffset: 0, duration: 1.5, ease: "power2.inOut" }, 1.15)

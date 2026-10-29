@@ -40,6 +40,15 @@
     else shown();
   });
 
+  // The menu cascades in on arrival, except moving from one case study to another, where the
+  // menu is the same and stays still (js/site.js)
+  try {
+    const kind = isHome ? "home" : /about/.test(location.pathname) ? "about" : "case";
+    const last = sessionStorage.getItem("page-kind");
+    sessionStorage.setItem("page-kind", kind);
+    if (!reduceMotion && !(kind === "case" && last === "case")) root.classList.add("menu-in");
+  } catch (e) {}
+
   try {
     const f = sessionStorage.getItem("project-filter");
     if (f && f !== "all") root.dataset.projects = f;

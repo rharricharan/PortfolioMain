@@ -189,7 +189,6 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
     text-align: center;
     text-decoration: none;
     transition: border-color 0.3s ease, background-color 0.3s ease;
-    animation: about-card-in 0.9s 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 .menu-about-text { max-width: 30ch; line-height: 1.5; }
 .menu-about-button { display: inline-flex; align-items: center; gap: 5px; padding: 7px 13px; border-radius: 9px; background-color: rgba(0, 0, 0, 0.05); color: #4a4a46; transition: background-color 0.3s ease, color 0.3s ease; }
@@ -198,6 +197,6 @@ a.menu-row:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .menu-about-card:hover .menu-about-button { background-color: rgba(0, 0, 0, 0.08); color: var(--ink); }
 .menu-about-card:hover .icon { transform: translateX(3px); }
 .menu-about-card:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
-@keyframes about-card-in { from { opacity: 0; transform: translateY(10px); } }
-.case-swap .menu-about-card { animation: none; } /* the menu stays still between case studies */
-@media (prefers-reduced-motion: reduce) { .menu-about-card { animation: none; } }
+
+/* Held until the menu cascades in (js/boot.js, js/site.js) */
+html.menu-in .menu :is(.menu-top, .menu-heading, .project-filter, .menu-row, .menu-about-card, .menu-footer) { opacity: 0; }

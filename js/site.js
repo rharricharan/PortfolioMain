@@ -377,6 +377,22 @@
     });
   });
 
+  // --- Menu cascade (js/boot.js decides when): its parts arrive one by one ---------------
+  addEventListener("DOMContentLoaded", () => {
+    const root = document.documentElement;
+    if (!root.classList.contains("menu-in")) return;
+    const { gsap } = window;
+    const items = document.querySelectorAll(".menu :is(.menu-top, .menu-heading, .project-filter, .menu-row, .menu-about-card, .menu-footer)");
+    if (!gsap) { root.classList.remove("menu-in"); return; }
+    Promise.resolve(window.pageRevealed).then(() => {
+      gsap.fromTo(items, { opacity: 0, y: 10 }, {
+        opacity: 1, y: 0, duration: 0.7, ease: "expo.out", stagger: 0.035,
+        delay: 0.25 + (window.introDelay || 0), clearProps: "opacity,transform",
+        onStart: () => root.classList.remove("menu-in"),
+      });
+    });
+  });
+
   // --- Tooltips: [data-tip] buttons get a small label that floats with the pointer inside them
   // (css/filter.css). Mouse only.
   if (matchMedia("(hover: hover) and (pointer: fine)").matches) {

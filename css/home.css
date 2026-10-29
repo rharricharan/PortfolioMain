@@ -133,8 +133,7 @@ body.home-page {
 .home-preview figcaption span + span { color: var(--muted); }
 
 /* Nothing flashes before the launch animation runs */
-.intro:not(.intro-ready) .home :is(.home-bio, .home-about, .home-hint),
-.intro:not(.intro-ready) .home-page .menu-inner > * { opacity: 0; }
+.intro:not(.intro-ready) .home :is(.home-bio, .home-about, .home-hint) { opacity: 0; }
 
 .home-top, .home-swipe { display: none; }
 
