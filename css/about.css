@@ -173,3 +173,7 @@
     .about-steps, .about-steps:has(> li:nth-child(4)) { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .about-toolkit { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
+
+/* A thin rule between sections, for direction */
+.about-section { padding-top: 48px; border-top: 1px solid var(--line); }
+.about-intro + .about-section { border-top: 0; padding-top: 0; }
