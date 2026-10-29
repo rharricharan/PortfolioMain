@@ -60,7 +60,7 @@
       shown = atEnd;
       if (reduceMotion) gsap.set(cols, { scaleY: atEnd ? height : 0 });
       else if (atEnd) gsap.to(cols, { scaleY: height, duration: 1.2, ease: "expo.out", stagger: { each: 0.06, from: "center" }, overwrite: true });
-      else gsap.to(cols, { scaleY: 0, duration: 0.6, ease: "power2.in", stagger: { each: 0.03, from: "edges" }, overwrite: true });
+      else gsap.to(cols, { scaleY: 0, duration: 0.28, ease: "power2.in", stagger: { each: 0.012, from: "edges" }, overwrite: true });
     };
     addEventListener("scroll", check, { passive: true });
     addEventListener("resize", check);
