@@ -1,0 +1,5 @@
+{
+  "version": 1,
+  "include": ["/api/*", "/ulogic", "/ulogic.html", "/ulogic/*", "/shift", "/shift.html", "/shift/*", "/assets/work/ulogic/*", "/assets/work/shift/*"],
+  "exclude": []
+}

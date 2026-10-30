@@ -1,13 +1,55 @@
 {
   "prefetch": [
     {
-      "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/assets/*" } }] },
+      "where": {
+        "and": [
+          {
+            "href_matches": "/*"
+          },
+          {
+            "not": {
+              "href_matches": "/assets/*"
+            }
+          },
+          {
+            "not": {
+              "href_matches": "/ulogic*"
+            }
+          },
+          {
+            "not": {
+              "href_matches": "/shift*"
+            }
+          }
+        ]
+      },
       "eagerness": "moderate"
     }
   ],
   "prerender": [
     {
-      "where": { "and": [{ "href_matches": "/*" }, { "not": { "href_matches": "/assets/*" } }] },
+      "where": {
+        "and": [
+          {
+            "href_matches": "/*"
+          },
+          {
+            "not": {
+              "href_matches": "/assets/*"
+            }
+          },
+          {
+            "not": {
+              "href_matches": "/ulogic*"
+            }
+          },
+          {
+            "not": {
+              "href_matches": "/shift*"
+            }
+          }
+        ]
+      },
       "eagerness": "conservative"
     }
   ]

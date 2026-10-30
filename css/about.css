@@ -390,3 +390,18 @@ html:has(.cv-dialog[open]) { overflow: hidden; }
 .legal-section h2 { font-size: 20px; font-weight: 400; letter-spacing: -0.02em; }
 .legal-section p { margin-top: 12px; color: var(--muted); }
 .legal-section a { color: var(--ink); text-underline-offset: 3px; }
+
+/* Unlock page: shown in place of a password-protected case study (functions/_middleware.js) */
+.unlock-kicker { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 16px; padding: 6px 11px; border-radius: 9px; background-color: rgba(0, 0, 0, 0.05); color: #4a4a46; font-size: 13px; }
+.unlock-kicker .icon { width: 13px; height: 13px; }
+.unlock-body { max-width: 520px; }
+.unlock-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+.unlock-row .about-button { justify-content: center; }
+.unlock-form input[type="password"] { width: 100%; padding: 12px 14px; border: 0; border-radius: 12px; background-color: var(--mat); color: var(--ink); font: inherit; font-size: 16px; box-shadow: inset 0 0 0 1px transparent; transition: box-shadow 0.2s ease, background-color 0.2s ease; }
+.unlock-form input[type="password"]:focus { outline: none; background-color: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); }
+.unlock-form input[type="password"]:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.unlock-form [aria-invalid="true"] { background-color: #fff; box-shadow: inset 0 0 0 1px #c4362a; }
+.unlock-form [data-unlock-submit][aria-busy="true"] { opacity: 0.6; pointer-events: none; }
+.unlock-ask { margin-top: 20px; font-size: 14px; color: var(--muted); }
+.unlock-ask a { color: var(--ink); text-underline-offset: 3px; }
+@media (max-width: 600px) { .unlock-row { grid-template-columns: 1fr; } }
