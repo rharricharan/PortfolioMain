@@ -16,8 +16,6 @@
 
 ## Case studies
 - [STIM](https://rharricharan.com/smartstop): How Ryan designed STIM, Smartstop’s AI traffic platform: twelve tools down to one, 22% more traffic efficiency, and five cities signed.
-- [Shift AI](https://rharricharan.com/shift): Designing Shift, Inclusive Health’s AI debrief coach for physicians: onboarding, Morning Rounds, chats and insights, from MVP through v2.
-- [uLogic](https://rharricharan.com/ulogic): Designing uLogic’s renewal workspace and design system for data center operators, shipped in early 2026 and saving teams 10 hours a week.
 - [Rays](https://rharricharan.com/rays): Rays, an iPhone app that helps people tan for their skin type without burning. A product design case study by Ryan Harricharan.
 - [Halftone](https://rharricharan.com/halftone): Halftone’s website, merch for the biggest names in music and sport: site traffic up 80% and clients grown from 3 to 15 in two years.
 - [LeadHack](https://rharricharan.com/leadhack): LeadHack’s website: lead generation for agencies, told in one scroll, and part of the pitch for its $3M+ seed round.

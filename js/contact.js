@@ -1,9 +1,8 @@
 // Contact page form: checked in place, then sent to /api/contact (functions/api/contact.js), which
-// emails it to Ryan. Until delivery is set up, the visitor's email app opens with it written out.
+// emails it to Ryan. The visitor sees that it was sent, or that it wasn't and can try again.
 (() => {
   const form = document.querySelector("[data-contact-form]");
   if (!form) return;
-  const EMAIL = "rharricharandesigns@gmail.com";
   const submit = form.querySelector("[data-contact-submit]");
   const status = form.querySelector("[data-contact-status]");
   const done = document.querySelector("[data-contact-done]");
@@ -52,14 +51,9 @@
     try {
       const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       if (res.ok) return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
-      if (res.status !== 503 && res.status !== 404 && res.status !== 405) throw new Error(res.status);
-      // Not set up to deliver yet: hand it to the visitor's email app, written out
-      const body = `Hi Ryan,\n\n${data.message}\n\nWhat I need: ${data.need}\nName: ${data.name}\nEmail: ${data.email}\n`;
-      const subject = `New enquiry: ${data.need}, from ${data.name}`;
-      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-      showDone("Almost there.", `Your email app should open with your message written out. Press send, and I’ll reply to ${data.email}.`);
+      throw new Error(res.status);
     } catch {
-      status.innerHTML = `That didn’t send. Try again, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
+      status.textContent = "That didn’t send. Nothing went through, so try again in a moment.";
     } finally {
       submit.removeAttribute("aria-busy");
       submit.textContent = "Send";

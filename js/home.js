@@ -101,6 +101,18 @@
   const videoFor = (row) => {
     const slug = row.dataset.preview;
     if (videos.has(slug)) return videos.get(slug);
+    // Password-protected work shows a lock, not its footage (the files answer 401 until unlocked)
+    if (row.hasAttribute("data-locked")) {
+      const card = document.createElement("div");
+      card.className = "home-preview-locked";
+      card.setAttribute("aria-hidden", "true");
+      card.innerHTML = '<svg class="icon" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" clip-rule="evenodd" d="M10 1a4.5 4.5 0 0 0-4.5 4.5V9H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-6a2 2 0 0 0-2-2h-.5V5.5A4.5 4.5 0 0 0 10 1Zm3 8V5.5a3 3 0 1 0-6 0V9h6Z"/></svg><span>Password protected</span>';
+      card.play = () => Promise.resolve();
+      card.pause = () => {};
+      frame.append(card);
+      videos.set(slug, card);
+      return card;
+    }
     const ver = row.dataset.v ? `?v=${row.dataset.v}` : "";
     const v = document.createElement("video");
     v.muted = true;
@@ -146,7 +158,7 @@
   const show = (row) => {
     clearTimeout(hideTimer);
     const slug = row.dataset.preview;
-    const size = sizeFor(Number(row.dataset.ratio) || 1.6);
+    const size = sizeFor(row.hasAttribute("data-locked") ? 1.6 : Number(row.dataset.ratio) || 1.6);
     const { x, y } = placeFor(row, size);
     const ease = "expo.out";
 
@@ -167,7 +179,7 @@
     current = slug;
     nameEl.textContent = row.querySelector(".menu-row-name").textContent;
     metaEl.textContent = row.querySelector(".menu-row-meta").textContent;
-    next.currentTime = 0;
+    if ("currentTime" in next) next.currentTime = 0;
     next.play().catch(() => {});
     gsap.to(next, { opacity: 1, duration: 0.45, ease: "power2.out", overwrite: true });
     if (prev) gsap.to(prev, { opacity: 0, duration: 0.45, ease: "power2.out", overwrite: true, onComplete: () => prev.pause() });
@@ -194,6 +206,6 @@
   list.addEventListener("focusout", (e) => { if (!list.contains(e.relatedTarget)) hide(); });
   // Warm the first few previews once the page has settled
   addEventListener("load", () => setTimeout(() => {
-    [...list.querySelectorAll(".menu-row")].slice(0, 3).forEach((r) => { const v = videoFor(r); v.preload = "metadata"; });
+    [...list.querySelectorAll(".menu-row:not([data-locked])")].slice(0, 3).forEach((r) => { const v = videoFor(r); v.preload = "metadata"; });
   }, 2500));
 })();

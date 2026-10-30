@@ -225,3 +225,5 @@ html.nav-reopen .home-page #right-side-menu { clip-path: circle(0% at 100% 0%); 
 /* While the bio's lines rise, the tags' grey stays clear, then fades in (js/home.js) */
 .home-bio .bio-tag { transition: background-color 0.5s ease; }
 .home-bio.is-rising .bio-tag { background-color: transparent; }
+.home-preview-locked { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: 10px; background-color: #f2f2ee; color: #6b6b66; font-size: 13px; opacity: 0; }
+.home-preview-locked .icon { width: 20px; height: 20px; }

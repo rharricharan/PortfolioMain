@@ -1,5 +1,6 @@
 // The case-study access cookie, shared by functions/_middleware.js and functions/api/unlock.js
-const COOKIE = "case_access";
+// __Host-: only ever set by this site over HTTPS, for the whole site, so nothing else can plant it
+const COOKIE = "__Host-case_access";
 const DAYS = 30;
 
 const enc = new TextEncoder();
@@ -21,6 +22,9 @@ export async function hasAccess(request, secret) {
   const m = (request.headers.get("Cookie") || "").match(new RegExp(`(?:^|;\\s*)${COOKIE}=([^;]+)`));
   if (!m) return false;
   const [exp, sig] = m[1].split(".");
-  return Number(exp) > Date.now() && sig === (await sign(exp, secret));
+  if (!/^\d{13}$/.test(exp || "") || !/^[0-9a-f]{64}$/.test(sig || "")) return false;
+  if (Number(exp) <= Date.now() || Number(exp) > Date.now() + DAYS * 864e5) return false;
+  const want = enc.encode(await sign(exp, secret)), got = enc.encode(sig);
+  return crypto.subtle.timingSafeEqual ? crypto.subtle.timingSafeEqual(want, got) : want.every((b, i) => b === got[i]);
 }
 

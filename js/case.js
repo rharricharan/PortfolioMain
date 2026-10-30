@@ -1,5 +1,10 @@
 // Case study pages: GSAP intro, progressive reveal on scroll, and the small rebuilt demos.
 (() => {
+  // A password-protected case study never comes back from the back/forward cache: the server
+  // decides again (functions/_middleware.js), so lost or expired access shows the lock
+  if (/^\/(ulogic|shift)(\.html)?\/?$/i.test(location.pathname)) {
+    addEventListener("pageshow", (e) => { if (e.persisted) location.reload(); });
+  }
   const story = document.querySelector(".story");
   if (!story) return;
   const root = document.documentElement;

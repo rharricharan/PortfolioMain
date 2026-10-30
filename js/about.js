@@ -71,8 +71,8 @@
 
 // Request CV: the button under the experience list opens a dialog over a frosted page. It closes
 // from the close button, Cancel, Escape or a click outside. Requests go to /api/cv-request
-// (functions/api/cv-request.js); until that can deliver, the visitor's email app opens with the
-// request written out instead.
+// (functions/api/cv-request.js), which emails them to Ryan; the visitor sees that it was sent, or
+// that it wasn't and can try again.
 (() => {
   const dialog = document.querySelector(".cv-dialog");
   const opener = document.querySelector("[data-cv-open]");
@@ -82,7 +82,6 @@
   const status = dialog.querySelector("[data-cv-status]");
   const submit = dialog.querySelector("[data-cv-submit]");
   const panel = dialog.querySelector(".cv-panel");
-  const EMAIL = "rharricharandesigns@gmail.com";
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const sheet = () => matchMedia("(max-width: 600px)").matches;
   const { gsap } = window;
@@ -156,13 +155,9 @@
     try {
       const res = await fetch("/api/cv-request", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       if (res.ok) return showDone("Request sent.", `Thanks, ${first}. I’ll email my CV to ${data.email}.`);
-      if (res.status !== 503 && res.status !== 404 && res.status !== 405) throw new Error(res.status);
-      // Not set up to deliver yet: hand it to the visitor's email app, written out
-      const body = `Hi Ryan,\n\nI’d like to request your CV.\n\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company}\n\n${data.message}\n`;
-      location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(`CV request: ${data.name}, ${data.company}`)}&body=${encodeURIComponent(body)}`;
-      showDone("Almost there.", `Your email app should open with the request written out. Press send, and I’ll reply to ${data.email} with my CV.`);
+      throw new Error(res.status);
     } catch {
-      status.innerHTML = `That didn’t send. Try again, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
+      status.textContent = "That didn’t send. Nothing went through, so try again in a moment.";
     } finally {
       submit.removeAttribute("aria-busy");
       submit.textContent = "Send request";
