@@ -22,12 +22,12 @@
   const swap = (from, to) => {
     const { gsap } = window;
     const show = () => { from.hidden = true; to.hidden = false; to.querySelector("h2")?.focus(); };
-    if (!gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) { show(); if (to === form) form.elements.company.focus(); return; }
+    if (!gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) { show(); if (to === form) form.elements.name.focus(); return; }
     gsap.to(from, { opacity: 0, y: -8, duration: 0.25, ease: "power2.in", onComplete: () => {
       show();
       gsap.set(from, { clearProps: "all" });
       gsap.fromTo(to, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" });
-      if (to === form) form.elements.company.focus();
+      if (to === form) form.elements.name.focus();
     } });
   };
   const showDone = (title, text) => {
@@ -44,7 +44,7 @@
     fields.forEach((f) => mark(f, !bad.includes(f)));
     if (bad.length) { bad[0].focus(); return; }
 
-    const data = Object.fromEntries(["company", "need", "name", "email", "message", "website"].map((n) => [n, String(form.elements[n].value || "").trim()]));
+    const data = Object.fromEntries(["need", "name", "email", "message", "website"].map((n) => [n, String(form.elements[n].value || "").trim()]));
     data.elapsed = Date.now() - opened;
     const first = data.name.split(/\s+/)[0];
     submit.setAttribute("aria-busy", "true");
@@ -54,15 +54,15 @@
       if (res.ok) return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
       if (res.status !== 503 && res.status !== 404 && res.status !== 405) throw new Error(res.status);
       // Not set up to deliver yet: hand it to the visitor's email app, written out
-      const body = `Hi Ryan,\n\n${data.message}\n\nWhat I need: ${data.need}\nName: ${data.name}\nEmail: ${data.email}\nCompany: ${data.company || "Not given"}\n`;
-      const subject = `New enquiry: ${data.need}, from ${data.name}${data.company ? ` (${data.company})` : ""}`;
+      const body = `Hi Ryan,\n\n${data.message}\n\nWhat I need: ${data.need}\nName: ${data.name}\nEmail: ${data.email}\n`;
+      const subject = `New enquiry: ${data.need}, from ${data.name}`;
       location.href = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       showDone("Almost there.", `Your email app should open with your message written out. Press send, and I’ll reply to ${data.email}.`);
     } catch {
       status.innerHTML = `That didn’t send. Try again, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
     } finally {
       submit.removeAttribute("aria-busy");
-      submit.textContent = "Send message";
+      submit.textContent = "Send";
     }
   });
 })();

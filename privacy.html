@@ -12,6 +12,7 @@
     <script src="js/vendor/ScrollTrigger.min.js" defer></script>
     <script src="js/vendor/SplitText.min.js" defer></script>
     <script src="js/about.js" defer></script>
+    <script src="js/privacy.js" defer></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="author" content="Ryan Harricharan">
@@ -86,54 +87,64 @@
         <div class="page-content-wrapper">
             <main id="main">
                 <div class="content-wrapper">
-                    <article class="about legal">
-                        <div class="about-intro">
-                            <h1 class="about-title">Privacy</h1>
-                            <p class="legal-lead">No ads, nothing sold, no profiles. Here’s what this site collects, why, and who handles it.</p>
-                            <p class="legal-date">Updated 30 October 2026</p>
+                    <article class="about page-single">
+                        <div class="about-who page-who">
+                            <img src="assets/about/ryan.webp" alt="" width="44" height="44">
+                            <p>The small print, kept short.<br><span>Nothing here is sold or shared.</span></p>
                         </div>
+                        <p class="about-label page-label"><span>01</span>Privacy</p>
+                        <h1 class="page-title">What this site does with information about you. <span>Not much: no ads, no selling, no profiles.</span></h1>
+                        <p class="page-text page-date">Last updated 30 October 2026</p>
 
-                        <section class="about-section legal-section" id="who">
+                        <section class="privacy-section" id="who">
                             <h2>Who’s responsible</h2>
-                            <p>I’m Ryan Harricharan, and I run this site through RH Design, my independent practice. Questions about your data go to me at <a href="mailto:rharricharandesigns@gmail.com">rharricharandesigns@gmail.com</a>.</p>
+                            <p>I am: Ryan Harricharan, running this site through RH Design, my independent practice. Write to me at <a class="page-link" href="mailto:rharricharandesigns@gmail.com">rharricharandesigns@gmail.com</a> about anything on this page.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="hosting">
+                        <section class="privacy-section" id="hosting">
                             <h2>Hosting</h2>
-                            <p>Cloudflare Pages serves this site. To deliver and protect it, Cloudflare handles each request, including your IP address and browser details. I don’t keep access logs of my own.</p>
+                            <p>The site is hosted by Cloudflare (Cloudflare Pages). Every visit passes through Cloudflare’s network, which processes your IP address, browser and the page you asked for, to deliver the site and protect it from attacks. I don’t keep access logs.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="contact">
+                        <section class="privacy-section" id="contact">
                             <h2>The contact form, and email</h2>
-                            <p>The contact form sends your company (if you add it), what you need, your name, your email address, your message and the country your connection comes from. The CV request on the About page sends your name, email address, company and what it’s for.</p>
-                            <p>Both go from a Cloudflare Function on this site to Web3Forms, which delivers them to my Gmail inbox. I use them to reply to you and talk about possible work, and nothing else: no mailing lists, no sharing.</p>
-                            <p>I keep messages for as long as the conversation and any work that follows need them, or delete them sooner if you ask. Spam is stopped with a hidden field and a minimum time to fill in the form, so there’s no CAPTCHA and no tracking.</p>
-                            <p>If you email me directly, it goes through your email provider and Gmail. If you book a call, Cal.com handles the booking under its own policy.</p>
+                            <p>When you send the contact form I receive what you typed: what you need, your name, your email address and your message, along with the country your connection comes from. The CV request on the About page sends your name, email address, company and what it’s for.</p>
+                            <p>Both pass through a Cloudflare Function on this site to Web3Forms, which delivers them to my inbox. My inbox is Gmail (Google). Email you send me directly reaches me the same way, and booking a call goes through Cal.com under its own policy.</p>
+                            <p>I use it to reply to you and to talk about the work, and nothing else: no mailing lists, no sharing. I keep it as long as the conversation and any work that comes of it need, and delete it sooner if you ask.</p>
+                            <p>Spam is kept out with a hidden field and a minimum fill time. There’s no CAPTCHA and no tracking.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="analytics">
+                        <section class="privacy-section" id="analytics">
                             <h2>Analytics</h2>
-                            <p>Google Analytics 4 counts visits: which pages are viewed, roughly where from, on what device and from which link. It sets its own cookies to do that. I use it to see which work people look at. It doesn’t see what you type into the forms. A content blocker or Google’s opt-out add-on turns it off.</p>
+                            <p>I use Google Analytics 4 to see which pages get read and where visitors come from. Google receives the page, the referring site, your browser and an approximate location, and sets its own cookies (<code>_ga</code> and <code>_ga_*</code>) to tell visits apart. It never sees what you type into the forms.</p>
+                            <p>The provider is Google, and data may be transferred to the US. You can turn it off below at any time.</p>
+                            <div class="privacy-toggle" data-analytics-toggle>
+                                <p>Analytics in this browser: <span data-analytics-state>on</span>.</p>
+                                <button type="button" class="about-button is-primary" data-analytics-button>Turn it off</button>
+                            </div>
+                            <p>Turning it off is remembered in this browser. If your browser sends a Global Privacy Control signal, Analytics stays off.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="third-parties">
-                            <h2>Other services</h2>
-                            <p>The Inter typeface loads from Google Fonts, so your browser shares your IP address with Google to fetch it. Links to Cal.com, LinkedIn and Awwwards send nothing until you click; after that, their policies apply.</p>
+                        <section class="privacy-section" id="other">
+                            <h2>Other sites’ content</h2>
+                            <p>The Inter typeface loads from Google Fonts, so Google receives your IP address when a page loads. Links to Cal.com, LinkedIn and Awwwards are plain links: nothing is sent to them until you click.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="browser">
+                        <section class="privacy-section" id="browser">
                             <h2>Kept in your browser</h2>
-                            <p>This site keeps a few settings in your browser’s session storage: whether you’ve seen the opening animation, whether the side menu is open, your project filter, and the kind of page you were last on, for transitions. They stay on your device and clear when you close the tab.</p>
+                            <p>The site itself sets no cookies. It keeps a few settings in your browser’s session storage, which clears when you close the tab: whether you’ve seen the opening animation (<code>visited</code>), whether the side menu is open (<code>nav-collapsed</code>), your project filter (<code>project-filter</code>) and the kind of page you were last on, for transitions (<code>page-kind</code>).</p>
+                            <p>Two things last longer. Turning Analytics off is remembered in local storage (<code>analytics-off</code>). Unlocking a password-protected case study sets one cookie (<code>case_access</code>) for 30 days, so you aren’t asked again. Clearing your browser’s site data removes them all.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="rights">
+                        <section class="privacy-section" id="rights">
                             <h2>Your rights</h2>
-                            <p>You can ask to see the data I hold about you, correct it, delete it, limit how I use it, take a copy, or object to my using it. Email me and I’ll take care of it. You can also complain to your local data protection authority.</p>
+                            <p>You can ask me for a copy of the data I hold about you, and to correct it, delete it, restrict its use or hand it over in a portable form. You can also object to my using it. Write to <a class="page-link" href="mailto:rharricharandesigns@gmail.com">rharricharandesigns@gmail.com</a>.</p>
+                            <p>You can also complain to a data protection authority, for example the one where you live or work. There’s no automated decision-making on this site, and I don’t sell or share your data with anyone beyond the providers named here.</p>
                         </section>
 
-                        <section class="about-section legal-section" id="changes">
+                        <section class="privacy-section" id="changes">
                             <h2>Changes</h2>
-                            <p>If this page changes, the date at the top changes with it.</p>
+                            <p>If the site starts doing something new with your data, this page changes first, with a new date at the top.</p>
                         </section>
                     </article>
                 </div>

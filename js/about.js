@@ -17,11 +17,16 @@
 
     // Intro: the photo line, then the headline's lines rising behind a mask
     const title = about.querySelector(".about-title");
-    const split = SplitText.create(title, { type: "lines", mask: "lines" });
     const delay = (root.classList.contains("case-swap") ? 0.6 : 0.4) + (window.introDelay || 0);
-    gsap.timeline({ delay })
-      .set(title, { opacity: 1 }, 0)
-      .from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger: 0.08, onComplete: () => split.revert() }, 0.1);
+    if (title) {
+      const split = SplitText.create(title, { type: "lines", mask: "lines" });
+      gsap.timeline({ delay })
+        .set(title, { opacity: 1 }, 0)
+        .from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger: 0.08, onComplete: () => split.revert() }, 0.1);
+    } else {
+      // Contact and Privacy: the intro line, label, text and form rise in turn
+      gsap.from(about.querySelectorAll(".page-who, .page-label, .page-title, .page-text, .contact-panel"), { opacity: 0, y: 14, duration: 1, ease, stagger: 0.07, delay, clearProps: "opacity,transform" });
+    }
     root.classList.add("intro-ready");
 
     // Sections: label, then content, rising a little as they come into view
