@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "stage": "rm -rf .site && rsync -a --exclude .nvmrc --exclude .git --exclude .claude --exclude .vscode --exclude .wrangler --exclude .site --exclude functions --exclude node_modules --exclude package.json --exclude package-lock.json --exclude .gitignore --exclude CNAME ./ .site/",
+    "stage": "python3 -I .claude/build_menu.py && rm -rf .site && rsync -a --exclude .nvmrc --exclude .git --exclude .claude --exclude .vscode --exclude .wrangler --exclude .site --exclude functions --exclude node_modules --exclude package.json --exclude package-lock.json --exclude .gitignore --exclude CNAME ./ .site/",
     "deploy:preview": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=$(git branch --show-current)",
     "deploy": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=main"
   },

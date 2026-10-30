@@ -85,7 +85,7 @@
 .about-numbers dt { font-size: 13px; color: var(--muted); }
 
 /* 04 Contact */
-.about-contact-card { margin-top: 28px; padding: 40px 28px; border-radius: 24px; background-color: var(--mat); }
+.about-contact-card { padding: 0; }
 .about-contact-card h2 { font-size: clamp(24px, 3.6cqi, 36px); font-weight: 400; line-height: 1.1; letter-spacing: -0.035em; }
 .about-contact-card p { max-width: 46ch; margin-top: 12px; color: var(--muted); }
 .about-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 28px; }
@@ -106,6 +106,11 @@
 .about-button.is-primary { background-color: var(--ink); color: #fff; box-shadow: none; }
 .about-button:hover { transform: translateY(-1px); }
 .about-button.is-primary:hover { background-color: #000; }
+/* Contact: the soft pill matches the menu's "Learn more"; email reads as plain text */
+.about-button.is-soft { gap: 6px; padding: 9px 14px; border-radius: 9px; background-color: rgba(0, 0, 0, 0.05); color: #4a4a46; box-shadow: none; transition: background-color 0.3s ease, color 0.3s ease; }
+.about-button.is-soft:hover { transform: none; background-color: rgba(0, 0, 0, 0.08); color: var(--ink); }
+.about-button.is-plain { gap: 6px; padding: 9px 4px; background-color: transparent; color: #4a4a46; font-weight: 400; box-shadow: none; transition: color 0.3s ease; }
+.about-button.is-plain:hover { transform: none; color: var(--ink); }
 .about-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 
 @container (min-width: 720px) {
@@ -113,7 +118,6 @@
     .about-experience { padding-top: 6px; }
     .about-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .about-numbers { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-    .about-contact-card { padding: 56px 48px; }
 }
 
 @media (max-width: 780px) {

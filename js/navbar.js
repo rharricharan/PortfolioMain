@@ -114,6 +114,40 @@
     document.addEventListener("pointerdown", (e) => { if (open && !navbar.contains(e.target)) closePanel(); });
     navbar.addEventListener("focusout", (e) => { if (open && !navbar.contains(e.relatedTarget)) closePanel(); });
 
+    // --- Let’s chat: book a call or email --------------------------------------------------
+    const chat = navbar.querySelector("[data-navbar-chat]");
+    const chatMenu = navbar.querySelector("[data-navbar-chat-menu]");
+    let chatOpen = false;
+    const openChat = () => {
+      if (chatOpen) return;
+      closePanel();
+      chatOpen = true;
+      chat.setAttribute("aria-expanded", "true");
+      // Under the pill, right edges lined up
+      chatMenu.style.right = `${navbar.getBoundingClientRect().right - chat.getBoundingClientRect().right}px`;
+      chatMenu.hidden = false;
+      if (gsap && !reduceMotion) gsap.fromTo(chatMenu, { opacity: 0, y: -6, scale: 0.96 }, { opacity: 1, y: 0, scale: 1, duration: 0.45, ease, overwrite: true });
+    };
+    const closeChat = (animate = true) => {
+      if (!chatOpen) return;
+      chatOpen = false;
+      chat.setAttribute("aria-expanded", "false");
+      const done = () => { chatMenu.hidden = true; gsap?.set(chatMenu, { clearProps: "opacity,transform" }); };
+      if (!gsap || reduceMotion || !animate) { gsap?.killTweensOf(chatMenu); done(); return; }
+      gsap.to(chatMenu, { opacity: 0, y: -4, scale: 0.97, duration: 0.2, ease: "power2.in", overwrite: true, onComplete: done });
+    };
+    if (chat && chatMenu) {
+      chat.addEventListener("click", () => (chatOpen ? closeChat() : openChat()));
+      projects.addEventListener("click", () => closeChat(false));
+      projects.addEventListener("pointerenter", () => { if (hover.matches) closeChat(false); });
+      chatMenu.addEventListener("click", (e) => { if (e.target.closest("a")) closeChat(false); });
+      addEventListener("keydown", (e) => { if (e.key === "Escape" && chatOpen) { closeChat(); chat.focus(); } });
+      document.addEventListener("pointerdown", (e) => { if (chatOpen && !chat.contains(e.target) && !chatMenu.contains(e.target)) closeChat(); });
+      navbar.addEventListener("focusout", (e) => { if (chatOpen && !navbar.contains(e.relatedTarget)) closeChat(); });
+      addEventListener("pageshow", (e) => { if (e.persisted) closeChat(false); });
+      addEventListener("navchange", () => closeChat(false));
+    }
+
     // --- Follow the hide / show toggle (js/site.js) ----------------------------------------
     // Desktop: shown while the side menu is hidden. Phones: always the navigation.
     addEventListener("navchange", (e) => { if (!phone.matches) (e.detail.collapsed ? show(true) : hide()); });
