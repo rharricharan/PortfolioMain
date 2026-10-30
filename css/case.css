@@ -616,10 +616,8 @@
     transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
 }
 .story-sign-button .icon { width: 14px; height: 14px; }
+.story-sign-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 200px; }
 .story-sign-button:hover { background-color: var(--ink); color: #fff; box-shadow: 0 0 0 1px var(--ink); }
-.story-sign-copy { padding: 0; border: 0; background: none; color: var(--soft); font: inherit; font-size: 13px; cursor: pointer; transition: color 0.2s ease; }
-.story-sign-copy:hover { color: var(--ink); }
-:is(.story-sign-button, .story-sign-copy):focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 200px; }
 
 @container (min-width: 520px) {
     .story-more { grid-template-columns: 1fr 1fr; }

@@ -67,28 +67,6 @@
 .navbar-pill[aria-expanded="true"] .icon { transform: rotate(180deg); }
 :is(.navbar-pill, .navbar-icon, .navbar-avatar, .navbar-row, .pager-link, .navbar-home):focus-visible { outline: 2px solid #161615; outline-offset: 2px; }
 
-/* Let’s chat: a small frosted list under the pill, to book a call or send an email */
-.navbar-chat {
-    position: absolute;
-    top: calc(100% + 8px);
-    right: 0;
-    display: grid;
-    gap: 2px;
-    min-width: 168px;
-    padding: 6px;
-    border-radius: 18px;
-    background-color: rgba(255, 255, 255, 0.78);
-    -webkit-backdrop-filter: blur(28px) saturate(1.4);
-    backdrop-filter: blur(28px) saturate(1.4);
-    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04), 0 14px 30px rgba(0, 0, 0, 0.08);
-    transform-origin: 100% 0;
-}
-.navbar-chat[hidden] { display: none; }
-.navbar-chat a { display: flex; align-items: center; gap: 10px; height: 36px; padding: 0 12px; border-radius: 12px; color: #4a4a46; text-decoration: none; white-space: nowrap; transition: background-color 0.25s ease, color 0.25s ease; }
-.navbar-chat a:hover { background-color: rgba(0, 0, 0, 0.05); color: #161615; }
-.navbar-chat a:focus-visible { outline: 2px solid #161615; outline-offset: -2px; }
-.navbar-chat .icon { width: 15px; height: 15px; }
-
 /* About: home, in its own frosted circle just left of the bar */
 .navbar-home {
     position: absolute;

@@ -350,13 +350,11 @@
 
   // --- Availability pill (css/filter.css) ---------------------------------------------
   // The label rises between "contract" and "full-time" every few seconds; on hover it offers
-  // to copy the email, and a click copies it (falling back to a mailto link).
+  // the contact page, which it links to.
   document.querySelectorAll("[data-available]").forEach((pill) => {
     const wrap = pill.querySelector(".available-text");
-    const status = pill.querySelector("[data-available-status]");
-    const email = pill.dataset.email;
     const cycle = [wrap.textContent.trim()]; // the label as written; more entries would cycle
-    let i = 0, hovering = false, copied = false;
+    let i = 0, hovering = false;
     let current = wrap.querySelector(".available-label");
 
     const show = (text) => {
@@ -375,29 +373,16 @@
       gsap.to(old, { yPercent: -100, opacity: 0, duration: 0.35, ease: "power2.in", onComplete: () => old.remove() });
     };
     const resting = () => cycle[i];
-    const tick = () => { if (!hovering && !copied) { i = (i + 1) % cycle.length; show(resting()); } };
+    const tick = () => { if (!hovering) { i = (i + 1) % cycle.length; show(resting()); } };
 
     pill.classList.add("is-live");
     wrap.style.width = `${current.offsetWidth}px`;
     // Measured again once Inter has loaded, so the label isn't cut to the fallback font's width
-    document.fonts?.ready.then(() => { if (!hovering && !copied) wrap.style.width = `${current.offsetWidth}px`; });
+    document.fonts?.ready.then(() => { if (!hovering) wrap.style.width = `${current.offsetWidth}px`; });
     if (!reduceMotion && cycle.length > 1) setInterval(tick, 3200);
 
-    pill.addEventListener("pointerenter", () => { hovering = true; if (!copied) show("Copy my email"); });
-    pill.addEventListener("pointerleave", () => { hovering = false; if (!copied) show(resting()); });
-    pill.addEventListener("click", async () => {
-      try {
-        await navigator.clipboard.writeText(email);
-      } catch (err) {
-        location.href = `mailto:${email}`;
-        return;
-      }
-      copied = true;
-      show("Email copied");
-      status.textContent = `Copied ${email}`;
-      window.gsap?.fromTo(pill, { scale: 0.96 }, { scale: 1, duration: 0.5, ease: "back.out(3)", clearProps: "transform" });
-      setTimeout(() => { copied = false; show(hovering ? "Copy my email" : resting()); }, 1800);
-    });
+    pill.addEventListener("pointerenter", () => { hovering = true; show("Let’s chat"); });
+    pill.addEventListener("pointerleave", () => { hovering = false; show(resting()); });
   });
 
   // --- Menu cascade (js/boot.js decides when): its parts arrive one by one ---------------
@@ -452,17 +437,6 @@
       tag.classList.add("is-tapped");
     });
     tag.addEventListener("animationend", (e) => { if (e.target === tag) tag.classList.remove("is-tapped"); });
-  });
-
-  // --- "Copy email" at the end of each case study -----------------------------------
-  document.querySelectorAll("[data-copy-email]").forEach((button) => {
-    const label = button.textContent;
-    button.addEventListener("click", () => {
-      navigator.clipboard?.writeText(button.dataset.copyEmail).then(() => {
-        button.textContent = "Email copied";
-        setTimeout(() => { button.textContent = label; }, 1800);
-      }, () => { location.href = `mailto:${button.dataset.copyEmail}`; });
-    });
   });
 
   // --- Videos: load and play only while on screen -----------------------------------
