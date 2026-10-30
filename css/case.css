@@ -572,8 +572,6 @@
 /* End of a case study (.claude/build_menu.py): the previous and next projects as two quiet cards,
    then a short sign-off. Light buttons: a hairline pill that fills in on hover, and a text link */
 .story-end { margin-top: 120px; }
-.story-more { display: grid; gap: 12px; }
-.story-more-link {
     display: flex;
     align-items: center;
     gap: 16px;
@@ -585,22 +583,13 @@
     text-decoration: none;
     transition: box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
-.story-more-link:hover { box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.16), 0 12px 32px rgba(0, 0, 0, 0.05); transform: translateY(-2px); }
-.story-more-link:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; }
-.story-more-link img { flex-shrink: 0; width: 56px; height: 56px; border-radius: 14px; object-fit: cover; object-position: top; background-color: #fff; box-shadow: 0 0 0 1px var(--line); }
-.story-more-link > span { display: grid; gap: 2px; min-width: 0; }
-.story-more-dir { display: inline-flex; align-items: center; gap: 6px; font-size: 12px; color: var(--soft); }
-.story-more-dir .icon { width: 14px; height: 14px; transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1); }
-.story-more-link.is-prev:hover .icon { transform: translateX(-3px); }
-.story-more-link.is-next:hover .icon { transform: translateX(3px); }
-.story-more-name { font-size: 15px; letter-spacing: -0.01em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.story-more-link.is-next { flex-direction: row-reverse; text-align: right; }
-.story-more-link.is-next > span { justify-items: end; }
 
-.story-sign { margin-top: 96px; display: grid; justify-items: start; gap: 16px; }
+.story-sign { display: grid; justify-items: start; gap: 16px; }
 .story-sign-photo { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 0 1px var(--line); }
-.story-sign p { max-width: 24ch; font-size: clamp(20px, 2.2vw, 24px); line-height: 1.3; letter-spacing: -0.025em; color: var(--ink); text-wrap: balance; }
-.story-sign-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 4px; }
+.story-sign-text { display: grid; gap: 6px; }
+.story-sign h2 { max-width: 30ch; font-size: clamp(20px, 2.2vw, 24px); font-weight: 400; line-height: 1.3; letter-spacing: -0.025em; color: var(--ink); text-wrap: balance; }
+.story-sign p { max-width: 44ch; font-size: 15px; line-height: 1.5; color: var(--muted); text-wrap: balance; }
+.story-sign-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 20px; margin-top: 8px; }
 .story-sign-button {
     display: inline-flex;
     align-items: center;
@@ -619,6 +608,3 @@
 .story-sign-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 3px; border-radius: 200px; }
 .story-sign-button:hover { background-color: var(--ink); color: #fff; box-shadow: 0 0 0 1px var(--ink); }
 
-@container (min-width: 520px) {
-    .story-more { grid-template-columns: 1fr 1fr; }
-}
