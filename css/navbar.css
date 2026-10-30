@@ -164,8 +164,6 @@
 /* Desktop: the story leaves room for the bars while the side menu is hidden */
 @media (min-width: 781px) {
     html.nav-collapsed :is(.story, .about) { padding-top: 104px; padding-bottom: 140px; }
-    /* With the whole window to itself, the content takes wider side margins */
-    html.nav-collapsed :is(.story, .about) { padding-left: clamp(32px, 6.5vw, 96px); padding-right: clamp(32px, 6.5vw, 96px); }
     html:not(.nav-collapsed) .pager { display: none; }
 }
 
