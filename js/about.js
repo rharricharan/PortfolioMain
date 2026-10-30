@@ -38,6 +38,13 @@
 
     // Numbers count up to their value
     about.querySelectorAll("[data-count]").forEach((el) => {
+      // Years since a date (data-since) stay current without a rebuild
+      if (el.dataset.since) {
+        const since = new Date(`${el.dataset.since}T00:00:00`);
+        const now = new Date();
+        const years = now.getFullYear() - since.getFullYear() - (now < new Date(now.getFullYear(), since.getMonth(), since.getDate()) ? 1 : 0);
+        el.textContent = Math.max(1, years);
+      }
       const end = Number(el.textContent);
       const start = end > 1000 ? end - 12 : 0;
       const n = { v: start };
