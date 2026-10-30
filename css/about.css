@@ -319,3 +319,74 @@ html:has(.cv-dialog[open]) { overflow: hidden; }
 .about-links a:hover { border-color: var(--ink); }
 .about-links .icon { width: 14px; height: 14px; color: var(--soft); }
 :is(.about-inline, .about-links a):focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+/* Contact page: the pitch and other routes beside the form, which stacks under on phones */
+.contact-body { display: grid; gap: 48px; margin-top: 56px; }
+.contact-lead { max-width: 36ch; font-size: clamp(18px, 2.4cqi, 22px); line-height: 1.4; letter-spacing: -0.02em; }
+.contact-alt { max-width: 40ch; margin-top: 20px; color: var(--muted); }
+.contact-side .about-actions { margin-top: 16px; }
+
+.contact-form { display: grid; gap: 22px; }
+.contact-field { display: grid; gap: 8px; min-width: 0; margin: 0; padding: 0; border: 0; }
+.contact-field :is(label, legend) { padding: 0; font-size: 13px; color: var(--ink); }
+.contact-field label span { margin-left: 6px; color: var(--soft); }
+.contact-pair { display: grid; gap: 22px; }
+.contact-form :is(input[type="text"], input[type="email"], textarea) {
+    width: 100%;
+    padding: 12px 14px;
+    border: 0;
+    border-radius: 12px;
+    background-color: var(--mat);
+    color: var(--ink);
+    font: inherit;
+    font-size: 16px; /* 16px or more, so phones don't zoom in on focus */
+    line-height: 1.4;
+    box-shadow: inset 0 0 0 1px transparent;
+    transition: box-shadow 0.2s ease, background-color 0.2s ease;
+}
+.contact-form textarea { min-height: 148px; resize: vertical; }
+.contact-form :is(input, textarea)::placeholder { color: #8a8a85; }
+.contact-form :is(input, textarea):focus { outline: none; background-color: #fff; box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.18); }
+.contact-form :is(input, textarea):focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.contact-form [aria-invalid="true"] { background-color: #fff; box-shadow: inset 0 0 0 1px #c4362a; }
+.contact-error { font-size: 12px; color: #b3261e; }
+.contact-error:empty { display: none; }
+
+.contact-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
+.contact-chip { position: relative; cursor: pointer; }
+.contact-chip input { position: absolute; opacity: 0; pointer-events: none; }
+.contact-chip span { display: block; padding: 8px 14px; border-radius: 9px; background-color: rgba(0, 0, 0, 0.05); color: #4a4a46; font-size: 14px; transition: background-color 0.25s ease, color 0.25s ease; }
+.contact-chip:hover span { background-color: rgba(0, 0, 0, 0.08); color: var(--ink); }
+.contact-chip input:checked + span { background-color: var(--ink); color: #fff; }
+.contact-chip input:focus-visible + span { outline: 2px solid var(--ink); outline-offset: 2px; }
+
+.contact-status { font-size: 13px; line-height: 1.5; color: #b3261e; }
+.contact-status:empty { display: none; }
+.contact-status a { color: inherit; }
+.contact-send { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px; }
+.contact-send .about-button { justify-content: center; }
+.contact-form [data-contact-submit][aria-busy="true"] { opacity: 0.6; pointer-events: none; }
+.contact-note { font-size: 12px; color: var(--soft); }
+.contact-note a { color: inherit; text-underline-offset: 3px; }
+.contact-note a:hover { color: var(--ink); }
+
+.contact-done { display: grid; justify-items: start; gap: 10px; }
+.contact-done[hidden] { display: none; }
+.contact-done h2 { font-size: clamp(24px, 3.6cqi, 32px); font-weight: 400; line-height: 1.1; letter-spacing: -0.035em; }
+.contact-done h2:focus { outline: none; }
+.contact-done p { max-width: 40ch; color: var(--muted); }
+.contact-done .about-button { margin-top: 12px; }
+
+@container (min-width: 720px) {
+    .contact-body { grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr); gap: 72px; }
+    .contact-pair { grid-template-columns: 1fr 1fr; gap: 16px; }
+}
+@media (max-width: 600px) { .contact-send { display: grid; } .contact-send .about-button { width: 100%; } }
+
+/* Privacy: one readable column */
+.legal-lead { max-width: 48ch; margin-top: 20px; font-size: clamp(18px, 2.4cqi, 22px); line-height: 1.4; letter-spacing: -0.02em; }
+.legal-date { margin-top: 12px; font-size: 13px; color: var(--soft); }
+.legal-section { max-width: 64ch; margin-top: 56px; scroll-margin-top: 96px; }
+.legal-section h2 { font-size: 20px; font-weight: 400; letter-spacing: -0.02em; }
+.legal-section p { margin-top: 12px; color: var(--muted); }
+.legal-section a { color: var(--ink); text-underline-offset: 3px; }

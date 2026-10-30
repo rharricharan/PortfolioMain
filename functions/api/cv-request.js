@@ -1,35 +1,21 @@
-// POST /api/cv-request: a CV request from the About page (js/about.js), emailed to Ryan through
-// Web3Forms. Needs the WEB3FORMS_KEY secret on the Pages project; without it, it answers 503 and
-// the page falls back to the visitor's email app.
+// POST /api/cv-request: a CV request from the About page (js/about.js), emailed to Ryan
+// (functions/_mail.js). Without the WEB3FORMS_KEY secret it answers 503 and the page falls back
+// to the visitor's email app.
+import { json, isEmail, clean, stamp, deliver } from "../_mail.js";
+
 const LIMITS = { name: 120, email: 200, company: 160, message: 2000 };
-const json = (body, status = 200) => new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
 
 export async function onRequestPost({ request, env }) {
   let data;
   try { data = await request.json(); } catch { return json({ error: "bad request" }, 400); }
   if (data.website) return json({ ok: true }); // the hidden field only bots fill in
-  const clean = {};
-  for (const [k, max] of Object.entries(LIMITS)) {
-    const v = String(data[k] || "").trim();
-    if (!v || v.length > max) return json({ error: `invalid ${k}` }, 400);
-    clean[k] = v;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(clean.email)) return json({ error: "invalid email" }, 400);
-  if (!env.WEB3FORMS_KEY) return json({ error: "not configured" }, 503);
-
-  const res = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({
-      access_key: env.WEB3FORMS_KEY,
-      subject: `CV request: ${clean.name}, ${clean.company}`,
-      from_name: "rharricharan.com",
-      replyto: clean.email,
-      name: clean.name,
-      email: clean.email,
-      company: clean.company,
-      message: clean.message,
-    }),
+  const { fields, error } = clean(data, LIMITS);
+  if (error) return json({ error }, 400);
+  if (!isEmail(fields.email)) return json({ error: "invalid email" }, 400);
+  return deliver(env, {
+    subject: `CV request: ${fields.name}, ${fields.company}`,
+    fromName: "rharricharan.com · CV request",
+    replyto: fields.email,
+    fields: { Name: fields.name, Email: fields.email, Company: fields.company, "What it’s for": fields.message, Sent: stamp() },
   });
-  return res.ok ? json({ ok: true }) : json({ error: "delivery failed" }, 502);
 }
