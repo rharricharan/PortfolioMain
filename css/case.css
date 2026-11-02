@@ -560,13 +560,22 @@
 
 /* Header: the overview and role sit closer together instead of spanning the full width */
 @container (min-width: 520px) {
-    .story-header { grid-template-columns: minmax(0, 27rem) minmax(0, 27rem); column-gap: 48px; }
+    /* A third, flexible track takes up the rest of the width, so rows that span the header (the
+       facts) span the whole content column and centre on it */
+    .story-header { grid-template-columns: minmax(0, 27rem) minmax(0, 27rem) minmax(0, 1fr); column-gap: 48px; }
 }
 
-/* Facts and stats: centred on the content column, spread evenly, each item centred */
-.story-facts > div, .story-stats > div { text-align: center; justify-items: center; align-items: center; }
+/* Stats: centred on the content column, spread evenly, each number centred */
+.story-stats > div { text-align: center; justify-items: center; align-items: center; }
 @container (min-width: 520px) {
-    .story-facts, .story-stats, .story-stats:not(:has(> div:nth-child(3))) { justify-content: space-around; gap: 24px; }
+    .story-stats, .story-stats:not(:has(> div:nth-child(3))) { justify-content: space-around; gap: 24px; }
+}
+
+/* Facts (Role, Built With…): the row sits centred on the content column as one group, and each
+   fact reads from its left edge, label over value */
+.story-facts > div { text-align: left; justify-items: start; }
+@container (min-width: 761px) {
+    .story-facts { justify-content: center; gap: 24px 48px; }
 }
 
 /* End of a case study (.claude/build_menu.py): the previous and next projects as two quiet cards,
