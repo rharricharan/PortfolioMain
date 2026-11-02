@@ -1,5 +1,5 @@
 // Password protection for the uLogic and Shift AI case studies and everything made from them:
-// the pages, their images and videos, the menu previews and the share images. It runs on every
+// the pages, their images and videos and the share images. Only the menu's hover previews are public. It runs on every
 // request (_routes.json sends /* here), so no path reaches the files without this check.
 // Without a valid access cookie a page answers with the unlock page (unlock.html, named for the
 // project) and a file answers 401. The password lives in the CASE_PASSWORD secret on the Pages
@@ -23,7 +23,11 @@ function normalise(raw) {
 // Which project a path belongs to: any path segment named for it (with or without an extension),
 // so /ulogic, /ulogic.html, /ulogic/, /assets/work/ulogic/x.webp and /assets/previews/ulogic.mp4
 // all count. Pages are the top-level ones; everything else is a file.
+// The one exception: the menu's hover previews (a short clip and its poster) stay public
+const PUBLIC = /^\/assets\/previews\/(ulogic|shift)\.(mp4|webp)$/;
+
 function project(path) {
+  if (PUBLIC.test(path)) return null;
   const segs = path.split("/").filter(Boolean);
   for (const seg of segs) {
     // The name followed by anything that isn't a letter or digit: .html, .mp4, ;x, a stray space
