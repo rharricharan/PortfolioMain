@@ -225,6 +225,8 @@ img, video, svg, picture, canvas {
 .icon-to { width: 0.7em; height: 0.7em; vertical-align: 0.05em; margin: 0 0.04em; }
 .story-facts a .icon { width: 12px; height: 12px; vertical-align: -1px; }
 
+/* Text for screen readers and search engines only (the home page's heading, form status lines) */
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* Hide / show the side nav on case pages (desktop). Collapsing slides the nav out to the right
    and lets the story take the full window; a floating Menu pill brings it back (js/site.js). */
