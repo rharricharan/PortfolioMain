@@ -26,5 +26,7 @@ export async function deliver(env, { subject, replyto, fromName, fields }) {
     headers: { "Content-Type": "application/json", Accept: "application/json" },
     body: JSON.stringify({ access_key: env.WEB3FORMS_KEY, subject, from_name: fromName, replyto, ...fields }),
   });
-  return res.ok ? json({ ok: true }) : json({ error: "delivery failed" }, 502);
+  // Web3Forms answers { success: true } once it has taken the message; anything else is a failure
+  const body = await res.json().catch(() => ({}));
+  return res.ok && body.success === true ? json({ ok: true }) : json({ error: "delivery failed" }, 502);
 }
