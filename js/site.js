@@ -348,43 +348,6 @@
     if (event.persisted && window.gsap) window.gsap.set(".bio-more-arrow", { clearProps: "transform,opacity" });
   });
 
-  // --- Availability pill (css/filter.css) ---------------------------------------------
-  // The label rises between "contract" and "full-time" every few seconds; on hover it offers
-  // the contact page, which it links to.
-  document.querySelectorAll("[data-available]").forEach((pill) => {
-    const wrap = pill.querySelector(".available-text");
-    const cycle = [wrap.textContent.trim()]; // the label as written; more entries would cycle
-    let i = 0, hovering = false;
-    let current = wrap.querySelector(".available-label");
-
-    const show = (text) => {
-      if (current.textContent === text) return;
-      const { gsap } = window;
-      const next = document.createElement("span");
-      next.className = "available-label";
-      next.textContent = text;
-      wrap.append(next);
-      const width = next.offsetWidth;
-      const old = current;
-      current = next;
-      if (!gsap || reduceMotion) { old.remove(); wrap.style.width = `${width}px`; return; }
-      gsap.to(wrap, { width, duration: 0.5, ease: "expo.out" });
-      gsap.fromTo(next, { yPercent: 100, opacity: 0 }, { yPercent: 0, opacity: 1, duration: 0.5, ease: "expo.out" });
-      gsap.to(old, { yPercent: -100, opacity: 0, duration: 0.35, ease: "power2.in", onComplete: () => old.remove() });
-    };
-    const resting = () => cycle[i];
-    const tick = () => { if (!hovering) { i = (i + 1) % cycle.length; show(resting()); } };
-
-    pill.classList.add("is-live");
-    wrap.style.width = `${current.offsetWidth}px`;
-    // Measured again once Inter has loaded, so the label isn't cut to the fallback font's width
-    document.fonts?.ready.then(() => { if (!hovering) wrap.style.width = `${current.offsetWidth}px`; });
-    if (!reduceMotion && cycle.length > 1) setInterval(tick, 3200);
-
-    pill.addEventListener("pointerenter", () => { hovering = true; show("Let’s chat"); });
-    pill.addEventListener("pointerleave", () => { hovering = false; show(resting()); });
-  });
-
   // --- Menu cascade (js/boot.js decides when): its parts arrive one by one ---------------
   addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;

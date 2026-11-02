@@ -225,54 +225,6 @@ img, video, svg, picture, canvas {
 .icon-to { width: 0.7em; height: 0.7em; vertical-align: 0.05em; margin: 0 0.04em; }
 .story-facts a .icon { width: 12px; height: 12px; vertical-align: -1px; }
 
-/* Availability: a soft blue pill. Its label cycles between contract and full-time; on hover it
-   offers to copy the email, and a click copies it (js/site.js). */
-.available {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px;
-    border-radius: 200px;
-    border: 1px solid rgba(37, 99, 235, 0.07);
-    background-color: rgba(37, 99, 235, 0.06);
-    color: #2154c9;
-    font: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    transition: background-color 0.3s ease, border-color 0.3s ease;
-}
-.available:hover, .available:focus-visible { background-color: rgba(37, 99, 235, 0.1); border-color: rgba(37, 99, 235, 0.12); }
-.available:focus-visible { outline: 2px solid #2154c9; outline-offset: 2px; }
-.available .dot {
-    position: relative;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background-color: #2563eb;
-}
-.available .dot::after {
-    content: "";
-    position: absolute;
-    inset: -3px;
-    border-radius: 50%;
-    border: 1px solid #2563eb;
-    animation: available-ping 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-@keyframes available-ping { 0% { transform: scale(0.6); opacity: 0.7; } 80%, 100% { transform: scale(1.8); opacity: 0; } }
-.available-text {
-    position: relative;
-    display: inline-block;
-    height: 1.4em;
-    overflow: hidden;
-    font-size: 13px;
-    letter-spacing: -0.3px;
-    line-height: 1.4;
-    color: #2154c9;
-    white-space: nowrap;
-}
-.available.is-live .available-label { position: absolute; left: 0; top: 0; }
-.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-@media (prefers-reduced-motion: reduce) { .available .dot::after { animation: none; } }
 
 /* Hide / show the side nav on case pages (desktop). Collapsing slides the nav out to the right
    and lets the story take the full window; a floating Menu pill brings it back (js/site.js). */
