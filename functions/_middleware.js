@@ -45,6 +45,11 @@ const LOCKED = { ...PRIVATE, "Clear-Site-Data": '"cache"', "X-Robots-Tag": "noin
 
 export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
+  // One address: www goes to rharricharan.com, keeping the path
+  if (url.hostname === "www.rharricharan.com") {
+    url.hostname = "rharricharan.com";
+    return Response.redirect(url.toString(), 301);
+  }
   let path;
   try { path = normalise(url.pathname); } catch { return new Response("Bad request", { status: 400, headers: PRIVATE }); }
   const p = project(path);
