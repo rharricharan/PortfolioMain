@@ -164,7 +164,7 @@ body.home-page {
     .home-top-clock { color: var(--muted); font-size: 12px; font-variant-numeric: tabular-nums; }
     .home-intro { display: flex; flex-direction: column; max-width: none; margin-top: 48px; padding: 0 12px; }
     .home-bio { font-size: 16px; }
-    .home-about { align-self: flex-end; margin-top: 24px; }
+    .home-about { align-self: flex-start; margin-top: 24px; }
     .home-swipe {
         display: grid;
         justify-items: center;

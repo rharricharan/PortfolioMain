@@ -1,0 +1,29 @@
+/* Phones: one type scale and one button size for every page, loaded after the page's own styles.
+   Display 32 · heading 20 · lead 17 · body 15 · meta 13. Buttons are at least 36px tall,
+   40px where they're the page's main action. */
+@media (max-width: 780px) {
+    /* Display: the big title at the top of a page */
+    html :is(.story-title, .about-title) { font-size: 32px; line-height: 1.08; letter-spacing: -0.035em; }
+
+    /* Headings: sections and sign-offs */
+    html :is(.story-section h2, .about-sub, .story-sign h2, .about-contact-card h2) { font-size: 20px; line-height: 1.3; letter-spacing: -0.025em; }
+
+    /* Lead: the opening statement of a page or block */
+    html :is(.home-bio, .about-lead, .story-notes-title) { font-size: 17px; line-height: 1.5; }
+
+    /* Body: anything meant to be read */
+    html :is(.story-lead, .story-role, .story-role p, .about-copy p, .about-pair p, .about-steps p, .about-experience :is(dt, dd), .about-tools li, html .about-toolgroup .about-tools li, .about-intro-line, .about-sub-small, .contact-chip span, .home-about) { font-size: 15px; line-height: 1.55; }
+
+    /* Meta: labels, captions, small print and navigation text */
+    html :is(.story-facts, .story-facts :is(dt, dd), .story-figure figcaption, .bar-label, .bar-value, .menu-heading, .menu-exp > span, .menu-row-name, .menu-row-meta, .home-top-clock, .navbar-pill, .pager-link, .menu-links a, .menu-contact, .menu-about-button, .about-label, .contact-note, .contact-field :is(label, legend), .story-pairs span, .story-notes h3, .story-notes-list span, .about-toolgroup > p, .menu .project-filter button, .home-swipe, .story-stats dt, .story-stats-label, .story-voice-label) { font-size: 13px; }
+
+    /* Buttons: comfortable to tap */
+    html .navbar-pill { height: 36px; }
+    html .navbar-icon, html .navbar-avatar img { width: 36px; height: 36px; }
+    html .menu .project-filter button { min-height: 32px; padding: 0 14px; }
+    html :is(.menu-contact, .menu-about-button) { min-height: 36px; padding: 0 14px; }
+    html .pager-link { height: 40px; }
+    html :is(.story-sign-button, .about-button.is-soft, .contact-send .about-button, .privacy-toggle .about-button, .unlock-row .about-button) { height: 40px; font-size: 15px; }
+    html .about-inline { padding: 4px 12px; }
+    html .story-voice-nav button { width: 36px; height: 36px; }
+}
