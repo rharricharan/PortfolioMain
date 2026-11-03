@@ -1,4 +1,4 @@
-// npm test: the form delivery and the middleware's response headers, with
+// npm test: the form checks and the middleware's response headers, with
 // Web3Forms and the static files stubbed, so nothing is sent and no server runs.
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -10,36 +10,21 @@ const message = { need: "Website", name: "Test Person", email: "test@example.com
 const post = (body) => new Request("https://rharricharan.com/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
 const withFetch = async (stub, run) => { const real = globalThis.fetch; globalThis.fetch = stub; try { return await run(); } finally { globalThis.fetch = real; } };
 
-test("contact: Web3Forms confirms, so the page shows Message sent", async () => {
-  let sent;
-  const res = await withFetch(async (_url, init) => { sent = JSON.parse(init.body); return Response.json({ success: true }); }, () => contact({ request: post(message), env }));
+test("contact: a good message comes back as the email for the page to send", async () => {
+  const never = async () => { throw new Error("the server never sends"); };
+  const res = await withFetch(never, () => contact({ request: post(message), env }));
   assert.equal(res.status, 200);
-  assert.deepEqual(await res.json(), { ok: true });
+  const { submit: sent } = await res.json();
+  assert.equal(sent.access_key, "test-key");
   assert.equal(sent.replyto, "test@example.com");
   assert.equal(sent.subject, "New enquiry: Website, from Test Person");
   assert.deepEqual(Object.keys(sent).filter((k) => /^[A-Z]/.test(k)), ["What they need", "Name", "Email", "Message", "Country", "Sent"]);
 });
 
-test("contact: Web3Forms refuses, so the page shows the error", async () => {
-  const res = await withFetch(async () => Response.json({ success: false, message: "Invalid key" }, { status: 400 }), () => contact({ request: post(message), env }));
-  assert.equal(res.status, 502);
-});
-
-test("contact: Web3Forms says ok but not success, so it still counts as failed", async () => {
-  const res = await withFetch(async () => Response.json({ success: false }), () => contact({ request: post(message), env }));
-  assert.equal(res.status, 502);
-});
-
-test("contact: the network fails, so the page shows the error", async () => {
-  const res = await withFetch(async () => { throw new TypeError("network down"); }, () => contact({ request: post(message), env }));
-  assert.equal(res.status, 502);
-});
-
-test("contact: no key set answers 503, and bots and bad input never reach Web3Forms", async () => {
+test("contact: no key set answers 503, and bots and bad input never get the email back", async () => {
   const never = async () => { throw new Error("should not send"); };
   assert.equal((await withFetch(never, () => contact({ request: post(message), env: {} }))).status, 503);
-  assert.equal((await withFetch(never, () => contact({ request: post({ ...message, website: "spam" }), env }))).status, 200);
-  assert.equal((await withFetch(never, () => contact({ request: post({ ...message, elapsed: 500 }), env }))).status, 200);
+  for (const bot of [{ website: "spam" }, { elapsed: 500 }]) assert.deepEqual(await (await contact({ request: post({ ...message, ...bot }), env })).json(), { ok: true, skip: true });
   assert.equal((await withFetch(never, () => contact({ request: post({ ...message, email: "nope" }), env }))).status, 400);
 });
 
