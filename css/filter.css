@@ -130,6 +130,17 @@ html[data-projects="creative"] .menu-projects .menu-row[data-type]:not([data-typ
     .bio-tag.is-tapped { animation: none; }
 }
 
+/* The open-to-roles line on About: a link to Contact whose shimmer also plays by itself every
+   few seconds, in the ring's spectrum */
+.bio-tag.is-open { --b1: #e0529f; --b2: #4f7cf2; --b3: #17a77e; --tint: rgba(79, 124, 242, 0.1); }
+.bio-tag.is-open span { color: transparent; animation: bio-every 6s cubic-bezier(0.22, 1, 0.36, 1) 2.4s infinite both; }
+.bio-tag.is-open:hover span { animation: bio-shimmer 1.1s cubic-bezier(0.22, 1, 0.36, 1) both; }
+@keyframes bio-every { 0% { background-position: 100% 0; } 20%, 100% { background-position: 0 0; } }
+@media (prefers-reduced-motion: reduce) {
+    .bio-tag.is-open span { animation: none; color: var(--ink); }
+    .bio-tag.is-open:hover span { animation: none; color: var(--b2); }
+}
+
 /* Each brand's colors, sampled from its own site (deepened a touch to stay readable) */
 .bio-tag[data-brand="asmallstudio"] { --b1: #2fc9a0; --b2: #4a9ff5; --b3: #8f4ff0; --tint: rgba(74, 159, 245, 0.12); }
 .bio-tag[data-brand="awwwards"]     { --b1: #f2a900; --b2: #fa5d29; --b3: #f2a900; --tint: rgba(250, 93, 41, 0.11); }
@@ -318,3 +329,57 @@ img, video, svg, picture, canvas {
 /* Password-protected case studies: a small lock after the name (.claude/build_menu.py) */
 .lock { display: inline-flex; vertical-align: -1px; margin-left: 6px; opacity: 0.55; }
 .lock .icon { width: 11px; height: 11px; }
+
+/* Soft button with a spectrum-ring hover: "Learn more about me" on the home page, Contact on About.
+   The ring sweeps around it with a soft halo behind (after the Cosmos reference); pure CSS, and
+   the spin runs only while hovered. */
+.ring-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #4a4a46;
+    font-size: 15px;
+    letter-spacing: -0.2px;
+    text-decoration: none;
+    transition: background-color 0.25s ease, color 0.25s ease;
+}
+.ring-button:hover { background-color: #fff; color: var(--ink); }
+
+@property --ring {
+    syntax: "<angle>";
+    inherits: false;
+    initial-value: 0deg;
+}
+.ring-button { position: relative; } /* no isolation: the halo (z -1) must sit behind the button itself */
+.ring-button::before,
+.ring-button::after {
+    content: "";
+    position: absolute;
+    border-radius: 12px;
+    background: conic-gradient(from var(--ring), #ff8ad8, #8ab4ff, #7de8ff, #8dffc0, #ffe680, #ffad7a, #ff8ad8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+    animation: ring-spin 2.6s linear infinite paused;
+}
+.ring-button::before {
+    inset: -1.5px;
+    padding: 1.5px;
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+}
+.ring-button::after { inset: -3px; z-index: -1; filter: blur(12px); }
+.ring-button:hover::before { opacity: 1; animation-play-state: running; }
+.ring-button:hover::after { opacity: 0.5; animation-play-state: running; }
+@keyframes ring-spin { to { --ring: 360deg; } }
+.ring-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
+.ring-button .icon { width: 15px; height: 15px; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
+.ring-button:hover .icon { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+    .ring-button, .ring-button .icon { transition: none; }
+    .ring-button::before, .ring-button::after { animation: none; }
+}

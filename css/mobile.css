@@ -24,6 +24,5 @@
     html :is(.menu-contact, .menu-about-button) { min-height: 36px; padding: 0 14px; }
     html .pager-link { height: 40px; }
     html :is(.story-sign-button, .about-button.is-soft, .contact-send .about-button, .privacy-toggle .about-button, .unlock-row .about-button) { height: 40px; font-size: 15px; }
-    html .about-inline { padding: 4px 12px; }
     html .story-voice-nav button { width: 36px; height: 36px; }
 }
