@@ -58,20 +58,23 @@
       return tl;
     };
 
-    // Intro: waits for the wipe, or for the previous story to slide out when moving between case studies.
+    // Intro: waits for the wipe, or for the previous story to slide out when moving between case
+    // studies. Phones have their own, quicker intro in CSS (css/case.css), so this is desktop only.
     const delay = (root.classList.contains("case-swap") ? 0.6 : 0.4) + (window.introDelay || 0);
     const hero = story.querySelector(".story-header + .story-figure");
-    const intro = gsap.timeline({ delay });
-    intro
-      .add(rise([story.querySelector(".story-title")]))
-      .add(rise([story.querySelector(".story-lead"), story.querySelector(".story-role")], { stagger: 0.05, gap: 0.12 }), 0.25)
-      .add(rise($$(".story-facts dt, .story-facts dd"), { stagger: 0.04, gap: 0.035 }), 0.5);
-    if (hero) {
-      const media = hero.querySelector(".story-mat > *");
+    if (!matchMedia("(max-width: 780px)").matches) {
+      const intro = gsap.timeline({ delay });
       intro
-        .fromTo(hero, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.2, ease, clearProps: "transform" }, 0.65)
-        .from(media, { scale: 1.04, duration: 1.4, ease, clearProps: "transform" }, "<")
-        .add(rise([hero.querySelector("figcaption")]), "-=0.9");
+        .add(rise([story.querySelector(".story-title")]))
+        .add(rise([story.querySelector(".story-lead"), story.querySelector(".story-role")], { stagger: 0.05, gap: 0.12 }), 0.25)
+        .add(rise($$(".story-facts dt, .story-facts dd"), { stagger: 0.04, gap: 0.035 }), 0.5);
+      if (hero) {
+        const media = hero.querySelector(".story-mat > *");
+        intro
+          .fromTo(hero, { opacity: 0, y: 32 }, { opacity: 1, y: 0, duration: 1.2, ease, clearProps: "transform" }, 0.65)
+          .from(media, { scale: 1.04, duration: 1.4, ease, clearProps: "transform" }, "<")
+          .add(rise([hero.querySelector("figcaption")]), "-=0.9");
+      }
     }
     root.classList.add("intro-ready"); // GSAP owns the intro now; drop the CSS fallback
 

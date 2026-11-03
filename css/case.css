@@ -314,12 +314,25 @@
 .story-figure.is-phone .story-mat { display: grid; place-items: center; padding: 40px 16px; }
 .story-figure.is-phone .story-mat video { width: min(280px, 64%); border-radius: 13% / 6.2%; }
 
-/* Intro: hidden before first paint (js/boot.js) until GSAP plays it (js/case.js).
+/* Intro, desktop: hidden before first paint (js/boot.js) until GSAP plays it (js/case.js).
    If GSAP never runs, the fallback shows everything after 2.5s. */
-.intro:not(.intro-ready) .story :is(.story-title, .story-lead, .story-role, .story-facts > div, .story-header + .story-figure) {
-    opacity: 0;
-    animation: intro-fallback 0s 2.5s forwards;
+@media (min-width: 781px) {
+    .intro:not(.intro-ready) .story :is(.story-title, .story-lead, .story-role, .story-facts > div, .story-header + .story-figure) {
+        opacity: 0;
+        animation: intro-fallback 0s 2.5s forwards;
+    }
 }
+
+/* Intro, phones: a short rise as soon as the page paints, so the first screen never waits on
+   scripts. Title, then the text, the facts and the hero, a beat apart. */
+@media (max-width: 780px) and (prefers-reduced-motion: no-preference) {
+    .story :is(.story-title, .story-lead, .story-role, .story-facts, .story-header + .story-figure) { animation: phone-rise 0.7s cubic-bezier(0.22, 1, 0.36, 1) both; }
+    .story .story-lead { animation-delay: 0.06s; }
+    .story .story-role { animation-delay: 0.12s; }
+    .story .story-facts { animation-delay: 0.18s; }
+    .story .story-header + .story-figure { animation-delay: 0.24s; }
+}
+@keyframes phone-rise { from { opacity: 0; transform: translateY(14px); } }
 
 @keyframes intro-fallback {
     to { opacity: 1; }
