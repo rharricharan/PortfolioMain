@@ -5,6 +5,7 @@
 // project) and a file answers 401. The password lives in the CASE_PASSWORD secret on the Pages
 // project; with no secret set, nothing unlocks.
 import { hasAccess, hasCookie, token, cookie, clearCookie } from "./_access.js";
+import { SECURITY } from "./_security.js";
 
 const PROTECTED = { ulogic: "uLogic", shift: "Shift AI" };
 
@@ -65,7 +66,20 @@ const PRIVATE_FILE = { "Cache-Control": "private, max-age=604800" };
 const LOCKED_FILE = { ...PRIVATE_PAGE, "X-Robots-Tag": "noindex, nofollow" };
 const LOCKED_PAGE = LOCKED_FILE;
 
-export async function onRequest({ request, env, next }) {
+// Every response leaves with the site's security headers (static files already have them from
+// _headers; Function responses get them here). Copies of the site on *.pages.dev stay out of search.
+export async function onRequest(context) {
+  const res = await gate(context);
+  const missing = Object.entries(SECURITY).filter(([k]) => !res.headers.has(k));
+  const offIndex = new URL(context.request.url).hostname.endsWith(".pages.dev");
+  if (!missing.length && !offIndex) return res;
+  const out = new Response(res.body, res);
+  for (const [k, v] of missing) out.headers.set(k, v);
+  if (offIndex) out.headers.set("X-Robots-Tag", "noindex, nofollow");
+  return out;
+}
+
+async function gate({ request, env, next }) {
   const url = new URL(request.url);
   // One address: www goes to rharricharan.com, keeping the path
   if (url.hostname === "www.rharricharan.com") {
