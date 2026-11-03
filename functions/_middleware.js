@@ -38,10 +38,16 @@ function project(path) {
   return null;
 }
 
-const PRIVATE = { "Cache-Control": "private, no-store, max-age=0", Vary: "Cookie" };
-// Locked answers also wipe this site's copies from the browser's cache, so a page seen before it
-// was protected (or before the access ran out) can't come back with the Back button
-const LOCKED = { ...PRIVATE, "Clear-Site-Data": '"cache"', "X-Robots-Tag": "noindex, nofollow" };
+// Unlocked pages are never stored, so every visit asks this check again. Unlocked files (images,
+// video) are kept a week in that visitor's own browser only ("private": never in a shared cache),
+// so scrolling, revisiting and looping videos don't download them again. No Vary: Cookie here:
+// Analytics rewrites its cookies on every page, which would throw the cached files away each time.
+const PRIVATE_PAGE = { "Cache-Control": "private, no-store, max-age=0" };
+const PRIVATE_FILE = { "Cache-Control": "private, max-age=604800" };
+// Locked answers are never stored either. The locked page also wipes this site's copies from the
+// browser's cache, so files kept from an earlier visit go once the access has run out
+const LOCKED_FILE = { ...PRIVATE_PAGE, "X-Robots-Tag": "noindex, nofollow" };
+const LOCKED_PAGE = { ...LOCKED_FILE, "Clear-Site-Data": '"cache"' };
 
 export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
@@ -51,17 +57,18 @@ export async function onRequest({ request, env, next }) {
     return Response.redirect(url.toString(), 301);
   }
   let path;
-  try { path = normalise(url.pathname); } catch { return new Response("Bad request", { status: 400, headers: PRIVATE }); }
+  try { path = normalise(url.pathname); } catch { return new Response("Bad request", { status: 400, headers: PRIVATE_PAGE }); }
   const p = project(path);
   if (!p) return next();
 
   if (await hasAccess(request, env.CASE_PASSWORD)) {
     const res = await next();
     const out = new Response(res.body, res);
-    for (const [k, v] of Object.entries(PRIVATE)) out.headers.set(k, v);
+    for (const [k, v] of Object.entries(p.page ? PRIVATE_PAGE : PRIVATE_FILE)) out.headers.set(k, v);
+    out.headers.delete("Vary");
     return out;
   }
-  if (!p.page || request.method !== "GET") return new Response("Password protected", { status: 401, headers: LOCKED });
+  if (!p.page || request.method !== "GET") return new Response("Password protected", { status: 401, headers: LOCKED_FILE });
   const page = await env.ASSETS.fetch(new URL("/unlock", url));
   const named = new HTMLRewriter()
     .on("[data-unlock-name]", { element: (el) => el.setInnerContent(PROTECTED[p.slug]) })
@@ -69,5 +76,5 @@ export async function onRequest({ request, env, next }) {
     .on("[data-unlock-next]", { element: (el) => el.setAttribute("value", `/${p.slug}`) })
     .on("[data-unlock-error]", { element: (el) => { if (url.searchParams.has("wrong")) el.setInnerContent("That password didn’t work. Try again."); } })
     .transform(page);
-  return new Response(named.body, { status: 401, headers: { "Content-Type": "text/html; charset=utf-8", ...LOCKED } });
+  return new Response(named.body, { status: 401, headers: { "Content-Type": "text/html; charset=utf-8", ...LOCKED_PAGE } });
 }
