@@ -22,13 +22,21 @@
     // The bio's lines rise into place behind a mask, as text does on the case studies. It's
     // split into words (splitting by line re-wraps the text around the grey tags), then each
     // word takes its line's timing, so every line rises together
-    const split = SplitText ? SplitText.create(bio, { type: "words", mask: "words" }) : null;
+    const split = SplitText ? SplitText.create(bio, { type: "words", mask: "words", aria: "none" }) : null;
     const tops = split ? [...new Set(split.words.map((w) => Math.round(w.getBoundingClientRect().top)))] : [];
     const lineOf = (w) => tops.indexOf(Math.round(w.getBoundingClientRect().top));
     const len = (p) => p.getTotalLength();
     // Hidden until drawn: round line caps would otherwise show as dots before the draw starts
     gsap.set([line, head], { strokeDasharray: (i, el) => len(el), strokeDashoffset: (i, el) => len(el), opacity: 0 });
-    const chars = SplitText ? SplitText.create(label, { type: "chars" }).chars : [label];
+    // Letters are split from a copy screen readers skip; they read the plain text beside it
+    let chars = [label];
+    if (SplitText) {
+      const text = label.textContent;
+      label.innerHTML = '<span class="visually-hidden"></span><span aria-hidden="true"></span>';
+      label.firstChild.textContent = text;
+      label.lastChild.textContent = text;
+      chars = SplitText.create(label.lastChild, { type: "chars", aria: "none" }).chars;
+    }
 
     const delay = (root.classList.contains("case-swap") ? 0.55 : 0.35) + (window.introDelay || 0);
     const tl = gsap.timeline({ delay, onComplete: () => { launched = true; idle(); } });

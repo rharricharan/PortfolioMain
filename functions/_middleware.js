@@ -7,6 +7,7 @@
 import { hasAccess, hasCookie, token, cookie, clearCookie } from "./_access.js";
 import { SECURITY } from "./_security.js";
 
+// TODO-RYAN: confirm uLogic and Shift AI stay password protected.
 const PROTECTED = { ulogic: "uLogic", shift: "Shift AI" };
 
 // Decodes the path until it stops changing, so %75logic, %2575logic and the like are seen as

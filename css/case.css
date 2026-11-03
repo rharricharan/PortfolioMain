@@ -216,7 +216,7 @@
 .story-notes h3 { padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 12px; font-weight: 400; color: var(--soft); }
 .story-notes-list { list-style: none; }
 .story-notes-list li { display: grid; grid-template-columns: 2.25rem minmax(0, 1fr); padding: 14px 0; border-bottom: 1px solid var(--line); }
-.story-notes-list span { font-size: 12px; line-height: 1.75; color: var(--faint); font-variant-numeric: tabular-nums; }
+.story-notes-list span { font-size: 12px; line-height: 1.75; color: var(--soft); font-variant-numeric: tabular-nums; }
 .story-notes-list p { color: var(--muted); }
 .story-notes-cols > div:last-child .story-notes-list p { color: var(--ink); }
 

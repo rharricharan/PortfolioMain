@@ -51,7 +51,7 @@
     const rise = (els, { stagger = 0.08, gap = 0.1 } = {}) => {
       const tl = gsap.timeline();
       els.filter(Boolean).forEach((el, i) => {
-        const split = SplitText.create(el, { type: "lines", mask: "lines" });
+        const split = SplitText.create(el, { type: "lines", mask: "lines", aria: "none" });
         gsap.set(el, { opacity: 1 });
         tl.from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger, onComplete: () => split.revert() }, i * gap);
       });
@@ -261,7 +261,7 @@
     let current = 0, busy = false;
     const splits = new Map();
     const lines = (q) => {
-      if (!splits.has(q)) splits.set(q, SplitText.create(q.querySelector("p"), { type: "lines", mask: "lines" }).lines);
+      if (!splits.has(q)) splits.set(q, SplitText.create(q.querySelector("p"), { type: "lines", mask: "lines", aria: "none" }).lines);
       return splits.get(q);
     };
     const show = (i) => {

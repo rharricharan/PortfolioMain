@@ -19,7 +19,7 @@
     const title = about.querySelector(".about-title");
     const delay = (root.classList.contains("case-swap") ? 0.6 : 0.4) + (window.introDelay || 0);
     if (title) {
-      const split = SplitText.create(title, { type: "lines", mask: "lines" });
+      const split = SplitText.create(title, { type: "lines", mask: "lines", aria: "none" });
       gsap.timeline({ delay })
         .set(title, { opacity: 1 }, 0)
         .from(split.lines, { yPercent: 110, duration: 1.1, ease, stagger: 0.08, onComplete: () => split.revert() }, 0.1);
