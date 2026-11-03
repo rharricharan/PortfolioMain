@@ -23,6 +23,17 @@
     sessionStorage.setItem("visited", "1");
   } catch (e) {}
 
+  // Desktop About slides the side nav closed on arrival, and the page after it slides it back
+  // open (js/site.js); the menu is then already on screen, so it doesn't cascade in, and About's
+  // intro waits for the slide
+  const desktop = matchMedia("(min-width: 781px)").matches && !reduceMotion;
+  const isAbout = /^\/about(\.html)?\/?$/.test(location.pathname);
+  let navSlides = false;
+  try {
+    const collapsed = sessionStorage.getItem("nav-collapsed") === "1";
+    navSlides = desktop && !isHome && (isAbout ? !collapsed : collapsed && sessionStorage.getItem("nav-auto") === "1");
+  } catch (e) {}
+
   window.introDelay = 0;
   window.pageRevealed = new Promise((resolve) => {
     const shown = (event) => {
@@ -37,6 +48,9 @@
         window.introDelay = 0.7;
         setTimeout(() => root.classList.remove("launch"), 1500);
       }
+      if (navSlides && isAbout) window.introDelay += 0.6;
+      // Resolves once the page-change slide has finished (straight away when there wasn't one)
+      window.pageSettled = event && event.viewTransition ? event.viewTransition.finished.catch(() => {}) : Promise.resolve();
       root.classList.remove("is-prerendering");
       resolve();
     };
@@ -51,7 +65,7 @@
     const kind = isHome ? "home" : /about/.test(location.pathname) ? "about" : "case";
     const last = sessionStorage.getItem("page-kind");
     sessionStorage.setItem("page-kind", kind);
-    if (!reduceMotion && !(kind === "case" && last === "case")) root.classList.add("menu-in");
+    if (!reduceMotion && !navSlides && !(kind === "case" && last === "case")) root.classList.add("menu-in");
   } catch (e) {}
 
   try {

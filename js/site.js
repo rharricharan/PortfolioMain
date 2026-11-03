@@ -127,15 +127,17 @@
     navOpen.addEventListener("click", () => setNav(false));
 
     // About reads best full width: arriving there, the side nav slides closed into the top bar;
-    // leaving, the next page slides it back open. A nav the visitor closed themselves stays closed.
+    // leaving, the next page slides it back open (js/boot.js holds the menu and About's intro for
+    // it). It moves once the page-change slide has finished, with the same motion as the toggle.
+    // A nav the visitor closed themselves stays closed.
     if (matchMedia("(min-width: 781px)").matches) {
       const onAbout = /^\/about(\.html)?\/?$/.test(location.pathname);
       const closedByAbout = () => { try { return sessionStorage.getItem("nav-auto") === "1"; } catch (e) { return false; } };
-      Promise.resolve(window.pageRevealed).then(() => setTimeout(() => {
+      Promise.resolve(window.pageRevealed).then(() => window.pageSettled).then(() => setTimeout(() => {
         const collapsed = root.classList.contains("nav-collapsed");
         if (onAbout && !collapsed) setNav(true, true);
         else if (!onAbout && collapsed && closedByAbout()) setNav(false, true);
-      }, 450));
+      }, 150));
     }
   }
 
