@@ -13,6 +13,11 @@ main {
     view-transition-name: case-sidebar;
 }
 
+/* With the side nav hidden, the top bar stands in for it, so going to or from About (where the
+   nav closes, js/boot.js .nav-morph) the side nav and the bar morph into each other */
+html.nav-collapsed #right-side-menu { view-transition-name: none; }
+html.nav-collapsed .navbar { view-transition-name: case-sidebar; }
+
 /* The sidebar doesn't animate: only the new one is shown (blending the two snapshots turned
    the links a muddy grey). The page behind everything (the project's glow) fades from the old
    colors to the new ones: the old stays put while the new fades in over it. */
@@ -32,6 +37,31 @@ main {
 ::view-transition-old(case-sidebar) {
     display: none;
 }
+
+/* The morph: a soft white shape flows from the panel into the bar (or back); the panel's
+   contents fade first, the bar's arrive last */
+html.nav-morph::view-transition-group(case-sidebar) {
+    animation: revert;
+    animation-duration: 0.8s;
+    animation-timing-function: cubic-bezier(0.65, 0, 0.35, 1);
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 22px;
+    box-shadow: 0 14px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+html.nav-morph::view-transition-old(case-sidebar),
+html.nav-morph::view-transition-new(case-sidebar) {
+    display: block;
+    height: 100%;
+    object-fit: none;
+    object-position: 50% 0;
+    mix-blend-mode: normal;
+}
+html.nav-morph::view-transition-old(case-sidebar) { animation: nav-morph-out 0.25s ease both; }
+html.nav-morph::view-transition-new(case-sidebar) { animation: nav-morph-in 0.3s ease 0.5s both; }
+
+@keyframes nav-morph-out { to { opacity: 0; } }
+@keyframes nav-morph-in { from { opacity: 0; } }
 
 @keyframes page-glow-in {
     from { opacity: 0; }

@@ -23,15 +23,25 @@
     sessionStorage.setItem("visited", "1");
   } catch (e) {}
 
-  // Desktop About slides the side nav closed on arrival, and the page after it slides it back
-  // open (js/site.js); the menu is then already on screen, so it doesn't cascade in, and About's
-  // intro waits for the slide
-  const desktop = matchMedia("(min-width: 781px)").matches && !reduceMotion;
-  const isAbout = /^\/about(\.html)?\/?$/.test(location.pathname);
-  let navSlides = false;
+  // Desktop About reads full width: arriving there, the side nav becomes the top bar, and the page
+  // after it gets the side nav back. Both happen during the page change, where the side nav
+  // morphs into the bar or back (.nav-morph, css/case-nav.css). A nav the visitor closed
+  // themselves stays closed.
+  let navMorph = false;
   try {
+    const desktop = matchMedia("(min-width: 781px)").matches && !reduceMotion;
+    const isAbout = /^\/about(\.html)?\/?$/.test(location.pathname);
     const collapsed = sessionStorage.getItem("nav-collapsed") === "1";
-    navSlides = desktop && !isHome && (isAbout ? !collapsed : collapsed && sessionStorage.getItem("nav-auto") === "1");
+    if (desktop && !isHome && isAbout && !collapsed) {
+      sessionStorage.setItem("nav-collapsed", "1");
+      sessionStorage.setItem("nav-auto", "1");
+      navMorph = true;
+    } else if (desktop && !isHome && !isAbout && collapsed && sessionStorage.getItem("nav-auto") === "1") {
+      sessionStorage.setItem("nav-collapsed", "0");
+      sessionStorage.setItem("nav-auto", "0");
+      navMorph = true;
+    }
+    if (navMorph) root.classList.add("nav-morph");
   } catch (e) {}
 
   window.introDelay = 0;
@@ -48,9 +58,6 @@
         window.introDelay = 0.7;
         setTimeout(() => root.classList.remove("launch"), 1500);
       }
-      if (navSlides && isAbout) window.introDelay += 0.6;
-      // Resolves once the page-change slide has finished (straight away when there wasn't one)
-      window.pageSettled = event && event.viewTransition ? event.viewTransition.finished.catch(() => {}) : Promise.resolve();
       root.classList.remove("is-prerendering");
       resolve();
     };
@@ -65,7 +72,7 @@
     const kind = isHome ? "home" : /about/.test(location.pathname) ? "about" : "case";
     const last = sessionStorage.getItem("page-kind");
     sessionStorage.setItem("page-kind", kind);
-    if (!reduceMotion && !navSlides && !(kind === "case" && last === "case")) root.classList.add("menu-in");
+    if (!reduceMotion && !navMorph && !(kind === "case" && last === "case")) root.classList.add("menu-in");
   } catch (e) {}
 
   try {
