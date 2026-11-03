@@ -109,18 +109,34 @@
   const navOpen = document.querySelector("[data-nav-open]");
   if (navClose && navOpen) {
     const root = document.documentElement;
-    const setNav = (collapsed) => {
+    // auto: About closing it on arrival (or the next page reopening it), not a click, so focus stays put
+    const setNav = (collapsed, auto = false) => {
       root.classList.toggle("nav-collapsed", collapsed);
       dispatchEvent(new CustomEvent("navchange", { detail: { collapsed } })); // js/navbar.js
       navClose.setAttribute("aria-expanded", String(!collapsed));
-      try { sessionStorage.setItem("nav-collapsed", collapsed ? "1" : "0"); } catch (e) {}
-      (collapsed ? navOpen : navClose).focus({ preventScroll: true });
+      try {
+        sessionStorage.setItem("nav-collapsed", collapsed ? "1" : "0");
+        sessionStorage.setItem("nav-auto", auto && collapsed ? "1" : "0");
+      } catch (e) {}
+      if (!auto) (collapsed ? navOpen : navClose).focus({ preventScroll: true });
       // The story changes width: let scroll-driven reveals re-measure once it settles
       setTimeout(() => window.ScrollTrigger?.refresh(), 650);
     };
     navClose.setAttribute("aria-expanded", String(!root.classList.contains("nav-collapsed")));
     navClose.addEventListener("click", () => setNav(true));
     navOpen.addEventListener("click", () => setNav(false));
+
+    // About reads best full width: arriving there, the side nav slides closed into the top bar;
+    // leaving, the next page slides it back open. A nav the visitor closed themselves stays closed.
+    if (matchMedia("(min-width: 781px)").matches) {
+      const onAbout = /^\/about(\.html)?\/?$/.test(location.pathname);
+      const closedByAbout = () => { try { return sessionStorage.getItem("nav-auto") === "1"; } catch (e) { return false; } };
+      Promise.resolve(window.pageRevealed).then(() => setTimeout(() => {
+        const collapsed = root.classList.contains("nav-collapsed");
+        if (onAbout && !collapsed) setNav(true, true);
+        else if (!onAbout && collapsed && closedByAbout()) setNav(false, true);
+      }, 450));
+    }
   }
 
   // --- Sounds (home page) -------------------------------------------------------
