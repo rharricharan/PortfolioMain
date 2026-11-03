@@ -618,3 +618,6 @@
 .story-sign-button:hover { background-color: rgba(0, 0, 0, 0.08); color: var(--ink); }
 .story-sign-button:hover .icon { transform: translateX(3px); }
 
+
+/* While js/case.js checks a locked case study is still open, nothing of it shows */
+html.access-check .story { visibility: hidden; }

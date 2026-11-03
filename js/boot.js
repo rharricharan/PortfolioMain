@@ -28,6 +28,8 @@
     const shown = (event) => {
       // Home always opens with the launch, so coming back from another page skips the slide
       const launch = !reduceMotion && (firstVisit || isHome);
+      // A skipped or interrupted slide rejects these; that's expected, not an error
+      if (event && event.viewTransition) [event.viewTransition.updateCallbackDone, event.viewTransition.ready, event.viewTransition.finished].forEach((p) => p.catch(() => {}));
       if (event && event.viewTransition && isHome && launch) event.viewTransition.skipTransition();
       else if (event && event.viewTransition) root.classList.add("case-swap");
       if (launch && !root.classList.contains("case-swap")) {

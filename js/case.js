@@ -1,9 +1,17 @@
 // Case study pages: GSAP intro, progressive reveal on scroll, and the small rebuilt demos.
 (() => {
-  // A password-protected case study never comes back from the back/forward cache: the server
-  // decides again (functions/_middleware.js), so lost or expired access shows the lock
+  // A password-protected case study shown again from the browser's page memory (Back, Forward) is
+  // hidden until the server confirms access is still open (functions/_middleware.js); if it has
+  // ended (the visitor went home, or it ran out), the page reloads into the lock
   if (/^\/(ulogic|shift)(\.html)?\/?$/i.test(location.pathname)) {
-    addEventListener("pageshow", (e) => { if (e.persisted) location.reload(); });
+    addEventListener("pageshow", (e) => {
+      if (!e.persisted) return;
+      const root = document.documentElement;
+      root.classList.add("access-check");
+      fetch(location.href, { method: "HEAD", cache: "no-store", credentials: "same-origin" })
+        .then((r) => { if (r.ok) root.classList.remove("access-check"); else location.reload(); })
+        .catch(() => location.reload());
+    });
   }
   const story = document.querySelector(".story");
   if (!story) return;

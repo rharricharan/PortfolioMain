@@ -348,6 +348,16 @@
     if (event.persisted && window.gsap) window.gsap.set(".bio-more-arrow", { clearProps: "transform,opacity" });
   });
 
+  // --- Case-study access ends outside the case studies (functions/_middleware.js) --------
+  // The server ends it when one of these pages loads; this covers the times the browser shows the
+  // page without asking (Back, its page memory, a prerender)
+  if (!document.querySelector(".story, [data-unlock-form]")) {
+    const lock = () => fetch("/api/lock", { method: "POST", keepalive: true, credentials: "same-origin" }).catch(() => {});
+    if (document.prerendering) document.addEventListener("prerenderingchange", lock, { once: true });
+    else lock();
+    addEventListener("pageshow", (e) => { if (e.persisted) lock(); });
+  }
+
   // --- Menu cascade (js/boot.js decides when): its parts arrive one by one ---------------
   addEventListener("DOMContentLoaded", () => {
     const root = document.documentElement;

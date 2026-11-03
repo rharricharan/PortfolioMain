@@ -4,7 +4,7 @@
 // Without a valid access cookie a page answers with the unlock page (unlock.html, named for the
 // project) and a file answers 401. The password lives in the CASE_PASSWORD secret on the Pages
 // project; with no secret set, nothing unlocks.
-import { hasAccess } from "./_access.js";
+import { hasAccess, hasCookie, token, cookie, clearCookie } from "./_access.js";
 
 const PROTECTED = { ulogic: "uLogic", shift: "Shift AI" };
 
@@ -18,6 +18,23 @@ function normalise(raw) {
     path = next;
   }
   return path.toLowerCase().replace(/\\/g, "/").replace(/\/{2,}/g, "/");
+}
+
+// Every case study, locked or not: moving between these keeps access; any other page ends it
+const CASES = new Set(["ulogic", "shift", "smartstop", "rays", "halftone", "leadhack", "one", "cinnamon", "gostr", "ave"]);
+const caseSlug = (path) => { const m = path.match(/^\/([a-z0-9]+)(?:\.html)?\/?$/); return m && CASES.has(m[1]) ? m[1] : null; };
+
+// A locked page opens only when the visitor clicked through to it from a case study on this site
+// (or straight after entering the password). A reload, a typed address, a bookmark, a restored tab
+// or a link from anywhere else asks for the password again.
+function clickedThrough(request) {
+  const h = request.headers;
+  if (h.get("Sec-Fetch-Site") !== "same-origin") return false;
+  if (/max-age=0|no-cache/i.test(h.get("Cache-Control") || "") || /no-cache/i.test(h.get("Pragma") || "")) return false; // reload
+  let from;
+  try { from = new URL(h.get("Referer") || ""); } catch { return false; }
+  if (from.origin !== new URL(request.url).origin) return false;
+  try { return !!caseSlug(normalise(from.pathname)); } catch { return false; }
 }
 
 // Which project a path belongs to: any path segment named for it (with or without an extension),
@@ -44,10 +61,9 @@ function project(path) {
 // Analytics rewrites its cookies on every page, which would throw the cached files away each time.
 const PRIVATE_PAGE = { "Cache-Control": "private, no-store, max-age=0" };
 const PRIVATE_FILE = { "Cache-Control": "private, max-age=604800" };
-// Locked answers are never stored either. The locked page also wipes this site's copies from the
-// browser's cache, so files kept from an earlier visit go once the access has run out
+// Locked answers are never stored either
 const LOCKED_FILE = { ...PRIVATE_PAGE, "X-Robots-Tag": "noindex, nofollow" };
-const LOCKED_PAGE = { ...LOCKED_FILE, "Clear-Site-Data": '"cache"' };
+const LOCKED_PAGE = LOCKED_FILE;
 
 export async function onRequest({ request, env, next }) {
   const url = new URL(request.url);
@@ -59,13 +75,24 @@ export async function onRequest({ request, env, next }) {
   let path;
   try { path = normalise(url.pathname); } catch { return new Response("Bad request", { status: 400, headers: PRIVATE_PAGE }); }
   const p = project(path);
-  if (!p) return next();
+  if (!p) {
+    // Opening any page outside the case studies ends access (prefetches don't count)
+    const res = await next();
+    const isPage = request.method === "GET" && request.headers.get("Sec-Fetch-Dest") === "document" && !request.headers.get("Sec-Purpose");
+    if (!isPage || caseSlug(path) || !hasCookie(request)) return res;
+    const out = new Response(res.body, res);
+    out.headers.append("Set-Cookie", clearCookie);
+    return out;
+  }
 
-  if (await hasAccess(request, env.CASE_PASSWORD)) {
+  const access = await hasAccess(request, env.CASE_PASSWORD);
+  if (access && (!p.page || clickedThrough(request))) {
     const res = await next();
     const out = new Response(res.body, res);
     for (const [k, v] of Object.entries(p.page ? PRIVATE_PAGE : PRIVATE_FILE)) out.headers.set(k, v);
     out.headers.delete("Vary");
+    // Each unlocked page view renews the two-hour token
+    if (p.page) out.headers.append("Set-Cookie", cookie(await token(env.CASE_PASSWORD)));
     return out;
   }
   if (!p.page || request.method !== "GET") return new Response("Password protected", { status: 401, headers: LOCKED_FILE });
@@ -76,5 +103,7 @@ export async function onRequest({ request, env, next }) {
     .on("[data-unlock-next]", { element: (el) => el.setAttribute("value", `/${p.slug}`) })
     .on("[data-unlock-error]", { element: (el) => { if (url.searchParams.has("wrong")) el.setInnerContent("That password didn’t work. Try again."); } })
     .transform(page);
-  return new Response(named.body, { status: 401, headers: { "Content-Type": "text/html; charset=utf-8", ...LOCKED_PAGE } });
+  const headers = new Headers({ "Content-Type": "text/html; charset=utf-8", ...LOCKED_PAGE });
+  if (hasCookie(request)) headers.append("Set-Cookie", clearCookie);
+  return new Response(named.body, { status: 401, headers });
 }
