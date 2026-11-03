@@ -375,11 +375,9 @@ img, video, svg, picture, canvas {
 }
 :is(.ring-button, .ring-hover)::after { inset: -3px; z-index: -1; filter: blur(12px); }
 .ring-hover::before, .ring-hover::after { border-radius: inherit; }
-/* While hovered, each grey button is solid (the same grey it shows on its own background), so the
-   halo glows around it and never tints its middle */
-html .ring-button.about-contact:hover { background-color: rgb(236, 236, 236); }
-html :is(.story-sign-button, .about-button.is-soft).ring-hover:hover { background-color: rgb(228, 228, 228); }
-html :is(.menu-contact, .navbar-pill).ring-hover:hover { background-color: rgb(233, 233, 233); }
+/* While hovered, every Contact button turns white like "Learn more about me", so the halo glows
+   around it and never tints its middle */
+html :is(.menu-contact, .navbar-pill, .story-sign-button, .about-button, .ring-button).ring-hover:hover { background-color: #fff; color: var(--ink, #111); }
 :is(.ring-button, .ring-hover):hover::before { opacity: 1; animation-play-state: running; }
 :is(.ring-button, .ring-hover):hover::after { opacity: 0.5; animation-play-state: running; }
 @keyframes ring-spin { to { --ring: 360deg; } }
