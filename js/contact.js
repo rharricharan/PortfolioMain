@@ -49,9 +49,15 @@
     submit.setAttribute("aria-busy", "true");
     submit.textContent = "Sending…";
     try {
+      // The site checks the message and returns it as the email; the browser sends it to Web3Forms
       const res = await fetch("/api/contact", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
-      if (res.ok) return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
-      throw new Error(res.status);
+      const checked = await res.json();
+      if (!res.ok) throw new Error(res.status);
+      if (checked.submit) {
+        const sent = await fetch("https://api.web3forms.com/submit", { method: "POST", headers: { "Content-Type": "application/json", Accept: "application/json" }, body: JSON.stringify(checked.submit) });
+        if ((await sent.json().catch(() => ({}))).success !== true) throw new Error(sent.status);
+      }
+      return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
     } catch {
       status.textContent = "That didn’t send. Nothing went through, so try again in a moment.";
     } finally {
