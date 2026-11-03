@@ -6,6 +6,10 @@
 .navbar-defs { position: absolute; width: 0; height: 0; }
 
 .navbar, .navbar-clock, .pager { visibility: hidden; }
+/* Arriving by a page change, the bars are already there from the first frame, so they hold still
+   instead of blinking out and back (js/navbar.js shows them without the grow-in then) */
+html.case-swap.nav-collapsed :is(.navbar, .navbar-clock, .pager) { visibility: visible; }
+@media (max-width: 780px) { html.case-swap :is(.navbar, .navbar-clock, .pager) { visibility: visible; } }
 
 .navbar {
     position: fixed;
@@ -29,6 +33,7 @@
     filter: url(#nav-goo) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.04)) drop-shadow(0 14px 30px rgba(0, 0, 0, 0.08));
 }
 .navbar-shapes span { position: absolute; top: 0; left: 0; border-radius: 26px; background-color: rgba(255, 255, 255, 0.62); }
+.navbar-shapes [data-shape="bar"] { width: 100%; height: 100%; } /* until js/navbar.js sizes it */
 .navbar-shapes [data-shape="panel"] { border-radius: 22px; opacity: 0; }
 .navbar-items, .navbar-panel, .pager-shape, .navbar-home { transition: -webkit-backdrop-filter 0.4s ease, backdrop-filter 0.4s ease; }
 .navbar.is-settled .navbar-items,

@@ -66,14 +66,9 @@
     else shown();
   });
 
-  // The menu cascades in on arrival, except moving from one case study to another, where the
-  // menu is the same and stays still (js/site.js)
-  try {
-    const kind = isHome ? "home" : /about/.test(location.pathname) ? "about" : "case";
-    const last = sessionStorage.getItem("page-kind");
-    sessionStorage.setItem("page-kind", kind);
-    if (!reduceMotion && !navMorph && !(kind === "case" && last === "case")) root.classList.add("menu-in");
-  } catch (e) {}
+  // The menu cascades in only with the launch (a fresh visit, or the home page). Moving around
+  // the site it's the same menu, so it stays still through the page change (js/site.js)
+  if (!reduceMotion && !navMorph && (firstVisit || isHome)) root.classList.add("menu-in");
 
   try {
     const f = sessionStorage.getItem("project-filter");

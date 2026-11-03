@@ -17,16 +17,35 @@ main {
    nav closes, js/boot.js .nav-morph) the side nav and the bar morph into each other */
 html.nav-collapsed #right-side-menu { view-transition-name: none; }
 html.nav-collapsed .navbar { view-transition-name: case-sidebar; }
+/* Phones: the menu is part of the home page itself and the top bar is the navigation, so the bar
+   is what holds still across pages */
+@media (max-width: 780px) {
+    html #right-side-menu { view-transition-name: none; }
+    html .navbar { view-transition-name: case-sidebar; }
+    html .menu-projects .menu-row.selected { view-transition-name: none; }
+}
+
+/* The bottom bar (Home / Next project) holds still too, instead of leaving with the story */
+.pager { view-transition-name: site-pager; }
 
 /* The sidebar doesn't animate: only the new one is shown (blending the two snapshots turned
    the links a muddy grey). The page behind everything (the project's glow) fades from the old
    colors to the new ones: the old stays put while the new fades in over it. */
 ::view-transition-group(root),
 ::view-transition-group(case-sidebar),
+::view-transition-group(site-pager),
 ::view-transition-old(root),
-::view-transition-new(case-sidebar) {
+::view-transition-new(case-sidebar),
+::view-transition-new(site-pager) {
     animation: none;
     mix-blend-mode: normal;
+}
+
+/* A bar the last page didn't have (the top bar, leaving Home on a phone) fades in with the page
+   instead of landing on top of the old one */
+::view-transition-new(case-sidebar):only-child,
+::view-transition-new(site-pager):only-child {
+    animation: page-glow-in 0.5s ease 0.3s both;
 }
 
 ::view-transition-new(root) {
@@ -34,12 +53,14 @@ html.nav-collapsed .navbar { view-transition-name: case-sidebar; }
     mix-blend-mode: normal;
 }
 
-::view-transition-old(case-sidebar) {
+::view-transition-old(case-sidebar),
+::view-transition-old(site-pager) {
     display: none;
 }
 
 /* The morph: a soft white shape flows from the panel into the bar (or back); the panel's
-   contents fade first, the bar's arrive last */
+   contents fade out as it starts and the bar's fade in while it's still moving, so the shape is
+   never an empty box */
 html.nav-morph::view-transition-group(case-sidebar) {
     animation: revert;
     animation-duration: 2s;
@@ -57,8 +78,12 @@ html.nav-morph::view-transition-new(case-sidebar) {
     object-position: 50% 0;
     mix-blend-mode: normal;
 }
-html.nav-morph::view-transition-old(case-sidebar) { animation: nav-morph-out 0.6s ease both; }
-html.nav-morph::view-transition-new(case-sidebar) { animation: nav-morph-in 0.75s ease 1.25s both; }
+html.nav-morph::view-transition-old(case-sidebar) { animation: nav-morph-out 0.5s ease both; }
+html.nav-morph::view-transition-new(case-sidebar) { animation: nav-morph-in 0.6s ease 0.45s both; }
+/* Into About (panel to bar) the panel's rows stay in view, squeezed by the shrinking shape, until
+   it's nearly the bar */
+html.nav-morph.nav-collapsed::view-transition-old(case-sidebar) { animation: nav-morph-out 0.5s ease 0.9s both; }
+html.nav-morph.nav-collapsed::view-transition-new(case-sidebar) { animation: nav-morph-in 0.6s ease 1.2s both; }
 
 @keyframes nav-morph-out { to { opacity: 0; } }
 @keyframes nav-morph-in { from { opacity: 0; } }
@@ -119,6 +144,8 @@ html.nav-morph::view-transition-new(case-sidebar) { animation: nav-morph-in 0.75
 }
 
 @media (prefers-reduced-motion: reduce) {
+    ::view-transition-new(case-sidebar):only-child,
+    ::view-transition-new(site-pager):only-child,
     ::view-transition-old(case-content),
     ::view-transition-new(case-content),
     ::view-transition-new(root),
