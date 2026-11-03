@@ -332,7 +332,8 @@ img, video, svg, picture, canvas {
 
 /* Soft button with a spectrum-ring hover: "Learn more about me" on the home page, Contact on About.
    The ring sweeps around it with a soft halo behind (after the Cosmos reference); pure CSS, and
-   the spin runs only while hovered. */
+   the spin runs only while hovered. .ring-hover adds just the ring to a button that keeps its own
+   size and colours: every other Contact button (menu, top bar, case-study sign-off, About). */
 .ring-button {
     display: inline-flex;
     align-items: center;
@@ -353,9 +354,9 @@ img, video, svg, picture, canvas {
     inherits: false;
     initial-value: 0deg;
 }
-.ring-button { position: relative; } /* no isolation: the halo (z -1) must sit behind the button itself */
-.ring-button::before,
-.ring-button::after {
+:is(.ring-button, .ring-hover) { position: relative; } /* no isolation: the halo (z -1) must sit behind the button itself */
+:is(.ring-button, .ring-hover)::before,
+:is(.ring-button, .ring-hover)::after {
     content: "";
     position: absolute;
     border-radius: 12px;
@@ -365,21 +366,27 @@ img, video, svg, picture, canvas {
     transition: opacity 0.45s ease;
     animation: ring-spin 2.6s linear infinite paused;
 }
-.ring-button::before {
+:is(.ring-button, .ring-hover)::before {
     inset: -1.5px;
     padding: 1.5px;
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
     mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
 }
-.ring-button::after { inset: -3px; z-index: -1; filter: blur(12px); }
-.ring-button:hover::before { opacity: 1; animation-play-state: running; }
-.ring-button:hover::after { opacity: 0.5; animation-play-state: running; }
+:is(.ring-button, .ring-hover)::after { inset: -3px; z-index: -1; filter: blur(12px); }
+.ring-hover::before, .ring-hover::after { border-radius: inherit; }
+/* While hovered, each grey button is solid (the same grey it shows on its own background), so the
+   halo glows around it and never tints its middle */
+html .ring-button.about-contact:hover { background-color: rgb(236, 236, 236); }
+html :is(.story-sign-button, .about-button.is-soft).ring-hover:hover { background-color: rgb(228, 228, 228); }
+html :is(.menu-contact, .navbar-pill).ring-hover:hover { background-color: rgb(233, 233, 233); }
+:is(.ring-button, .ring-hover):hover::before { opacity: 1; animation-play-state: running; }
+:is(.ring-button, .ring-hover):hover::after { opacity: 0.5; animation-play-state: running; }
 @keyframes ring-spin { to { --ring: 360deg; } }
 .ring-button:focus-visible { outline: 2px solid var(--ink); outline-offset: 2px; }
 .ring-button .icon { width: 15px; height: 15px; transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1); }
 .ring-button:hover .icon { transform: translateX(3px); }
 @media (prefers-reduced-motion: reduce) {
     .ring-button, .ring-button .icon { transition: none; }
-    .ring-button::before, .ring-button::after { animation: none; }
+    :is(.ring-button, .ring-hover)::before, :is(.ring-button, .ring-hover)::after { animation: none; }
 }

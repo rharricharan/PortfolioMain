@@ -31,16 +31,17 @@
       if (focus && to === form) form.elements.name.focus();
     } });
   };
-  // After a send, the thank-you shows for about five seconds and then the empty form comes back
+  // After a send, the thank-you (with a link to book a call) shows for about five seconds and then
+  // the empty form comes back
   let back;
-  const again = (focus) => { clearTimeout(back); if (done.hidden) return; form.reset(); swap(done, form, focus); };
+  const again = () => { if (done.hidden) return; form.reset(); swap(done, form, false); };
   const showDone = (title, text) => {
     done.querySelector("[data-contact-done-title]").textContent = title;
     done.querySelector("[data-contact-done-text]").textContent = text;
     swap(form, done);
-    back = setTimeout(() => again(false), 5000);
+    clearTimeout(back);
+    back = setTimeout(again, 5000);
   };
-  done.querySelector("[data-contact-again]").addEventListener("click", () => again(true));
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
