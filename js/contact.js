@@ -3,6 +3,7 @@
 (() => {
   const form = document.querySelector("[data-contact-form]");
   if (!form) return;
+  const EMAIL = "rharricharandesigns@gmail.com";
   const submit = form.querySelector("[data-contact-submit]");
   const status = form.querySelector("[data-contact-status]");
   const done = document.querySelector("[data-contact-done]");
@@ -53,7 +54,7 @@
       if (res.ok) return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
       throw new Error(res.status);
     } catch {
-      status.textContent = "That didn’t send. Nothing went through, so try again in a moment.";
+      status.innerHTML = `That didn’t send. Try again in a moment, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
     } finally {
       submit.removeAttribute("aria-busy");
       submit.textContent = "Send";

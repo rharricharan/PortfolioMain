@@ -75,6 +75,7 @@
 // that it wasn't and can try again.
 (() => {
   const dialog = document.querySelector(".cv-dialog");
+  const EMAIL = "rharricharandesigns@gmail.com";
   const opener = document.querySelector("[data-cv-open]");
   if (!dialog || !opener) return;
   const form = dialog.querySelector("[data-cv-form]");
@@ -157,7 +158,7 @@
       if (res.ok) return showDone("Request sent.", `Thanks, ${first}. I’ll email my CV to ${data.email}.`);
       throw new Error(res.status);
     } catch {
-      status.textContent = "That didn’t send. Nothing went through, so try again in a moment.";
+      status.innerHTML = `That didn’t send. Try again in a moment, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
     } finally {
       submit.removeAttribute("aria-busy");
       submit.textContent = "Send request";

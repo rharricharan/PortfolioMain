@@ -2,9 +2,10 @@
   "private": true,
   "scripts": {
     "dev": "npm run stage && wrangler pages dev .site --port 8788",
-    "stage": "python3 -I .claude/build_menu.py && python3 -I .claude/build_headers.py && rm -rf .site && rsync -a --exclude .nvmrc --exclude .git --exclude .claude --exclude .vscode --exclude .wrangler --exclude .site --exclude functions --exclude node_modules --exclude package.json --exclude package-lock.json --exclude .gitignore --exclude .dev.vars --exclude CNAME ./ .site/",
+    "stage": "python3 -I .claude/build_menu.py && python3 -I .claude/build_headers.py && rm -rf .site && rsync -a --exclude .nvmrc --exclude .git --exclude .claude --exclude .vscode --exclude .wrangler --exclude .site --exclude functions --exclude node_modules --exclude package.json --exclude package-lock.json --exclude .gitignore --exclude .dev.vars --exclude tests --exclude CNAME ./ .site/",
     "deploy:preview": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=$(git branch --show-current)",
-    "deploy": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=main"
+    "deploy": "npm run stage && wrangler pages deploy .site --project-name=rharricharan-portfolio --branch=main",
+    "test": "node --test tests/*.test.mjs"
   },
   "devDependencies": {
     "wrangler": "^4.154.0"

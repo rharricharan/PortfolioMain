@@ -21,11 +21,16 @@ export const stamp = () => new Intl.DateTimeFormat("en-US", { dateStyle: "medium
 
 export async function deliver(env, { subject, replyto, fromName, fields }) {
   if (!env.WEB3FORMS_KEY) return json({ error: "not configured" }, 503);
-  const res = await fetch("https://api.web3forms.com/submit", {
-    method: "POST",
-    headers: { "Content-Type": "application/json", Accept: "application/json" },
-    body: JSON.stringify({ access_key: env.WEB3FORMS_KEY, subject, from_name: fromName, replyto, ...fields }),
-  });
+  let res;
+  try {
+    res = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Accept: "application/json" },
+      body: JSON.stringify({ access_key: env.WEB3FORMS_KEY, subject, from_name: fromName, replyto, ...fields }),
+    });
+  } catch {
+    return json({ error: "delivery failed" }, 502);
+  }
   // Web3Forms answers { success: true } once it has taken the message; anything else is a failure
   const body = await res.json().catch(() => ({}));
   return res.ok && body.success === true ? json({ ok: true }) : json({ error: "delivery failed" }, 502);
