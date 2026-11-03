@@ -19,23 +19,28 @@
   };
   fields.forEach((f) => f.addEventListener("input", () => { if (f.hasAttribute("aria-invalid") && valid(f)) mark(f, true); }));
 
-  const swap = (from, to) => {
+  // `focus` is off when the form comes back by itself, so a phone's keyboard doesn't pop up
+  const swap = (from, to, focus = true) => {
     const { gsap } = window;
-    const show = () => { from.hidden = true; to.hidden = false; to.querySelector("h2")?.focus(); };
-    if (!gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) { show(); if (to === form) form.elements.name.focus(); return; }
+    const show = () => { from.hidden = true; to.hidden = false; if (focus) to.querySelector("h2")?.focus(); };
+    if (!gsap || matchMedia("(prefers-reduced-motion: reduce)").matches) { show(); if (focus && to === form) form.elements.name.focus(); return; }
     gsap.to(from, { opacity: 0, y: -8, duration: 0.25, ease: "power2.in", onComplete: () => {
       show();
       gsap.set(from, { clearProps: "all" });
       gsap.fromTo(to, { opacity: 0, y: 12 }, { opacity: 1, y: 0, duration: 0.7, ease: "expo.out", clearProps: "all" });
-      if (to === form) form.elements.name.focus();
+      if (focus && to === form) form.elements.name.focus();
     } });
   };
+  // After a send, the thank-you shows for about five seconds and then the empty form comes back
+  let back;
+  const again = (focus) => { clearTimeout(back); if (done.hidden) return; form.reset(); swap(done, form, focus); };
   const showDone = (title, text) => {
     done.querySelector("[data-contact-done-title]").textContent = title;
     done.querySelector("[data-contact-done-text]").textContent = text;
     swap(form, done);
+    back = setTimeout(() => again(false), 5000);
   };
-  done.querySelector("[data-contact-again]").addEventListener("click", () => { form.reset(); swap(done, form); });
+  done.querySelector("[data-contact-again]").addEventListener("click", () => again(true));
 
   form.addEventListener("submit", async (e) => {
     e.preventDefault();
@@ -60,7 +65,7 @@
       }
       return showDone("Message sent.", `Thanks, ${first}. It’s in my inbox, and I’ll reply to ${data.email}.`);
     } catch {
-      status.innerHTML = `That didn’t send. Try again in a moment, or email me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`;
+      status.innerHTML = `Sorry, that one didn’t come through. Email me at <a href="mailto:${EMAIL}">${EMAIL}</a> and I’ll get back to you.`;
     } finally {
       submit.removeAttribute("aria-busy");
       submit.textContent = "Send";
